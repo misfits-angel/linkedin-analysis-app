@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LinkedIn Yearly Wrap • Preview (Chart.js)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+  <style>
+    :root { --brand:#157187; --brand2:#63a5b3; --muted:#b1d9df; --ink:#202022; }
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial; }
+    .card { background:#fff; border-radius:1rem; border:1px solid #eef2f7; box-shadow:0 1px 2px rgba(0,0,0,0.04); }
+    .metric { font-size:1.5rem; font-weight:700; color:#111827; }
+    .label { font-size:0.8rem; color:#6b7280; }
+    .section-title { font-size:1.1rem; font-weight:700; color:#111827; }
+    .pill { display:inline-flex; align-items:center; gap:.5rem; border-radius:9999px; padding:.25rem .75rem; font-size:.75rem; background:#f3f4f6; color:#374151; cursor:pointer; }
+    .grid-cell { border-radius:.5rem; height:2rem; min-width:3.5rem; }
+    .chart-wrap { height: 200px; }
+    .chart-wrap canvas { height: 180px !important; max-height:180px !important; width:100% !important; }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <div class="max-w-7xl mx-auto p-6 space-y-6">
+    <header class="flex flex-wrap items-center justify-between gap-4">
+      <div>
+        <h1 class="text-2xl md:text-3xl font-bold">
+          <span id="personName">LinkedIn Yearly Wrap</span>
+        </h1>
+        <p class="text-gray-600">Insight-driven snapshot for the last 12 months</p>
+      </div>
+      <div class="flex items-center gap-3">
+        <label class="pill">Upload summary.json
+          <input id="fileInputJson" type="file" class="hidden" accept="application/json" />
+        </label>
+        <a id="downloadSample" class="pill" href="#">Download sample JSON</a>
+      </div>
+    </header>
+
+    <section class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div class="card p-4"><div class="label">Posts (12m)</div><div id="m_posts" class="metric">-</div></div>
+      <div class="card p-4"><div class="label">Active months</div><div id="m_active" class="metric">-</div></div>
+      <div class="card p-4"><div class="label">Median engagement</div><div id="m_med" class="metric">-</div></div>
+      <div class="card p-4"><div class="label">P90 engagement</div><div id="m_p90" class="metric">-</div></div>
+    </section>
+
+    <section class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div class="card p-4">
+        <div class="section-title mb-2">Posting cadence</div>
+        <div class="chart-wrap"><canvas id="chartPostsPerMonth"></canvas></div>
+      </div>
+      <div class="card p-4">
+        <div class="section-title mb-2">Engagement over time</div>
+        <div class="chart-wrap"><canvas id="chartMedianByMonth"></canvas></div>
+      </div>
+    </section>
+
+    <section class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div class="card p-4">
+        <div class="section-title mb-2">Format mix</div>
+        <div class="chart-wrap"><canvas id="chartFormatMix"></canvas></div>
+      </div>
+      <div class="card p-4">
+        <div class="section-title mb-2">Topic insights</div>
+        <ul id="topicBullets" class="list-disc pl-5 space-y-1 text-sm text-gray-700"></ul>
+      </div>
+    </section>
+
+    <section class="card p-4">
+      <div class="section-title mb-2">Best time to post</div>
+      <ul id="bestTimeBullets" class="list-disc pl-5 space-y-1 text-sm text-gray-700"></ul>
+    </section>
+
+    <section class="card p-4">
+      <div class="section-title mb-2">Top Performing Posts</div>
+      <div id="topPosts" class="space-y-3"></div>
+    </section>
+
+    <section class="card p-4">
+      <div class="section-title mb-2">Deep Dive: Why This Post Worked</div>
+      <div id="deepDive" class="text-sm text-gray-700 leading-relaxed"></div>
+    </section>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <script>
+    function labelMonth(m){
+      if(!m) return '';
+      if(/^\d{4}-\d{2}$/.test(m)){
+        const [y,mm]=m.split('-');
+        const d=new Date(Number(y), Number(mm)-1, 1);
+        return d.toLocaleString('en-US',{month:'short'})+" '"+String(y).slice(-2);
+      }
+      if(/^\d{2}$/.test(m)){
+        const d=new Date(2000, Number(m)-1, 1);
+        return d.toLocaleString('en-US',{month:'short'});
+      }
+      return m;
+    }
+    function toDonut(shareObj={}){ return Object.entries(shareObj).map(([name,frac])=>({name, value: Math.round((frac||0)*100)})); }
+    function ensureArray(a){ return Array.isArray(a)?a:[]; }
+    function clip(s, n=120){ if(!s) return ''; s=String(s); return s.length>n? s.slice(0,n-1)+'…' : s; }
+
+    const CHARTS={};
+    function drawOrUpdateChart(id,config){
+      const ctx=document.getElementById(id);
+      if(!ctx||!window.Chart) return;
+      if(CHARTS[id]){ CHARTS[id].destroy(); delete CHARTS[id]; }
+      CHARTS[id]=new Chart(ctx,config);
+    }
+
+    function renderSummary(d){
+      document.getElementById('personName').textContent = d?.profile?.name || d?.summary?.name || 'LinkedIn Yearly Wrap';
+      m_posts.textContent=d?.summary?.posts_last_12m ?? '-';
+      m_active.textContent=d?.summary?.active_months ?? '-';
+      m_med.textContent=d?.summary?.median_engagement ?? '-';
+      m_p90.textContent=d?.summary?.p90_engagement ?? '-';
+    }
+
+    function renderPostsPerMonth(d){
+      const arr = ensureArray(d?.trends?.posts_per_month);
+      const labels = arr.map(x=>labelMonth(x.month));
+      const vals = arr.map(x=>x.count||0);
+      drawOrUpdateChart('chartPostsPerMonth',{
+        type:'bar',
+        data:{ labels, datasets:[{ label:'Posts', data: vals }]},
+        options:{ maintainAspectRatio:true, plugins:{ legend:{ display:false } }, scales:{ x:{ title:{ display:true, text:'Month' } }, y:{ title:{ display:true, text:'Posts' } } } }
+      });
+    }
+
+    function renderMedianByMonth(d){
+      const arr = ensureArray(d?.trends?.month_median);
+      const labels = arr.map(x=>labelMonth(x.month));
+      const vals = arr.map(x=>x.median||0);
+      drawOrUpdateChart('chartMedianByMonth',{
+        type:'line',
+        data:{ labels, datasets:[{ label:'Median engagement', data: vals, tension:0.25, pointRadius:3 }]},
+        options:{ maintainAspectRatio:true, plugins:{ legend:{ display:false } }, scales:{ x:{ title:{ display:true, text:'Month' } }, y:{ title:{ display:true, text:'Median engagement' } } } }
+      });
+    }
+
+    function renderFormatMix(d){
+      const donut = toDonut(d?.mix?.type_share || {});
+      drawOrUpdateChart('chartFormatMix',{
+        type:'doughnut',
+        data:{ labels: donut.map(v=>v.name), datasets:[{ data: donut.map(v=>v.value) }]},
+        options:{ maintainAspectRatio:true, plugins:{ legend:{ position:'bottom' } } }
+      });
+    }
+
+    function renderTopicBullets(d){
+      const root = document.getElementById('topicBullets');
+      root.innerHTML = '';
+      const share = d?.topics?.tag_share || {};
+      const med = d?.topics?.tag_median_engagement || {};
+      const keys = Object.keys({...share, ...med});
+      if(keys.length===0){ root.innerHTML = '<li>No topic data available.</li>'; return; }
+      const sorted = keys.map(k=>({k, med: med[k]||0, share: share[k]||0})).sort((a,b)=>b.med-a.med);
+      const top3 = sorted.slice(0,3);
+      top3.forEach(t=>{
+        const li = document.createElement('li');
+        li.textContent = `${t.k} posts performed best (median ${t.med}; ${Math.round(t.share*100)||0}% share)`;
+        root.appendChild(li);
+      });
+      const worst = sorted[sorted.length-1];
+      if(worst){
+        const li = document.createElement('li');
+        li.textContent = `${worst.k} underperformed (median ${worst.med}).`;
+        root.appendChild(li);
+      }
+    }
+
+    function renderBestTimeBullets(d){
+      const root = document.getElementById('bestTimeBullets');
+      root.innerHTML = '';
+      const hm = d?.heatmap || {};
+      const points = [];
+      for (const dow of Object.keys(hm)){
+        for (const h of Object.keys(hm[dow])){
+          points.push({ dow, h, v: Number(hm[dow][h]||0) });
+        }
+      }
+      if(points.length===0){ root.innerHTML = '<li>Timing data not available.</li>'; return; }
+      points.sort((a,b)=>b.v-a.v);
+      const top = points.slice(0,2);
+      const worst = points[points.length-1];
+      const li1 = document.createElement('li');
+      li1.textContent = `These times worked better for you: ${top.map(p=>`${p.dow} ${p.h}:00 (median ${p.v})`).join(', ')}`;
+      root.appendChild(li1);
+      if(worst){ const li2 = document.createElement('li'); li2.textContent = `This time tended to underperform: ${worst.dow} ${worst.h}:00 (median ${worst.v})`; root.appendChild(li2); }
+    }
+
+    function renderTopPosts(d){
+      const root = document.getElementById('topPosts');
+      root.innerHTML = '';
+      const posts = ensureArray(d?.posts);
+      if(posts.length===0){ root.innerHTML = '<div class="text-sm text-gray-500">No post-level data available. Upload JSON to enable this.</div>'; return; }
+      const ranked = posts.map(p=>({ ...p, eng: (p.eng!=null?p.eng:(Number(p.likes||0)+Number(p.comments||0))) })).sort((a,b)=>b.eng-a.eng);
+      ranked.slice(0,3).forEach((p,i)=>{
+        const tile = document.createElement('div');
+        tile.className='p-3 bg-gray-50 rounded-lg border border-gray-100';
+        tile.innerHTML=`<div class="text-xs text-gray-600 mb-1">${(p.type||'text').toUpperCase()} • ${p.eng} engagement</div>`+`<div class="font-medium text-gray-800">${clip(p.content||p.snippet||'', 160)}</div>`+`<div class="text-xs text-gray-500 mt-1">Month: ${p.month?labelMonth(p.month):'-'}</div>`;
+        root.appendChild(tile);
+      });
+      const dd = document.getElementById('deepDive');
+      dd.innerHTML = '';
+      if(ranked.length>0){
+        const p = ranked[0];
+        const hypotheses = [];
+        const text = (p.content||'').toLowerCase();
+        if(text.includes('ai')) hypotheses.push('Topical fit (AI) likely amplified reach.');
+        if((p.comments||0) > (p.likes||0)*0.4) hypotheses.push('High comment ratio → conversation-driven boost.');
+        if((p.type||'')==='carousel'||(p.type||'')==='image') hypotheses.push('Visual format tends to earn more dwell time.');
+        if(hypotheses.length===0) hypotheses.push('Clear POV and concise structure may have helped.');
+        dd.innerHTML = `"${clip(p.content||'', 180)}"<br/><br/>Why it worked: ${hypotheses.join(' ')}<div class="mt-2 text-xs text-gray-500">Type: ${(p.type||'text').toUpperCase()} • Month: ${p.month?labelMonth(p.month):'-'} • Engagement: ${p.eng}</div>`;
+      } else { dd.textContent = 'No post-level data available.'; }
+    }
+
+    function renderAll(d){
+      renderSummary(d);
+      renderPostsPerMonth(d);
+      renderMedianByMonth(d);
+      renderFormatMix(d);
+      renderTopicBullets(d);
+      renderBestTimeBullets(d);
+      renderTopPosts(d);
+      window.__CURRENT__ = d;
+    }
+
+    document.getElementById('fileInputJson').addEventListener('change',(e)=>{
+      const f=e.target.files?.[0]; if(!f) return;
+      const r=new FileReader(); r.onload=()=>{ try{ const json=JSON.parse(r.result); renderAll(json); } catch{ alert('Invalid JSON'); } }; r.readAsText(f);
+    });
+
+    const SAMPLE = {
+  profile: { name: "Jane Founder" },
+  summary: {
+    posts_last_12m: 42,
+    active_months: 9,
+    median_engagement: 145,
+    p90_engagement: 410
+  },
+  trends: {
+    posts_per_month: [
+      { month: '2024-08', count: 3 }, { month: '2024-09', count: 2 },
+      { month: '2024-10', count: 4 }, { month: '2024-11', count: 5 },
+      { month: '2024-12', count: 6 }, { month: '2025-01', count: 2 },
+      { month: '2025-02', count: 5 }, { month: '2025-03', count: 4 },
+      { month: '2025-04', count: 5 }, { month: '2025-05', count: 2 },
+      { month: '2025-06', count: 3 }, { month: '2025-07', count: 1 }
+    ],
+    month_median: [
+      { month: '2024-08', median: 80 }, { month: '2024-09', median: 95 },
+      { month: '2024-10', median: 100 }, { month: '2024-11', median: 120 },
+      { month: '2024-12', median: 130 }, { month: '2025-01', median: 110 },
+      { month: '2025-02', median: 140 }, { month: '2025-03', median: 160 },
+      { month: '2025-04', median: 170 }, { month: '2025-05', median: 155 },
+      { month: '2025-06', median: 180 }, { month: '2025-07', median: 200 }
+    ]
+  },
+  mix: {
+    type_share: {
+      text: 0.62, carousel: 0.26, video: 0.08, poll: 0.04
+    },
+    type_median_engagement: {
+      text: 90, carousel: 250, video: 140, poll: 70
+    }
+  },
+  topics: {
+    tag_share: {
+      ai: 0.34, hiring: 0.18, product: 0.22, misc: 0.26
+    },
+    tag_median_engagement: {
+      ai: 280, hiring: 180, product: 120, misc: 95
+    }
+  },
+  heatmap: {
+    Mon: { '09': 120, '10': 160, '11': 130 },
+    Tue: { '09': 180, '10': 260, '11': 200 },
+    Wed: { '09': 110, '10': 150, '11': 140 },
+    Thu: { '09': 130, '10': 140, '11': 120 },
+    Fri: { '09': 90, '10': 110, '11': 80 },
+    Sat: { '09': 70, '10': 85, '11': 55 },
+    Sun: { '09': 60, '10': 65, '11': 50 }
+  },
+  posts: [
+    {
+      content: "AI is transforming how we write content. Here's what worked for me.",
+      month: "2025-03",
+      type: "text",
+      likes: 180,
+      comments: 90
+    },
+    {
+      content: "Behind the scenes of our new product launch 🎉",
+      month: "2025-06",
+      type: "carousel",
+      likes: 150,
+      comments: 120
+    },
+    {
+      content: "We're hiring across roles in engineering and design. Join us!",
+      month: "2025-04",
+      type: "image",
+      likes: 200,
+      comments: 80
+    }
+  ]
+};
+
+// Auto-render sample for quick preview
+window.addEventListener('DOMContentLoaded', () => {
+  renderAll(SAMPLE);
+});
+
+// Allow user to download the sample JSON
+(function(){
+  const a = document.getElementById('downloadSample');
+  if(!a) return;
+  a.addEventListener('click', (e)=>{
+    e.preventDefault();
+    const blob = new Blob([JSON.stringify(SAMPLE, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const tmp = document.createElement('a');
+    tmp.href = url;
+    tmp.download = 'linkedin_wrap_sample.json';
+    document.body.appendChild(tmp);
+    tmp.click();
+    tmp.remove();
+    URL.revokeObjectURL(url);
+  });
+})();
+</script>
