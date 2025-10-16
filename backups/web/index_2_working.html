@@ -1,0 +1,2328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LinkedIn Yearly Wrap • Preview (Chart.js)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <style>
+    :root { --brand:#157187; --brand2:#63a5b3; --muted:#b1d9df; --ink:#202022; }
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial; }
+    .card { background:#fff; border-radius:1rem; border:1px solid #eef2f7; box-shadow:0 1px 2px rgba(0,0,0,0.04); }
+    .metric { font-size:1.5rem; font-weight:700; color:#111827; }
+    .label { font-size:0.8rem; color:#6b7280; }
+    .section-title { font-size:1.1rem; font-weight:700; color:#111827; }
+    .pill { display:inline-flex; align-items:center; gap:.5rem; border-radius:9999px; padding:.25rem .75rem; font-size:.75rem; background:#f3f4f6; color:#374151; cursor:pointer; transition: background 0.2s; }
+    .pill:hover { background:#e5e7eb; }
+    .grid-cell { border-radius:.5rem; height:2rem; min-width:3.5rem; }
+    .chart-wrap { height: 300px; position: relative; }
+    .chart-wrap canvas { max-width: 100%; height: auto !important; }
+    .loading-skeleton { background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%); background-size: 200% 100%; animation: loading 1.5s infinite; }
+    @keyframes loading { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+    .chart-export-btn { position: absolute; top: 0.5rem; right: 0.5rem; z-index: 10; background: white; border: 1px solid #e5e7eb; border-radius: 0.25rem; padding: 0.25rem 0.5rem; font-size: 0.7rem; cursor: pointer; opacity: 0; transition: opacity 0.2s; }
+    .chart-wrap:hover .chart-export-btn { opacity: 1; }
+    .error-message { background: #fef2f2; border: 1px solid #fecaca; color: #991b1b; padding: 0.75rem; border-radius: 0.5rem; font-size: 0.875rem; }
+    .post-content-full { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
+    .post-content-full.expanded { max-height: 1000px; transition: max-height 0.5s ease-in; }
+    .toggle-content { color: #157187; cursor: pointer; font-size: 0.75rem; display: inline-block; font-weight: 500; vertical-align: baseline; }
+    .toggle-content:hover { text-decoration: underline; }
+    .post-link { color: #157187; text-decoration: none; font-size: 0.75rem; font-weight: 500; display: inline-block; vertical-align: baseline; }
+    .post-link:hover { text-decoration: underline; }
+    @media (max-width: 640px) {
+      .chart-wrap { height: 300px; }
+      .metric { font-size: 1.25rem; }
+      .section-title { font-size: 1rem; }
+    }
+    
+    /* PDF-specific chart styling */
+    @media print {
+      .chart-wrap { 
+        height: 300px !important; 
+        page-break-inside: avoid;
+      }
+      .chart-wrap canvas { 
+        max-width: 100% !important;
+        height: auto !important;
+      }
+    }
+    /* Dropdown menu styles */
+    .menu-container { position: relative; }
+    .menu-btn { 
+      background: white; 
+      border: 1px solid #e5e7eb; 
+      border-radius: 0.5rem; 
+      padding: 0.5rem 1rem; 
+      cursor: pointer; 
+      font-size: 1.25rem;
+      transition: all 0.2s;
+    }
+    .menu-btn:hover { background: #f9fafb; border-color: #157187; }
+    .menu-dropdown {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 100%;
+      margin-top: 0.5rem;
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 0.75rem;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+      min-width: 220px;
+      z-index: 1000;
+      overflow: hidden;
+    }
+    .menu-dropdown.active { display: block; }
+    .menu-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+      font-size: 0.875rem;
+      color: #374151;
+      border-bottom: 1px solid #f3f4f6;
+    }
+    .menu-item:last-child { border-bottom: none; }
+    .menu-item:hover { background: #f9fafb; color: #157187; }
+    .menu-item input[type="file"] { display: none; }
+    .menu-separator { height: 1px; background: #e5e7eb; margin: 0.25rem 0; }
+    
+    /* Notification overlay - separate from main content */
+    #pdfNotification {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      z-index: 9999;
+      max-width: 400px;
+    }
+    
+    @media print {
+      .pill, .chart-export-btn, .menu-container, #pdfNotification { display: none !important; }
+      .card { page-break-inside: avoid; box-shadow: none; }
+      body { background: white !important; }
+      header { margin-bottom: 1rem !important; }
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <!-- Notification overlay for PDF generation (outside main content) -->
+  <div id="pdfNotification"></div>
+  
+  <div class="max-w-7xl mx-auto p-6 space-y-6">
+    <header class="flex flex-wrap items-center justify-between gap-4">
+      <div>
+        <h1 class="text-2xl md:text-3xl font-bold">
+          <span id="personName">LinkedIn Yearly Wrap</span>
+        </h1>
+      </div>
+      <div class="menu-container">
+        <button class="menu-btn" id="menuBtn" title="Options">⋮</button>
+        <div class="menu-dropdown" id="menuDropdown">
+          <label class="menu-item" role="button" tabindex="0">
+            <span>📊</span>
+            <span>Upload CSV</span>
+            <input id="fileInputCsv" type="file" accept=".csv,text/csv" aria-label="Upload CSV data file" />
+          </label>
+          <label class="menu-item" role="button" tabindex="0">
+            <span>🤖</span>
+            <span>Upload LLM JSON</span>
+            <input id="fileInputJson" type="file" accept=".json,application/json" aria-label="Upload LLM analysis JSON file" />
+          </label>
+          <div class="menu-separator"></div>
+          <div class="menu-item" id="downloadPdf" title="Download page as PDF">
+            <span>📄</span>
+            <span>Download PDF</span>
+          </div>
+          <div class="menu-item" id="printPage" title="Print page (Browser native)">
+            <span>🖨️</span>
+            <span>Print Page</span>
+          </div>
+          <div class="menu-item" id="clearData" style="display:none;" title="Clear saved data and load sample">
+            <span>🗑️</span>
+            <span>Clear Data</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div id="errorContainer"></div>
+
+    <section class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div class="card p-4">
+        <div class="label">Posts</div>
+        <div id="m_posts" class="metric" role="status" aria-live="polite" aria-label="Total posts in last 12 months">-</div>
+      </div>
+      <div class="card p-4">
+        <div class="label">Active months</div>
+        <div id="m_active" class="metric" role="status" aria-live="polite" aria-label="Number of active months">-</div>
+      </div>
+      <div class="card p-4">
+        <div class="label">Median engagement</div>
+        <div id="m_med" class="metric" role="status" aria-live="polite" aria-label="Median engagement per post">-</div>
+      </div>
+      <div class="card p-4">
+        <div class="label">P90 engagement</div>
+        <div id="m_p90" class="metric" role="status" aria-live="polite" aria-label="90th percentile engagement">-</div>
+      </div>
+    </section>
+
+    <section class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div class="card p-4">
+        <div class="section-title mb-2">Posting cadence</div>
+        <div class="chart-wrap">
+          <button class="chart-export-btn" onclick="exportChart('chartPostsPerMonth')" title="Export as PNG">📥 PNG</button>
+          <canvas id="chartPostsPerMonth" role="img" aria-label="Bar chart showing posting frequency by month"></canvas>
+        </div>
+      </div>
+      <div class="card p-4">
+        <div class="section-title mb-2">Engagement over time</div>
+        <div class="chart-wrap">
+          <button class="chart-export-btn" onclick="exportChart('chartMedianByMonth')" title="Export as PNG">📥 PNG</button>
+          <canvas id="chartMedianByMonth" role="img" aria-label="Line chart showing engagement trends over time"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div class="card p-4">
+        <div class="section-title mb-2">Format mix</div>
+        <div class="chart-wrap">
+          <button class="chart-export-btn" onclick="exportChart('chartFormatMix')" title="Export as PNG">📥 PNG</button>
+          <canvas id="chartFormatMix" role="img" aria-label="Doughnut chart showing content format distribution"></canvas>
+        </div>
+      </div>
+      <div class="card p-4">
+        <div class="section-title mb-2">Post vs Reshare</div>
+        <div class="chart-wrap">
+          <button class="chart-export-btn" onclick="exportChart('chartActionMix')" title="Export as PNG">📥 PNG</button>
+          <canvas id="chartActionMix" role="img" aria-label="Doughnut chart showing post action distribution"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div class="card p-4">
+        <div class="section-title mb-2">Engagement by post type</div>
+        <ul id="postTypeBullets" class="list-disc pl-5 space-y-1 text-sm text-gray-700" role="list"></ul>
+      </div>
+      <div class="card p-4">
+        <div class="flex justify-between items-center mb-2">
+          <div class="section-title">Topic insights</div>
+          <button 
+            id="analyzeTopicsBtn" 
+            onclick="analyzeTopicsWithLLM()"
+            class="px-3 py-1.5 bg-gradient-to-r from-purple-500 to-indigo-600 text-white rounded-lg text-xs font-medium hover:from-purple-600 hover:to-indigo-700 transition-all duration-200 shadow-sm hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
+            style="background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%);">
+            <span id="topicBtnText">🎯 Analyze with AI</span>
+          </button>
+        </div>
+        <ul id="topicBullets" class="list-disc pl-5 space-y-1 text-sm text-gray-700" role="list"></ul>
+        <div id="llmTopicResults" class="mt-3" style="display:none;"></div>
+      </div>
+    </section>
+
+    <!-- Narrative Insights Section (LLM-powered) -->
+    <section class="card p-4" id="narrativeInsightsSection">
+      <div class="flex justify-between items-center mb-3">
+        <div class="section-title">💬 Narrative Insights</div>
+        <button 
+          id="generateInsightsBtn" 
+          onclick="generateNarrativeInsights()"
+          class="px-4 py-2 bg-gradient-to-r from-blue-500 to-teal-600 text-white rounded-lg text-sm font-medium hover:from-blue-600 hover:to-teal-700 transition-all duration-200 shadow-sm hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
+          style="background: linear-gradient(135deg, #157187 0%, #63a5b3 100%);">
+          <span id="btnText">✨ Generate Insights</span>
+        </button>
+      </div>
+      
+      <div id="narrativeInsightsContent" class="space-y-3">
+        <div class="text-sm text-gray-500 italic">
+          Click "Generate Insights" to get AI-powered observations about your posting patterns and engagement triggers.
+        </div>
+      </div>
+    </section>
+
+    <!-- Best time to post section - COMMENTED OUT FOR EASY ROLLBACK -->
+    <!-- <section class="card p-4">
+      <div class="section-title mb-2">Best time to post</div>
+      <ul id="bestTimeBullets" class="list-disc pl-5 space-y-1 text-sm text-gray-700" role="list"></ul>
+    </section> -->
+
+    <section class="card p-4">
+      <div class="section-title mb-2">Posting Rhythm & Continuity</div>
+      <div id="postingRhythm" class="space-y-3"></div>
+    </section>
+
+    <section class="card p-4">
+      <div class="section-title mb-2">Timing Insights</div>
+      <div id="timingInsights" class="space-y-3"></div>
+    </section>
+
+    <section class="card p-4">
+      <div class="section-title mb-2">Top Performing Posts</div>
+      <div id="topPosts" class="space-y-3"></div>
+    </section>
+  </div>
+
+  <script>
+    // ============= CONFIGURATION =============
+    const CONFIG = {
+      clipLength: { default: 120, post: 160, deepDive: 180 },
+      topPostsCount: 3,
+      topTopicsCount: 3,
+      chartHeight: 200,
+      colors: {
+        primary: '#157187',
+        secondary: '#63a5b3',
+        tertiary: '#b1d9df',
+        background: 'rgba(99, 165, 179, 0.1)'
+      },
+      storageKeys: {
+        data: 'linkedin_wrap_data',
+        timestamp: 'linkedin_wrap_timestamp'
+      }
+    };
+
+    // ============= UTILITY FUNCTIONS =============
+    function labelMonth(m){
+      if(!m) return '';
+      if(/^\d{4}-\d{2}$/.test(m)){
+        const [y,mm]=m.split('-');
+        const d=new Date(Number(y), Number(mm)-1, 1);
+        return d.toLocaleString('en-US',{month:'short'})+" '"+String(y).slice(-2);
+      }
+      if(/^\d{2}$/.test(m)){
+        const d=new Date(2000, Number(m)-1, 1);
+        return d.toLocaleString('en-US',{month:'short'});
+      }
+      return m;
+    }
+
+    function toDonut(shareObj={}){ 
+      return Object.entries(shareObj).map(([name,frac])=>({name, value: Math.round((frac||0)*100)})); 
+    }
+
+    function ensureArray(a){ 
+      return Array.isArray(a)?a:[]; 
+    }
+
+    function clip(s, n=CONFIG.clipLength.default){ 
+      if(!s) return ''; 
+      s=String(s); 
+      return s.length>n? s.slice(0,n-1)+'…' : s; 
+    }
+
+    function showError(message) {
+      const container = document.getElementById('errorContainer');
+      container.innerHTML = `<div class="error-message">${message}</div>`;
+      setTimeout(() => { container.innerHTML = ''; }, 5000);
+    }
+
+    function showLoading(elementId) {
+      const el = document.getElementById(elementId);
+      if (el) {
+        el.innerHTML = '<div class="loading-skeleton" style="height:3rem;border-radius:0.5rem;"></div>';
+      }
+    }
+
+    // ============= DATA VALIDATION =============
+    function validateData(json) {
+      const errors = [];
+      
+      if (!json || typeof json !== 'object') {
+        errors.push('Invalid JSON structure');
+        return { valid: false, errors };
+      }
+
+      // Check summary
+      if (!json.summary) {
+        errors.push('Missing "summary" section');
+      } else {
+        const required = ['posts_last_12m', 'active_months', 'median_engagement', 'p90_engagement'];
+        required.forEach(field => {
+          if (json.summary[field] === undefined) {
+            errors.push(`Missing summary.${field}`);
+          }
+        });
+      }
+
+      // Check trends
+      if (!json.trends?.posts_per_month) {
+        errors.push('Missing "trends.posts_per_month" data');
+      }
+      if (!json.trends?.month_median) {
+        errors.push('Missing "trends.month_median" data');
+      }
+
+      // Check mix
+      if (!json.mix?.type_share) {
+        errors.push('Missing "mix.type_share" data');
+      }
+
+      // Topics and heatmap are optional but should be objects if present
+      if (json.topics && typeof json.topics !== 'object') {
+        errors.push('"topics" should be an object');
+      }
+      if (json.heatmap && typeof json.heatmap !== 'object') {
+        errors.push('"heatmap" should be an object');
+      }
+
+      return { valid: errors.length === 0, errors };
+    }
+
+    // ============= DATA PERSISTENCE =============
+    function saveData(data) {
+      try {
+        localStorage.setItem(CONFIG.storageKeys.data, JSON.stringify(data));
+        localStorage.setItem(CONFIG.storageKeys.timestamp, Date.now().toString());
+        document.getElementById('clearData').style.display = 'flex';
+      } catch (e) {
+        console.warn('Failed to save data locally:', e);
+      }
+    }
+
+    function loadSavedData() {
+      try {
+        const saved = localStorage.getItem(CONFIG.storageKeys.data);
+        if (saved) {
+          return JSON.parse(saved);
+        }
+      } catch (e) {
+        console.warn('Failed to load saved data:', e);
+      }
+      return null;
+    }
+
+    async function clearSavedData() {
+      localStorage.removeItem(CONFIG.storageKeys.data);
+      localStorage.removeItem(CONFIG.storageKeys.timestamp);
+      const clearDataBtn = document.getElementById('clearData');
+      if (clearDataBtn) {
+        clearDataBtn.style.display = 'none';
+      }
+      const sampleData = await loadSampleData();
+      renderAll(sampleData);
+    }
+
+    // ============= CHART MANAGEMENT =============
+    const CHARTS={};
+
+    function drawOrUpdateChart(id, config){
+      const ctx = document.getElementById(id);
+      if (!ctx) {
+        console.error(`Chart canvas #${id} not found`);
+        return;
+      }
+      if (!window.Chart) {
+        console.error('Chart.js not loaded');
+        return;
+      }
+      
+      try {
+        if (CHARTS[id]) { 
+          CHARTS[id].destroy(); 
+          delete CHARTS[id]; 
+        }
+        CHARTS[id] = new Chart(ctx, config);
+      } catch (error) {
+        console.error(`Failed to create chart ${id}:`, error);
+        const wrap = ctx.closest('.chart-wrap');
+        if (wrap) {
+          wrap.innerHTML = '<p class="text-red-500 text-sm text-center py-8">Chart failed to render</p>';
+        }
+      }
+    }
+
+    function exportChart(chartId) {
+      const chart = CHARTS[chartId];
+      if (!chart) {
+        alert('Chart not found');
+        return;
+      }
+      
+      try {
+        // Get the canvas element
+        const canvas = document.getElementById(chartId);
+        if (!canvas) {
+          alert('Chart canvas not found');
+          return;
+        }
+        
+        // Find the parent card and get the title
+        const card = canvas.closest('.card');
+        if (!card) {
+          // Fallback to original method if card not found
+          const link = document.createElement('a');
+          link.download = `${chartId}_${new Date().toISOString().split('T')[0]}.png`;
+          link.href = chart.toBase64Image();
+          link.click();
+          return;
+        }
+        
+        // Get the section title
+        const titleElement = card.querySelector('.section-title');
+        const title = titleElement ? titleElement.textContent : 'Chart';
+        
+        // Create a temporary canvas with extra space for title
+        const tempCanvas = document.createElement('canvas');
+        const ctx = tempCanvas.getContext('2d');
+        
+        // Set dimensions (add space for title)
+        const titleHeight = 50;
+        const padding = 20;
+        tempCanvas.width = canvas.width;
+        tempCanvas.height = canvas.height + titleHeight;
+        
+        // Fill background
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
+        
+        // Draw title
+        ctx.fillStyle = '#111827';
+        ctx.font = 'bold 18px system-ui, -apple-system, Segoe UI, Roboto, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText(title, tempCanvas.width / 2, 35);
+        
+        // Draw the chart
+        ctx.drawImage(canvas, 0, titleHeight);
+        
+        // Download
+        const link = document.createElement('a');
+        const filename = title.toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_]/g, '');
+        link.download = `${filename}_${new Date().toISOString().split('T')[0]}.png`;
+        link.href = tempCanvas.toDataURL('image/png');
+        link.click();
+        
+      } catch (error) {
+        console.error('Failed to export chart:', error);
+        alert('Failed to export chart: ' + error.message);
+      }
+    }
+
+    // ============= RENDERING FUNCTIONS =============
+    function renderSummary(d){
+      document.getElementById('personName').textContent = d?.profile?.name || d?.summary?.name || 'LinkedIn Yearly Wrap';
+      m_posts.textContent = d?.summary?.posts_last_12m ?? '-';
+      m_active.textContent = d?.summary?.active_months ?? '-';
+      m_med.textContent = d?.summary?.median_engagement ?? '-';
+      m_p90.textContent = d?.summary?.p90_engagement ?? '-';
+    }
+
+    function renderPostsPerMonth(d){
+      const arr = ensureArray(d?.trends?.posts_per_month);
+      const labels = arr.map(x=>labelMonth(x.month));
+      const vals = arr.map(x=>x.count||0);
+      
+      drawOrUpdateChart('chartPostsPerMonth',{
+        type:'bar',
+        data:{ 
+          labels, 
+          datasets:[{ 
+            label:'Posts', 
+            data: vals,
+            backgroundColor: CONFIG.colors.primary,
+            borderColor: CONFIG.colors.primary,
+            borderWidth: 1
+          }]
+        },
+        options:{ 
+          responsive: true,
+          maintainAspectRatio: true,
+          aspectRatio: 2,
+          plugins:{ 
+            legend:{ display:false },
+            tooltip: { 
+              backgroundColor: CONFIG.colors.primary,
+              titleColor: '#fff',
+              bodyColor: '#fff'
+            }
+          }, 
+          scales:{ 
+            x:{ 
+              title:{ display:true, text:'Month' },
+              grid: { display: false },
+              ticks: { font: { size: 11 } }
+            }, 
+            y:{ 
+              title:{ display:true, text:'Posts' },
+              beginAtZero: true,
+              ticks: { stepSize: 1, font: { size: 11 } }
+            } 
+          } 
+        }
+      });
+    }
+
+    function renderMedianByMonth(d){
+      const arr = ensureArray(d?.trends?.month_median);
+      const labels = arr.map(x=>labelMonth(x.month));
+      const vals = arr.map(x=>x.median||0);
+      
+      drawOrUpdateChart('chartMedianByMonth',{
+        type:'line',
+        data:{ 
+          labels, 
+          datasets:[{ 
+            label:'Median engagement', 
+            data: vals, 
+            tension: 0.3, 
+            pointRadius: 4,
+            pointHoverRadius: 6,
+            borderColor: CONFIG.colors.secondary,
+            backgroundColor: CONFIG.colors.background,
+            borderWidth: 2,
+            fill: true
+          }]
+        },
+        options:{ 
+          responsive: true,
+          maintainAspectRatio: true,
+          aspectRatio: 2,
+          plugins:{ 
+            legend:{ display:false },
+            tooltip: { 
+              backgroundColor: CONFIG.colors.secondary,
+              titleColor: '#fff',
+              bodyColor: '#fff'
+            }
+          }, 
+          scales:{ 
+            x:{ 
+              title:{ display:true, text:'Month' },
+              grid: { display: false },
+              ticks: { font: { size: 11 } }
+            }, 
+            y:{ 
+              title:{ display:true, text:'Median engagement' },
+              beginAtZero: true,
+              ticks: { font: { size: 11 } }
+            } 
+          } 
+        }
+      });
+    }
+
+    function renderFormatMix(d){
+      const donut = toDonut(d?.mix?.type_share || {});
+      const counts = d?.mix?.type_counts || {};
+      const colors = ['#157187', '#63a5b3', '#b1d9df', '#d4ebef'];
+      
+      drawOrUpdateChart('chartFormatMix',{
+        type:'doughnut',
+        data:{ 
+          labels: donut.map(v=>v.name), 
+          datasets:[{ 
+            data: donut.map(v=>v.value),
+            backgroundColor: colors,
+            borderWidth: 2,
+            borderColor: '#fff'
+          }]
+        },
+        options:{ 
+          responsive: true,
+          maintainAspectRatio: true,
+          aspectRatio: 1.5,
+          plugins:{ 
+            legend:{ 
+              position:'bottom',
+              labels: { padding: 10, font: { size: 11 } }
+            },
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  const type = context.label;
+                  const count = counts[type] || 0;
+                  const percentage = context.parsed;
+                  const postLabel = count === 1 ? 'post' : 'posts';
+                  return `${type}: ${count} ${postLabel} (${percentage}%)`;
+                }
+              }
+            }
+          } 
+        }
+      });
+    }
+
+    function renderActionMix(d){
+      const donut = toDonut(d?.mix?.action_share || {});
+      const counts = d?.mix?.action_counts || {};
+      const colors = ['#157187', '#63a5b3', '#b1d9df'];
+      
+      drawOrUpdateChart('chartActionMix',{
+        type:'doughnut',
+        data:{ 
+          labels: donut.map(v=>v.name), 
+          datasets:[{ 
+            data: donut.map(v=>v.value),
+            backgroundColor: colors,
+            borderWidth: 2,
+            borderColor: '#fff'
+          }]
+        },
+        options:{ 
+          responsive: true,
+          maintainAspectRatio: true,
+          aspectRatio: 1.5,
+          plugins:{ 
+            legend:{ 
+              position:'bottom',
+              labels: { padding: 10, font: { size: 11 } }
+            },
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  const action = context.label;
+                  const count = counts[action] || 0;
+                  const percentage = context.parsed;
+                  const postLabel = count === 1 ? 'post' : 'posts';
+                  return `${action}: ${count} ${postLabel} (${percentage}%)`;
+                }
+              }
+            }
+          } 
+        }
+      });
+    }
+
+    function renderTopicBullets(d){
+      const root = document.getElementById('topicBullets');
+      root.innerHTML = '';
+      const share = d?.topics?.tag_share || {};
+      const med = d?.topics?.tag_median_engagement || {};
+      const counts = d?.topics?.tag_counts || {};
+      const llmSummary = d?.topics?.llm_summary || '';
+      const keys = Object.keys({...share, ...med}).filter(k => k !== 'misc');
+      
+      if(keys.length===0){ 
+        root.innerHTML = '<li>No topic data available. Run <code>python analyze_topics_llm.py</code> to analyze topics with AI.</li>'; 
+        return; 
+      }
+      
+      // Show LLM summary if available
+      if(llmSummary) {
+        const summaryDiv = document.createElement('div');
+        summaryDiv.className = 'mb-4 p-3 bg-blue-50 rounded-lg border border-blue-100';
+        summaryDiv.innerHTML = `
+          <div class="flex items-start gap-2">
+            <span style="font-size: 1.2rem;">🤖</span>
+            <div>
+              <div class="font-semibold text-blue-900 mb-1" style="font-size: 0.75rem;">AI Analysis</div>
+              <div class="text-sm text-blue-900 leading-relaxed">${llmSummary}</div>
+            </div>
+          </div>
+        `;
+        root.appendChild(summaryDiv);
+      }
+      
+      // Sort by count (most frequent first) to show topic distribution
+      const sorted = keys.map(k=>({
+        k, 
+        med: med[k]||0, 
+        share: share[k]||0, 
+        count: counts[k]||0
+      })).sort((a,b)=>b.count-a.count);
+      
+      // Add topic distribution header
+      if(sorted.length > 0) {
+        const headerDiv = document.createElement('div');
+        headerDiv.className = 'font-semibold text-gray-700 mt-3 mb-2';
+        headerDiv.style.fontSize = '0.85rem';
+        headerDiv.textContent = '📊 Topic Distribution';
+        root.appendChild(headerDiv);
+      }
+      
+      // Create list element for topics
+      const ul = document.createElement('ul');
+      ul.className = 'list-disc pl-5 space-y-1 text-sm text-gray-700';
+      
+      // Show all topics with their distribution and performance
+      sorted.forEach((t, idx) => {
+        const li = document.createElement('li');
+        const topicLabel = t.k.charAt(0).toUpperCase() + t.k.slice(1);
+        const percentage = Math.round(t.share * 100);
+        const postLabel = t.count === 1 ? 'post' : 'posts';
+        
+        li.innerHTML = `<strong>${topicLabel}:</strong> ${t.count} ${postLabel} (${percentage}%) • median engagement: ${t.med}`;
+        ul.appendChild(li);
+      });
+      
+      root.appendChild(ul);
+      
+      // Show best vs worst performer (only if no LLM summary, as LLM includes this)
+      if(!llmSummary) {
+        const byPerformance = [...sorted].sort((a,b)=>b.med-a.med);
+        if(byPerformance.length > 1){
+          const best = byPerformance[0];
+          const worst = byPerformance[byPerformance.length-1];
+          
+          if(best.med > worst.med * 1.2) {
+            const insightDiv = document.createElement('div');
+            insightDiv.className = 'mt-3 p-2 bg-gray-50 rounded text-sm';
+            insightDiv.style.color = '#157187';
+            const bestLabel = best.k.charAt(0).toUpperCase() + best.k.slice(1);
+            const worstLabel = worst.k.charAt(0).toUpperCase() + worst.k.slice(1);
+            const improvement = Math.round((best.med / worst.med - 1) * 100);
+            insightDiv.innerHTML = `<strong>💡 Insight:</strong> ${bestLabel} topics perform ${improvement}% better than ${worstLabel} topics`;
+            root.appendChild(insightDiv);
+          }
+        }
+      }
+    }
+
+    // Legacy function - kept for rollback if needed
+    // function renderActionBullets(d){
+    //   const root = document.getElementById('actionBullets');
+    //   root.innerHTML = '';
+    //   const share = d?.mix?.action_share || {};
+    //   const med = d?.mix?.action_median_engagement || {};
+    //   const keys = Object.keys({...share, ...med});
+    //   
+    //   if(keys.length===0){ 
+    //     root.innerHTML = '<li>No action data available.</li>'; 
+    //     return; 
+    //   }
+    //   
+    //   keys.forEach(action => {
+    //     const li = document.createElement('li');
+    //     const percentage = Math.round((share[action] || 0) * 100);
+    //     const engagement = med[action] || 0;
+    //     li.textContent = `${action}: ${percentage}% of content (median engagement: ${engagement})`;
+    //     root.appendChild(li);
+    //   });
+    // }
+
+    function renderPostTypeBullets(d){
+      const root = document.getElementById('postTypeBullets');
+      root.innerHTML = '';
+      const share = d?.mix?.type_share || {};
+      const med = d?.mix?.type_median_engagement || {};
+      const mean = d?.mix?.type_mean_engagement || {};
+      const q1 = d?.mix?.type_q1_engagement || {};
+      const q3 = d?.mix?.type_q3_engagement || {};
+      const max = d?.mix?.type_max_engagement || {};
+      const counts = d?.mix?.type_counts || {};
+      const keys = Object.keys({...share, ...med});
+      
+      if(keys.length===0){ 
+        root.innerHTML = '<li>No post type data available.</li>'; 
+        return; 
+      }
+      
+      // Sort by median engagement (highest to lowest)
+      const sorted = keys.map(k=>({
+        k, 
+        med: med[k]||0, 
+        mean: mean[k]||0,
+        q1: q1[k]||0,
+        q3: q3[k]||0,
+        max: max[k]||0,
+        share: share[k]||0, 
+        count: counts[k]||0
+      })).sort((a,b)=>b.med-a.med);
+      
+      sorted.forEach(t=>{
+        const typeLabel = t.k.charAt(0).toUpperCase() + t.k.slice(1);
+        const postLabel = t.count === 1 ? 'post' : 'posts';
+        
+        // Main summary line
+        const li = document.createElement('li');
+        li.innerHTML = `<strong>${typeLabel} ${postLabel}:</strong> ${t.count} ${postLabel} (${Math.round(t.share*100)}%)`;
+        root.appendChild(li);
+        
+        // Statistical breakdown - indented
+        const statsDiv = document.createElement('div');
+        statsDiv.style.marginLeft = '1.5rem';
+        statsDiv.style.marginTop = '0.25rem';
+        statsDiv.style.fontSize = '0.875rem';
+        statsDiv.style.color = '#4b5563';
+        statsDiv.innerHTML = `
+          <div style="line-height: 1.5;">
+            • Median: <strong>${t.med}</strong> | Mean: <strong>${t.mean}</strong> | Peak: <strong>${t.max}</strong><br>
+            • Bottom 25%: ${t.q1} | Top 25%: <strong>${t.q3}</strong>
+          </div>
+        `;
+        root.appendChild(statsDiv);
+      });
+      
+      // Add comprehensive insights
+      if(sorted.length > 1) {
+        const spacerDiv = document.createElement('div');
+        spacerDiv.style.marginTop = '0.75rem';
+        root.appendChild(spacerDiv);
+        
+        // 1. Performance comparison
+        const best = sorted[0];
+        const worst = sorted[sorted.length - 1];
+        if(best.med > worst.med * 1.5) {
+          const li = document.createElement('li');
+          const bestLabel = best.k.charAt(0).toUpperCase() + best.k.slice(1);
+          const worstLabel = worst.k.charAt(0).toUpperCase() + worst.k.slice(1);
+          const improvement = Math.round((best.med / worst.med - 1) * 100);
+          li.innerHTML = `<strong>💡 Performance Gap:</strong> ${bestLabel} posts outperform ${worstLabel} posts by ${improvement}% on median engagement`;
+          li.style.color = '#157187';
+          li.style.fontWeight = '500';
+          root.appendChild(li);
+        }
+        
+        // 2. Top quartile ceiling (growth potential)
+        const bestQ3 = sorted[0];
+        if(bestQ3.count >= 3) {
+          const li = document.createElement('li');
+          const bestLabel = bestQ3.k.charAt(0).toUpperCase() + bestQ3.k.slice(1);
+          li.innerHTML = `<strong>🎯 High Ceiling:</strong> ${bestLabel} posts' top 25% achieve ${bestQ3.q3}+ engagement (${Math.round((bestQ3.q3/bestQ3.med - 1) * 100)}% above median)`;
+          li.style.color = '#157187';
+          li.style.fontWeight = '500';
+          root.appendChild(li);
+        }
+        
+        // 3. Consistency analysis
+        let mostConsistent = null;
+        let bestConsistencyScore = Infinity;
+        sorted.forEach(t => {
+          if(t.count >= 5) {
+            const spread = t.q3 - t.q1;
+            const relativeSpread = spread / t.med;
+            if(relativeSpread < bestConsistencyScore) {
+              bestConsistencyScore = relativeSpread;
+              mostConsistent = t;
+            }
+          }
+        });
+        
+        if(mostConsistent && bestConsistencyScore < 1) {
+          const li = document.createElement('li');
+          const label = mostConsistent.k.charAt(0).toUpperCase() + mostConsistent.k.slice(1);
+          li.innerHTML = `<strong>📊 Most Consistent:</strong> ${label} posts show reliable performance (Q1: ${mostConsistent.q1} → Q3: ${mostConsistent.q3})`;
+          li.style.color = '#7c3aed';
+          li.style.fontWeight = '500';
+          root.appendChild(li);
+        }
+        
+        // 4. Sample size warning
+        const smallSample = sorted.filter(t => t.count < 5 && t.count > 0);
+        if(smallSample.length > 0) {
+          const li = document.createElement('li');
+          const types = smallSample.map(t => t.k.charAt(0).toUpperCase() + t.k.slice(1)).join(', ');
+          const countLabels = smallSample.map(t => {
+            const postLabel = t.count === 1 ? 'post' : 'posts';
+            return `${t.count} ${postLabel}`;
+          }).join(', ');
+          li.innerHTML = `<strong>⚠️ Small Sample:</strong> ${types} (${countLabels}) - insights may vary with more data`;
+          li.style.color = '#d97706';
+          li.style.fontWeight = '500';
+          li.style.fontSize = '0.8125rem';
+          root.appendChild(li);
+        }
+        
+        // 5. Outlier detection (mean vs median)
+        const skewed = sorted.filter(t => t.count >= 5 && t.mean > t.med * 1.3);
+        if(skewed.length > 0) {
+          const t = skewed[0];
+          const li = document.createElement('li');
+          const label = t.k.charAt(0).toUpperCase() + t.k.slice(1);
+          li.innerHTML = `<strong>🌟 Hidden Gems:</strong> ${label} posts have viral potential (mean: ${t.mean} vs median: ${t.med}) - some posts greatly outperform the rest`;
+          li.style.color = '#dc2626';
+          li.style.fontWeight = '500';
+          root.appendChild(li);
+        }
+      }
+    }
+
+    // FUNCTION COMMENTED OUT - Best time to post section removed (for easy rollback)
+    // function renderBestTimeBullets(d){
+    //   const root = document.getElementById('bestTimeBullets');
+    //   root.innerHTML = '';
+    //   
+    //   const timing = d?.timingInsights || {};
+    //   const dayStats = timing.day_of_week || {};
+    //   
+    //   if(Object.keys(dayStats).length === 0){ 
+    //     root.innerHTML = '<li>Not enough data to determine best posting days.</li>'; 
+    //     return; 
+    //   }
+    //   
+    //   // Sort days by median engagement
+    //   const sortedDays = Object.entries(dayStats)
+    //     .filter(([_, stats]) => stats.count >= 2) // At least 2 posts
+    //     .sort(([_, a], [__, b]) => b.median - a.median);
+    //   
+    //   if(sortedDays.length === 0) {
+    //     root.innerHTML = '<li>Not enough data to determine best posting days.</li>'; 
+    //     return;
+    //   }
+    //   
+    //   const topDays = sortedDays.slice(0, 3);
+    //   const worstDay = sortedDays[sortedDays.length - 1];
+    //   
+    //   const li1 = document.createElement('li');
+    //   li1.textContent = `Best performing days: ${topDays.map(([day, stats]) => `${day} (median ${stats.median})`).join(', ')}`;
+    //   root.appendChild(li1);
+    //   
+    //   if(worstDay && sortedDays.length > 1){ 
+    //     const li2 = document.createElement('li'); 
+    //     li2.textContent = `Day with lower engagement: ${worstDay[0]} (median ${worstDay[1].median})`; 
+    //     root.appendChild(li2); 
+    //   }
+    // }
+
+    function renderPostingRhythm(d){
+      const root = document.getElementById('postingRhythm');
+      root.innerHTML = '';
+      const rhythm = d?.rhythm || {};
+      
+      if(!rhythm.posts_per_month_avg){ 
+        root.innerHTML = '<div class="text-sm text-gray-600">Rhythm data not available.</div>'; 
+        return; 
+      }
+      
+      // Create a grid of metric cards
+      const gridDiv = document.createElement('div');
+      gridDiv.className = 'grid grid-cols-2 lg:grid-cols-4 gap-3';
+      
+      // Metric 1: Posts per month
+      const metric1 = document.createElement('div');
+      metric1.className = 'bg-gradient-to-br from-blue-50 to-blue-100 p-3 rounded-lg border border-blue-200';
+      metric1.innerHTML = `
+        <div class="text-xs text-gray-600 mb-1">Avg Posts/Month</div>
+        <div class="text-2xl font-bold text-gray-800">${rhythm.posts_per_month_avg}</div>
+      `;
+      gridDiv.appendChild(metric1);
+      
+      // Metric 2: Longest gap
+      const metric2 = document.createElement('div');
+      metric2.className = 'bg-gradient-to-br from-orange-50 to-orange-100 p-3 rounded-lg border border-orange-200';
+      
+      let gapDateRange = '';
+      if (rhythm.longest_gap_start && rhythm.longest_gap_end) {
+        const startDate = new Date(rhythm.longest_gap_start).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+        const endDate = new Date(rhythm.longest_gap_end).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        gapDateRange = `<div class="text-xs text-gray-500 mt-1">${startDate} - ${endDate}</div>`;
+      }
+      
+      metric2.innerHTML = `
+        <div class="text-xs text-gray-600 mb-1">Longest Gap</div>
+        <div class="text-2xl font-bold text-gray-800">${rhythm.longest_gap_days} <span class="text-sm">days</span></div>
+        ${gapDateRange}
+      `;
+      gridDiv.appendChild(metric2);
+      
+      // Metric 3: Average gap
+      const metric3 = document.createElement('div');
+      metric3.className = 'bg-gradient-to-br from-green-50 to-green-100 p-3 rounded-lg border border-green-200';
+      metric3.innerHTML = `
+        <div class="text-xs text-gray-600 mb-1">Avg Posting Gap</div>
+        <div class="text-2xl font-bold text-gray-800">${rhythm.avg_gap_days} <span class="text-sm">days</span></div>
+      `;
+      gridDiv.appendChild(metric3);
+      
+      // Metric 4: Peak month
+      const peakMonthDisplay = rhythm.peak_month ? new Date(rhythm.peak_month + '-01').toLocaleDateString('en-US', { year: 'numeric', month: 'short' }) : 'N/A';
+      const metric4 = document.createElement('div');
+      metric4.className = 'bg-gradient-to-br from-purple-50 to-purple-100 p-3 rounded-lg border border-purple-200';
+      const peakPostLabel = rhythm.peak_month_count === 1 ? 'post' : 'posts';
+      metric4.innerHTML = `
+        <div class="text-xs text-gray-600 mb-1">Peak Month</div>
+        <div class="text-lg font-bold text-gray-800">${peakMonthDisplay}</div>
+        <div class="text-xs text-gray-600">${rhythm.peak_month_count} ${peakPostLabel}</div>
+      `;
+      gridDiv.appendChild(metric4);
+      
+      root.appendChild(gridDiv);
+      
+      // Habit Score calculation
+      const habitScoreDiv = document.createElement('div');
+      habitScoreDiv.className = 'mt-3 p-3 bg-gray-50 rounded-lg border border-gray-200';
+      
+      let habitScore = 0;
+      let habitFactors = [];
+      
+      // Factor 1: Consistency (lower avg gap = better)
+      if(rhythm.avg_gap_days <= 7) {
+        habitScore += 40;
+        habitFactors.push('✓ Highly consistent posting');
+      } else if(rhythm.avg_gap_days <= 14) {
+        habitScore += 25;
+        habitFactors.push('✓ Good posting consistency');
+      } else {
+        habitScore += 10;
+        habitFactors.push('• Room to improve consistency');
+      }
+      
+      // Factor 2: No long breaks (longest gap)
+      if(rhythm.longest_gap_days <= 14) {
+        habitScore += 30;
+        habitFactors.push('✓ No extended breaks');
+      } else if(rhythm.longest_gap_days <= 30) {
+        habitScore += 20;
+        habitFactors.push('• Some breaks taken');
+      } else {
+        habitScore += 10;
+        habitFactors.push('• Had extended breaks');
+      }
+      
+      // Factor 3: Volume (posts per month)
+      if(rhythm.posts_per_month_avg >= 12) {
+        habitScore += 30;
+        habitFactors.push('✓ High posting volume');
+      } else if(rhythm.posts_per_month_avg >= 4) {
+        habitScore += 20;
+        habitFactors.push('✓ Moderate posting volume');
+      } else {
+        habitScore += 10;
+        habitFactors.push('• Low posting volume');
+      }
+      
+      const scoreColor = habitScore >= 80 ? 'text-green-700' : habitScore >= 60 ? 'text-blue-700' : 'text-orange-700';
+      const scoreLabel = habitScore >= 80 ? 'Excellent' : habitScore >= 60 ? 'Good' : 'Needs Work';
+      
+      habitScoreDiv.innerHTML = `
+        <div class="flex items-center justify-between mb-2">
+          <div class="text-sm font-semibold text-gray-700">Posting Habit Score</div>
+          <div class="text-2xl font-bold ${scoreColor}">${habitScore}/100 <span class="text-sm">(${scoreLabel})</span></div>
+        </div>
+        <div class="text-xs text-gray-600 space-y-1">
+          ${habitFactors.map(f => `<div>${f}</div>`).join('')}
+        </div>
+      `;
+      
+      root.appendChild(habitScoreDiv);
+    }
+
+    function renderTimingInsights(d){
+      const root = document.getElementById('timingInsights');
+      root.innerHTML = '';
+      const timing = d?.timingInsights || {};
+      
+      if(!timing.day_of_week || Object.keys(timing.day_of_week).length === 0){ 
+        root.innerHTML = '<div class="text-sm text-gray-600">Timing data not available.</div>'; 
+        return; 
+      }
+      
+      // Day of Week section
+      const dowSection = document.createElement('div');
+      dowSection.className = 'mb-4';
+      dowSection.innerHTML = `
+        <div class="text-sm font-semibold text-gray-700 mb-2">📅 Performance by Day of Week</div>
+        <div class="text-xs text-gray-500 mb-2">Shows: Posts count • Median engagement</div>
+      `;
+      
+      const dowGrid = document.createElement('div');
+      dowGrid.className = 'grid grid-cols-7 gap-2 text-center';
+      
+      const dayOrder = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+      const dayAbbr = { Monday: 'Mon', Tuesday: 'Tue', Wednesday: 'Wed', Thursday: 'Thu', Friday: 'Fri', Saturday: 'Sat', Sunday: 'Sun' };
+      
+      dayOrder.forEach(day => {
+        const stats = timing.day_of_week[day];
+        const isActive = stats && stats.count > 0;
+        const isBest = timing.best_day === day;
+        
+        const dayCard = document.createElement('div');
+        dayCard.className = `p-2 rounded-lg text-xs ${isBest ? 'bg-blue-100 border-2 border-blue-500' : isActive ? 'bg-gray-100 border border-gray-300' : 'bg-gray-50 border border-gray-200 opacity-50'}`;
+        
+        if(isActive) {
+          const postLabel = stats.count === 1 ? 'post' : 'posts';
+          dayCard.innerHTML = `
+            <div class="font-semibold text-gray-800">${dayAbbr[day]}</div>
+            <div class="text-xs text-gray-600">${stats.count} ${postLabel}</div>
+            <div class="font-bold text-blue-700">${stats.median}</div>
+            ${isBest ? '<div class="text-xs mt-1">⭐</div>' : ''}
+          `;
+        } else {
+          dayCard.innerHTML = `
+            <div class="font-semibold text-gray-400">${dayAbbr[day]}</div>
+            <div class="text-xs text-gray-400">-</div>
+          `;
+        }
+        
+        dowGrid.appendChild(dayCard);
+      });
+      
+      dowSection.appendChild(dowGrid);
+      root.appendChild(dowSection);
+      
+      // Best day insight
+      if(timing.best_day) {
+        const insightDiv = document.createElement('div');
+        insightDiv.className = 'p-3 bg-blue-50 border border-blue-200 rounded-lg mt-3';
+        const bestDayStats = timing.day_of_week[timing.best_day];
+        const postLabel = bestDayStats.count === 1 ? 'post' : 'posts';
+        insightDiv.innerHTML = `
+          <div class="text-sm font-semibold text-blue-800 mb-1">🎯 Best Day to Post</div>
+          <div class="text-sm text-blue-700">${timing.best_day}s show your highest median engagement (${bestDayStats.median} from ${bestDayStats.count} ${postLabel})</div>
+        `;
+        root.appendChild(insightDiv);
+      }
+    }
+
+    function analyzePost(post, allPosts) {
+      const hypotheses = [];
+      const text = (post.content || '').toLowerCase();
+      const avgEng = allPosts.length > 0 
+        ? allPosts.reduce((sum, p) => sum + (p.eng || 0), 0) / allPosts.length 
+        : 0;
+      
+      // Performance vs average
+      if (avgEng > 0 && post.eng > avgEng * 2) {
+        hypotheses.push('Significantly outperformed average engagement');
+      }
+      
+      // Topic analysis
+      if (text.match(/\b(ai|ml|automation|artificial intelligence)\b/i)) {
+        hypotheses.push('AI/tech topics resonate with your audience');
+      }
+      if (text.match(/\b(hiring|job|career|opportunity)\b/i)) {
+        hypotheses.push('Hiring/career content drives interest');
+      }
+      
+      // Engagement pattern
+      const commentRatio = (post.comments || 0) / (post.likes || 1);
+      if (commentRatio > 0.3) {
+        hypotheses.push('High comment-to-like ratio indicates strong conversation');
+      }
+      
+      // Format analysis
+      if (post.type === 'carousel') {
+        hypotheses.push('Carousel format encourages swipe engagement and dwell time');
+      }
+      if (post.type === 'video') {
+        hypotheses.push('Video format captures attention effectively');
+      }
+      if (post.type === 'image') {
+        hypotheses.push('Visual content stops the scroll');
+      }
+      
+      // Content structure
+      if (text.length > 0 && text.length < 300) {
+        hypotheses.push('Concise posts are easy to consume');
+      }
+      if (text.includes('?')) {
+        hypotheses.push('Questions drive engagement and replies');
+      }
+      if (text.match(/\b(here's|here are|tips?|steps?|ways?)\b/i)) {
+        hypotheses.push('Educational/actionable content provides value');
+      }
+      
+      return hypotheses.length > 0 ? hypotheses : ['Clear value proposition and authentic voice likely helped'];
+    }
+
+    function renderTopPosts(d){
+      const root = document.getElementById('topPosts');
+      root.innerHTML = '';
+      const posts = ensureArray(d?.posts);
+      
+      if(posts.length===0){ 
+        root.innerHTML = '<div class="text-sm text-gray-500">No post-level data available. Upload CSV to enable this.</div>'; 
+        return; 
+      }
+      
+      const ranked = posts.map(p=>({ 
+        ...p, 
+        eng: (p.eng != null ? p.eng : (Number(p.likes||0) + Number(p.comments||0))) 
+      })).sort((a,b)=>b.eng-a.eng);
+      
+      ranked.slice(0, CONFIG.topPostsCount).forEach((p,i)=>{
+        const tile = document.createElement('div');
+        tile.className='p-3 bg-gray-50 rounded-lg border border-gray-100';
+        
+        const fullContent = p.content || p.snippet || '';
+        const truncatedContent = clip(fullContent, CONFIG.clipLength.post);
+        const needsExpansion = fullContent.length > CONFIG.clipLength.post;
+        const uniqueId = `post-${i}`;
+        
+        tile.innerHTML = `
+          <div class="text-xs text-gray-600 mb-1">
+            <span class="font-semibold">#${i+1}</span> • 
+            ${(p.type||'text').toUpperCase()} • 
+            ${p.eng} engagement
+            ${p.likes ? `(${p.likes} likes, ${p.comments||0} comments)` : ''}
+          </div>
+          <div class="text-sm text-gray-800">
+            <span class="post-content-preview">${truncatedContent}</span>
+            ${needsExpansion ? `
+              <div class="post-content-full" id="${uniqueId}">
+                <div class="mt-2 pt-2 border-t border-gray-200">${fullContent}</div>
+              </div>
+            ` : ''}
+          </div>
+          <div class="text-xs text-gray-500 mt-1">Month: ${p.month?labelMonth(p.month):'-'}</div>
+          <div class="flex items-baseline gap-3 mt-2">
+            ${p.url ? `<a href="${p.url}" target="_blank" class="post-link">🔗 View on LinkedIn</a>` : ''}
+            ${needsExpansion ? `<span class="toggle-content" onclick="togglePostContent('${uniqueId}', this)">📖 Read full post</span>` : ''}
+          </div>
+        `;
+        root.appendChild(tile);
+      });
+    }
+
+    function renderAll(d){
+      renderSummary(d);
+      renderPostsPerMonth(d);
+      renderMedianByMonth(d);
+      renderFormatMix(d);
+      renderActionMix(d);
+      renderTopicBullets(d);
+      renderPostTypeBullets(d); // Changed from renderActionBullets
+      // renderBestTimeBullets(d); // COMMENTED OUT - section removed
+      renderPostingRhythm(d);
+      renderTimingInsights(d);
+      renderTopPosts(d);
+      window.__CURRENT__ = d;
+      
+      // Store posts for LLM insights (if available)
+      if (d.posts && Array.isArray(d.posts)) {
+        // Convert processed posts back to format expected by LLM
+        const postsForLLM = d.posts.map(p => ({
+          postContent: p.txt || p.content || '',
+          likeCount: p.likes || 0,
+          commentCount: p.comments || 0,
+          repostCount: p.reposts || 0,
+          type: p.type || 'Text',
+          imgUrl: p.hasImage ? 'present' : '',
+          postTimestamp: p.date || '',
+          postUrl: p.url || ''
+        }));
+        storePostsData(postsForLLM);
+      }
+    }
+
+    // ============= POST CONTENT TOGGLE =============
+    function togglePostContent(postId, toggleElement) {
+      const contentDiv = document.getElementById(postId);
+      if (!contentDiv) return;
+      
+      if (contentDiv.classList.contains('expanded')) {
+        contentDiv.classList.remove('expanded');
+        toggleElement.textContent = '📖 Read full post';
+      } else {
+        contentDiv.classList.add('expanded');
+        toggleElement.textContent = '📕 Show less';
+      }
+    }
+
+    // ============= CSV ANALYSIS =============
+    // Parse date from postTimestamp column only (no fallback to ensure data quality)
+    function parseCSVDate(dateStr) {
+      if (!dateStr) return null;
+      
+      // Handle relative dates (e.g., "1w", "2w", "1mo", "3d")
+      const relativeMatch = dateStr.match(/^(\d+)(w|d|mo|h|m|y)$/);
+      if (relativeMatch) {
+        const value = parseInt(relativeMatch[1]);
+        const unit = relativeMatch[2];
+        const now = new Date();
+        
+        switch(unit) {
+          case 'h': // hours
+            return new Date(now.getTime() - value * 60 * 60 * 1000);
+          case 'd': // days
+            return new Date(now.getTime() - value * 24 * 60 * 60 * 1000);
+          case 'w': // weeks
+            return new Date(now.getTime() - value * 7 * 24 * 60 * 60 * 1000);
+          case 'mo': // months (approximate)
+            return new Date(now.getFullYear(), now.getMonth() - value, now.getDate());
+          case 'm': // minutes
+            return new Date(now.getTime() - value * 60 * 1000);
+          case 'y': // years
+            return new Date(now.getFullYear() - value, now.getMonth(), now.getDate());
+        }
+      }
+      
+      // Try ISO format
+      let date = new Date(dateStr);
+      if (!isNaN(date.getTime())) return date;
+      
+      // Try other formats
+      const formats = [
+        /(\d{4})-(\d{2})-(\d{2})/,  // YYYY-MM-DD
+        /(\d{2})\/(\d{2})\/(\d{4})/, // MM/DD/YYYY
+      ];
+      
+      for (const regex of formats) {
+        const match = dateStr.match(regex);
+        if (match) {
+          date = new Date(match[0]);
+          if (!isNaN(date.getTime())) return date;
+        }
+      }
+      
+      return null;
+    }
+
+    function getMonthKey(date) {
+      if (!date) return null;
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      return `${year}-${month}`;
+    }
+
+    function getDayOfWeek(date) {
+      if (!date) return null;
+      const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+      return days[date.getDay()];
+    }
+
+    // Legacy function - kept for rollback if needed
+    // function getHour(date) {
+    //   if (!date) return null;
+    //   return String(date.getHours()).padStart(2, '0');
+    // }
+
+    function median(arr) {
+      if (!arr || arr.length === 0) return 0;
+      const sorted = [...arr].sort((a, b) => a - b);
+      const mid = Math.floor(sorted.length / 2);
+      return sorted.length % 2 === 0 
+        ? Math.round((sorted[mid - 1] + sorted[mid]) / 2)
+        : sorted[mid];
+    }
+
+    function percentile(arr, p) {
+      if (!arr || arr.length === 0) return 0;
+      const sorted = [...arr].sort((a, b) => a - b);
+      const index = Math.ceil((p / 100) * sorted.length) - 1;
+      return sorted[Math.max(0, index)];
+    }
+
+    function mean(arr) {
+      if (!arr || arr.length === 0) return 0;
+      const sum = arr.reduce((a, b) => a + b, 0);
+      return Math.round(sum / arr.length);
+    }
+
+    function detectPostType(row) {
+      const type = (row.type || '').toLowerCase();
+      if (type === 'image' || row.imgUrl) return 'image';
+      if (type === 'video' || row.videoUrl) return 'video';
+      if (type === 'carousel') return 'carousel';
+      if (type === 'poll') return 'poll';
+      return 'text';
+    }
+
+    function extractTopics(content) {
+      if (!content) return ['misc'];
+      const text = content.toLowerCase();
+      const topics = [];
+      
+      // Define topic keywords - posts can match MULTIPLE topics
+      const topicMap = {
+        'hiring': /\b(hiring|job|career|opportunity|recruiting|join us|we're hiring|internship)\b/i,
+        'ai': /\b(ai|artificial intelligence|ml|machine learning|chatgpt|gpt|llm)\b/i,
+        'product': /\b(product|launch|feature|release|update)\b/i,
+        'startup': /\b(startup|founder|entrepreneurship|fundraising|venture|investor|fintech|b2b)\b/i,
+        'tech': /\b(technology|software|engineering|dev|code|api|platform|infrastructure|automation)\b/i,
+        'growth': /\b(growth|scale|expansion|revenue|metrics|kpi)\b/i,
+        'leadership': /\b(leadership|management|team|culture|leader)\b/i,
+      };
+      
+      // Check ALL topics - a post can have multiple topics
+      for (const [topic, regex] of Object.entries(topicMap)) {
+        if (regex.test(text)) {
+          topics.push(topic);
+        }
+      }
+      
+      return topics.length > 0 ? topics : ['misc'];
+    }
+
+    function analyzeCsvData(rows) {
+      // Filter valid rows
+      const validRows = rows.filter(row => 
+        row.postContent && 
+        row.postContent.trim() !== '' &&
+        !row.postContent.includes('Export limit reached')
+      );
+
+      console.log(`Found ${validRows.length} valid rows in CSV`);
+
+      if (validRows.length === 0) {
+        showError('No valid posts found in CSV. Please check the file format.');
+        return null;
+      }
+
+      // Calculate 12 months ago (set to start of day to include all posts from that day)
+      const now = new Date();
+      const twelveMonthsAgo = new Date(now.getFullYear(), now.getMonth() - 12, now.getDate());
+      twelveMonthsAgo.setHours(0, 0, 0, 0); // Set to midnight to include posts from the entire day
+      console.log(`Filtering posts from last 12 months (since ${twelveMonthsAgo.toLocaleDateString()})`);
+
+      // Check for missing postTimestamp and warn
+      const rowsWithoutTimestamp = validRows.filter(row => !row.postTimestamp || row.postTimestamp.trim() === '');
+      if (rowsWithoutTimestamp.length > 0) {
+        console.warn(`⚠️ Warning: ${rowsWithoutTimestamp.length} posts are missing postTimestamp and will be excluded from analysis`);
+        showError(`Warning: ${rowsWithoutTimestamp.length} posts are missing dates (postTimestamp column) and were excluded from analysis.`);
+      }
+
+      // Process each row - ONLY use postTimestamp (no fallback)
+      const posts = validRows.map(row => {
+        // Only use postTimestamp column
+        const date = parseCSVDate(row.postTimestamp);
+        
+        const likes = parseInt(row.likeCount || 0);
+        const comments = parseInt(row.commentCount || 0);
+        const reposts = parseInt(row.repostCount || 0);
+        const views = parseInt(row.viewCount || 0);
+        const engagement = likes + comments + reposts;
+        
+        return {
+          content: row.postContent,
+          date: date,
+          month: getMonthKey(date),
+          dayOfWeek: getDayOfWeek(date),
+          type: detectPostType(row),
+          action: row.action || 'Post',
+          likes: likes,
+          comments: comments,
+          reposts: reposts,
+          views: views,
+          eng: engagement,
+          topics: extractTopics(row.postContent),
+          url: row.postUrl,
+          author: row.author || 'Unknown'
+        };
+      }).filter(p => p.date && p.date >= twelveMonthsAgo);
+
+      console.log(`After filtering: ${posts.length} posts from last 12 months`);
+      
+      if (posts.length === 0) {
+        showError('No posts found within the last 12 months. Your CSV might contain older data or have date format issues.');
+        console.log('Sample row:', validRows[0]);
+        return null;
+      }
+
+      // Sort by date
+      posts.sort((a, b) => a.date - b.date);
+
+      // Extract author name - find the most common author
+      const authorCounts = {};
+      posts.forEach(p => {
+        const author = p.author || 'Unknown';
+        authorCounts[author] = (authorCounts[author] || 0) + 1;
+      });
+      
+      let authorName = 'LinkedIn User';
+      let maxCount = 0;
+      Object.entries(authorCounts).forEach(([author, count]) => {
+        if (count > maxCount && author !== 'Unknown') {
+          authorName = author;
+          maxCount = count;
+        }
+      });
+      
+      console.log('Detected author:', authorName);
+
+      // Calculate summary metrics
+      const engagements = posts.map(p => p.eng);
+      const summary = {
+        posts_last_12m: posts.length,
+        active_months: new Set(posts.map(p => p.month)).size,
+        median_engagement: median(engagements),
+        p90_engagement: percentile(engagements, 90)
+      };
+
+      // Trends: posts per month
+      const monthCounts = {};
+      posts.forEach(p => {
+        monthCounts[p.month] = (monthCounts[p.month] || 0) + 1;
+      });
+      const posts_per_month = Object.entries(monthCounts)
+        .map(([month, count]) => ({ month, count }))
+        .sort((a, b) => a.month.localeCompare(b.month));
+
+      // Trends: median engagement by month
+      const monthEngagements = {};
+      posts.forEach(p => {
+        if (!monthEngagements[p.month]) monthEngagements[p.month] = [];
+        monthEngagements[p.month].push(p.eng);
+      });
+      const month_median = Object.entries(monthEngagements)
+        .map(([month, engs]) => ({ month, median: median(engs) }))
+        .sort((a, b) => a.month.localeCompare(b.month));
+
+      // Mix: type distribution
+      const typeCounts = {};
+      const typeEngagements = {};
+      posts.forEach(p => {
+        typeCounts[p.type] = (typeCounts[p.type] || 0) + 1;
+        if (!typeEngagements[p.type]) typeEngagements[p.type] = [];
+        typeEngagements[p.type].push(p.eng);
+      });
+      
+      const type_share = {};
+      const type_median_engagement = {};
+      const type_mean_engagement = {};
+      const type_q1_engagement = {};
+      const type_q3_engagement = {};
+      const type_max_engagement = {};
+      Object.keys(typeCounts).forEach(type => {
+        type_share[type] = typeCounts[type] / posts.length;
+        type_median_engagement[type] = median(typeEngagements[type]);
+        type_mean_engagement[type] = mean(typeEngagements[type]);
+        type_q1_engagement[type] = percentile(typeEngagements[type], 25);
+        type_q3_engagement[type] = percentile(typeEngagements[type], 75);
+        type_max_engagement[type] = Math.max(...typeEngagements[type]);
+      });
+
+      // Mix: action distribution (Post vs Reshare)
+      const actionCounts = {};
+      const actionEngagements = {};
+      posts.forEach(p => {
+        actionCounts[p.action] = (actionCounts[p.action] || 0) + 1;
+        if (!actionEngagements[p.action]) actionEngagements[p.action] = [];
+        actionEngagements[p.action].push(p.eng);
+      });
+      
+      const action_share = {};
+      const action_median_engagement = {};
+      Object.keys(actionCounts).forEach(action => {
+        action_share[action] = actionCounts[action] / posts.length;
+        action_median_engagement[action] = median(actionEngagements[action]);
+      });
+
+      // Topics - Posts can have MULTIPLE topics
+      const topicCounts = {};
+      const topicEngagements = {};
+      posts.forEach(p => {
+        // Each post can contribute to multiple topic categories
+        p.topics.forEach(topic => {
+          topicCounts[topic] = (topicCounts[topic] || 0) + 1;
+          if (!topicEngagements[topic]) topicEngagements[topic] = [];
+          topicEngagements[topic].push(p.eng);
+        });
+      });
+      
+      const tag_share = {};
+      const tag_median_engagement = {};
+      const tag_counts = {};
+      Object.keys(topicCounts).forEach(topic => {
+        // Share represents "% of posts that include this topic"
+        // Note: This can add up to >100% since posts can have multiple topics
+        tag_share[topic] = topicCounts[topic] / posts.length;
+        tag_median_engagement[topic] = median(topicEngagements[topic]);
+        tag_counts[topic] = topicCounts[topic];
+      });
+
+      // Note: Heatmap removed as we only have dates, not posting times
+
+      // Posting Rhythm & Continuity
+      const sortedPosts = [...posts].sort((a, b) => a.date - b.date);
+      const postGaps = [];
+      let longestGapInfo = { days: 0, startDate: null, endDate: null };
+      
+      for (let i = 1; i < sortedPosts.length; i++) {
+        const gapDays = Math.floor((sortedPosts[i].date - sortedPosts[i-1].date) / (1000 * 60 * 60 * 24));
+        postGaps.push(gapDays);
+        
+        // Track the longest gap with dates
+        if (gapDays > longestGapInfo.days) {
+          longestGapInfo = {
+            days: gapDays,
+            startDate: sortedPosts[i-1].date,
+            endDate: sortedPosts[i].date
+          };
+        }
+      }
+      
+      const avgPostingGap = postGaps.length > 0 ? Math.round(postGaps.reduce((a, b) => a + b, 0) / postGaps.length) : 0;
+      const longestGap = postGaps.length > 0 ? Math.max(...postGaps) : 0;
+      const postsPerMonthAvg = summary.posts_last_12m / 12;
+      
+      // Find peak posting month
+      const peakMonth = posts_per_month.reduce((max, curr) => curr.count > max.count ? curr : max, posts_per_month[0]);
+      
+      const rhythm = {
+        posts_per_month_avg: Math.round(postsPerMonthAvg * 10) / 10,
+        longest_gap_days: longestGap,
+        longest_gap_start: longestGapInfo.startDate,
+        longest_gap_end: longestGapInfo.endDate,
+        avg_gap_days: avgPostingGap,
+        peak_month: peakMonth?.month || 'N/A',
+        peak_month_count: peakMonth?.count || 0
+      };
+
+      // Timing Insights: Day of Week Analysis (no hour analysis as we only have dates)
+      const dayOfWeekCounts = {};
+      const dayOfWeekEngagements = {};
+      
+      posts.forEach(p => {
+        if (p.dayOfWeek) {
+          dayOfWeekCounts[p.dayOfWeek] = (dayOfWeekCounts[p.dayOfWeek] || 0) + 1;
+          if (!dayOfWeekEngagements[p.dayOfWeek]) dayOfWeekEngagements[p.dayOfWeek] = [];
+          dayOfWeekEngagements[p.dayOfWeek].push(p.eng);
+        }
+      });
+      
+      const dayOfWeekStats = {};
+      Object.keys(dayOfWeekCounts).forEach(day => {
+        dayOfWeekStats[day] = {
+          count: dayOfWeekCounts[day],
+          median: median(dayOfWeekEngagements[day]),
+          mean: mean(dayOfWeekEngagements[day])
+        };
+      });
+      
+      // Find best day (highest median engagement with at least 3 posts)
+      let bestDay = null;
+      let bestDayMedian = 0;
+      Object.entries(dayOfWeekStats).forEach(([day, stats]) => {
+        if (stats.count >= 3 && stats.median > bestDayMedian) {
+          bestDay = day;
+          bestDayMedian = stats.median;
+        }
+      });
+      
+      const timingInsights = {
+        day_of_week: dayOfWeekStats,
+        best_day: bestDay
+      };
+
+      // Prepare posts array for top posts
+      const postsForJson = posts.map(p => ({
+        content: p.content,
+        month: p.month,
+        type: p.type,
+        likes: p.likes,
+        comments: p.comments,
+        reposts: p.reposts,
+        views: p.views,
+        eng: p.eng,
+        url: p.url
+      }));
+
+      return {
+        profile: { name: authorName },
+        summary: summary,
+        trends: {
+          posts_per_month: posts_per_month,
+          month_median: month_median
+        },
+        mix: {
+          type_share: type_share,
+          type_median_engagement: type_median_engagement,
+          type_mean_engagement: type_mean_engagement,
+          type_q1_engagement: type_q1_engagement,
+          type_q3_engagement: type_q3_engagement,
+          type_max_engagement: type_max_engagement,
+          type_counts: typeCounts,
+          action_share: action_share,
+          action_median_engagement: action_median_engagement,
+          action_counts: actionCounts
+        },
+        topics: {
+          tag_share: tag_share,
+          tag_median_engagement: tag_median_engagement,
+          tag_counts: tag_counts
+        },
+        rhythm: rhythm,
+        timingInsights: timingInsights,
+        posts: postsForJson
+      };
+    }
+
+    // ============= JSON UPLOAD HANDLER =============
+    document.getElementById('fileInputJson').addEventListener('change', (e) => {
+      const f = e.target.files?.[0]; 
+      if (!f) return;
+      
+      // Close menu
+      menuDropdown.classList.remove('active');
+      
+      const errorContainer = document.getElementById('errorContainer');
+      errorContainer.innerHTML = '<div class="bg-blue-50 border border-blue-200 text-blue-800 px-4 py-3 rounded-lg text-sm">📊 Loading LLM analysis...</div>';
+      
+      const r = new FileReader(); 
+      r.onload = () => { 
+        try { 
+          const json = JSON.parse(r.result);
+          
+          // Validate data
+          const validation = validateData(json);
+          if (!validation.valid) {
+            errorContainer.innerHTML = '';
+            showError('Invalid JSON structure: ' + validation.errors.join(', '));
+            return;
+          }
+          
+          // Render and save
+          renderAll(json);
+          saveData(json);
+          
+          // Show success message
+          const topicCount = Object.keys(json.topics?.tag_counts || {}).length;
+          errorContainer.innerHTML = `<div class="bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded-lg text-sm">✅ Successfully loaded LLM analysis with ${topicCount} topics!</div>`;
+          setTimeout(() => { errorContainer.innerHTML = ''; }, 3000);
+          
+        } catch(err) { 
+          errorContainer.innerHTML = '';
+          console.error('JSON parse error:', err);
+          showError('Invalid JSON file. Please check the file format.');
+        } 
+      }; 
+      r.readAsText(f);
+    });
+
+    // ============= CSV UPLOAD HANDLER =============
+    document.getElementById('fileInputCsv').addEventListener('change', (e) => {
+      const f = e.target.files?.[0]; 
+      if (!f) return;
+      
+      // Close menu
+      menuDropdown.classList.remove('active');
+      
+      // Show loading state
+      const errorContainer = document.getElementById('errorContainer');
+      errorContainer.innerHTML = '<div class="bg-blue-50 border border-blue-200 text-blue-800 px-4 py-3 rounded-lg text-sm">📊 Processing CSV file and analyzing your LinkedIn posts...</div>';
+      
+      const r = new FileReader(); 
+      r.onload = () => { 
+        try { 
+          // Parse CSV
+          Papa.parse(r.result, {
+            header: true,
+            skipEmptyLines: true,
+            complete: function(results) {
+              // Clear loading message
+              errorContainer.innerHTML = '';
+              
+              if (!results.data || results.data.length === 0) {
+                showError('No data found in CSV file.');
+            return;
+          }
+              
+              // Store raw CSV data for LLM insights
+              storePostsData(results.data);
+              
+              // Analyze and convert to JSON format
+              const json = analyzeCsvData(results.data);
+              
+              if (!json) {
+                return; // Error already shown in analyzeCsvData
+              }
+          
+          // Render and save
+          renderAll(json);
+          saveData(json);
+          
+              // Show success message
+              errorContainer.innerHTML = '<div class="bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded-lg text-sm">✅ Successfully analyzed ' + json.summary.posts_last_12m + ' posts from your CSV!</div>';
+              setTimeout(() => { errorContainer.innerHTML = ''; }, 3000);
+              
+            },
+            error: function(error) {
+              errorContainer.innerHTML = '';
+              console.error('CSV parse error:', error);
+              showError('Failed to parse CSV file: ' + error.message);
+            }
+          });
+        } catch(err) { 
+          errorContainer.innerHTML = '';
+          console.error('CSV processing error:', err);
+          showError('Invalid CSV file. Please check the file format.');
+        } 
+      }; 
+      r.readAsText(f);
+    });
+
+    // ============= MENU TOGGLE =============
+    const menuBtn = document.getElementById('menuBtn');
+    const menuDropdown = document.getElementById('menuDropdown');
+    
+    menuBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      menuDropdown.classList.toggle('active');
+    });
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!menuDropdown.contains(e.target) && e.target !== menuBtn) {
+        menuDropdown.classList.remove('active');
+      }
+    });
+
+    // ============= PDF DOWNLOAD =============
+    document.getElementById('downloadPdf').addEventListener('click', async () => {
+      // Close menu
+      menuDropdown.classList.remove('active');
+      
+      // Check if html2pdf is loaded
+      if (typeof html2pdf === 'undefined') {
+        alert('PDF library not loaded. Please check your internet connection.');
+        return;
+      }
+      
+      // Show loading notification in separate overlay (won't be in PDF because of @media print)
+      const notification = document.getElementById('pdfNotification');
+      notification.innerHTML = '<div class="bg-blue-50 border border-blue-200 text-blue-800 px-4 py-3 rounded-lg text-sm shadow-lg">📄 Generating PDF... This may take a few moments.</div>';
+      
+      // Wait for menu to close and UI to settle
+      await new Promise(resolve => setTimeout(resolve, 800));
+      
+      try {
+        // Get the element
+        const element = document.querySelector('.max-w-7xl');
+        
+        if (!element) {
+          throw new Error('Content container not found');
+        }
+        
+        // Simple, reliable PDF configuration
+        const opt = {
+          margin: [0.5, 0.5, 0.5, 0.5],
+          filename: `LinkedIn_Yearly_Wrap_${new Date().toISOString().split('T')[0]}.pdf`,
+          image: { type: 'jpeg', quality: 0.95 },
+          html2canvas: { 
+            scale: 2,
+            useCORS: true,
+            logging: true,
+            letterRendering: true
+          },
+          jsPDF: { 
+            unit: 'in', 
+            format: 'letter', 
+            orientation: 'portrait'
+          },
+          pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+        };
+        
+        console.log('Starting PDF generation...');
+        console.log('Element dimensions:', element.offsetWidth, 'x', element.offsetHeight);
+        console.log('Element content:', element.innerHTML.length, 'characters');
+        console.log('Number of charts:', document.querySelectorAll('canvas').length);
+        
+        // Scroll to top to ensure everything is visible
+        window.scrollTo(0, 0);
+        await new Promise(resolve => setTimeout(resolve, 200));
+        
+        await html2pdf().set(opt).from(element).save();
+        
+        console.log('PDF generation completed');
+        
+        // Show success message
+        notification.innerHTML = '<div class="bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded-lg text-sm shadow-lg">✅ PDF downloaded successfully!</div>';
+        setTimeout(() => { 
+          notification.innerHTML = ''; 
+        }, 3000);
+        
+      } catch (error) {
+        console.error('PDF generation failed:', error);
+        console.error('Error details:', error.stack);
+        
+        // Show error message
+        notification.innerHTML = '<div class="error-message shadow-lg">Failed to generate PDF. Please check console for details.</div>';
+        setTimeout(() => { 
+          notification.innerHTML = ''; 
+        }, 5000);
+      }
+    });
+
+    // ============= PRINT PAGE (FALLBACK) =============
+    document.getElementById('printPage').addEventListener('click', () => {
+      // Close menu
+      menuDropdown.classList.remove('active');
+      
+      // Use browser's native print dialog
+      window.print();
+    });
+
+    // ============= CLEAR DATA =============
+    document.getElementById('clearData').addEventListener('click', async () => {
+      // Close menu
+      menuDropdown.classList.remove('active');
+      
+      if (confirm('Clear saved data and load sample?')) {
+        await clearSavedData();
+      }
+    });
+
+    // ============= SAMPLE DATA LOADER =============
+    async function loadSampleData() {
+      try {
+        const response = await fetch('sample-data.json');
+        if (!response.ok) {
+          throw new Error('Failed to load sample data');
+        }
+        return await response.json();
+      } catch (error) {
+        console.error('Error loading sample data:', error);
+        // Return minimal fallback data if file can't be loaded
+        return {
+          profile: { name: "Demo User" },
+          summary: {
+            posts_last_12m: 0,
+            active_months: 0,
+            median_engagement: 0,
+            p90_engagement: 0
+          },
+          trends: {
+            posts_per_month: [],
+            month_median: []
+          },
+          mix: {
+            type_share: {},
+            type_median_engagement: {},
+            type_counts: {},
+            action_share: {},
+            action_median_engagement: {},
+            action_counts: {}
+          },
+          topics: {
+            tag_share: {},
+            tag_median_engagement: {},
+            tag_counts: {}
+          },
+          rhythm: {},
+          timingInsights: {},
+          posts: []
+        };
+      }
+    }
+
+    // ============= NARRATIVE INSIGHTS (LLM) =============
+    let currentPostsData = null; // Store posts data globally for LLM analysis
+    
+    // Store posts data when rendering (called from renderAll)
+    function storePostsData(posts) {
+      currentPostsData = posts;
+    }
+    
+    async function generateNarrativeInsights() {
+      const btn = document.getElementById('generateInsightsBtn');
+      const btnText = document.getElementById('btnText');
+      const content = document.getElementById('narrativeInsightsContent');
+      
+      // Check if we have posts data
+      if (!currentPostsData || currentPostsData.length === 0) {
+        content.innerHTML = `
+          <div class="p-3 bg-yellow-50 border border-yellow-200 rounded-lg text-sm text-yellow-800">
+            ⚠️ Please upload your LinkedIn data first before generating insights.
+          </div>
+        `;
+        return;
+      }
+      
+      // Disable button and show loading state
+      btn.disabled = true;
+      btnText.textContent = '⏳ Generating...';
+      
+      content.innerHTML = `
+        <div class="flex items-center gap-3 p-4 bg-blue-50 rounded-lg">
+          <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-600"></div>
+          <div class="text-sm text-blue-800">
+            Analyzing ${currentPostsData.length} posts with AI... This may take 10-15 seconds.
+          </div>
+        </div>
+      `;
+      
+      try {
+        // Call Flask API
+        const response = await fetch('http://127.0.0.1:5000/generate-insights', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            posts: currentPostsData
+          })
+        });
+        
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.error || 'Failed to generate insights');
+        }
+        
+        const result = await response.json();
+        
+        if (result.success && result.data) {
+          displayNarrativeInsights(result.data);
+        } else {
+          throw new Error(result.error || 'Invalid response from server');
+        }
+        
+      } catch (error) {
+        console.error('Error generating insights:', error);
+        
+        let errorMessage = error.message;
+        let troubleshooting = '';
+        
+        if (error.message.includes('fetch') || error.message.includes('Failed to fetch')) {
+          errorMessage = 'Could not connect to the insights server.';
+          troubleshooting = `
+            <div class="mt-2 text-xs space-y-1">
+              <strong>Troubleshooting:</strong>
+              <ol class="list-decimal pl-4 space-y-1 mt-1">
+                <li>Make sure the API server is running: <code class="bg-gray-100 px-1 rounded">python narrative_insights_api.py</code></li>
+                <li>Ensure your <code class="bg-gray-100 px-1 rounded">.env</code> file contains <code class="bg-gray-100 px-1 rounded">GEMINI_API_KEY</code></li>
+                <li>Check that the server is running on <code class="bg-gray-100 px-1 rounded">http://127.0.0.1:5000</code></li>
+              </ol>
+            </div>
+          `;
+        }
+        
+        content.innerHTML = `
+          <div class="p-4 bg-red-50 border border-red-200 rounded-lg">
+            <div class="flex items-start gap-2">
+              <div class="text-red-600 font-bold">❌</div>
+              <div class="flex-1">
+                <div class="text-sm font-medium text-red-800">${errorMessage}</div>
+                ${troubleshooting}
+              </div>
+            </div>
+          </div>
+        `;
+      } finally {
+        // Re-enable button
+        btn.disabled = false;
+        btnText.textContent = '✨ Generate Insights';
+      }
+    }
+    
+    function displayNarrativeInsights(data) {
+      const content = document.getElementById('narrativeInsightsContent');
+      
+      const insights = data.insights || [];
+      const keyFinding = data.key_finding || '';
+      const recommendation = data.recommendation || '';
+      
+      let html = '';
+      
+      // Key Finding (if available)
+      if (keyFinding) {
+        html += `
+          <div class="p-4 bg-gradient-to-r from-blue-50 to-teal-50 border-l-4 border-blue-500 rounded-lg">
+            <div class="flex items-start gap-2">
+              <div class="text-2xl">🎯</div>
+              <div class="flex-1">
+                <div class="font-semibold text-gray-800 mb-1">Key Finding</div>
+                <div class="text-sm text-gray-700">${keyFinding}</div>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+      
+      // Insights List
+      if (insights.length > 0) {
+        html += `
+          <div class="space-y-2">
+            <div class="text-xs font-semibold text-gray-600 uppercase tracking-wide mb-2">Observations</div>
+        `;
+        
+        insights.forEach((insight, idx) => {
+          html += `
+            <div class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+              <div class="flex-shrink-0 w-6 h-6 rounded-full bg-white border-2 border-blue-200 flex items-center justify-center text-xs font-semibold text-blue-600">
+                ${idx + 1}
+              </div>
+              <div class="flex-1 text-sm text-gray-700 leading-relaxed">${insight}</div>
+            </div>
+          `;
+        });
+        
+        html += `</div>`;
+      }
+      
+      // Recommendation (if available)
+      if (recommendation) {
+        html += `
+          <div class="p-4 bg-green-50 border border-green-200 rounded-lg">
+            <div class="flex items-start gap-2">
+              <div class="text-xl">💡</div>
+              <div class="flex-1">
+                <div class="font-semibold text-green-800 mb-1">Recommended Action</div>
+                <div class="text-sm text-green-700">${recommendation}</div>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+      
+      // If no data
+      if (!html) {
+        html = `
+          <div class="text-sm text-gray-500 italic">
+            No insights generated. Please try again.
+          </div>
+        `;
+      }
+      
+      content.innerHTML = html;
+    }
+
+    // ============= TOPIC ANALYSIS WITH LLM =============
+    async function analyzeTopicsWithLLM() {
+      const btn = document.getElementById('analyzeTopicsBtn');
+      const btnText = document.getElementById('topicBtnText');
+      const resultsDiv = document.getElementById('llmTopicResults');
+      
+      // Check if we have posts data
+      if (!currentPostsData || currentPostsData.length === 0) {
+        resultsDiv.innerHTML = `
+          <div class="p-3 bg-yellow-50 border border-yellow-200 rounded-lg text-sm text-yellow-800">
+            ⚠️ Please upload your LinkedIn data first.
+          </div>
+        `;
+        resultsDiv.style.display = 'block';
+        return;
+      }
+      
+      // Disable button and show loading state
+      btn.disabled = true;
+      btnText.textContent = '⏳ Analyzing...';
+      
+      resultsDiv.innerHTML = `
+        <div class="flex items-center gap-3 p-3 bg-purple-50 rounded-lg">
+          <div class="animate-spin rounded-full h-5 w-5 border-b-2 border-purple-600"></div>
+          <div class="text-xs text-purple-800">
+            Analyzing topics in ${currentPostsData.length} posts... This may take 10-15 seconds.
+          </div>
+        </div>
+      `;
+      resultsDiv.style.display = 'block';
+      
+      try {
+        // Call Flask API
+        const response = await fetch('http://127.0.0.1:5000/analyze-topics', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            posts: currentPostsData
+          })
+        });
+        
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.error || 'Failed to analyze topics');
+        }
+        
+        const result = await response.json();
+        
+        if (result.success && result.data) {
+          displayTopicAnalysis(result.data);
+        } else {
+          throw new Error(result.error || 'Invalid response from server');
+        }
+        
+      } catch (error) {
+        console.error('Error analyzing topics:', error);
+        
+        let errorMessage = error.message;
+        let troubleshooting = '';
+        
+        if (error.message.includes('fetch') || error.message.includes('Failed to fetch')) {
+          errorMessage = 'Could not connect to the server.';
+          troubleshooting = `
+            <div class="mt-2 text-xs">
+              Make sure the API server is running.
+            </div>
+          `;
+        }
+        
+        resultsDiv.innerHTML = `
+          <div class="p-3 bg-red-50 border border-red-200 rounded-lg">
+            <div class="flex items-start gap-2">
+              <div class="text-red-600 font-bold text-sm">❌</div>
+              <div class="flex-1">
+                <div class="text-xs font-medium text-red-800">${errorMessage}</div>
+                ${troubleshooting}
+              </div>
+            </div>
+          </div>
+        `;
+      } finally {
+        // Re-enable button
+        btn.disabled = false;
+        btnText.textContent = '🎯 Analyze with AI';
+      }
+    }
+    
+    function displayTopicAnalysis(data) {
+      const resultsDiv = document.getElementById('llmTopicResults');
+      
+      const summary = data.summary || '';
+      const topicStats = data.topic_stats || {};
+      
+      let html = '';
+      
+      // Summary
+      if (summary) {
+        html += `
+          <div class="p-3 bg-gradient-to-r from-purple-50 to-indigo-50 border-l-4 border-purple-500 rounded-lg mb-3">
+            <div class="text-xs font-semibold text-purple-900 mb-1">🤖 AI Analysis</div>
+            <div class="text-xs text-purple-800">${summary}</div>
+          </div>
+        `;
+      }
+      
+      // Topic breakdown with bars
+      if (Object.keys(topicStats).length > 0) {
+        html += `<div class="space-y-2">`;
+        
+        // Sort topics by count (descending)
+        const sortedTopics = Object.entries(topicStats)
+          .sort((a, b) => b[1].count - a[1].count)
+          .slice(0, 10);  // Show top 10
+        
+        const maxCount = sortedTopics[0][1].count;
+        
+        sortedTopics.forEach(([topic, stats]) => {
+          const percentage = Math.round((stats.count / maxCount) * 100);
+          const topicLabel = topic.charAt(0).toUpperCase() + topic.slice(1);
+          
+          html += `
+            <div class="space-y-1">
+              <div class="flex justify-between items-baseline text-xs">
+                <span class="font-medium text-gray-700">${topicLabel}</span>
+                <span class="text-gray-500">${stats.count} posts • avg: ${Math.round(stats.avg_engagement)}</span>
+              </div>
+              <div class="w-full bg-gray-200 rounded-full h-1.5">
+                <div class="bg-gradient-to-r from-purple-500 to-indigo-600 h-1.5 rounded-full transition-all duration-500" style="width: ${percentage}%"></div>
+              </div>
+            </div>
+          `;
+        });
+        
+        html += `</div>`;
+      }
+      
+      if (!html) {
+        html = `
+          <div class="text-xs text-gray-500 italic">
+            No topic analysis available.
+          </div>
+        `;
+      }
+      
+      resultsDiv.innerHTML = html;
+      resultsDiv.style.display = 'block';
+    }
+
+    // ============= AUTO-RENDER ON LOAD =============
+    window.addEventListener('DOMContentLoaded', async () => {
+      const saved = loadSavedData();
+      if (saved) {
+        // Validate saved data before using
+        const validation = validateData(saved);
+        if (validation.valid) {
+          renderAll(saved);
+          document.getElementById('clearData').style.display = 'flex';
+          return;
+        } else {
+          console.warn('Saved data invalid, clearing:', validation.errors);
+          await clearSavedData();
+          return;
+        }
+      }
+      // Fallback to sample data (loaded from external file)
+      const sampleData = await loadSampleData();
+      renderAll(sampleData);
+    });
+
+  </script>
+</body>
+</html>
+

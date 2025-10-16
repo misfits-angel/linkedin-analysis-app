@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LinkedIn Yearly Wrap • Preview (Chart.js)</title>
+  
+  <!-- External Libraries -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+  
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <!-- Notification overlay for PDF generation (outside main content) -->
+  <div id="pdfNotification"></div>
+  
+  <div class="max-w-7xl mx-auto p-6 space-y-6">
+    <header class="flex flex-wrap items-center justify-between gap-4">
+      <div>
+        <h1 class="text-2xl md:text-3xl font-bold">
+          <span id="personName">LinkedIn Yearly Wrap</span>
+        </h1>
+        <div class="text-sm text-gray-600 mt-1">
+          <span id="auditDate"></span>
+        </div>
+        <div class="text-sm text-gray-500">
+          Audit Period: <span id="auditPeriod">1 year</span>
+        </div>
+      </div>
+      <div class="menu-container">
+        <button class="menu-btn" id="menuBtn" title="Options">⋮</button>
+        <div class="menu-dropdown" id="menuDropdown">
+          <label class="menu-item" role="button" tabindex="0">
+            <span>📊</span>
+            <span>Upload CSV</span>
+            <input id="fileInputCsv" type="file" accept=".csv,text/csv" aria-label="Upload CSV data file" />
+          </label>
+          <div class="menu-separator"></div>
+          <div class="menu-item" id="downloadPdf" title="Download page as PDF">
+            <span>📄</span>
+            <span>Download PDF</span>
+          </div>
+          <div class="menu-item" id="pdfSectionToggle" title="Toggle PDF section controls">
+            <span>⚙️</span>
+            <span>PDF Sections</span>
+          </div>
+          <div class="menu-item" id="printPage" title="Print page (Browser native)">
+            <span>🖨️</span>
+            <span>Print Page</span>
+          </div>
+          <div class="menu-item" id="clearData" style="display:none;" title="Clear saved data">
+            <span>🗑️</span>
+            <span>Clear Data</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- PDF Section Controls Panel (Hidden by default) -->
+    <div id="pdfSectionControls" class="card p-4 mb-6" style="display: none;">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-lg font-semibold text-gray-800">📄 PDF Section Controls</h3>
+        <button id="closePdfControls" class="text-gray-400 hover:text-gray-600 text-xl font-bold" title="Close">×</button>
+      </div>
+      <div class="text-sm text-gray-600 mb-4">
+        Select which sections to include in your PDF. All sections are included by default.
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <!-- Section toggles will be dynamically generated here -->
+      </div>
+    </div>
+
+    <div id="errorContainer"></div>
+
+    <!-- Section 1: Key numbers & two bar graphs -->
+    <section class="grid grid-cols-2 md:grid-cols-4 gap-4" id="keyNumbersSection" data-pdf-section="key-metrics">
+      <div class="card p-4">
+        <div class="label">Posts <span style="font-size: 0.7rem; color: #9ca3af;">(excl. reshares)</span></div>
+        <div id="m_posts" class="metric" role="status" aria-live="polite" aria-label="Total posts in last 12 months excluding reshares">-</div>
+      </div>
+      <div class="card p-4">
+        <div class="label">Active months</div>
+        <div id="m_active" class="metric" role="status" aria-live="polite" aria-label="Number of active months">-</div>
+      </div>
+      <div class="card p-4">
+        <div class="label">Median engagement</div>
+        <div id="m_med" class="metric" role="status" aria-live="polite" aria-label="Median engagement per post">-</div>
+      </div>
+      <div class="card p-4">
+        <div class="label">P90 engagement</div>
+        <div id="m_p90" class="metric" role="status" aria-live="polite" aria-label="90th percentile engagement">-</div>
+      </div>
+    </section>
+
+    <!-- Section 1 continued: Two bar graphs (Side by Side) -->
+    <section class="grid grid-cols-1 lg:grid-cols-2 gap-6 page-break-inside-avoid" data-pdf-section="charts">
+      <div class="card p-4">
+        <div class="section-title mb-2">Posting cadence</div>
+        <div class="chart-wrap">
+          <button class="chart-export-btn" onclick="exportChart('chartPostsPerMonth')" title="Export as PNG">📥 PNG</button>
+          <canvas id="chartPostsPerMonth" role="img" aria-label="Bar chart showing posting frequency by month"></canvas>
+        </div>
+      </div>
+      <div class="card p-4">
+        <div class="section-title mb-2">Engagement over time (baseline quality vs reach)</div>
+        <div class="chart-wrap">
+          <button class="chart-export-btn" onclick="exportChart('chartMedianByMonth')" title="Export as PNG">📥 PNG</button>
+          <canvas id="chartMedianByMonth" role="img" aria-label="Line chart showing engagement trends over time"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: 2 pie charts (Side by Side) -->
+    <section class="grid grid-cols-1 lg:grid-cols-2 gap-6 page-break-before page-break-inside-avoid" data-pdf-section="format-mix">
+      <div class="card p-4">
+        <div class="section-title mb-2">Format mix</div>
+        <div class="chart-wrap">
+          <button class="chart-export-btn" onclick="exportChart('chartFormatMix')" title="Export as PNG">📥 PNG</button>
+          <canvas id="chartFormatMix" role="img" aria-label="Doughnut chart showing content format distribution"></canvas>
+        </div>
+      </div>
+      <div class="card p-4">
+        <div class="section-title mb-2">Post vs Reshare</div>
+        <div class="chart-wrap">
+          <button class="chart-export-btn" onclick="exportChart('chartActionMix')" title="Export as PNG">📥 PNG</button>
+          <canvas id="chartActionMix" role="img" aria-label="Doughnut chart showing post action distribution"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: Engagement by post type & Topic Insights (Side by Side) -->
+    <section class="grid grid-cols-1 lg:grid-cols-2 gap-6 page-break-before page-break-inside-avoid" data-pdf-section="engagement-analysis">
+      <div class="card p-4">
+        <div class="section-title mb-2">Engagement by post type</div>
+        <ul id="postTypeBullets" class="list-disc pl-5 space-y-1 text-sm text-gray-700" role="list"></ul>
+      </div>
+      <div class="card p-4">
+        <div class="flex justify-between items-center mb-2">
+          <div class="section-title">Topic insights</div>
+          <button 
+            id="analyzeTopicsBtn" 
+            onclick="analyzeTopicsWithLLM()"
+            class="px-3 py-1.5 bg-gradient-to-r from-purple-500 to-indigo-600 text-white rounded-lg text-xs font-medium hover:from-purple-600 hover:to-indigo-700 transition-all duration-200 shadow-sm hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
+            style="background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%);">
+            <span id="topicBtnText">🎯 Analyze with AI</span>
+          </button>
+        </div>
+        <ul id="topicBullets" class="list-disc pl-5 space-y-1 text-sm text-gray-700" role="list"></ul>
+        <div id="llmTopicResults" class="mt-3" style="display:none;"></div>
+      </div>
+    </section>
+
+    <!-- Section 4: Narrative Insights -->
+    <section class="card p-4 page-break-before" id="narrativeInsightsSection" data-pdf-section="narrative-insights">
+      <div class="flex justify-between items-center mb-3">
+        <div class="section-title">💬 Narrative Insights</div>
+        <button 
+          id="generateInsightsBtn" 
+          onclick="generateNarrativeInsights()"
+          class="px-4 py-2 bg-gradient-to-r from-blue-500 to-teal-600 text-white rounded-lg text-sm font-medium hover:from-blue-600 hover:to-teal-700 transition-all duration-200 shadow-sm hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
+          style="background: linear-gradient(135deg, #157187 0%, #63a5b3 100%);">
+          <span id="btnText">✨ Generate Insights</span>
+        </button>
+      </div>
+      
+      <div id="narrativeInsightsContent" class="space-y-3 section-content">
+        <div class="text-sm text-gray-500 italic">
+          Click "Generate Insights" to get AI-powered observations about your posting patterns and engagement triggers.
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 5: Post Quality Evaluation - Part 1: Analysis & Rubric -->
+    <section class="card p-4 page-break-before" id="postEvaluationSection" data-pdf-section="post-evaluation">
+      <div class="flex justify-between items-center mb-3">
+        <div class="section-title">📝 Post Quality Evaluation</div>
+        <button 
+          id="evaluatePostsBtn" 
+          onclick="evaluatePostsWithLLM()"
+          class="px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-lg text-sm font-medium hover:from-green-600 hover:to-emerald-700 transition-all duration-200 shadow-sm hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
+          style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">
+          <span id="evalBtnText">🎯 Evaluate Posts</span>
+        </button>
+      </div>
+      
+      <div id="postEvaluationContent" class="space-y-3 section-content">
+        <div class="text-sm text-gray-500 italic">
+          Get AI-powered evaluation of your LinkedIn posts based on thought-leadership criteria including depth, clarity, and engagement potential.
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 5b: Post Quality Evaluation - Part 2: Strengths & Improvements -->
+    <section class="card p-4 page-break-before" id="postEvaluationStrengthsSection" data-pdf-section="post-evaluation-strengths">
+      <div class="flex justify-between items-center mb-3">
+        <div class="section-title">📈 Post Quality Insights</div>
+      </div>
+      
+      <div id="postEvaluationStrengthsContent" class="space-y-3 section-content">
+        <div class="text-sm text-gray-500 italic">
+          Detailed strengths and areas for improvement will appear here after post evaluation.
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 6: Positioning Analysis, Timing Insights in one page -->
+    <section class="page-break-before" data-pdf-section="positioning-timing">
+      <div class="card p-4">
+        <div class="flex justify-between items-center mb-3">
+          <div class="section-title">🎯 Positioning Analysis</div>
+          <button 
+            id="analyzePositioningBtn" 
+            onclick="analyzePositioningWithLLM()"
+            class="px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded-lg text-sm font-medium hover:from-purple-600 hover:to-pink-700 transition-all duration-200 shadow-sm hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
+            style="background: linear-gradient(135deg, #7c3aed 0%, #ec4899 100%);">
+            <span id="positioningBtnText">🚀 Analyze Positioning</span>
+          </button>
+        </div>
+        
+        <div id="positioningAnalysisContent" class="space-y-3">
+          <div class="text-sm text-gray-500 italic">
+            Get AI-powered analysis of your current personal branding and positioning, plus strategic recommendations for future positioning improvements.
+          </div>
+        </div>
+      </div>
+
+      <div class="card p-4 mt-4">
+        <div class="section-title mb-2">Timing Insights</div>
+        <div id="timingInsights" class="space-y-3"></div>
+      </div>
+    </section>
+
+    <!-- Section 7: Posting Rhythm, Top Performing Posts in one page -->
+    <section class="page-break-before" data-pdf-section="rhythm-posts">
+      <div class="card p-4">
+        <div class="section-title mb-2">Posting Rhythm & Continuity</div>
+        <div id="postingRhythm" class="space-y-3"></div>
+      </div>
+
+      <div class="card p-4 mt-4">
+        <div class="section-title mb-2">Top Performing Posts</div>
+        <div id="topPosts" class="space-y-3"></div>
+      </div>
+    </section>
+
+    <!-- Section 8: Peer Comparison -->
+    <section class="card p-4 page-break-before" id="peerComparisonSection" style="display: none;" data-pdf-section="peer-comparison">
+      <div class="flex justify-between items-center mb-3">
+        <div class="section-title">👥 Peer Comparison</div>
+        <button 
+          id="uploadPeerBtn" 
+          onclick="document.getElementById('fileInputPeer').click()"
+          class="px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded-lg text-sm font-medium hover:from-purple-600 hover:to-pink-700 transition-all duration-200 shadow-sm hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
+          style="background: linear-gradient(135deg, #7c3aed 0%, #ec4899 100%);">
+          📊 Upload Peer CSV
+        </button>
+        <input id="fileInputPeer" type="file" accept=".csv,text/csv" style="display: none;" aria-label="Upload peer CSV data file" />
+      </div>
+      
+      <div id="peerComparisonContent" class="space-y-4">
+        <div class="text-sm text-gray-500 italic">
+          Upload a similar LinkedIn CSV file to compare your performance metrics with a peer.
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 9: Transform your LinkedIn Presence -->
+    <section class="card p-6 bg-gradient-to-br from-blue-50 to-teal-50 border-2 border-blue-200 relative page-break-before" id="unstoppableValueProp" data-pdf-section="value-proposition">
+      <div class="absolute top-4 right-4 cost-per-hour-toggle">
+        <button 
+          onclick="toggleCostPerHourSection()" 
+          class="text-gray-400 hover:text-gray-600 transition-colors text-2xl font-bold"
+          title="Customize time value calculations"
+        >
+          ⋯
+        </button>
+      </div>
+      <div class="text-center mb-6 page-break-inside-avoid">
+        <div class="text-2xl font-bold text-gray-800 mb-2" style="page-break-inside: avoid; break-inside: avoid;">🚀 Transform Your LinkedIn Presence with Unstoppable</div>
+        <div class="text-sm text-gray-600" style="page-break-inside: avoid; break-inside: avoid;">See how our AI-powered content creation can multiply your impact</div>
+      </div>
+      
+      <!-- Cost per hour input - Hidden by default -->
+      <div id="costPerHourSection" class="bg-white rounded-lg border border-gray-200 mb-6 cost-per-hour-section hidden">
+        <div class="p-4">
+          <div class="text-center mb-4">
+            <div class="font-semibold text-gray-800 mb-2">💰 Configure the values</div>
+          </div>
+          <div class="flex items-center justify-center gap-8">
+            <div class="flex items-center gap-2">
+              <label for="hourlyRate" class="text-sm font-medium text-gray-700">Cost per hour:</label>
+              <div class="flex items-center gap-2">
+                <span class="text-gray-600">$</span>
+                <input 
+                  type="number" 
+                  id="hourlyRate" 
+                  value="50" 
+                  min="10" 
+                  max="500" 
+                  step="5"
+                  class="w-20 px-2 py-1 border border-gray-300 rounded text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  onchange="updateTimeValueCalculations()"
+                />
+                <span class="text-gray-600 text-sm">/hour</span>
+              </div>
+            </div>
+            <div class="flex items-center gap-2">
+              <label for="serviceFee" class="text-sm font-medium text-gray-700">Service fee:</label>
+              <div class="flex items-center gap-2">
+                <span class="text-gray-600">$</span>
+                <input 
+                  type="number" 
+                  id="serviceFee" 
+                  value="500" 
+                  min="100" 
+                  max="2000" 
+                  step="50"
+                  class="w-20 px-2 py-1 border border-gray-300 rounded text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  onchange="updateTimeValueCalculations()"
+                />
+                <span class="text-gray-600 text-sm">/month</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6 page-break-inside-avoid max-w-4xl mx-auto" style="page-break-inside: avoid; break-inside: avoid; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; align-items: start;">
+        <!-- Current State -->
+        <div class="bg-white rounded-lg p-4 border border-gray-200" style="page-break-inside: avoid; break-inside: avoid; display: block; width: 100%; padding: 1rem; margin: 0; box-sizing: border-box;">
+          <div class="flex items-center gap-2 mb-3" style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem; width: 100%;">
+            <div class="w-3 h-3 bg-orange-400 rounded-full" style="width: 0.75rem; height: 0.75rem; border-radius: 50%; flex-shrink: 0;"></div>
+            <div class="font-semibold text-gray-800" style="flex: 1;">Your Current State</div>
+          </div>
+          <div id="currentMetrics" class="space-y-3" style="display: block; width: 100%;">
+            <div class="text-sm text-gray-600">Loading your data...</div>
+          </div>
+        </div>
+        
+        <!-- Future State with Unstoppable -->
+        <div class="bg-white rounded-lg p-4 border border-green-200" style="page-break-inside: avoid; break-inside: avoid; display: block; width: 100%; padding: 1rem; margin: 0; box-sizing: border-box;">
+          <div class="flex items-center gap-2 mb-3" style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem; width: 100%;">
+            <div class="w-3 h-3 bg-green-400 rounded-full" style="width: 0.75rem; height: 0.75rem; border-radius: 50%; flex-shrink: 0;"></div>
+            <div class="font-semibold text-gray-800" style="flex: 1;">With Unstoppable Content Creation</div>
+          </div>
+          <div id="futureMetrics" class="space-y-3" style="display: block; width: 100%;">
+            <div class="text-sm text-gray-600">Calculating potential...</div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Value Proposition Highlight -->
+      <div class="text-center bg-gradient-to-r from-yellow-50 to-orange-50 rounded-lg p-4 border border-yellow-200 mb-6 pdf-cta-section" style="page-break-inside: avoid; break-inside: avoid;">
+        <div class="text-lg font-semibold text-gray-800 mb-2">🎯 Get Multifold Output with Fractional Time Investment</div>
+        <div class="text-sm text-gray-600">Spend less than half the time while achieving exponentially better results</div>
+      </div>
+      
+      
+    </section>
+  </div>
+
+  <!-- JavaScript Files -->
+  <script src="config.js"></script>
+  <script src="charts.js"></script>
+  <script src="ui.js"></script>
+  <script src="data-handlers.js"></script>
+  <script src="llm-insights.js"></script>
+  <script src="main.js"></script>
+  
+  <!-- Initialize everything -->
+  <script>
+    // Initialize file upload handlers when DOM is ready
+    document.addEventListener('DOMContentLoaded', function() {
+      initializeFileUploadHandlers();
+      initializeLLMInsights();
+    });
+  </script>
+</body>
+</html>
