@@ -1,0 +1,498 @@
+// ============= CSV PROCESSING UTILITIES =============
+
+export interface ProcessedPost {
+  content: string
+  date: Date | null
+  month: string | null
+  dayOfWeek: string | null
+  type: string
+  action: string
+  likes: number
+  comments: number
+  reposts: number
+  views: number
+  eng: number
+  topics: string[]
+  url: string
+  author: string
+}
+
+export interface AnalysisResult {
+  profile: { name: string }
+  summary: {
+    posts_last_12m: number
+    active_months: number
+    median_engagement: number
+    p90_engagement: number
+  }
+  trends: {
+    posts_per_month: Record<string, number>
+    month_median: Record<string, number>
+  }
+  mix: {
+    type_share: Record<string, number>
+    type_median_engagement: Record<string, number>
+    type_mean_engagement: Record<string, number>
+    type_q1_engagement: Record<string, number>
+    type_q3_engagement: Record<string, number>
+    type_max_engagement: Record<string, number>
+    type_counts: Record<string, number>
+    action_share: Record<string, number>
+    action_median_engagement: Record<string, number>
+    action_counts: Record<string, number>
+  }
+  topics: {
+    tag_share: Record<string, number>
+    tag_median_engagement: Record<string, number>
+    tag_counts: Record<string, number>
+  }
+  rhythm: {
+    avg_posting_gap: number
+    longest_gap: number
+    longest_gap_start: Date | null
+    longest_gap_end: Date | null
+    consistency_score: number
+  }
+  timingInsights: {
+    day_of_week: Record<string, { count: number; avg_engagement: number }>
+    best_day: string
+  }
+  posts: ProcessedPost[]
+}
+
+/**
+ * Parse date from various formats including relative dates
+ */
+export function parseCSVDate(dateStr: string): Date | null {
+  if (!dateStr) return null
+  
+  // Handle relative dates (e.g., "1w", "2w", "1mo", "3d")
+  const relativeMatch = dateStr.match(/^(\d+)(w|d|mo|h|m|y)$/)
+  if (relativeMatch) {
+    const value = parseInt(relativeMatch[1])
+    const unit = relativeMatch[2]
+    const now = new Date()
+    
+    switch(unit) {
+      case 'h': // hours
+        return new Date(now.getTime() - value * 60 * 60 * 1000)
+      case 'd': // days
+        return new Date(now.getTime() - value * 24 * 60 * 60 * 1000)
+      case 'w': // weeks
+        return new Date(now.getTime() - value * 7 * 24 * 60 * 60 * 1000)
+      case 'mo': // months (approximate)
+        return new Date(now.getFullYear(), now.getMonth() - value, now.getDate())
+      case 'm': // minutes
+        return new Date(now.getTime() - value * 60 * 1000)
+      case 'y': // years
+        return new Date(now.getFullYear() - value, now.getMonth(), now.getDate())
+    }
+  }
+  
+  // Try ISO format
+  let date = new Date(dateStr)
+  if (!isNaN(date.getTime())) return date
+  
+  // Try other formats
+  const formats = [
+    /(\d{4})-(\d{2})-(\d{2})/,  // YYYY-MM-DD
+    /(\d{2})\/(\d{2})\/(\d{4})/, // MM/DD/YYYY
+  ]
+  
+  for (const regex of formats) {
+    const match = dateStr.match(regex)
+    if (match) {
+      date = new Date(match[0])
+      if (!isNaN(date.getTime())) return date
+    }
+  }
+  
+  return null
+}
+
+/**
+ * Get month key in YYYY-MM format
+ */
+export function getMonthKey(date: Date): string | null {
+  if (!date) return null
+  const year = date.getFullYear()
+  const month = String(date.getMonth() + 1).padStart(2, '0')
+  return `${year}-${month}`
+}
+
+/**
+ * Get day of week name
+ */
+export function getDayOfWeek(date: Date): string | null {
+  if (!date) return null
+  const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+  return days[date.getDay()]
+}
+
+/**
+ * Calculate median of array
+ */
+export function median(arr: number[]): number {
+  if (!arr || arr.length === 0) return 0
+  const sorted = [...arr].sort((a, b) => a - b)
+  const mid = Math.floor(sorted.length / 2)
+  return sorted.length % 2 === 0 
+    ? Math.round((sorted[mid - 1] + sorted[mid]) / 2)
+    : sorted[mid]
+}
+
+/**
+ * Calculate percentile of array
+ */
+export function percentile(arr: number[], p: number): number {
+  if (!arr || arr.length === 0) return 0
+  const sorted = [...arr].sort((a, b) => a - b)
+  const index = Math.ceil((p / 100) * sorted.length) - 1
+  return sorted[Math.max(0, index)]
+}
+
+/**
+ * Calculate mean of array
+ */
+export function mean(arr: number[]): number {
+  if (!arr || arr.length === 0) return 0
+  const sum = arr.reduce((a, b) => a + b, 0)
+  return Math.round(sum / arr.length)
+}
+
+/**
+ * Detect post type from row data
+ */
+export function detectPostType(row: any): string {
+  if (row.type && row.type.trim() !== '') {
+    const typeValue = row.type.toLowerCase().trim()
+    const match = typeValue.match(/^([a-z]+)/)
+    if (match) return match[1]
+  }
+  
+  if (row.videoUrl) return 'video'
+  if (row.imgUrl) return 'image'
+  return 'text'
+}
+
+/**
+ * Generate last 12 months array
+ */
+export function generateLast12Months(): string[] {
+  const months: string[] = []
+  const now = new Date()
+  
+  for (let i = 11; i >= 0; i--) {
+    const date = new Date(now.getFullYear(), now.getMonth() - i, 1)
+    const year = date.getFullYear()
+    const month = String(date.getMonth() + 1).padStart(2, '0')
+    months.push(`${year}-${month}`)
+  }
+  
+  return months
+}
+
+/**
+ * Format month label for display
+ */
+export function labelMonth(m: string): string {
+  if (!m) return ''
+  if (/^\d{4}-\d{2}$/.test(m)) {
+    const [y, mm] = m.split('-')
+    const d = new Date(Number(y), Number(mm) - 1, 1)
+    return d.toLocaleString('en-US', { month: 'short' }) + " '" + String(y).slice(-2)
+  }
+  if (/^\d{2}$/.test(m)) {
+    const d = new Date(2000, Number(m) - 1, 1)
+    return d.toLocaleString('en-US', { month: 'short' })
+  }
+  return m
+}
+
+/**
+ * Convert share object to donut chart format
+ */
+export function toDonut(shareObj: Record<string, number> = {}) {
+  return Object.entries(shareObj).map(([name, frac]) => ({
+    name, 
+    value: Math.round((frac || 0) * 100)
+  }))
+}
+
+/**
+ * Ensure value is an array
+ */
+export function ensureArray(a: any): any[] {
+  return Array.isArray(a) ? a : []
+}
+
+/**
+ * Clip string to specified length
+ */
+export function clip(s: string, n: number = 120): string {
+  if (!s) return ''
+  s = String(s)
+  return s.length > n ? s.slice(0, n - 1) + '…' : s
+}
+
+/**
+ * Main CSV analysis function
+ */
+export function analyzeCsvData(rows: any[]): AnalysisResult | null {
+  const validRows = rows.filter(row => 
+    row.postContent && 
+    row.postContent.trim() !== '' &&
+    !row.postContent.includes('Export limit reached')
+  )
+
+  if (validRows.length === 0) {
+    throw new Error('No valid posts found in CSV. Please check the file format.')
+  }
+
+  const now = new Date()
+  const twelveMonthsAgo = new Date(now.getFullYear(), now.getMonth() - 12, now.getDate())
+  twelveMonthsAgo.setHours(0, 0, 0, 0)
+
+  const rowsWithoutTimestamp = validRows.filter(row => !row.postTimestamp || row.postTimestamp.trim() === '')
+  if (rowsWithoutTimestamp.length > 0) {
+    console.warn(`Warning: ${rowsWithoutTimestamp.length} posts are missing dates (postTimestamp column) and were excluded from analysis.`)
+  }
+
+  // Process all posts
+  const allPosts = validRows.map(row => {
+    const date = parseCSVDate(row.postTimestamp)
+    const likes = parseInt(row.likeCount || '0')
+    const comments = parseInt(row.commentCount || '0')
+    const reposts = parseInt(row.repostCount || '0')
+    const views = parseInt(row.viewCount || '0')
+    const engagement = likes + comments + reposts
+    
+    return {
+      content: row.postContent,
+      date: date,
+      month: date ? getMonthKey(date) : null,
+      dayOfWeek: date ? getDayOfWeek(date) : null,
+      type: detectPostType(row),
+      action: row.action || 'Post',
+      likes: likes,
+      comments: comments,
+      reposts: reposts,
+      views: views,
+      eng: engagement,
+      topics: [], // Topics will be analyzed by LLM only
+      url: row.postUrl,
+      author: row.author || 'Unknown'
+    }
+  }).filter(p => p.date) // Only filter out posts without dates
+
+  // Filter posts from last 12 months for summary
+  const posts = allPosts.filter(p => p.date && p.date >= twelveMonthsAgo)
+  
+  if (posts.length === 0) {
+    throw new Error('No posts found within the last 12 months. Your CSV might contain older data or have date format issues.')
+  }
+
+  posts.sort((a, b) => a.date!.getTime() - b.date!.getTime())
+
+  // Get author name (most common author)
+  const authorCounts: Record<string, number> = {}
+  posts.forEach(p => {
+    authorCounts[p.author] = (authorCounts[p.author] || 0) + 1
+  })
+  const authorName = Object.keys(authorCounts).reduce((a, b) => authorCounts[a] > authorCounts[b] ? a : b)
+
+  // Summary metrics
+  const engagementScores = posts.map(p => p.eng)
+  const summary = {
+    posts_last_12m: posts.length,
+    active_months: new Set(posts.map(p => p.month).filter(Boolean)).size,
+    median_engagement: median(engagementScores),
+    p90_engagement: percentile(engagementScores, 90)
+  }
+
+  // Trends: Posts per month
+  const postsPerMonth: Record<string, number> = {}
+  const monthMedian: Record<string, number> = {}
+  const last12Months = generateLast12Months()
+  
+  last12Months.forEach(month => {
+    postsPerMonth[month] = 0
+    monthMedian[month] = 0
+  })
+
+  posts.forEach(p => {
+    if (p.month && postsPerMonth.hasOwnProperty(p.month)) {
+      postsPerMonth[p.month]++
+    }
+  })
+
+  // Calculate median engagement per month
+  const monthEngagements: Record<string, number[]> = {}
+  posts.forEach(p => {
+    if (p.month && postsPerMonth[p.month] > 0) {
+      if (!monthEngagements[p.month]) monthEngagements[p.month] = []
+      monthEngagements[p.month].push(p.eng)
+    }
+  })
+
+  Object.keys(monthEngagements).forEach(month => {
+    monthMedian[month] = median(monthEngagements[month])
+  })
+
+  // Mix: Type distribution
+  const typeCounts: Record<string, number> = {}
+  const typeEngagements: Record<string, number[]> = {}
+  
+  posts.forEach(p => {
+    typeCounts[p.type] = (typeCounts[p.type] || 0) + 1
+    if (!typeEngagements[p.type]) typeEngagements[p.type] = []
+    typeEngagements[p.type].push(p.eng)
+  })
+  
+  const type_share: Record<string, number> = {}
+  const type_median_engagement: Record<string, number> = {}
+  const type_mean_engagement: Record<string, number> = {}
+  const type_q1_engagement: Record<string, number> = {}
+  const type_q3_engagement: Record<string, number> = {}
+  const type_max_engagement: Record<string, number> = {}
+  
+  Object.keys(typeCounts).forEach(type => {
+    type_share[type] = typeCounts[type] / posts.length
+    type_median_engagement[type] = median(typeEngagements[type])
+    type_mean_engagement[type] = mean(typeEngagements[type])
+    type_q1_engagement[type] = percentile(typeEngagements[type], 25)
+    type_q3_engagement[type] = percentile(typeEngagements[type], 75)
+    type_max_engagement[type] = Math.max(...typeEngagements[type])
+  })
+
+  // Mix: Action distribution (Post vs Reshare)
+  const actionCounts: Record<string, number> = {}
+  const actionEngagements: Record<string, number[]> = {}
+  
+  posts.forEach(p => {
+    actionCounts[p.action] = (actionCounts[p.action] || 0) + 1
+    if (!actionEngagements[p.action]) actionEngagements[p.action] = []
+    actionEngagements[p.action].push(p.eng)
+  })
+  
+  const action_share: Record<string, number> = {}
+  const action_median_engagement: Record<string, number> = {}
+  
+  Object.keys(actionCounts).forEach(action => {
+    action_share[action] = actionCounts[action] / posts.length
+    action_median_engagement[action] = median(actionEngagements[action])
+  })
+
+  // Topics - No manual analysis, LLM only
+  const tag_share: Record<string, number> = {}
+  const tag_median_engagement: Record<string, number> = {}
+  const tag_counts: Record<string, number> = {}
+
+  // Posting Rhythm & Continuity
+  const sortedPosts = [...posts].sort((a, b) => a.date!.getTime() - b.date!.getTime())
+  const postGaps: number[] = []
+  let longestGapInfo = { days: 0, startDate: null as Date | null, endDate: null as Date | null }
+  
+  for (let i = 1; i < sortedPosts.length; i++) {
+    const gapDays = Math.floor((sortedPosts[i].date!.getTime() - sortedPosts[i-1].date!.getTime()) / (1000 * 60 * 60 * 24))
+    postGaps.push(gapDays)
+    
+    if (gapDays > longestGapInfo.days) {
+      longestGapInfo = {
+        days: gapDays,
+        startDate: sortedPosts[i-1].date,
+        endDate: sortedPosts[i].date
+      }
+    }
+  }
+  
+  const avgPostingGap = postGaps.length > 0 ? Math.round(mean(postGaps)) : 0
+  const consistencyScore = Math.max(0, 100 - (avgPostingGap * 2)) // Simple consistency score
+
+  const rhythm = {
+    avg_posting_gap: avgPostingGap,
+    longest_gap: longestGapInfo.days,
+    longest_gap_start: longestGapInfo.startDate,
+    longest_gap_end: longestGapInfo.endDate,
+    consistency_score: Math.min(100, consistencyScore)
+  }
+
+  // Timing Insights
+  const dayOfWeekStats: Record<string, { count: number; avg_engagement: number }> = {}
+  const dayEngagements: Record<string, number[]> = {}
+  
+  posts.forEach(p => {
+    if (p.dayOfWeek) {
+      dayOfWeekStats[p.dayOfWeek] = { count: 0, avg_engagement: 0 }
+      dayEngagements[p.dayOfWeek] = []
+    }
+  })
+  
+  posts.forEach(p => {
+    if (p.dayOfWeek) {
+      dayOfWeekStats[p.dayOfWeek].count++
+      dayEngagements[p.dayOfWeek].push(p.eng)
+    }
+  })
+  
+  Object.keys(dayOfWeekStats).forEach(day => {
+    dayOfWeekStats[day].avg_engagement = Math.round(mean(dayEngagements[day]))
+  })
+  
+  const bestDay = Object.keys(dayOfWeekStats).reduce((a, b) => 
+    dayOfWeekStats[a].avg_engagement > dayOfWeekStats[b].avg_engagement ? a : b, 
+    Object.keys(dayOfWeekStats)[0] || 'Monday'
+  )
+
+  const timingInsights = {
+    day_of_week: dayOfWeekStats,
+    best_day: bestDay
+  }
+
+  // Prepare posts array for JSON
+  const postsForJson = posts.map(p => ({
+    content: p.content,
+    date: p.date,
+    month: p.month,
+    dayOfWeek: p.dayOfWeek,
+    type: p.type,
+    action: p.action,
+    likes: p.likes,
+    comments: p.comments,
+    reposts: p.reposts,
+    views: p.views,
+    eng: p.eng,
+    topics: p.topics,
+    url: p.url,
+    author: p.author
+  }))
+
+  return {
+    profile: { name: authorName },
+    summary,
+    trends: {
+      posts_per_month: postsPerMonth,
+      month_median: monthMedian
+    },
+    mix: {
+      type_share,
+      type_median_engagement,
+      type_mean_engagement,
+      type_q1_engagement,
+      type_q3_engagement,
+      type_max_engagement,
+      type_counts: typeCounts,
+      action_share,
+      action_median_engagement,
+      action_counts: actionCounts
+    },
+    topics: {
+      tag_share,
+      tag_median_engagement,
+      tag_counts
+    },
+    rhythm,
+    timingInsights,
+    posts: postsForJson
+  }
+}
