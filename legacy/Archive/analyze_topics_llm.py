@@ -129,7 +129,7 @@ Focus on accuracy. A post about "hiring engineers" should be tagged as both "hir
     print("🤖 Sending posts to Gemini for analysis...")
     
     try:
-        model = genai.GenerativeModel('gemini-1.5-flash')
+        model = genai.GenerativeModel('gemini-2.5-flash-lite')
         response = model.generate_content(prompt)
         
         # Extract JSON from response
