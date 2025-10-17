@@ -4,7 +4,7 @@
   "outputDirectory": "nextjs-app/.next",
   "framework": "nextjs",
   "functions": {
-    "nextjs-app/src/app/api/*/route.ts": {
+    "nextjs-app/src/app/api/**/route.ts": {
       "maxDuration": 60
     }
   }
