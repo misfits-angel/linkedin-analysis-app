@@ -14,7 +14,7 @@ import {
 import '@/lib/chart-setup'
 
 interface ChartSectionProps {
-  data: AnalysisData
+  data: AnalysisData | null | undefined
 }
 
 export default function ChartSection({ data }: ChartSectionProps) {

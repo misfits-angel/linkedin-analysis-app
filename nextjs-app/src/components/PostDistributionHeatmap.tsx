@@ -4,7 +4,7 @@ import { useMemo } from 'react'
 import { AnalysisResult, labelMonth } from '@/lib/csv-processor'
 
 interface PostDistributionHeatmapProps {
-  data: AnalysisResult
+  data: AnalysisResult | null
 }
 
 export default function PostDistributionHeatmap({ data }: PostDistributionHeatmapProps) {
