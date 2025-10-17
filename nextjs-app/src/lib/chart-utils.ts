@@ -21,6 +21,10 @@ export interface AnalysisData {
     type_median_engagement: Record<string, number>
     action_share: Record<string, number>
     action_median_engagement: Record<string, number>
+    action_share_full_data: Record<string, number>
+    type_counts: Record<string, number>
+    action_counts: Record<string, number>
+    action_counts_full_data: Record<string, number>
   }
 }
 
@@ -186,6 +190,10 @@ export function createFormatMixChart(data: AnalysisData): ChartConfig {
     'rgba(32, 32, 34, 0.8)',     // ink
   ]
   
+  // Calculate actual counts from percentages - derive from type_counts
+  const typeCounts = data?.mix?.type_counts || {}
+  const actualCounts = donutData.map(d => typeCounts[d.name] || 0)
+  
   return {
     type: 'doughnut' as const,
     data: {
@@ -212,6 +220,16 @@ export function createFormatMixChart(data: AnalysisData): ChartConfig {
         title: {
           display: false
         },
+        tooltip: {
+          callbacks: {
+            label: (context: any) => {
+              const label = context.label || ''
+              const index = context.dataIndex
+              const count = actualCounts[index] || 0
+              return `${label}: ${count}`
+            }
+          }
+        } as any,
         datalabels: {
           display: true,
           color: '#ffffff',
@@ -230,12 +248,20 @@ export function createFormatMixChart(data: AnalysisData): ChartConfig {
  * Generate action mix chart configuration
  */
 export function createActionMixChart(data: AnalysisData): ChartConfig {
-  const donutData = toDonut(data?.mix?.action_share)
+  const donutData = toDonut(data?.mix?.action_share_full_data)
   
   const colors = [
     'rgba(21, 113, 135, 0.8)',   // brand
     'rgba(99, 165, 179, 0.8)',   // brand2
   ]
+  
+  // Calculate actual counts - derive from action_counts (full dataset counts)
+  const actionCounts = data?.mix?.action_counts_full_data || {}
+  const actualCounts = donutData.map(d => {
+    // Map display names back to action names
+    const actionName = d.name === 'Post' ? 'Post' : d.name === 'Reshare' ? 'Reshare' : d.name
+    return actionCounts[actionName] || 0
+  })
   
   return {
     type: 'doughnut' as const,
@@ -263,6 +289,16 @@ export function createActionMixChart(data: AnalysisData): ChartConfig {
         title: {
           display: false
         },
+        tooltip: {
+          callbacks: {
+            label: (context: any) => {
+              const label = context.label || ''
+              const index = context.dataIndex
+              const count = actualCounts[index] || 0
+              return `${label}: ${count}`
+            }
+          }
+        } as any,
         datalabels: {
           display: true,
           color: '#ffffff',

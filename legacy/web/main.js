@@ -627,6 +627,157 @@ function clearPeerData() {
   }
 }
 
+function renderMonthlyDistributionTable(d) {
+  const root = document.getElementById('monthlyDistributionTable');
+  if (!root) return;
+  
+  const trends = d?.trends || {};
+  const postsPerMonth = trends.posts_per_month || [];
+  const monthMedian = trends.month_median || [];
+  
+  if (postsPerMonth.length === 0) {
+    root.innerHTML = '<div class="text-sm text-gray-500">No monthly data available.</div>';
+    return;
+  }
+  
+  // Create a map for easy lookup
+  const monthData = {};
+  postsPerMonth.forEach(item => {
+    monthData[item.month] = { posts: item.count, engagement: 0 };
+  });
+  
+  monthMedian.forEach(item => {
+    if (monthData[item.month]) {
+      monthData[item.month].engagement = item.median;
+    }
+  });
+  
+  // Sort months chronologically
+  const sortedMonths = Object.keys(monthData).sort();
+  
+  // Calculate totals
+  const totalPosts = Object.values(monthData).reduce((sum, item) => sum + item.posts, 0);
+  const totalEngagement = Object.values(monthData).reduce((sum, item) => sum + (item.engagement * item.posts), 0);
+  const avgEngagement = totalPosts > 0 ? Math.round(totalEngagement / totalPosts) : 0;
+  
+  // Create table HTML
+  let tableHTML = `
+    <table class="distribution-table">
+      <thead>
+        <tr>
+          <th class="month-cell">Month</th>
+          <th>Posts</th>
+          <th>Engagement</th>
+        </tr>
+      </thead>
+      <tbody>
+  `;
+  
+  // Add data rows
+  sortedMonths.forEach(month => {
+    const data = monthData[month];
+    const monthName = formatMonthName(month);
+    tableHTML += `
+      <tr>
+        <td class="month-cell">${monthName}</td>
+        <td class="number-cell">${data.posts}</td>
+        <td class="number-cell">${data.engagement}</td>
+      </tr>
+    `;
+  });
+  
+  // Add total row
+  tableHTML += `
+        <tr class="total-row">
+          <th class="month-cell">Total</th>
+          <th class="number-cell">${totalPosts}</th>
+          <th class="number-cell">${avgEngagement}</th>
+        </tr>
+      </tbody>
+    </table>
+  `;
+  
+  root.innerHTML = tableHTML;
+}
+
+function renderWeekdayDistributionTable(d) {
+  const root = document.getElementById('weekdayDistributionTable');
+  if (!root) return;
+  
+  const timing = d?.timingInsights || {};
+  const dayOfWeek = timing.day_of_week || {};
+  
+  if (Object.keys(dayOfWeek).length === 0) {
+    root.innerHTML = '<div class="text-sm text-gray-500">No weekday data available.</div>';
+    return;
+  }
+  
+  // Define day order
+  const dayOrder = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  const dayAbbr = { 
+    Monday: 'Mon', Tuesday: 'Tue', Wednesday: 'Wed', Thursday: 'Thu', 
+    Friday: 'Fri', Saturday: 'Sat', Sunday: 'Sun' 
+  };
+  
+  // Calculate totals
+  const totalPosts = Object.values(dayOfWeek).reduce((sum, day) => sum + (day.count || 0), 0);
+  const totalEngagement = Object.values(dayOfWeek).reduce((sum, day) => sum + ((day.median || 0) * (day.count || 0)), 0);
+  const avgEngagement = totalPosts > 0 ? Math.round(totalEngagement / totalPosts) : 0;
+  
+  // Create table HTML
+  let tableHTML = `
+    <table class="distribution-table">
+      <thead>
+        <tr>
+          <th class="day-cell">Day</th>
+          <th>Posts</th>
+          <th>Engagement</th>
+        </tr>
+      </thead>
+      <tbody>
+  `;
+  
+  // Add data rows
+  dayOrder.forEach(day => {
+    const data = dayOfWeek[day];
+    const posts = data?.count || 0;
+    const engagement = data?.median || 0;
+    
+    tableHTML += `
+      <tr>
+        <td class="day-cell">${dayAbbr[day]}</td>
+        <td class="number-cell">${posts}</td>
+        <td class="number-cell">${engagement}</td>
+      </tr>
+    `;
+  });
+  
+  // Add total row
+  tableHTML += `
+        <tr class="total-row">
+          <th class="day-cell">Total</th>
+          <th class="number-cell">${totalPosts}</th>
+          <th class="number-cell">${avgEngagement}</th>
+        </tr>
+      </tbody>
+    </table>
+  `;
+  
+  root.innerHTML = tableHTML;
+}
+
+function formatMonthName(monthKey) {
+  if (!monthKey) return 'Unknown';
+  
+  try {
+    const [year, month] = monthKey.split('-');
+    const date = new Date(parseInt(year), parseInt(month) - 1, 1);
+    return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short' });
+  } catch (e) {
+    return monthKey;
+  }
+}
+
 function renderAll(d){
   renderSummary(d);
   renderPostsPerMonth(d);
@@ -638,6 +789,8 @@ function renderAll(d){
   renderPostingRhythm(d);
   renderTimingInsights(d);
   renderTopPosts(d);
+  renderMonthlyDistributionTable(d);
+  renderWeekdayDistributionTable(d);
   renderPeerComparison(d);
   renderUnstoppableValueProp(d);
   window.__CURRENT__ = d;

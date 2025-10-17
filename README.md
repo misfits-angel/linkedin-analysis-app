@@ -2,6 +2,12 @@
 
 A comprehensive analytics platform for analyzing LinkedIn post performance with AI-powered insights.
 
+## 🌐 Live Demo
+
+**🚀 [Try the Live App](https://linkedin-analysis-c8178u52f-anurags-projects-7932c64f.vercel.app)**
+
+The application is now live and ready to use! Upload your LinkedIn data and get AI-powered insights instantly.
+
 ## 📁 Project Structure
 
 ```

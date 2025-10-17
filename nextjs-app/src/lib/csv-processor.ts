@@ -40,6 +40,8 @@ export interface AnalysisResult {
     action_share: Record<string, number>
     action_median_engagement: Record<string, number>
     action_counts: Record<string, number>
+    action_share_full_data: Record<string, number>
+    action_counts_full_data: Record<string, number>
   }
   topics: {
     tag_share: Record<string, number>
@@ -56,6 +58,15 @@ export interface AnalysisResult {
   timingInsights: {
     day_of_week: Record<string, { count: number; avg_engagement: number }>
     best_day: string
+  }
+  distribution: {
+    monthly_daily: Record<string, Record<string, { count: number; avg_engagement: number }>>
+    insights: {
+      most_active_day: string
+      best_engagement_day: string
+      consistency_score: number
+      peak_month: string
+    }
   }
   posts: ProcessedPost[]
 }
@@ -236,6 +247,93 @@ export function clip(s: string, n: number = 120): string {
 }
 
 /**
+ * Calculate post distribution across months and days
+ */
+export function calculatePostDistribution(posts: ProcessedPost[]): {
+  monthly_daily: Record<string, Record<string, { count: number; avg_engagement: number }>>
+  insights: {
+    most_active_day: string
+    best_engagement_day: string
+    consistency_score: number
+    peak_month: string
+  }
+} {
+  const last12Months = generateLast12Months()
+  const dayOrder = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+  
+  // Initialize the distribution structure
+  const monthly_daily: Record<string, Record<string, { count: number; avg_engagement: number }>> = {}
+  
+  last12Months.forEach(month => {
+    monthly_daily[month] = {}
+    dayOrder.forEach(day => {
+      monthly_daily[month][day] = { count: 0, avg_engagement: 0 }
+    })
+  })
+  
+  // Process posts and populate distribution
+  const dayEngagements: Record<string, number[]> = {}
+  const monthCounts: Record<string, number> = {}
+  
+  posts.forEach(post => {
+    if (post.month && post.dayOfWeek && monthly_daily[post.month]) {
+      monthly_daily[post.month][post.dayOfWeek].count++
+      monthly_daily[post.month][post.dayOfWeek].avg_engagement += post.eng
+      
+      if (!dayEngagements[post.dayOfWeek]) dayEngagements[post.dayOfWeek] = []
+      dayEngagements[post.dayOfWeek].push(post.eng)
+      
+      monthCounts[post.month] = (monthCounts[post.month] || 0) + 1
+    }
+  })
+  
+  // Calculate average engagement for each cell
+  Object.keys(monthly_daily).forEach(month => {
+    dayOrder.forEach(day => {
+      const cell = monthly_daily[month][day]
+      if (cell.count > 0) {
+        cell.avg_engagement = Math.round(cell.avg_engagement / cell.count)
+      }
+    })
+  })
+  
+  // Calculate insights
+  const dayStats: Record<string, { count: number; avg_engagement: number }> = {}
+  dayOrder.forEach(day => {
+    const engagements = dayEngagements[day] || []
+    dayStats[day] = {
+      count: engagements.length,
+      avg_engagement: engagements.length > 0 ? Math.round(mean(engagements)) : 0
+    }
+  })
+  
+  const most_active_day = dayOrder.reduce((a, b) => 
+    dayStats[a].count > dayStats[b].count ? a : b, dayOrder[0]
+  )
+  
+  const best_engagement_day = dayOrder.reduce((a, b) => 
+    dayStats[a].avg_engagement > dayStats[b].avg_engagement ? a : b, dayOrder[0]
+  )
+  
+  const peak_month = last12Months.reduce((a, b) => 
+    (monthCounts[a] || 0) > (monthCounts[b] || 0) ? a : b, last12Months[0]
+  )
+  
+  const activeMonths = last12Months.filter(month => (monthCounts[month] || 0) > 0).length
+  const consistency_score = Math.round((activeMonths / 12) * 100)
+  
+  return {
+    monthly_daily,
+    insights: {
+      most_active_day,
+      best_engagement_day,
+      consistency_score,
+      peak_month
+    }
+  }
+}
+
+/**
  * Main CSV analysis function
  */
 export function analyzeCsvData(rows: any[]): AnalysisResult | null {
@@ -294,18 +392,25 @@ export function analyzeCsvData(rows: any[]): AnalysisResult | null {
 
   posts.sort((a, b) => a.date!.getTime() - b.date!.getTime())
 
+  // Filter out reshares - only count original posts for main metrics
+  // Reshares are identified by action containing "reposted"
+  const originalPosts = posts.filter(p => !p.action.toLowerCase().includes('reposted'))
+
+  // If all posts are reshares, use all posts as fallback
+  const postsForAnalysis = originalPosts.length > 0 ? originalPosts : posts
+
   // Get author name (most common author)
   const authorCounts: Record<string, number> = {}
-  posts.forEach(p => {
+  postsForAnalysis.forEach(p => {
     authorCounts[p.author] = (authorCounts[p.author] || 0) + 1
   })
   const authorName = Object.keys(authorCounts).reduce((a, b) => authorCounts[a] > authorCounts[b] ? a : b)
 
   // Summary metrics
-  const engagementScores = posts.map(p => p.eng)
+  const engagementScores = postsForAnalysis.map(p => p.eng)
   const summary = {
-    posts_last_12m: posts.length,
-    active_months: new Set(posts.map(p => p.month).filter(Boolean)).size,
+    posts_last_12m: postsForAnalysis.length,
+    active_months: new Set(postsForAnalysis.map(p => p.month).filter(Boolean)).size,
     median_engagement: median(engagementScores),
     p90_engagement: percentile(engagementScores, 90)
   }
@@ -320,7 +425,7 @@ export function analyzeCsvData(rows: any[]): AnalysisResult | null {
     monthMedian[month] = 0
   })
 
-  posts.forEach(p => {
+  postsForAnalysis.forEach(p => {
     if (p.month && postsPerMonth.hasOwnProperty(p.month)) {
       postsPerMonth[p.month]++
     }
@@ -328,7 +433,7 @@ export function analyzeCsvData(rows: any[]): AnalysisResult | null {
 
   // Calculate median engagement per month
   const monthEngagements: Record<string, number[]> = {}
-  posts.forEach(p => {
+  postsForAnalysis.forEach(p => {
     if (p.month && postsPerMonth[p.month] > 0) {
       if (!monthEngagements[p.month]) monthEngagements[p.month] = []
       monthEngagements[p.month].push(p.eng)
@@ -343,7 +448,7 @@ export function analyzeCsvData(rows: any[]): AnalysisResult | null {
   const typeCounts: Record<string, number> = {}
   const typeEngagements: Record<string, number[]> = {}
   
-  posts.forEach(p => {
+  postsForAnalysis.forEach(p => {
     typeCounts[p.type] = (typeCounts[p.type] || 0) + 1
     if (!typeEngagements[p.type]) typeEngagements[p.type] = []
     typeEngagements[p.type].push(p.eng)
@@ -357,7 +462,7 @@ export function analyzeCsvData(rows: any[]): AnalysisResult | null {
   const type_max_engagement: Record<string, number> = {}
   
   Object.keys(typeCounts).forEach(type => {
-    type_share[type] = typeCounts[type] / posts.length
+    type_share[type] = typeCounts[type] / postsForAnalysis.length
     type_median_engagement[type] = median(typeEngagements[type])
     type_mean_engagement[type] = mean(typeEngagements[type])
     type_q1_engagement[type] = percentile(typeEngagements[type], 25)
@@ -369,7 +474,7 @@ export function analyzeCsvData(rows: any[]): AnalysisResult | null {
   const actionCounts: Record<string, number> = {}
   const actionEngagements: Record<string, number[]> = {}
   
-  posts.forEach(p => {
+  postsForAnalysis.forEach(p => {
     actionCounts[p.action] = (actionCounts[p.action] || 0) + 1
     if (!actionEngagements[p.action]) actionEngagements[p.action] = []
     actionEngagements[p.action].push(p.eng)
@@ -379,8 +484,20 @@ export function analyzeCsvData(rows: any[]): AnalysisResult | null {
   const action_median_engagement: Record<string, number> = {}
   
   Object.keys(actionCounts).forEach(action => {
-    action_share[action] = actionCounts[action] / posts.length
+    action_share[action] = actionCounts[action] / postsForAnalysis.length
     action_median_engagement[action] = median(actionEngagements[action])
+  })
+
+  // Calculate action distribution from FULL posts (including reshares) for the pie chart
+  const fullActionCounts: Record<string, number> = {}
+  posts.forEach(p => {
+    const actionType = p.action.toLowerCase().includes('reposted') ? 'Reshare' : 'Post'
+    fullActionCounts[actionType] = (fullActionCounts[actionType] || 0) + 1
+  })
+  
+  const action_share_full_data: Record<string, number> = {}
+  Object.keys(fullActionCounts).forEach(action => {
+    action_share_full_data[action] = fullActionCounts[action] / posts.length
   })
 
   // Topics - No manual analysis, LLM only
@@ -389,7 +506,7 @@ export function analyzeCsvData(rows: any[]): AnalysisResult | null {
   const tag_counts: Record<string, number> = {}
 
   // Posting Rhythm & Continuity
-  const sortedPosts = [...posts].sort((a, b) => a.date!.getTime() - b.date!.getTime())
+  const sortedPosts = [...postsForAnalysis].sort((a, b) => a.date!.getTime() - b.date!.getTime())
   const postGaps: number[] = []
   let longestGapInfo = { days: 0, startDate: null as Date | null, endDate: null as Date | null }
   
@@ -421,14 +538,14 @@ export function analyzeCsvData(rows: any[]): AnalysisResult | null {
   const dayOfWeekStats: Record<string, { count: number; avg_engagement: number }> = {}
   const dayEngagements: Record<string, number[]> = {}
   
-  posts.forEach(p => {
+  postsForAnalysis.forEach(p => {
     if (p.dayOfWeek) {
       dayOfWeekStats[p.dayOfWeek] = { count: 0, avg_engagement: 0 }
       dayEngagements[p.dayOfWeek] = []
     }
   })
   
-  posts.forEach(p => {
+  postsForAnalysis.forEach(p => {
     if (p.dayOfWeek) {
       dayOfWeekStats[p.dayOfWeek].count++
       dayEngagements[p.dayOfWeek].push(p.eng)
@@ -449,8 +566,11 @@ export function analyzeCsvData(rows: any[]): AnalysisResult | null {
     best_day: bestDay
   }
 
+  // Calculate post distribution
+  const distribution = calculatePostDistribution(postsForAnalysis)
+
   // Prepare posts array for JSON
-  const postsForJson = posts.map(p => ({
+  const postsForJson = postsForAnalysis.map(p => ({
     content: p.content,
     date: p.date,
     month: p.month,
@@ -484,7 +604,9 @@ export function analyzeCsvData(rows: any[]): AnalysisResult | null {
       type_counts: typeCounts,
       action_share,
       action_median_engagement,
-      action_counts: actionCounts
+      action_counts: actionCounts,
+      action_share_full_data: action_share_full_data,
+      action_counts_full_data: fullActionCounts
     },
     topics: {
       tag_share,
@@ -493,6 +615,7 @@ export function analyzeCsvData(rows: any[]): AnalysisResult | null {
     },
     rhythm,
     timingInsights,
+    distribution,
     posts: postsForJson
   }
 }

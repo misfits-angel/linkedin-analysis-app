@@ -27,6 +27,9 @@ export default function InsightsPanel({ data }: InsightsPanelProps) {
   const handleGenerateInsights = async () => {
     setIsLoadingNarrative(true)
     try {
+      if (!data?.posts) {
+        throw new Error('No posts data available to generate insights.')
+      }
       const result = await generateNarrativeInsights(data.posts)
       setNarrativeInsights(result)
     } catch (error) {
@@ -39,6 +42,9 @@ export default function InsightsPanel({ data }: InsightsPanelProps) {
   const handleAnalyzePositioning = async () => {
     setIsLoadingPositioning(true)
     try {
+      if (!data?.posts) {
+        throw new Error('No posts data available to analyze positioning.')
+      }
       const result = await analyzePositioning(data.posts)
       setPositioningAnalysis(result)
     } catch (error) {
@@ -69,6 +75,7 @@ export default function InsightsPanel({ data }: InsightsPanelProps) {
             loadingText="Generating..."
             variant="primary"
             size="sm"
+            disabled={!data?.posts}
           />
         </div>
         
@@ -108,6 +115,7 @@ export default function InsightsPanel({ data }: InsightsPanelProps) {
             loadingText="Analyzing..."
             variant="primary"
             size="sm"
+            disabled={!data?.posts}
           />
         </div>
         

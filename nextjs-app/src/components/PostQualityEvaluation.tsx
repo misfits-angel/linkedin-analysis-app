@@ -191,10 +191,10 @@ export default function PostQualityEvaluation({ postsData }: PostQualityEvaluati
           onClick={handleEvaluatePosts}
           isLoading={isLoading}
           icon="🎯"
-          text="Evaluate Posts"
+          text="Evaluate"
           loadingText="Evaluating..."
           variant="primary"
-          size="md"
+          size="sm"
         />
       </div>
       
@@ -217,7 +217,7 @@ export default function PostQualityEvaluation({ postsData }: PostQualityEvaluati
       
       {!evaluation && !isLoading && !error && (
         <div className="text-sm text-gray-500 italic">
-          Click "Evaluate Posts" to get AI-powered quality assessment of your content.
+          Click "Evaluate" to get AI-powered quality assessment of your content.
         </div>
       )}
     </div>

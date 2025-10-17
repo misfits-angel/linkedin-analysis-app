@@ -226,6 +226,107 @@ body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarel
     align-items: center !important;
     display: flex !important;
   }
+
+/* ============= DISTRIBUTION TABLE STYLES ============= */
+.distribution-table-container {
+  overflow-x: auto;
+  border: 1px solid #cccccc;
+  background: white;
+  font-family: Arial, sans-serif;
+}
+
+.distribution-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  min-width: 300px;
+  font-family: Arial, sans-serif;
+}
+
+.distribution-table th {
+  background-color: #D6E3DD;
+  color: #000000;
+  font-weight: normal;
+  text-align: center;
+  padding: 8px 12px;
+  border: 1px solid #cccccc;
+  font-size: 14px;
+  height: 32px;
+}
+
+.distribution-table td {
+  background-color: #F6F5F1;
+  color: #000000;
+  text-align: center;
+  padding: 8px 12px;
+  border: 1px solid #cccccc;
+  font-size: 14px;
+  min-width: 60px;
+  height: 32px;
+  vertical-align: middle;
+}
+
+.distribution-table tr:nth-child(even) td {
+  background-color: #F6F5F1;
+}
+
+.distribution-table tr:nth-child(odd) td {
+  background-color: #F6F5F1;
+}
+
+.distribution-table .total-row th {
+  background-color: #D6E3DD;
+  font-weight: bold;
+  color: #000000;
+  border: 1px solid #cccccc;
+  font-size: 14px;
+}
+
+.distribution-table .total-row td {
+  background-color: #D6E3DD;
+  font-weight: bold;
+  color: #000000;
+  border: 1px solid #cccccc;
+  font-size: 14px;
+}
+
+.distribution-table .day-cell {
+  text-align: left;
+  font-weight: normal;
+  min-width: 80px;
+  padding-left: 12px;
+}
+
+.distribution-table .month-cell {
+  text-align: left;
+  font-weight: normal;
+  min-width: 100px;
+  padding-left: 12px;
+}
+
+.distribution-table .number-cell {
+  font-weight: normal;
+  color: #000000;
+  font-family: Arial, sans-serif;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .distribution-table {
+    font-size: 12px;
+  }
+  
+  .distribution-table th,
+  .distribution-table td {
+    padding: 6px 8px;
+    height: 28px;
+  }
+  
+  .distribution-table .day-cell,
+  .distribution-table .month-cell {
+    padding-left: 8px;
+  }
+}
   
   .pdf-button {
     flex: 0 0 auto !important;

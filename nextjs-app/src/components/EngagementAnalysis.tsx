@@ -16,6 +16,24 @@ export default function EngagementAnalysis({ data }: EngagementAnalysisProps) {
   const counts = data?.mix?.type_counts || {}
   const keys = Object.keys({...share, ...med})
   
+  // Return empty state if no data
+  if (!data || !data.posts) {
+    return (
+      <section className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="card p-4">
+          <div className="section-title-spaced">Engagement by post type</div>
+          <div className="text-sm text-gray-600">No engagement data available yet. Upload a CSV to see analysis.</div>
+        </div>
+        
+        {/* Topic Analysis on the right */}
+        <div className="card p-4">
+          <div className="section-title-spaced">Topic Analysis</div>
+          <div className="text-sm text-gray-600">No topic data available yet. Upload a CSV to see analysis.</div>
+        </div>
+      </section>
+    )
+  }
+  
   if (keys.length === 0) {
     return (
       <section className="grid grid-cols-1 lg:grid-cols-2 gap-6">

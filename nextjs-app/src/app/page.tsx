@@ -8,6 +8,7 @@ import InsightsPanel from '@/components/InsightsPanel'
 import EngagementAnalysis from '@/components/EngagementAnalysis'
 import PostingRhythm from '@/components/PostingRhythm'
 import TimingInsights from '@/components/TimingInsights'
+import PostDistributionHeatmap from '@/components/PostDistributionHeatmap'
 import TopPosts from '@/components/TopPosts'
 import PeerComparison from '@/components/PeerComparison'
 import ValueProposition from '@/components/ValueProposition'
@@ -175,8 +176,8 @@ export default function Home() {
           </div>
         )}
 
-        {/* Success State */}
-        {data && !isLoading && (
+        {/* Main Content - Always Show */}
+        {!isLoading && (
           <div id="main-content" className="space-y-6">
             {/* Key Numbers Section */}
             <section className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -213,6 +214,9 @@ export default function Home() {
             {/* Timing Insights */}
             <TimingInsights data={data} />
 
+            {/* Post Distribution Heatmap */}
+            <PostDistributionHeatmap data={data} />
+
             {/* Posting Rhythm & Top Posts */}
             <section className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <PostingRhythm data={data} />
@@ -242,27 +246,6 @@ export default function Home() {
                 </div>
               </div>
             </section>
-          </div>
-        )}
-
-        {/* Empty State */}
-        {!data && !isLoading && !displayError && (
-          <div className="card p-8 text-center">
-            <div className="text-6xl mb-4 emoji-display">📊</div>
-            <h2 className="text-xl font-semibold mb-2">Analyze Your LinkedIn Performance</h2>
-            <p className="text-gray-600 mb-6">
-              Upload your LinkedIn CSV data to get AI-powered insights about your posting patterns, engagement trends, and content performance.
-            </p>
-            
-            <div className="mt-8 text-sm text-gray-500 text-center">
-              <p className="mb-2">Supported features:</p>
-              <ul className="space-y-1 inline-block text-left">
-                <li>• 📈 Engagement analysis and trends</li>
-                <li>• 🎯 AI-powered content insights</li>
-                <li>• 📊 Visual charts and metrics</li>
-                <li>• 💡 Strategic recommendations</li>
-              </ul>
-            </div>
           </div>
         )}
       </div>
