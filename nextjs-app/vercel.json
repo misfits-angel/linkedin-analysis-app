@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "functions": {
+    "src/app/api/**/*.js": {
+      "maxDuration": 60
+    }
+  },
+  "outputDirectory": ".next"
+}
+
