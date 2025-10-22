@@ -1,0 +1,1571 @@
+postUrl,imgUrl,type,postContent,likeCount,commentCount,repostCount,postDate,action,author,authorUrl,profileUrl,timestamp,viewCount,postTimestamp,videoUrl,sharedPostUrl,approximateDate
+https://www.linkedin.com/feed/update/urn:li:activity:7384427152982593536,https://media.licdn.com/dms/image/v2/D5622AQEv82CpuSQTSg/feedshare-shrink_800/B56ZnpiRTUI0Ak-/0/1760559701837?e=1762992000&v=beta&t=Ua0NzxTUE0A2nf4xqH_TxXIDVfyt2mUmcariN5FyGxM,Image,"If you ask today’s LLMs, “Generate me an image with 5 apples and 7 bananas,” there’s no guarantee they’ll get it right — here are examples from Gemini and ChatGPT.
+
+But what if I tell you Synthefy’s time series generative models can adhere to such “hard constraints” with strict guarantees. 
+
+That’s why I’m excited to share our new NeurIPS 2025 paper on constrained time series generation.
+
+In this work, we show how to generate high-quality synthetic time series that satisfy hard real-world constraints. Hard constraints are everywhere – from financial time series to the physical world. Imagine asking:
+“Generate the Tesla stock price for the next month with a volatility of 5%.”
+“Generate the temperature for an oil refinery sensor, ensuring it stays below 120°F.”
+
+Our models make this possible — enforcing constraints while keeping the data realistic and statistically consistent.
+
+If you’re working in finance, engineering, healthcare, or wireless and want to generate or simulate constrained synthetic data, you can use the Synthefy Self-Serve Platform. Apply for access here: https://tally.so/r/meg0Ql.
+
+Huge shoutout to Sai Shankar Narasimhan for leading this — he teaches me something new every week.
+
+The Synthefy team and I will be at NeurIPS (San Diego) this year — DM if you’d like to meet!
+
+📖 Read more:
+Arxiv: https://lnkd.in/gdKxDsjT
+Blog: https://lnkd.in/g2wsWcWm",51,2,4,6d,Avi Aggarwal reposted this,Somi Agarwal,https://www.linkedin.com/in/shubhankar-agarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2025-10-16T11:29:00.000Z,,2025-10-16T00:00:00.000Z,,,16-10-2025
+https://www.linkedin.com/feed/update/urn:li:activity:7382331344309280768,https://media.licdn.com/dms/image/v2/D5622AQG75IAXxKPT3g/feedshare-shrink_800/B56ZnNOlkrIYAg-/0/1760084778386?e=1762992000&v=beta&t=6XsPrjZ3sM8ScVSwy33BTdF0QMMk49aOFLHH6fo2T14,Image,"Building AI Companions? It's running 99% BLIND, Here’s why
+
+
+Traditional product analytics tools e.g. Google Analytics, Amplitude, PostHog, etc were built for clicks, not conversations.
+
+In web or mobile, you can track a user journey:
+Button clicked → Page viewed → Item purchased
+
+But in AI Companion apps?
+Type → Press Enter → Type again
+
+That’s it.
+No events. No funnels. No visibility into why users do what they do.
+
+So when your Product Manager asks:
+1️⃣ Why are users dropping off?
+2️⃣ What features are driving retention?
+3️⃣ How can I increase paying user%?
+4️⃣ Which A/B experiments should I run?
+
+You can’t answer because the signal is buried inside unstructured chat logs and voice transcripts.
+
+The truth: your AI Companion isn’t missing features → it’s missing user understanding.
+
+You need analytics that will decode black box natural language: extracting user insights and mapping to product KPIs for driving business growth.
+
+Question for founders and PMs: How do you make sense of conversational data today?
+
+#AICompanions #AIProducts #LLMAnalytics #ProductManagement #AIAgents #UserInsights #UserAnalytics",4,0,1,1w,Avi Aggarwal reposted this,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2025-10-15T11:29:00.000Z,,2025-10-10T00:00:00.000Z,,,15-10-2025
+https://www.linkedin.com/feed/update/urn:li:activity:7382330630103068673,https://media.licdn.com/dms/image/v2/D5622AQG75IAXxKPT3g/feedshare-shrink_800/B56ZnNOlkrIYAg-/0/1760084778386?e=1762992000&v=beta&t=6XsPrjZ3sM8ScVSwy33BTdF0QMMk49aOFLHH6fo2T14,Image,"Building AI Companions? It's running 99% BLIND, Here’s why
+
+
+Traditional product analytics tools e.g. Google Analytics, Amplitude, PostHog, etc were built for clicks, not conversations.
+
+In web or mobile, you can track a user journey:
+Button clicked → Page viewed → Item purchased
+
+But in AI Companion apps?
+Type → Press Enter → Type again
+
+That’s it.
+No events. No funnels. No visibility into why users do what they do.
+
+So when your Product Manager asks:
+1️⃣ Why are users dropping off?
+2️⃣ What features are driving retention?
+3️⃣ How can I increase paying user%?
+4️⃣ Which A/B experiments should I run?
+
+You can’t answer because the signal is buried inside unstructured chat logs and voice transcripts.
+
+The truth: your AI Companion isn’t missing features → it’s missing user understanding.
+
+You need analytics that will decode black box natural language: extracting user insights and mapping to product KPIs for driving business growth.
+
+Question for founders and PMs: How do you make sense of conversational data today?
+
+#AICompanions #AIProducts #LLMAnalytics #ProductManagement #AIAgents #UserInsights #UserAnalytics",4,0,1,1w,Post,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2025-10-15T11:29:00.000Z,,2025-10-10T00:00:00.000Z,,,15-10-2025
+https://www.linkedin.com/feed/update/urn:li:activity:7381348612301258752,https://media.licdn.com/dms/image/v2/D4D22AQF-wMcnLbdFOg/feedshare-shrink_800/B4DZm_H3.CJcAg-/0/1759848139407?e=1762992000&v=beta&t=7tf6qsicTwbc7_jaj2lx2lfFGwcjqoTgrnRyfvBtCMk,Image,"OpenAI just killed thousands of agent startups? No, it's totally opposite tbh
+
+
+It didn’t kill them, it matured them. Think of it like education 🎓
+
+1/ OpenAI’s Agent Builder is the primary school - it gets everyone started, learning the basics of agentic workflows.
+
+2/But as these builders grow, they’ll “graduate” to the colleges - tools like n8n, Make, etc that power multi-model sophisticated automation.
+
+So yes, there might be fewer hobbyists signing up in the short-term, but they’ll get higher-quality builders, ready to pay and scale.
+
+OpenAI just expanded the top of the funnel and upgraded its quality for agent builder startups.
+
+It just gave them smarter students. 🚀
+
+BTW 'lol' meant 'lots of learnings'
+
+#AIAgents #AgenticWorkflows #AIStartups #Automation #NoCode #ProductGrowth #LLM",13,7,1,2w,Avi Aggarwal reposted this,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2025-10-07T11:29:00.000Z,,2025-10-07T00:00:00.000Z,,,08-10-2025
+https://www.linkedin.com/feed/update/urn:li:activity:7381338096333742080,https://media.licdn.com/dms/image/v2/D4D22AQF-wMcnLbdFOg/feedshare-shrink_800/B4DZm_H3.CJcAg-/0/1759848139407?e=1762992000&v=beta&t=7tf6qsicTwbc7_jaj2lx2lfFGwcjqoTgrnRyfvBtCMk,Image,"OpenAI just killed thousands of agent startups? No, it's totally opposite tbh
+
+
+It didn’t kill them, it matured them. Think of it like education 🎓
+
+1/ OpenAI’s Agent Builder is the primary school - it gets everyone started, learning the basics of agentic workflows.
+
+2/But as these builders grow, they’ll “graduate” to the colleges - tools like n8n, Make, etc that power multi-model sophisticated automation.
+
+So yes, there might be fewer hobbyists signing up in the short-term, but they’ll get higher-quality builders, ready to pay and scale.
+
+OpenAI just expanded the top of the funnel and upgraded its quality for agent builder startups.
+
+It just gave them smarter students. 🚀
+
+BTW 'lol' meant 'lots of learnings'
+
+#AIAgents #AgenticWorkflows #AIStartups #Automation #NoCode #ProductGrowth #LLM",13,7,1,2w,Post,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2025-10-07T11:29:00.000Z,,2025-10-07T00:00:00.000Z,,,08-10-2025
+https://www.linkedin.com/feed/update/urn:li:activity:7378787579896393729,https://media.licdn.com/dms/image/v2/D5622AQEI4ZnfTZB62w/feedshare-shrink_800/B56Zma4MyYHQAg-/0/1759240048791?e=1762992000&v=beta&t=2_EyeKiODNmNBsinOrQf0-KeCRAeQoy2acQc1ANNdXg,Image,"ChatGPT as both Mall and Billboard?
+
+You might have read two isolated headlines:
+🛒 Shopping is becoming native to The Sales Mind
+📢 OpenAI is building in-house advertising team
+ 
+Guess what? 
+They’re deeply connected!
+
+But why?
+Because the shopping funnel is being rebuilt inside the chat interface:
+Discovery → influenced by Ads + prompts
+Consideration → personalized conversations with ChatGPT
+Checkout → one-click, agentic, powered by Stripe
+
+This is the holy grail of digital commerce: ad → conversation → purchase, all without leaving the chat.
+
+Brands and sellers, it's time to think beyond 'click' to 'conversations'
+👉 Start working on GEO to rethink how their products are “indexed” in AI-native environments. Use products like Profound, Peec AI, etc.
+👉 Understand user behaviour in conversations of your platform using tools like Dimension Labs, Botanalytics, etc.
+
+We’re not just talking about AI assistants anymore. We’re talking about the next platform for commerce + advertising, with 700M users already inside the ChatGPT mall.
+
+#AICommerce #AgenticPayments #ConversationalAI #AdTech #DigitalAdvertising #PlatformShift",6,1,1,3w,Post,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2025-09-30T11:29:00.000Z,,2025-09-30T00:00:00.000Z,,,01-10-2025
+https://www.linkedin.com/feed/update/urn:li:activity:7376951064903745536,https://media.licdn.com/dms/image/v2/D5622AQEU5imDMAi0rQ/feedshare-shrink_800/B56ZmAww1AJoAg-/0/1758801892072?e=1762992000&v=beta&t=OmPJv13OvnOwFxiiEDYCSF08KZ0YLWcNrLYE8GmAm_I,Image,"ChatGPT just dropped its official usage report - a tectonic shift is unfolding in how people use it!
+
+Which are the major trends?
+📉 Writing (PINK) has declined sharply (36% → 23%)
+📈 Seeking Information (RED) has surged (18% → 24%), recently overtaking Writing to become the #2 use case of The Sales Mind 
+
+What does this mean?
+Consumers are no longer just writing essays, drafting emails, or brainstorming with ChatGPT. Increasingly, they’re using it like a discovery engine to explore products, ideas, and solutions in a way that’s personalized, contextual, and fluff free.
+
+What that’s a big deal?
+ChatGPT is influencing how users discover products online. Instead of Google, now OpenAI is deciding whether the user will purchase from your website or your competitors'.
+
+How does this impact you?
+👉 Is your brand discoverable in AI-native ways?
+👉👉 When buyers ask ChatGPT does your product show up?
+👉👉👉 Is your website's landing page contextualised for AI referral traffic? 
+
+The ground is moving under digital commerce and SaaS buying decisions. Are online sellers ready for this shift?
+
+👇 Link to the official ChatGPT's report is in comments. Must Read for all online businesses.
+
+#AIProductDiscovery #ConversationalAI #ConsumerBehavior #AIShift",2,3,1,3w,Avi Aggarwal reposted this,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2025-09-30T11:29:00.000Z,,2025-09-25T00:00:00.000Z,,,01-10-2025
+https://www.linkedin.com/feed/update/urn:li:activity:7376949820684435456,https://media.licdn.com/dms/image/v2/D5622AQEU5imDMAi0rQ/feedshare-shrink_800/B56ZmAww1AJoAg-/0/1758801892072?e=1762992000&v=beta&t=OmPJv13OvnOwFxiiEDYCSF08KZ0YLWcNrLYE8GmAm_I,Image,"ChatGPT just dropped its official usage report - a tectonic shift is unfolding in how people use it!
+
+Which are the major trends?
+📉 Writing (PINK) has declined sharply (36% → 23%)
+📈 Seeking Information (RED) has surged (18% → 24%), recently overtaking Writing to become the #2 use case of The Sales Mind 
+
+What does this mean?
+Consumers are no longer just writing essays, drafting emails, or brainstorming with ChatGPT. Increasingly, they’re using it like a discovery engine to explore products, ideas, and solutions in a way that’s personalized, contextual, and fluff free.
+
+What that’s a big deal?
+ChatGPT is influencing how users discover products online. Instead of Google, now OpenAI is deciding whether the user will purchase from your website or your competitors'.
+
+How does this impact you?
+👉 Is your brand discoverable in AI-native ways?
+👉👉 When buyers ask ChatGPT does your product show up?
+👉👉👉 Is your website's landing page contextualised for AI referral traffic? 
+
+The ground is moving under digital commerce and SaaS buying decisions. Are online sellers ready for this shift?
+
+👇 Link to the official ChatGPT's report is in comments. Must Read for all online businesses.
+
+#AIProductDiscovery #ConversationalAI #ConsumerBehavior #AIShift",2,3,1,3w,Post,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2025-09-30T11:29:00.000Z,,2025-09-25T00:00:00.000Z,,,01-10-2025
+https://www.linkedin.com/feed/update/urn:li:activity:7376292029586354176,https://media.licdn.com/dms/image/v2/D5605AQHPiLCGptOyRw/feedshare-thumbnail_720_1280/B56Zl1V9x8HAAw-/0/1758610326699?e=1761717600&v=beta&t=kCmx549Z1GVsCZpCJWKZZTWAWNtsc-mRs4-5mRJUC4s,Video (LinkedIn Source),"gemini just entered the AI browser wars.
+
+i was kinda expecting it.
+
+Google Chrome has been the same for 30 years → open tab → search → scroll → click.
+
+now with gemini built in, that entire workflow is… obsolete.
+
+gemini doesn’t just “show” the web. it acts on it (watch the launch video)
+- reads context on a page
+- fills forms
+- summarizes docs
+- drafts replies
+- navigates sites
+- even chains steps together into full workflows
+
+your browser isn’t just a window anymore.
+it’s becoming an agent.
+
+honestly?
+
+this isn’t about adding convenience features.
+this is about google pumping gasoline in the 'AI browser' wars.
+
+because suddenly, comet (Perplexity), agent (The Sales Mind), arc (The Browser Company), Genspark, Fellou all have to race against time:
+stay an horizontal AI browser… or build for vertical use cases
+
+and for businesses? the real shift is this:
+your website won’t just compete for human clicks anymore.
+it’ll compete for agent interactions, how AI decides to act on your site.
+
+the litmus test?
+if google REALLY wants to leave everyone else in the dust,
+they should make gemini capable of booking train tickets on IRCTC
+
+#AgenticAI #AIBrowsers #BrowserWars #GoogleGemini #ChromeAI #AIAutomation",5,0,1,4w,Avi Aggarwal reposted this,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2025-09-22T11:29:00.000Z,,2025-09-23T00:00:00.000Z,,,24-09-2025
+https://www.linkedin.com/feed/update/urn:li:activity:7376216270465060864,https://media.licdn.com/dms/image/v2/D5605AQHPiLCGptOyRw/feedshare-thumbnail_720_1280/B56Zl1V9x8HAAw-/0/1758610326699?e=1761717600&v=beta&t=kCmx549Z1GVsCZpCJWKZZTWAWNtsc-mRs4-5mRJUC4s,Video (LinkedIn Source),"gemini just entered the AI browser wars.
+
+i was kinda expecting it.
+
+Google Chrome has been the same for 30 years → open tab → search → scroll → click.
+
+now with gemini built in, that entire workflow is… obsolete.
+
+gemini doesn’t just “show” the web. it acts on it (watch the launch video)
+- reads context on a page
+- fills forms
+- summarizes docs
+- drafts replies
+- navigates sites
+- even chains steps together into full workflows
+
+your browser isn’t just a window anymore.
+it’s becoming an agent.
+
+honestly?
+
+this isn’t about adding convenience features.
+this is about google pumping gasoline in the 'AI browser' wars.
+
+because suddenly, comet (Perplexity), agent (The Sales Mind), arc (The Browser Company), Genspark, Fellou all have to race against time:
+stay an horizontal AI browser… or build for vertical use cases
+
+and for businesses? the real shift is this:
+your website won’t just compete for human clicks anymore.
+it’ll compete for agent interactions, how AI decides to act on your site.
+
+the litmus test?
+if google REALLY wants to leave everyone else in the dust,
+they should make gemini capable of booking train tickets on IRCTC
+
+#AgenticAI #AIBrowsers #BrowserWars #GoogleGemini #ChromeAI #AIAutomation",5,0,1,4w,Post,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2025-09-22T11:29:00.000Z,,2025-09-23T00:00:00.000Z,,,24-09-2025
+https://www.linkedin.com/feed/update/urn:li:activity:7374837289652379648,https://media.licdn.com/dms/image/v2/D5622AQFqqdi-7OoykQ/feedshare-shrink_800/B56ZlgzibWJ0Ag-/0/1758265748245?e=1762992000&v=beta&t=lCr_z_NLExQTr30WzUSypzYkjTjcAkLLj0_-gO2Avus,Image,"AI Agents and Fintech just had a baby… it’s named as 'AP2'
+
+
+1️⃣ AI Chatbots solved: Discovery
+2️⃣ Shopping Agents solved: Add to Cart → Checkout
+3️⃣ AP2 solves for the end goal: Purchase
+
+All your tabs, your forms, and your payment flows are getting replaced by one Agentic Browser as you read this article.
+
+🌅 Welcome to the era of AI Commerce
+With Google launching the new Agent Payments Protocol (AP2) - it enables Agentic Browsers (like Comet by Perplexity, Operator Mode by The Sales Mind) to execute the full-funnel journey on behalf of humans:
+
+Discovery → Add to Cart → Checkout → Purchase
+
+AP2 is backed by the biggest logos of fintech industry Adyen, American Express, Ant International, Coinbase, Etsy, Forter, Intuit, Mastercard, Mysten Labs, Revolut, Salesforce, ServiceNow, UnionPay International, Worldpay, and many more.
+
+And it’s not just Google. New startups like Kite recently raised $18M Series A led by PayPal Ventures and General Catalyst to build the rails to make this agentic transactions possible.
+
+🔥 Credit Card moment for Agentic Browsers is here
+
+#AgenticBrowsers #AICommerce #AIAgents #MCP #FutureOfWeb #FutureOfPayments #FintechInnovation #AP2 #DigitalCommerce #OpenProtocols",5,3,1,1mo,Avi Aggarwal reposted this,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2025-09-22T11:29:00.000Z,,2025-09-19T00:00:00.000Z,,,22-09-2025
+https://www.linkedin.com/feed/update/urn:li:activity:7374766738070159360,https://media.licdn.com/dms/image/v2/D5622AQFqqdi-7OoykQ/feedshare-shrink_800/B56ZlgzibWJ0Ag-/0/1758265748245?e=1762992000&v=beta&t=lCr_z_NLExQTr30WzUSypzYkjTjcAkLLj0_-gO2Avus,Image,"AI Agents and Fintech just had a baby… it’s named as 'AP2'
+
+
+1️⃣ AI Chatbots solved: Discovery
+2️⃣ Shopping Agents solved: Add to Cart → Checkout
+3️⃣ AP2 solves for the end goal: Purchase
+
+All your tabs, your forms, and your payment flows are getting replaced by one Agentic Browser as you read this article.
+
+🌅 Welcome to the era of AI Commerce
+With Google launching the new Agent Payments Protocol (AP2) - it enables Agentic Browsers (like Comet by Perplexity, Operator Mode by The Sales Mind) to execute the full-funnel journey on behalf of humans:
+
+Discovery → Add to Cart → Checkout → Purchase
+
+AP2 is backed by the biggest logos of fintech industry Adyen, American Express, Ant International, Coinbase, Etsy, Forter, Intuit, Mastercard, Mysten Labs, Revolut, Salesforce, ServiceNow, UnionPay International, Worldpay, and many more.
+
+And it’s not just Google. New startups like Kite recently raised $18M Series A led by PayPal Ventures and General Catalyst to build the rails to make this agentic transactions possible.
+
+🔥 Credit Card moment for Agentic Browsers is here
+
+#AgenticBrowsers #AICommerce #AIAgents #MCP #FutureOfWeb #FutureOfPayments #FintechInnovation #AP2 #DigitalCommerce #OpenProtocols",5,3,1,1mo,Post,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2025-09-22T11:29:00.000Z,,2025-09-19T00:00:00.000Z,,,22-09-2025
+https://www.linkedin.com/feed/update/urn:li:activity:7374049513843601408,https://media.licdn.com/dms/image/v2/D5622AQH3F3br_7gIZA/feedshare-shrink_800/B56ZlR29Z9HQAk-/0/1758014986438?e=1762992000&v=beta&t=FZ8vkekcgetwa3R9eYnQ3EFtJVGGN7QB0e2evasikqc,Image,"Mid-Week reminder for every founder & PM :- Don’t reinvent the wheel, instead use it to build skateboards, cars and trucks!!
+
+
+👉 Atlassian just acquired The Browser Company for $600M. It’s essentially a wrapper on open-source Chromium
+👉 Cursor, a fork of open-source VS Code, is valued at $10B
+👉 Databricks, now a $100B giant, started as the commercial version of Apache Spark (built by the same founders)
+
+The pattern is clear: Not everything great is built from scratch
+
+Startups win when they know what and how to leverage. Doing so lets you:
+✅ Move faster with fewer resources
+✅ Double down on unique customer value
+✅ Focus energy where it truly differentiates
+
+In 2025, the leverage isn’t in “building everything yourself”
+It’s in finding what to build on top of
+
+#OpenSource #AIStartups #ScalingStartups #LeanStartup #MoveFast #FounderInsights",2,0,0,1mo,Post,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2025-09-22T11:29:00.000Z,,2025-09-17T00:00:00.000Z,,,22-09-2025
+https://www.linkedin.com/feed/update/urn:li:activity:7373349076614119424,https://media.licdn.com/dms/image/v2/D5605AQGtBHn925mXfA/feedshare-thumbnail_720_1280/B56ZlNl044IsA4-/0/1757943395217?e=1761717600&v=beta&t=zQISUN2SWw_zd2lrBvf3iEd7GbyoVdz7Qi37FiXV0k8,Video (LinkedIn Source),"Struggling to find invite for Comet (Agentic Browser by Perplexity)?
+
+Good news: you don’t need to wait anymore! You can start experiencing Agentic Browsers today with Fellou. (download link in comments)
+
+Fellou just launched publicly and it’s not just another The Sales Mind extension for Google Chrome. It’s a browser that thinks and ACTs for you:
+✅ Navigate websites like a human would
+✅ Extract the info you need
+✅ Take actions end-to-end without copy-paste gymnastics
+
+My favorite prompt? 
+👉 Find two pet bloggers with 10k+ followers on Twitter/ Instagram/ YouTube/ TikTok, and send them private messages to ask if they can cooperate in promoting Brand A cat food.
+
+Instead of vanilla ChatGPT style compilation of searches and sprinkle of intelligence, Fellou performs the full workflow itself:
+1️⃣ Discovery
+2️⃣ Perform Actions
+3️⃣ Across Multiple Tabs (Attaching the video so you can see it in action 🔥)
+
+This is the closest thing I’ve seen to what Comet promises and makes other Agentic browsers like Dia (The Browser Company) and Microsoft Copilot look cute 👶 
+
+#AgenticBrowsers #AIAgents #BrowserAutomation #WebAgents #EarlyAdopters #NextBigThing",7,3,0,1mo,Post,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2025-09-22T11:29:00.000Z,,2025-09-15T00:00:00.000Z,,,22-09-2025
+https://www.linkedin.com/feed/update/urn:li:activity:7371888845354631168,https://media.licdn.com/dms/image/v2/D5622AQHCaoVv_sgdlw/feedshare-shrink_800/B56Zk4110oG0Ag-/0/1757595262739?e=1762992000&v=beta&t=oz--88u0-nZDmMVsjUG5StXnwncrCdk0yEQdTRlGPXk,Image,"🚨Most expensive mistake websites gonna commit? 
+
+
+👉 Ignoring the Browser AI Agent traffic (no, I ain't taking about crawlers)
+
+After 10+ years in web and AI, I realised the web is going to completely change with the introduction of web AI agents. If you haven't used browser agents like Comet (Perplexity) or Operator Agent (The Sales Mind), sorry to say but you are still living in the Stone Age.
+
+When you ignore this traffic:
+⚠️ Your site only serves humans, not AI agents → you miss future traffic & interactions
+⚠️ You reinvent the wheel with proprietary APIs → higher cost, lower interoperability
+⚠️ You slow down network effects → fewer consumers use and build on your work
+
+Instead, leverage protocol-first design for the AI Web.
+
+Here’s how:
+1️⃣ Adopt open protocols like NLWeb (Microsoft AI) & MCP (Anthropic))
+– Treat natural language endpoints as core infrastructure
+– Use the same APIs for both humans and AI agents
+– Future-proof your site against agent-driven browsing
+
+2️⃣ Leverage existing semantic layers
+– Use Schema[dot]org and RSS (already on 100M+ websites)
+– Expose structured data (JSON) alongside natural language
+– Reduce friction for agents to interpret your content
+
+3️⃣ Contribute, don’t just consume
+– Share sample implementations with the community
+– Build interoperable endpoints, not walled gardens
+– Treat this like the early Web: barn-raising, not gatekeeping
+
+This is an evolving space, so keep yourself updated to avoid loosing out on this generational behaviour shift.
+
+♻️ Repost to spread the message!
+
+Follow Avi Aggarwal for more",3,0,0,1mo,Post,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2025-09-22T11:29:00.000Z,,2025-09-11T00:00:00.000Z,,,22-09-2025
+https://www.linkedin.com/feed/update/urn:li:activity:7371514371081990144,,Text,"A simple trick to make LLMs more predictable and deterministic (without fine-tuning)
+
+While making the LLM call:
+✔️ Set temperature = 0 → always picks the most likely token
+✔️ Keep top_p = 0.01 (or ≤0.1 if you must use it) → reduces token sampling randomness
+✔️ Combine both → deterministic, repeatable outputs every time
+
+Why it matters:
+✅ Stable outputs (no surprises in downstream pipelines)
+✅ Reliable classifications & extractions
+✅ Easier caching and debugging
+
+Example config:
+response = client[dot]chat[dot]completions[dot]create(
+ model=""gpt-4o-mini"",
+ messages=[{""role"":""user"",""content"":""Classify: 'Refund not received'""}],
+ temperature=0,
+ top_p=1.0
+)
+
+Run this twice, thrice, or a hundred times → you’ll get the same answer. Perfect for enterprise-grade workflows where predictability > creativity.
+
+#LLM #AIagents #PromptEngineering #AgenticAI",6,0,0,1mo,Post,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2025-09-22T11:29:00.000Z,,2025-09-10T00:00:00.000Z,,,22-09-2025
+https://www.linkedin.com/feed/update/urn:li:activity:7371142835120762880,https://media.licdn.com/dms/image/v2/D5622AQGxYOF8ehzSyw/feedshare-shrink_2048_1536/B56ZkaG1igHkA4-/0/1757079624453?e=1762992000&v=beta&t=XBPManl4KylGcN9iqjLQMgLDFHEkXbi1PpVILZb8kjY,Image,"🛠️ How web AI Agents like Comet browser (by Perplexity) actually work? (hint: screenshots)
+
+👴 OLD WAY
+Most browsers were designed to render static documents. They wait for user input: URLs, clicks, scripts.
+
+👶 NEW WAY
+Agentic AI browsers like Comet by Perplexity or Dia and Arc by The Browser Company or takes a different approach: it behaves more like an autonomous agent orchestrator than a traditional client.
+
+Here’s how Comet works under the hood:
+1️⃣ Live Retrieval
+Instead of relying on cached indices, Comet issues real-time HTTP requests, parses DOM structures, and ingests structured/unstructured data (see attached flow diagram).
+2️⃣ Contextual Reasoning
+LLMs interpret retrieved content, grounding outputs in source material while avoiding hallucinations.
+3️⃣ Action Layer
+Beyond retrieval, Comet can act: drafting comparisons, executing workflows, or chaining multi-step tasks via agent calls.
+4️⃣ Feedback Loop
+User prompts refine the reasoning loop—effectively turning the browser into a stateful agent environment, not just a view layer.
+
+From a systems perspective: Comet is closer to a runtime for autonomous information agents than a browser. It blends:
+✅ Retrieval (like a search engine)
+✅ Reasoning (via LLMs)
+✅ Execution (multi-agent task orchestration)
+
+This evolution points to a broader trend: Browsers as programmable AI agents, surfing, reasoning, and executing without requiring users to micromanage every click.
+
+Question for builders: How will we design websites and mobile apps for a world where the browser is no longer just a window?
+
+Question for users: what limitations have you come across while using these AI browsers?
+
+#AutonomousAgents #LLM #FutureOfWeb #AIAgents #RAG #AEO #GEO #SEO",1,2,0,1mo,Post,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2025-09-22T11:29:00.000Z,,2025-09-09T00:00:00.000Z,,,22-09-2025
+https://www.linkedin.com/feed/update/urn:li:activity:7368968582686232578,https://media.licdn.com/dms/image/v2/D5622AQG5iPgy_WPzdw/feedshare-shrink_800/B56ZkPPENpHMA8-/0/1756897232758?e=1762992000&v=beta&t=-UKYf_HTmNTNsJoSLdmrVaumAAPXDeWUcrP34e7THkM,Image,"Which startups are winning the AI Agent tech stack race?
+
+AI Agents are shaping up to be as transformative as cloud computing was 20 years ago. To power autonomous digital workers, a whole new tech stack is emerging. 
+
+CB Insights has broken it down into 6 key layers:
+1️⃣ Foundation Models & Infra
+2️⃣ Agent Frameworks & Dev Platforms
+3️⃣ Tool Integration
+4️⃣ Context & Memory Management
+5️⃣ Orchestration
+6️⃣ Oversight & Governance
+
+Trends to watch:
+📈 Standardization → protocols that decide who becomes the “Amazon Web Services (AWS) of AI Agents”
+📈 Specialization → industry-specific agent solutions beyond generic use cases
+📈 Reliability & Testing → tools to measure & manage stochastic agent behavior
+📈 Regulatory Oversight → governance frameworks shaping adoption
+
+The market is already heating up:
+🌐 Cloud giants (AWS, Microsoft Azure, Google Cloud) expanding across the stack
+🌐 Incumbents like Salesforce & ServiceNow launching agent marketplaces
+
+Which startups do you think were missed out by CB Insights? Comment below 👇 
+
+#AIagents #AgenticAI #FutureOfWork #EnterpriseAI #TechStack #AutonomousAI",2,0,0,1mo,Post,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2025-09-22T11:29:00.000Z,,2025-09-03T00:00:00.000Z,,,22-09-2025
+https://www.linkedin.com/feed/update/urn:li:activity:7368243768401010688,https://media.licdn.com/dms/image/v2/D5622AQExAFO5ut7MBg/feedshare-shrink_800/B56ZkEioaqHQAk-/0/1756717813013?e=1762992000&v=beta&t=qbcC7Pjl06unK8f5QnSSn8Pp7yRuHr2TNon5bDSw7tY,Image,"Using GPT for all LLM tasks in your AI Agentic workflows? Sorry, it's not the optimal solution.
+
+A recent paper from researchers at Microsoft, Walmart Global Tech and SunitechAI tested 16 key scenarios on OpenAI's GPT-4o and DeepSeek AI's V3-0324 to showcase the trade-offs and help the builders of real-world AI applications take better infra decisions.
+
+✂️ TL;DR: For AI Agentic workflows demanding strong logical reasoning, deep customisation, or cost-efficiency, DeepSeek is a powerful, adaptable choice.
+
+Consider DeepSeek as your LLM for:
+
+✅ Logical & Mathematical Reasoning
+DeepSeek's architecture is purpose built for complex reasoning tasks, excelling in logic puzzles, multi-step maths, and scientific problem-solving, often outperforming on benchmarks like MATH and LiveCodeBench.
+
+✅ Cost-Optimised Deployments
+DeepSeek is ideal for budget-conscious, high-volume agent applications for developing markets like APAC, LATAM, and Africa. Because it achieves high performance at a fraction of GPT-4's training cost (estimated $5-6 million vs. over $100 million for GPT-4).
+
+✅  Highly Customised Agents
+With its open weights and MIT license, DeepSeek offers unparalleled fine-tuning flexibility (LoRA, QLoRA) on consumer hardware. This is perfect for deeply tailoring agents to specific domains or proprietary data.
+
+✅ Research & Reproducibility
+Its open-weight philosophy allows researchers to inspect components, test hypotheses, and replicate results, a transparency often absent in closed-source models.
+
+Also, This paper explores LLM applications across below mentioned domains, highlighting which model attributes are best suited for each use case.
+📱 Chatbots
+🤖 Coding tools
+💊 Healthcare
+🎒 Education
+
+👉 Link to Research Paper is in comments.
+
+Let's exchange notes on which other LLM models are you using?
+
+#LLMs #DeepSeek #AI #AgenticWorkflows #OpenSourceAI #AIAgents #AgenticAI #AIChatbots #AIResearch #AIAutomation #WorkflowAutomation #GenAI #GenerativeAI",13,4,0,1mo,Post,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2025-09-22T11:29:00.000Z,,2025-09-01T00:00:00.000Z,,,22-09-2025
+https://www.linkedin.com/feed/update/urn:li:activity:7366794254913839104,https://media.licdn.com/dms/image/v2/D5622AQHpeHKhZGUHcg/feedshare-shrink_800/B56ZjtB52THcAk-/0/1756323357502?e=1762992000&v=beta&t=cdB9As0DM7ddMgT6a8wJMVPwGid0lFei-ZorlMK0p0Y,Image,"🛠️ Learn to Build Your Own AI Agent in Just 2 hrs - FREE Webinar but LIMITED Seats 🚨 
+
+What’s in for you?
+✅ See a LIVE demo of CrewAI - automate workflows, deploy agent teams, and streamline operations without advanced coding
+✅ Understand how CrewAI stacks up against other frameworks like LangChain, AutogenAI, etc
+✅ Explore real-world case studies from marketing, finance, support, compliance & more
+✅ Join a LIVE Q&A and get tailored advice for your AI project ideas
+
+Who should attend?
+👥 Founders building in the AI space
+👥 Devs and Product Managers creating AI agents
+
+When is the webinar?
+📝 Sun - Aug 31 - 10 AM - India Time
+
+Want the enrolment link?
+1️⃣ Like + Comment 'AI Agent'
+2️⃣ I will DM you the link
+
+Only a few slots left 🔥 
+
+#AIAgents #MultiAgentSystems #Automation #GenerativeAI #Webinar #LiveDemo #Workshop #SkillUp #LearnAI #AgenticAI #CrewAI #NoCodeAI #AIForBusiness",6,5,0,1mo,Post,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2025-09-22T11:29:00.000Z,,2025-08-28T00:00:00.000Z,,,22-09-2025
+https://www.linkedin.com/feed/update/urn:li:activity:7366431866180075522,https://media.licdn.com/dms/image/v2/D5622AQHjWnQ4i4igew/feedshare-shrink_800/B56ZjgKqd7IAAg-/0/1756107554554?e=1762992000&v=beta&t=Zt4L8g8AFemUxhyEWYfgU-Ru3NxC04dR0QvrNx4RW0g,Image,"🚨 I automated outreach to profiles liking and commenting on my LinkedIn posts 🚨
+
+The Problem Today:
+⚠️ Engagement ≠ pipeline → LinkedIn likes/comments often just sit there with no follow-up
+⚠️ Manual data entry → Turning post engagement into usable CRM contacts takes hours (copying names, finding emails, verifying, etc.)
+⚠️ Missed timing → By the time a marketer or SDR reaches out, the “intent signal” from the engagement is cold
+⚠️ Fragmented outreach → Cold emails, LinkedIn invites, and CRM entries usually happen in silos, leading to broken sequences and lost opportunities
+
+I have been running a workflow that solves exactly this: 
+1️⃣ Scrape profiles of like & comment
+2️⃣ Enrich contact data
+3️⃣ Launch personalized emails
+4️⃣ Send LinkedIn invites
+5️⃣ Hubspot CRM sync
+
+The crazy part? It all happens automatically. 🚀
+
+Want access to the guide + n8n template?
+👍  Like this post + Comment ""AI Marketing""
+♻️  Repost for priority access
+
+I will send it directly to your inbox :)
+
+#Automation #Workflow #AIinMarketing #ContentCreator #SocialMediaMarketing #MarketingAutomation #DigitalMarketing",4,1,0,1mo,Post,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2025-09-22T11:29:00.000Z,,2025-08-27T00:00:00.000Z,,,22-09-2025
+https://www.linkedin.com/feed/update/urn:li:activity:7366069473671303169,https://media.licdn.com/dms/image/v2/D5622AQHVOK4MyA0Ujg/feedshare-shrink_800/B56Zin1dkEH0Ag-/0/1755162467271?e=1762992000&v=beta&t=BztCDHUDRlUdrqTGry9VOqt1A69Nlh3BsHmXfe8XccU,Image,"🚨 AI models think Adidas logo has 3 stripes and that's a scary flaw 🚨
+
+Fascinating new research reveals that Visual Language Models (VLMs) from Google DeepMind, Anthropic, and OpenAI are perfect at recognizing common visuals, but fail miserably when those patterns change aka counterfactuals.
+
+✅ 100% accuracy for common visuals:
+Zebra → 4 legs
+adidas logo → 3 stripes
+
+❌ 17% accuracy for counterfactuals:
+Mutated Zebra → 5 legs
+adidas-like logo → 4 stripes
+
+The takeaway?
+This means AI isn’t truly seeing; it’s recalling what it “knows” from training data.
+
+This has big implications for marketers:
+⚠️ Brand safety: AI-powered brand detection in ads or user-generated content may miss counterfeits, altered logos, or spoofed creative.
+⚠️ Creative analysis: Campaign testing tools using VLMs might misinterpret visual elements if they deviate from “standard” patterns.
+⚠️ Market research: Visual sentiment or competitor analysis could be skewed as it combines visual reasoning with pattern recognition
+
+As AI becomes embedded in marketing workflows, the next wave of VLM innovation will need to focus less on “what’s familiar” and more on what’s actually there.
+
+The big opportunity: Partner with AI marketing vendors who are actively evaluating and training for counterfactual accuracy.
+
+Want the link to the research report and sample prompts?
+📱 Comment “AI Marketing”
+♻️ Repost for priority access
+
+#AIMarketing #VisualLanguageModels #AIBias #AIFacts #AIForMarketers #GenerativeAI #AdTech #MarketingTrends #DataDrivenMarketing #AIInsights #ArtificialIntelligence",4,0,0,1mo,Post,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2025-09-22T11:29:00.000Z,,2025-08-26T00:00:00.000Z,,,22-09-2025
+https://www.linkedin.com/feed/update/urn:li:activity:7364257491544674304,https://media.licdn.com/dms/image/v2/D5605AQH3e2bVpndrRQ/feedshare-thumbnail_720_1280/B56ZjCG1S1G0A0-/0/1755603232484?e=1761717600&v=beta&t=yTEpQdu9YCzVVc8vTb8aNfS317dKLsHlfm89ZNnkmts,Video (LinkedIn Source),"🚨 I made this Video Ad for Monster Energy WITHOUT an Animation team🚨
+
+Traditional cost? $2000. My cost? Under $10
+Thanks to Kling AI and Google Gemini
+
+Most D2C FMCG brands are sleeping on this
+
+👇 Want my exact prompt (the same one I used for this ad)?
+
+Comment “AI Marketing” and I’ll DM you my prompt file, so you can make your own high-quality realistic animation ads for D2C FMCG brands, fast.
+
+The future of creative marketing is here and it's the only edge you have when AI automates everything in Campaign management.
+
+Follow Avi Aggarwal for more AI insights.",4,2,0,2mo,Post,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2025-08-23T11:29:00.000Z,,2025-08-21T00:00:00.000Z,blob:https://www.linkedin.com/169322d6-25d3-4c00-8e58-cab6f4e88fc3,,23-08-2025
+https://www.linkedin.com/feed/update/urn:li:activity:7363532819895078913,https://media.licdn.com/dms/image/v2/D5622AQHfzwERY6XxOQ/feedshare-shrink_800/B56ZjB_UwPHQAg-/0/1755601262235?e=1762992000&v=beta&t=s8A2B8kczRGVsVCvSSCTD8-kV_LKLDiu56iEm3D1voI,Image,"Breaking: OpenAI has launched ChatGPT Go plan ONLY in India, for just ₹399/month (<$5) 🇮🇳
+
+And the real game-changer? You can pay via UPI. 🙌
+
+This comes shortly after Perplexity bundled their Pro subscription for 1 year FREE with airtel Thanks plan. It's your turn Google Gemini now!!
+
+For years, subscribing to global B2C SaaS tools for India has been a nightmare:
+⚠️ Credit cards getting declined randomly
+⚠️ No GST claim
+⚠️ Overpriced compared to global PPP
+
+ChatGPT isn't just cheaper, it is fully value for money:
+✅ Access to GPT-5
+✅ 10x more message limits
+✅ 10x more image generations/day
+✅ 10x more file or image uploads/day
+✅ 2x longer memory for personalized responses
+
+If AI companies want to reach the next BILLION users, they’ll have to adapt to local payment rails + local price sensitivities.
+
+Think about it:
+Netflix cracked India with a ₹199 mobile plan.
+Uber won users by adding 'cash'
+Apple sold us iPhones by creating the 'SE' variants
+
+And yes, it’s so cheap that people in Valley are probably firing up VPNs right now just to pretend they’re in India. 😅
+
+#ChatGPT #AIAdoption #AIAccessibility #AIForAll #GenerativeAI #AIFuture #ProductStrategy #TechAccessibility #UPI #DigitalIndia #Localisation #EmergingMarkets #IndiaFirst #BharatTech",8,0,0,2mo,Post,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2025-08-23T11:29:00.000Z,,2025-08-19T00:00:00.000Z,,,23-08-2025
+https://www.linkedin.com/feed/update/urn:li:activity:7361396243136212992,https://media.licdn.com/dms/image/v2/D5622AQGAf3oRzBjtYw/feedshare-shrink_800/B56ZiJvBK4G0Ak-/0/1754657461994?e=1762992000&v=beta&t=yzW0oSiGu4qnZ6ohDdS1Wza7qWWOmXHyHAadFo6gEss,Image,"🚨 I Used to Spend 30+hrs Every Week to Create Viral Short Videos But Not Anymore 🚨
+
+Are you also tired of the endless loop of manually finding and repurposing viral videos for every single social media platform?
+
+There's an autonomous workflow that automates the entire process, so you can focus on creativity, not manual labor.
+
+Here’s how it works: 👇 
+
+✅ TRIGGER: Send a single TikTok link to a Telegram Messenger bot.
+
+✅ ANALYSIS: The workflow downloads the video, transcribes the audio, and uses AI (Perplexity & GPT-4o) to rewrite the script and caption, giving you a fresh take in the same viral niche.
+
+✅ CREATION: It then generates a brand-new video with your custom AI avatar using Captions.ai and adds subtitles and overlay text.
+
+✅ DISTRIBUTION: The final video is automatically published to 9 platforms: TikTok, Instagram, YouTube, etc
+
+Say goodbye to manual uploads and hello to multi-platform scale! 📈 
+
+Want access to the guide + template?
+
+1️⃣ React to this post + Comment ""AI Marketing""
+2️⃣ Repost ♻ for priority access
+
+I will send it directly to your inbox :)
+
+#Automation #Workflow #AIinMarketing #ContentCreator #SocialMediaMarketing #ViralContent #Martech #ShortFormVideo #AIAgents",13,7,1,2mo,Post,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2025-08-23T11:29:00.000Z,,2025-08-13T00:00:00.000Z,,,23-08-2025
+https://www.linkedin.com/feed/update/urn:li:activity:7360671410911895553,https://media.licdn.com/dms/image/v2/D5605AQHT5xGfwOBQEQ/feedshare-thumbnail_720_1280/B56ZiJmPKvHMA4-/0/1754655161180?e=1761717600&v=beta&t=gKhR15HsRy3sIuY1DQPAP8vzG1k7RE9EXO_spx9dAdQ,Video (LinkedIn Source),"🚨I Created this Video Ad for D2C Brand with NO Animation Team🚨
+
+Normal agency cost? $2000 💸
+My cost? $10 🏷️
+
+But most D2C brands are still punching holes in their wallet
+
+👇 Want the exact AI prompts + inputs I used to make this ad?
+
+⌨️ Comment “AI Marketing” and I’ll DM you the file so your D2C Brand can also create realistic, studio-quality animation ads in record time.
+
+♻️ Repost for Priority access.
+
+The future of creative marketing is already here and it’s your biggest edge when AI takes over performance marketing ⚡
+
+➕ Follow Avi Aggarwal for more 'AI marketing' hacks!
+
+#AIMarketing #D2C #EcommerceMarketing #VideoAds #AIAgent #CreativeAutomation #MarketingHacks #FutureOfMarketing #MarTech",5,5,0,2mo,Post,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2025-08-23T11:29:00.000Z,,2025-08-11T00:00:00.000Z,blob:https://www.linkedin.com/8437a03e-98ea-45ea-b3ff-81ef711b681a,,23-08-2025
+https://www.linkedin.com/feed/update/urn:li:activity:7359221863807401985,https://media.licdn.com/dms/image/v2/D5622AQET9Lc6LSmXpg/feedshare-shrink_800/B56Zh_AUBPH0Ag-/0/1754477475462?e=1762992000&v=beta&t=NxwOsy310BpTAMeNKNn5MvdhLO1rPe1L7q5yjS35g0I,Image,"Let me be honest. Please don’t use AI to generate Ads. 🚫 📣
+
+I am Founder of an AI marketing company, and I am telling you this. Hear me out:
+
+1️⃣ Marketing teams have spent decades perfecting ad-creative strategies for different channels. They know what resonates and what flops. It's an art as much as it is a science.
+
+2️⃣ Most online data about “best ad practices” is junk. Everyone's a self-proclaimed expert these days, but real expertise is rare. A lot of what you read is just noise.
+
+3️⃣ And that junk is what most LLMs are trained on. If you train a model on garbage, well, you know the saying—garbage in, garbage out.
+
+What you really want is to replicate how a great marketer would create ads. You want that spark of creativity, that unique touch that catches the eye and holds the attention 👩‍🎨 🎨
+
+But here’s the challenge:
+
+⚠️ There’s little online data on how top marketers craft ads. The real secrets, the winning formulas, aren’t posted on blogs or shared in forums. They’re the hard-won insights of seasoned pros.
+
+⚠️ Writing effective prompts for ad generation takes years of experience. It’s not just about the words you use; it’s about understanding the audience, the medium, the moment.
+
+The worst part? The internet is being flooded with mediocre AI-generated Ads, which models are then retrained on, making the problem even bigger. It's a vicious cycle of mediocrity threatening to drown out genuine creativity 📉🔻
+
+💡Use AI wisely, like how Dove came up with this brilliant Ad (attached) that won the Cannes Lions International Festival of Creativity - Media Grand Prix for championing 'Real Beauty' in the Age of AI.
+
+♻️ Pin this to your memo board and share with other marketing colleagues.
+
+#MarketingStrategy #DigitalMarketing #AdvertisingTips #AIinMarketing #AdCreative #MarketingTech #FutureOfAdvertising #Martech #AIagent #AgenticAI",12,0,0,2mo,Post,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2025-08-23T11:29:00.000Z,,2025-08-07T00:00:00.000Z,,,23-08-2025
+https://www.linkedin.com/feed/update/urn:li:activity:7358497115154649090,https://media.licdn.com/dms/image/v2/D5622AQGZeOV6Hzg3IA/feedshare-shrink_800/B56Zh2ZTX7HUAg-/0/1754333002891?e=1762992000&v=beta&t=Z0_pnnDJhR6LX7cwUYWvfFYEj0IoSMCd3I_TelbTldA,Image,"This AI Agent Wakes up at 7 am Every Monday 🌅 So You Don’t Have To 🤖 
+
+Imagine starting every Monday with a crisp AI-generated performance marketing detailed report comparing this week’s ad performance with the same period last year, without lifting a finger. ✨
+
+There's a n8n automated workflow that does exactly that:
+✅ Pulls data from Google Analytics, Google Ads & Meta Ads
+✅ Compares last 7 days vs. same time last year
+✅ AI prepares a clean table + summary insights
+✅ Sends a detailed report via email
+✅ Also shoots a bite-sized version to Telegram for on-the-go consumption
+
+All of this kicks off every Monday at 7 am (or at a time of your choice) like clockwork ⏰ 
+
+What's even better?
+1️⃣ It's FREE
+2️⃣ Built WITHOUT any coding
+3️⃣ Can be set up in less than 10 minutes (simply copy paste the workflow)
+4️⃣ Perfect for beginners who want to build their first agent!
+
+Want access to the guide + template?
+👍 Comment ""AI Marketing""
+♻️ Repost for priority access
+
+I will send it directly to your inbox. 📬 Help busy marketers discover this 😉
+
+#DigitalMarketing #AI #MarketingAutomation #Productivity #Automation #chatGPT #MarTech #PerformanceMarketing #AIagents #gemini #hack",9,2,1,2mo,Post,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2025-08-23T11:29:00.000Z,,2025-08-05T00:00:00.000Z,,,23-08-2025
+https://www.linkedin.com/feed/update/urn:li:activity:7356685092179636224,https://media.licdn.com/dms/image/v2/D5622AQGOyNoYLc1cMw/feedshare-shrink_800/B56ZhcfWyTHkA0-/0/1753898381264?e=1762992000&v=beta&t=SSi6LoKaUDz5Q2lUj8oIoT7LV2wOshenUzjD4H5SFiQ,Image,"Over the next few weeks I will be covering the most powerful AI-first startups in marketing space.
+
+The first one is Creatify AI by Yinan (Steven) Na!!
+
+What caught my attention (apart from 4.4⭐ on G2 across 300+ reviews):
+💰 $15.5M Series A co-led by WndrCo and Kindred Ventures, bringing total funding to $23M
+📈 $9M ARR in just 18 months from 1.5M+ users including major brands like Alibaba Group, Binance and Lion Studios, a Tripledot Studio
+🤖 New AdMax AI campaign agent that autonomously creates, tests, and optimizes video ads
+
+Pros (based on product pitch) ✅ 
+⚡ Speed & Efficiency: Generate stunning UGC or product videos from a simple URL in minutes, not weeks, saving up to 97% of production time.
+👜 Cost-Effective: Achieve up to 90% lower production costs compared to traditional methods.
+🚴‍♀️ Performance Boost: Experience a remarkable 2.7x increase in leads and 1.7x higher ROI, with agencies seeing up to 3x ROI.
+
+Cons (based on public reviews) ⁉️ 
+👶 Limited Advanced Editing: Some users desire finer control over transitions, multi-track audio, and animation timing.
+💹 Credit System Concerns: The credit system can add up quickly for high-volume users, leading to desires for more flexible pricing.
+🪲 Occasional Glitches: A few reports of slow rendering times or minor glitches have been noted.
+
+Takeaway:
+It can be a game-changer for marketers to create social ads fast and cheap, freeing up crucial time to invest in strategising of bespoke campaigns.
+
+Have you tried Creatify? I would love to hear your reviews.
+
+#AIinMarketing #VideoAds #DigitalMarketing #PerformanceMarketing #MarTech #MarketingTools #AIAgents #VideoMarketing",4,0,0,2mo,Post,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2025-08-23T11:29:00.000Z,,2025-07-31T00:00:00.000Z,,,23-08-2025
+https://www.linkedin.com/feed/update/urn:li:activity:7354148396712013825,https://media.licdn.com/dms/image/v2/D5622AQEn6nPm8gdU9w/feedshare-shrink_800/B56Zg8OrvbH0Ak-/0/1753357139375?e=1762992000&v=beta&t=1MNOhRFdpN9G0p06tr4MSsLNSABSjsTNgSN7O8MTgfQ,Image,"Where are Top Advertisers Shifting Their Budgets to? 🤔 💰 
+
+According to the recently out Liftoff Mobile’s 2025 Mobile Ad Creative Index (link in comments):
+
+📈 Playable ads deliver up to massive 16x higher conversion rates than non-Playable formats.
+🕹️ Top gaming advertisers spent 35% more on Playables, as they get 8x higher ITI (impression to install) rates than non-Playable ads
+💵 Liftoff recorded a 20% YoY growth in Interactive ad spend among top advertisers
+
+It’s clear: Interactivity drives performance 🏎️ 💨 
+
+At ArcPlay.ai, we’re betting big on this shift by distributing Playables beyond games, into mainstream consumer apps. The future of mobile advertising is engaging, opt-in and fun 🎮 
+
+Let’s talk if you're building for this future 🤙 
+
+#PlayableAds #AdTech #MobileMarketing #ArcPlay #UserAcquisition #GrowthMarketing #ConsumerApps #GamingIndustry #Liftoff #PerformanceMarketing",8,2,0,2mo,Post,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2025-08-23T11:29:00.000Z,,2025-07-24T00:00:00.000Z,,,23-08-2025
+https://www.linkedin.com/feed/update/urn:li:activity:7353423581650804736,,Text,"🔮 The future of Mobile UA is here - it's Agentic 🤖 & Interactive 🎮
+
+Sett.ai has just opened its Early Access Program, and if you're in mobile gaming or app space, this is the update you can't afford to ignore.
+
+For years, gaming UA teams have struggled with:
+❌ High costs of Playable creative production
+⏳ Slow turnaround times
+🧠 Heavy manual input with limited scalability
+
+That ends now.
+
+Sett is the first agentic platform built to automate the creation, testing, and iteration of Playable Ads at scale - no templates, no repetitive concepts - just original, high-performing creative produced faster than ever. Kudos to Amit and team.
+
+The impact?
+💰 Drastically reduced creative costs
+⚡ Rapid experimentation and optimization
+🎯 Better performance with fewer resources
+
+This is a game-changer for game and app studios spending hundreds of thousands on Playables annually. Imagine scaling your winning ads 10x faster and at 20x less cost.
+
+👉 Early access is live. To sign-up check the link in Akin's post.
+
+🤔 Wait....now that you are able to create Playable ads in volume, how would you distribute it?
+
+🦸‍♂️ Don't worry!! ArcPlay is building the next-gen distribution channel for Playable ads. Stay tuned for more ;)
+
+#MobileGaming #PlayableAds #CreativeAutomation #UserAcquisition #AdTech #GamingMarketing #AgenticAI #PerformanceMarketing #SettAI #GameGrowth #EarlyAccess #AIforGames",5,1,0,2mo,Post,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2025-08-23T11:29:00.000Z,,2025-07-22T00:00:00.000Z,,https://www.linkedin.com/feed/update/urn:li:activity:7353087630751748100/,23-08-2025
+https://www.linkedin.com/feed/update/urn:li:activity:7350886964570546179,https://media.licdn.com/dms/image/v2/D5622AQHWVoV45rnI0A/feedshare-shrink_800/B56ZfzRWN1HYAg-/0/1752133100885?e=1762992000&v=beta&t=nR1QCo5Za3wDzIrJmcPJkYBzGAZ6wwFidydk3c84z2w,Image,"📞 Truecaller just launched ‘Truecaller Play’ - it’s a signal for the future of performance ads in consumer apps📱
+
+With over 5 billion daily brand impressions and 10,000+ advertisers, Truecaller Ads is already a serious player. But with the launch of Truecaller Play, they’re stepping into the next era (link to afaqs! article in comments):
+
+📹 Video and interactive, high-engagement ad formats natively built into the natural app experience.
+
+Until now, interactive ad innovation was largely dominated by gaming. With GenAI solving the production of Video and Interactive ad creatives, this move shows how non-gaming platforms are now building immersive ad inventories that drive real performance.
+
+Why this matters:
+🔐 Powered by first-party data
+📍 Delivered at high-attention moments
+🧩 Designed to seamlessly blend into the app UX
+🎯 Backed by in-house creative support and targeting tools
+
+🦸‍♂️ As Hemant Arora (VP Global Ad Sales Business - Truecaller) puts it: ""It’s about placing your story exactly where attention is highest and distractions are lowest.""
+
+🌈 We’re watching a shift unfold where consumer apps across the spectrum are becoming the new battleground for high-conversion, performance-focused ads that create value for both advertisers and users.
+
+🤔 How is your consumer app tapping into the performance advertising dollars?
+
+#TruecallerPlay #AdTech #PerformanceMarketing #PlayableAds #MobileAdvertising #RichMedia #UserEngagement #FirstPartyData #BrandExperience #DigitalMarketing #ArcPlay #InteractiveAds #NonGamingApps #UtilityApps #TruecallerAds #GenAI",14,1,0,3mo,Post,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2025-07-24T11:29:00.000Z,,2025-07-15T00:00:00.000Z,,,24-07-2025
+https://www.linkedin.com/feed/update/urn:li:activity:7349074926672203777,https://media.licdn.com/dms/image/v2/D5622AQHDX9J99dTd7A/feedshare-shrink_800/B56ZfzemjiGoAk-/0/1752136577061?e=1762992000&v=beta&t=zBfwyCivp2gFwNganRtILl6kkIkn2UoBx3ZwFugXx-I,Image,"🚨 OpenAI launching its own browser in a few weeks - it’s a shot across the bow for the entire digital advertising industry 💰📣
+
+Why this is a huge deal (Reuters link in comments):
+1️⃣ Google Chrome powers ~66% of the world’s web browsing and is a critical data engine for Google's $200B+ ad business
+2️⃣ OpenAI’s new browser is expected to keep users within a ChatGPT-like interface, changing how we discover and interact with the web
+3️⃣ With 500M weekly ChatGPT users, OpenAI could quickly gain serious traction and valuable data
+4️⃣ It’s built on Chromium, Google’s open-source codebase the same one Chrome is built on.
+5️⃣ Plus, it integrates AI agents (like Operator) that can take actions for users: booking tickets, filling forms, and more right from within the browser.
+
+👀 Fun fact: OpenAI has already hired ex-Google VPs from the original Chrome team. And yes, they had even considered buying Chrome if Google was forced to sell.
+
+Why It’s a Game-Changer for Digital Advertising:
+🛣️ Full user journey control: 
+OpenAI’s browser keeps users within a ChatGPT-style experience, reducing reliance on 3P websites
+🗣️ Shift from search to conversation: 
+Discovery moves from typing into a box to chatting with an assistant, redefining brand strategies.
+⚡ Faster funnel: 
+AI-powered interactions mean users skip steps, shortening the path from awareness to conversion.
+🛍️ New ad formats: 
+AI agents embedded in the browser can book, buy, or recommend, ads become actions, not just banners or videos.
+
+🌅 This marks the start of a new ad economy: AI-native, performance-first, and radically personalized. 
+
+⁉️ Are you (Advertiser, Publisher or AdTech) prepared for this tectonic shift?
+
+#AdTech #OpenAI #ChatGPT #DigitalAdvertising #AIAds #MarTech #FutureOfSearch #MediaBuying #Programmatic #Web3 #BrowserWars #DigitalMarketing",8,3,0,3mo,Post,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2025-07-24T11:29:00.000Z,,2025-07-10T00:00:00.000Z,,,24-07-2025
+https://www.linkedin.com/feed/update/urn:li:activity:7348350219303993345,https://media.licdn.com/dms/image/v2/D5622AQFxtzghrtf8Mw/feedshare-shrink_800/B56ZflABcDGoAk-/0/1751893678743?e=1762992000&v=beta&t=GxlKwiQhBvjJVqY6JgsdnbIBoIjJKDi_TUDtqyKbTv4,Image,"🚕 Wanna run your Ads on Uber audience? It just got super easy 🙌
+
+Last week, Uber unlocked its ad inventory via Google DV360, The Trade Desk, and Yahoo DSP and while it may have gotten buried in the Cannes Lions International Festival of Creativity buzz, this move is a watershed moment for retail and commerce media. (Thanks Matthew Newcomb for posting about this)
+
+At first glance, it’s another RMN scaling access. But in reality, it signals a strategic shift. 🫨 
+
+Uber’s pitch? High performance, now at scale:
+📈 3%+ CTR
+⏱️ 100+ seconds average global view time
+💡 80% of users say ads caught their attention
+
+And it’s not just Uber making moves:
+🚗 Lyft has added video ads and enhanced targeting
+🛒 Instacart just received Media Ratings Council accreditation for 3 ad formats
+
+As programmatic dollars flow in, RMNs will shift from walled gardens to interoperable ecosystems, prioritizing new, high-impact ad inventory  in apps, in stores, in transit to capture a larger share of media budgets. 💰 
+
+This is commerce media evolving from owned and operated, to open and optimized.⚡
+
+#UberAds #RetailMedia #CommerceMedia #ProgrammaticAdvertising #TheTradeDesk #DV360 #AdTech #RMN #DigitalAdvertising #MediaBuying #OpenEcosystem #CannesLions #ArcPlay",64,0,0,3mo,Post,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2025-07-24T11:29:00.000Z,,2025-07-08T00:00:00.000Z,,,24-07-2025
+https://www.linkedin.com/feed/update/urn:li:activity:7346844163323138049,https://media.licdn.com/dms/image/v2/D5622AQEz-Tf__otINg/feedshare-shrink_800/B56ZfUjU43G0Ak-/0/1751617720661?e=1762992000&v=beta&t=b-gRAKXTGG9H_7vMZvOnxjHGfhTd6p2ST52cyeHJHTg,Image,"[This Week’s GVP Feature: ArcPlay]
+ArcPlay is bringing playable ads to the rest of the internet, 
+news apps, finance apps, any app with a screen.
+
+Users play short, interactive games to unlock features.
+App owners triple their revenue.
+Advertisers get real attention, not skipped videos.
+
+📊 Early Traction:
+- $20K ARR, bootstrapped
+- 3 live clients (Josh, Josh Lite, Yatri)
+- 3x higher click-through
+- 3x more revenue per ad
+- Twice as many ads shown without annoying users
+
+The SDK is light. The tech adapts to each user.
+And the infrastructure finally exists to scale this beyond gaming.
+
+☑️ Founders know what they do. 
+They’ve built and exited before.
+Adtech. Consumer apps. Platforms with 150M+ users.
+They know both sides of the table what users want and what advertisers need.
+
+We featured ArcPlay in this week’s Global Venture Play,
+our weekly newsletter curating one Indian AI startup.
+
+If you want the full deck or a warm intro, just DM me.
+Like I always said, best ones don’t stay open long.
+
+📌 Big thanks to Avi Aggarwal & ArcPlay for sharing!",69,45,4,3mo,Avi Aggarwal reposted this,Jay Lee,https://www.linkedin.com/in/globalventureplay,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2025-07-24T11:29:00.000Z,,2025-07-04T00:00:00.000Z,,,24-07-2025
+https://www.linkedin.com/feed/update/urn:li:activity:7346611597693370371,https://media.licdn.com/dms/image/v2/D5622AQF4TDOKhQcIyA/feedshare-shrink_800/B56ZfRoT.TGoAk-/0/1751568697038?e=1762992000&v=beta&t=faBkXwUms8Hwu2NjBqVPP4PDggsFfK5vXUvpsFasXU0,Image,"🕹️ 💰 Is Play2Earn (P2E) on the cusp of a major comeback? 🌋 
+
+Two recent events have caught my eye, suggesting a shift in how ""earning"" is integrating with ""playing"": ✨
+
+1️⃣ GetZoot, co-founded by gaming veteran Sean Ryan, raised $6M from Griffin and CoinFund to build a free-to-play gaming platform infused with sweepstakes prize mechanics, a clever way to drive engagement without stepping into murky regulatory waters.
+
+2️⃣ Plutus Labs, co-founded by Karata Dasmahapatra, backed by a16z speedrun and Konvoy, seems to have pivoted from influencer-led prediction markets to a Play-to-Earn model tailored for GenZ.
+
+These aren't your typical blockchain-heavy P2E games. They seem to be focused on:
+📱 Accessibility: Hyper-casual, free-to-play.
+⚡ Instant Gratification: Instant payouts, quick matches. 
+✅ Regulated/Clear Value: Real money, sweepstakes, compliant markets. 
+
+🌊 Could this be the next wave of P2E!!
+one that's less about Web3 mechanics and more about engaging, skill-based, or chance-based earning within familiar gaming formats 🤔
+
+💭 What are your thoughts on this trend? Are we seeing a mainstreaming of earning through play? 
+
+P.S: At ArcPlay, we're inspired by this evolution and taking it one step further. We're bringing Play-to-Earn to advertising by reimagining Playable Ads. DM me to learn more. 😉 
+
+#Play2Earn #P2E #Gaming #HyperCasual #PredictionMarkets #Sweepstakes #VC #StartupFunding #Innovation #Monetization #AdTech #GamingStartups #ConsumerApps #GenZGaming #MobileGaming",9,0,0,3mo,Post,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2025-07-24T11:29:00.000Z,,2025-07-04T00:00:00.000Z,,,24-07-2025
+https://www.linkedin.com/feed/update/urn:li:activity:7345813442227814400,https://media.licdn.com/dms/image/v2/D5622AQFj4ng6RJ_XKQ/feedshare-shrink_800/B56ZfE4WxcGQAg-/0/1751354799842?e=1762992000&v=beta&t=X-DamhiO-YsDa-fV5eBCr6fNGiCHBiq45ValGepjt3I,Image,"🤖 AI Search Is Hurting Websites, But a New Monetization Hero Emerges 🦸‍♂️ 
+
+With AI-powered search reducing traffic to publisher websites and 95% of users unwilling to pay for subscriptions, Google For Publishers just launched Offerwall (Beta), giving web publishers new tools to monetize without relying solely on clicks. (TechCrunch link in comments)
+
+📦 What’s inside? Offerwall gives users flexible access options like:
+1. Watch-to-unlock (rewarded ads)
+2. Micropayments for content (powered by Supertab)
+3. Surveys-to-unlock (rewarded surveys)
+4. newsletter signups & more (add your custom offer)
+
+🧠  All backed by AI to optimize engagement and revenue timing and early tests show approx 9% revenue lifts.
+
+🔥 Tailwind Beyond Websites
+This signals a broader shift: non-gaming consumer apps can now seriously explore microtransactions and rewarded ads as viable monetization models - from entertainment and productivity to education and news.
+
+🎮 At ArcPlay.ai, we are already thinking ahead of the curve:
+Instead of boring watch to unlock, we are pioneering Play-To-Unlock driven by Agentic AI to bring interactive, playable, rewarded experiences into everyday apps. It’s native, user-friendly, and unlocks massive value for both users and app developers.
+
+👀 Want a sneak peek?
+Comment “Play-To-Unlock” and we’ll share a behind-the-scenes look at what we are building.
+
+#AdTech #ConsumerApps #RewardedAds #Microtransactions #ProductStrategy #GoogleAdManager #ArcPlay #PlayToUnlock #Offerwall #AppMonetization",7,1,1,3mo,Post,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2025-07-24T11:29:00.000Z,,2025-07-01T00:00:00.000Z,,,24-07-2025
+https://www.linkedin.com/feed/update/urn:li:activity:7344363938098094080,https://media.licdn.com/dms/image/v2/D5622AQH88260Yiatgw/feedshare-shrink_800/B56ZexQk48HoAg-/0/1751025609977?e=1762992000&v=beta&t=9CXNYZE_3jVuX1WhtnP2plpX0HftlXHcPfS8iicFcPo,Image,"Shoutout to Daksha Sharma (达可莎)(KRAFTON India) for hosting a stellar webinar with stellar panelists: Anshul Khandelwal (MindYourLogic), Pankaj Uniyal (SocialPeta Ltd), and Vijay Singh 🎮🛍️(trophée) - super insightful conversations on the future areas of growth in gaming ecosystems!
+
+🎯 One key takeaway: AI is fast-tracking game development and the studios that win will be the ones with the strongest UA game.
+
+With AI slashing production timelines:
+✅ Game loops are prototyped in days
+✅ Art, levels & voiceovers generated at scale
+✅ A/B testing is practically real-time
+
+The result? A flood of new games, faster than ever. 
+But in this new era, making a great game isn’t enough. You have to scale it.
+
+🕹️  This is where Playable ads take center stage. Users acquired via Playables show higher retention and LTV than those from video or banner ads because they’ve already experienced the core gameplay before installing.
+
+🤖 Playable ads = qualified users + full-funnel performance.
+
+As AI makes game development easier, distribution becomes the real moat.
+Studios that treat UA like a product testing, iterating, and optimising relentlessly will pull ahead.
+
+The game has changed.......Growth is the new endgame and ArcPlay is re-imagining all things Playables 🚀 
+
+#GameDev #PlayableAds #AIinGaming #UserAcquisition #MobileGames #GamingGrowth #Krafton #MindYourLogic #SocialPeta #Trophee #ArcPlay #GamingMarketing #Retention #LTV #WebinarInsights",25,2,1,3mo,Post,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2025-07-24T11:29:00.000Z,,2025-06-27T00:00:00.000Z,,,24-07-2025
+https://www.linkedin.com/feed/update/urn:li:activity:7344001550291300353,https://media.licdn.com/dms/image/v2/D5622AQEnooJ03fzFHw/feedshare-shrink_800/B56ZemB8XDH8Ao-/0/1750837217603?e=1762992000&v=beta&t=gNqeC6My8MuwrFeaEbLhgi3cTI8jLWLYXZAGLbGNE9U,Image,"🛍️ The Trade Desk just reshaped Indian Retail Media - is the gaming advertising space next?
+
+By partnering with The Trade Desk, Zepto Advertising Solutions will now allow brands to target users on OTT, music, and apps based on what they’re buying think groceries → shampoo ad on your next JioHotstar binge. (link in comments)
+
+This shift marks the rise of closed-loop attribution and first-party signal-based targeting in India’s digital ad landscape. And this is just the beginning.
+
+🤔 🔮 Imagine similar partnerships with:
+🕹️ Gaming DSPs like Moloco or Aarki, powering smarter ad targeting inside 🍭 Candy Crush or 🔢 Sudoku, based on what you just ordered on Zepto.
+🛒 More Commerce Platforms like Blinkit, Meesho, or even Shopify, making every stream, scroll, or swipe smarter.
+
+At ArcPlay.ai, we’re building for this very future, where Agentic AI powered playable ads will make traditional video ads feel like BlackBerry in the iPhone era.
+
+The future of advertising isn’t just seen. It’s played, tracked, and optimised in real time. 🚀 
+
+#RetailMedia #AdTech #Zepto #TheTradeDesk #Moloco #PlayableAds #ArcPlay #FirstPartyData #DigitalAds #Programmatic #GamingAds #MarketingInnovation #IndiaAdTech",61,1,1,3mo,Post,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2025-07-24T11:29:00.000Z,,2025-06-26T00:00:00.000Z,,,24-07-2025
+https://www.linkedin.com/feed/update/urn:li:activity:7343276731920719872,https://media.licdn.com/dms/image/v2/D5622AQG7ZaYZ051mLQ/feedshare-shrink_800/B56Zeb3VoJG0Ag-/0/1750666668584?e=1762992000&v=beta&t=QM8stwE3H1QlLmmirzG-8t5btSA_Zdk_Nuifx4MRMPs,Image,"🎯 Show More Ads = High Retention + Strong LTV. But How?? 🤔 
+
+New global research by Deloitte and Google Ads confirms what leading publishers and advertisers already know. (link in comments)
+
+✨ Great ad experiences drive revenue growth✨
+
+When mobile gaming ads are designed with user respect and functionality in mind, the benefits are clear:
+✅ 72% of gamers continue playing after a high-quality ad
+✅ 20% prefer these games over others because of better ad experiences
+✅ Higher retention leads to stronger ARPU and long-term monetization
+
+So what defines a high-quality ad experience?
+✔️ Clear, expected controls (skip, close, mute)
+✔️ No forced redirects or misleading interactivity
+✔️ Rewarded ads with transparent value exchange
+
+What can you do?
+🧩 Game advertisers:
+1 Invest in creatives that respect user flow (e.g. Playables), no bait-and-switch
+📱 Non-gaming publishers:
+1. Audit your current ad placements for disruptiveness
+2. Introduce Rewarded ad placements to maximise LTV and user retention 
+
+📣 In a crowded mobile ecosystem, user-first ad design isn't just good UX, it's a competitive advantage. Prioritize quality and watch your retention, brand perception, and revenue grow together.
+
+#MobileGaming #AdTech #GrowthStrategy #UserExperience #DigitalMonetization #GamingAds #AdQuality #Deloitte #GoogleAdMob #ROAS #GamersFirst #AppGrowth #MediaStrategy #RetentionMatters",6,2,0,3mo,Post,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2025-07-24T11:29:00.000Z,,2025-06-24T00:00:00.000Z,,,24-07-2025
+https://www.linkedin.com/feed/update/urn:li:activity:7341468574974164994,https://media.licdn.com/dms/image/v2/D5605AQEs2YVK-HjKwQ/feedshare-thumbnail_720_1280/B56ZeDdBY1GoAs-/0/1750257117256?e=1761717600&v=beta&t=GFcMg1dNAEEPRDLBQ8UU75yhrP_VZh55Wm7Qwmr5NHI,Video (LinkedIn Source),"🎮 Did you know that Amazon is showing Playable Ads? 😳 🔥 
+
+It’s true and they call it 'Gamified Experiences' with Alexa (yeah those cute little toys sitting around our bedside tables)
+
+These aren’t just vanilla ads. They’re interactive brand experiences that let users talk, tap, or click their way through brand stories, exclusive content, and even product discovery, all through voice or screen on Alexa-enabled devices. (link in comments)
+
+Why this matters for Ecom sellers?
+🎯 It’s not just about clicks - it’s about memory, engagement, and favorability
+🧠 Interactivity = higher recall & deeper brand affinity
+🛍️ Blurs the line between entertainment + commerce
+📺 Brings play into the home through a medium people already trust
+
+As the ad world shifts from passive to playful, Amazon Ads is showing that voice, interaction, and immersion can drive both upper-funnel brand love and bottom-funnel action.
+
+Playable ads aren’t just for games anymore they’re for everyone who wants attention to convert into impact.
+
+ArcPlay | Amazon Alexa Developers | Amazon Usa Alexa | Amazon Alexa Fund #PlayableAds #AmazonAds #Alexa #BrandedExperiences #InteractiveMarketing #AdTech #VoiceCommerce #MarketingInnovation #EngagementAtScale #Ecommerce",11,2,0,4mo,Post,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2025-06-24T11:29:00.000Z,,2025-06-19T00:00:00.000Z,blob:https://www.linkedin.com/ba182583-a823-42cd-83bc-e7ad57535c19,,24-06-2025
+https://www.linkedin.com/feed/update/urn:li:activity:7340743235767627776,https://media.licdn.com/dms/image/v2/D5622AQGYD0h9WMs5KQ/feedshare-shrink_800/B56Zd.PEmlH8Ag-/0/1750169570529?e=1762992000&v=beta&t=X5iV1_QnHpfuJlUmEyUr6WkO_Bn4abJ7hmRz1rNfiZU,Image,"🎯 Big unlock for gaming advertisers: WhatsApp is finally opening up paid discovery.
+
+Meta is rolling out new surfaces in the Updates tab (used by 1.5B+ people daily globally) and for the first time, we can now reach, convert, and retain players natively on WhatsApp.
+
+Key updates:
+📢 Promoted Channels = top-of-funnel reach in WhatsApp's directory
+🧲 Ads in Status = full-screen, skippable placements driving click-to-chat or install
+💬 Channel Subscriptions = monthly monetization + exclusive content loop
+
+Why it matters for gaming:
+👥 94% of WhatsApp users open the app daily
+🤩 Click-to-chat campaigns on WA already show 2–3x CTR vs. mobile web
+💰 Player engagement in messaging channels drives 30–60% higher LTV when paired with CRM
+
+This is the first time UA and live ops teams can:
+✔️ Build a fanbase inside WhatsApp
+✔️ Run paid acquisition with 1:1 opt-in comms
+✔️ Monetize via subscriptions + microdrops
+
+Messaging ≠ just CRM anymore: it's becoming a full funnel growth channel.
+
+#GamingAds #WhatsAppAds #Meta #UserAcquisition #PerformanceMarketing #MobileGaming #MessagingCommerce #ClickToChat #GrowthLoops #PlayableAds #GamingCRM #AdTech",13,3,0,4mo,Post,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2025-06-24T11:29:00.000Z,,2025-06-17T00:00:00.000Z,,,24-06-2025
+https://www.linkedin.com/feed/update/urn:li:activity:7339252703547596800,https://media.licdn.com/dms/image/v2/D5622AQEpZ-vNfNiR5A/feedshare-shrink_800/B56ZdoXkt_GoAk-/0/1749802702305?e=1762992000&v=beta&t=ntyMDjlk3c2VV1z-PMfYvy7xKbp2U7QtaggJ0ZuCU_k,Image,"🕹️ Playable Ads Just Hit the Big Screen (aka CTV) Literally 📺
+
+Samsung Ads just launched GameBreaks 🎮  interactive, mini game ad formats that run during commercial breaks on Samsung TV Plus. (Ref in comments)
+
+Instead of passive 30s spots, users can now play branded games using their smartphone. Think:
+⁉️  Branded trivia
+🧠  Memory games
+🎤 Finish-the-tagline
+💡 Wordplay challenges
+
+This shift isn't just cosmetic, it’s performance-driven:
+📈 53% lift in unaided brand recall
+🔁 1.5x higher engagement vs. standard video ads
+📱 Seamless interaction using your phone — no remote fumbling required
+❤️ 89% of viewers prefer it to traditional ads
+
+🎯 The takeaway?
+Playables are no longer a “mobile-only” thing they’re becoming the standard for advertising across devices.
+
+👏 Kudos to the Samsung TV Plus team for innovating brand-friendly playable formats that bring real engagement to the living room.
+
+Advertising is no longer about being seen....it’s about being PLAYED 🤩 
+
+#AppMonetization #PlayableAds #CTV #AdTech #UserEngagement #SamsungAds #OTT #MobileGaming #AppGrowth #MediaInnovation #AdRevenue #RewardedAds",19,2,1,4mo,Post,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2025-06-24T11:29:00.000Z,,2025-06-13T00:00:00.000Z,,,24-06-2025
+https://www.linkedin.com/feed/update/urn:li:activity:7338180648420970496,https://media.licdn.com/dms/image/v2/D5622AQHLXIxkDJNkuQ/feedshare-shrink_800/B56ZdV6MNlHUAk-/0/1749493016034?e=1762992000&v=beta&t=9KADUIZ6mtYSxHODjW8KnaMynGMSUracUcOptSPv8R4,Image,"🥷  Steal This Idea: Celebrity IP x Mobile Games 🕹️ 
+
+🤔 Imagine this:
+1. Brad Pitt + Subway Surfers = Brad Pitt’s Endless Escape 🚃 
+2. Taylor Swift + Candy Crush = Swiftie Saga 🍭 
+We have seen celebs own the D2C playbook, but one $100B+ industry is still under-tapped 👉 Mobile gaming 🎮 
+
+🧩  Why this works:
+1. Built-in Distribution: Celebs bring massive fanbases = low CAC, high organic installs.
+2. Built in Retention: Their fans want to keep on playing because of their loyalty towards the character even though the gameplay might be repetitive
+
+💰  Market Insight:
+1. Mobile games made $90B+ in 2023, 50%+ of global gaming revenue.
+2. Casual & hypercasual games dominate downloads, retention, and monetization.
+3. Games using licensed IPs see 2-3x better ARPU than originals.
+
+🦸‍♂️  Proven Celebrity D2C Playbook:
+1. Rihanna – Fenty Beauty: $2.8B valuation (LVMH-backed)
+2. Ryan Reynolds – Aviation American Gin: Sold for $610M
+3. Kim Kardashian – SKIMS: $4B+ valuation
+4. MrBeast – Feastables: $100M+ revenue in Year 2
+5. Kylie Jenner – Kylie Cosmetics, LLC: $600M partial exit to Coty
+
+TL;DR
+ 🏗️ The infrastructure exists
+🥹  Game studios are hungry for UA
+💸  Celebs want a piece of digital revenue
+
+💡 Are you game dev studio or talent agency? Don't wait....build the next big genre 🦄 
+
+P.S: This image is AI generated for entertainment purpose and non-commercial usage. This has relation to Brad Pitt and SYBO. But honestly, wouldn't it be amazing to see this come to life? 🤩 
+
+#StealThisIdea #MobileGaming #CelebrityIP #D2CPlaybook #Startups #GameDev",12,0,0,4mo,Post,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2025-06-24T11:29:00.000Z,,2025-06-10T00:00:00.000Z,,,24-06-2025
+https://www.linkedin.com/feed/update/urn:li:activity:7335311937162883074,https://media.licdn.com/dms/image/v2/D5605AQGqrZnO3kceIw/videocover-low/B56ZcxDQmYGQBg-/0/1748874641251?e=1761717600&v=beta&t=1sinue1tSAPDk2L75jAnCD6XXss7DIteCE8i6741YcQ,Video (LinkedIn Source),"While the Walled Gardens are stuck with Video ads 📹, the Open Internet is not just adopting Playable Ads - they are re-imagining it!! 🔮 🚀 
+
+Super League (Nasdaq: SLE) has expanded its partnership with AdArcade to offer Native Playables, a next-gen ad format (demo video attached), that will reshaping how brands connect with the 220M+ monthly U.S. mobile gamers (PR in comments).📱🎮
+
+Why does this matter?
+✅ 3x higher engagement than traditional playables
+✅ Up to 13x ROAS compared to standard mobile ads
+✅ Seamless integration into 25+ popular game formats
+✅ Full-funnel impact: awareness ➡️ interaction ➡️ measurable conversions
+
+As Matt Edelman, CEO of Super League, puts it:
+“Playable ads are no longer just a novelty — they’re the future of consumer engagement.”
+
+Kudos to Bobby Wells, CEO of AdArcade, for innovating automated tech because of which Native Playables can be live in just a few hours. Talk about speed + scale.⚡
+
+With Gen Z, Alpha, Millennials, and even Gen X increasingly immersed in mobile games, this partnership unlocks a massive brand-safe channel for reaching consumers where they’re most engaged - in the games they love.
+
+👀 Keep an eye on this space. Playable media isn’t just where the future is headed - it’s already here.
+
+P.S: We at ArcPlay are also cooking something exciting in this space 😉 
+
+#PlayableAds #GenAI #AdTech #MobileMarketing #ArcPlay #GamifiedAds #FutureOfAdvertising #DigitalMedia #GrowthMarketing #PerformanceAds #StartupInnovation",15,2,0,4mo,Post,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2025-06-24T11:29:00.000Z,,2025-06-02T00:00:00.000Z,blob:https://www.linkedin.com/1aeb53b7-96da-46df-9db7-4c30c4a1e253,,24-06-2025
+https://www.linkedin.com/feed/update/urn:li:activity:7323609629551136768,https://media.licdn.com/dms/image/v2/D5622AQFBbJcQIP-oRw/feedshare-shrink_800/B56ZaH0e_uG4Ak-/0/1746035408153?e=1762992000&v=beta&t=l74iNPSSmMi9-fUznel7IhCjY8VifVfdOIYLvZu7jjw,Image,"Excited to share that I will be attending the World Audio Visual and Entertainment Summit (WAVES) Conference in Mumbai, India on May 3rd–4th!!
+
+If you are working or investing in some crazy projects in below areas I would love to connect, learn, and explore synergies:
+🕹️ Mobile gaming
+📱 Consumer apps
+🤖 AI (esp. Agentic Advertising)
+📢 Ad-tech (esp. Playable or Interactive Ads)
+🧩 Peripheral game tech
+
+I have got some exciting updates from ArcPlay, and I am keen to exchange ideas with fellow operators and investors.
+
+Let’s catch up - feel free to DM or drop a comment below!👇
+
+#WAVES2024 #MobileGaming #AdTech #ConsumerApps #Startups #Monetization #PlayableAds",14,1,0,5mo,Post,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2025-05-25T11:29:00.000Z,,2025-05-01T00:00:00.000Z,,,25-05-2025
+https://www.linkedin.com/feed/update/urn:li:activity:7323356733714706433,https://media.licdn.com/dms/image/v2/D5622AQEskCqkzMV2mw/feedshare-shrink_800/B56ZaDB1wTGkAg-/0/1745955020662?e=1762992000&v=beta&t=Y_eDBxcsAwB1ATWQ_ykNfWVZsWAHxmpksQSzz2Pb2sk,Image,"Playable Ads are Going Mainstream 📲 and it’s Not Just for Games Anymore. 🧩
+
+Playable ads have traditionally been the secret weapon of gaming companies to boost installs and drive ROAS. But in 2024, we’re witnessing a major shift: non-gaming categories are now among the top adopters of Playable creatives.
+
+📊 According to new data from SocialPeta Ltd and Playable Factory, the Top 20 advertisers using Playable Ads this year include a wide range of breakout names:
+
+💸 Fintech: Revolut, Capital(dot)com - using interactive ads to drive better user education and onboarding.
+🛍️ E-commerce: SHEIN, OTTO - turning product discovery into an engaging, gamified experience.
+🎵 Entertainment: Even TikTok is on the list - proof that Playables are now being used to engage massive mainstream audiences.
+
+This evolution shows that Playable Ads are no longer niche or limited to gaming apps. They're becoming a core format for performance marketers across industries, especially those looking to drive meaningful engagement for get high LTV installs.
+
+And yet most of these ads are still shown inside gaming environments. That’s a missed opportunity and exactly where ArcPlay.ai comes in. More on that later 😉 
+
+Which other non-gaming brands have seen advertising using Playable ads? Let me get the ball rolling: Temu, Zepto, KFC......
+
+#PlayableAds #AdTech #MobileAdvertising #PerformanceMarketing #InteractiveAds #DigitalMarketing #ProgrammaticAdvertising #UserAcquisition #AppMarketing",15,0,2,5mo,Post,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2025-05-25T11:29:00.000Z,,2025-04-30T00:00:00.000Z,,,25-05-2025
+https://www.linkedin.com/feed/update/urn:li:activity:7316040180082057216,https://media.licdn.com/dms/image/v2/D5605AQF6z45NZNSleA/videocover-high/B56ZYfLu2IGsBs-/0/1744279899996?e=1761717600&v=beta&t=sXBeYnCUVtvaaP-B7LcwPoav-tY1rwnCDzKEcrvmwH8,Video (LinkedIn Source),"WhatsApp Quietly Launches Marketplace for AI Agents 🤫 🤫 
+
+While OpenAI and others are focussed on solving for the top 1% by charging premium fee and building premium features. The champion of mass market adoption using free to use tech - Meta just rolled out two powerful updates to WhatsApp that could reshape how we use AI in daily life and how brands connect with users:
+
+🤖  Chat with AI by Third-Party Creators (link in comments):
+- Users can now message AIs created by independent developers
+- Enables unique, character-driven, or utility-focused chat experiences
+- Adds a new layer of engagement beyond just people-to-people conversations
+
+👨‍🎨 AI Studio (link in comments):
+- A no-code platform to build and deploy AIs on WhatsApp
+- Lets businesses, creators, and developers launch custom AI chatbots
+- Great for support, content delivery, commerce, and brand storytelling
+
+💥 How This Could Disrupt Brand Engagement:
+- Scalable Personalization: Brands can build on-brand AI personas to chat 1:1 with millions of users
+- New Commerce Layer: Chatbots can guide purchases, recommend products, and close sales directly in-app
+- Owned Engagement Channel: Brands can build deeper relationships without depending on social feed algorithms
+- Interactive Campaigns: From quizzes to product try-ons — AI chat can make marketing fun and engaging
+- Always On Support: Instant, intelligent customer assistance without the cost of scaling teams
+
+WhatsApp is going to become a conversational AI playground and this might be the biggest unlock for brand engagement since the rise of Instagram Stories. It would be interesting to see how Meta plans to monetise this thus enabling the creator/ developer ecosystem, apart from using this to feed data to its advertising engines. 
+
+Feel free to share your thoughts in comments. 💬 
+
+#WhatsApp #MetaAI #AIStudio #Chatbots #ConversationalAI #BrandEngagement #MarketingInnovation #TechNews",5,1,0,6mo,Post,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2025-04-25T11:29:00.000Z,,2025-04-10T00:00:00.000Z,blob:https://www.linkedin.com/e16c45eb-fa6a-4e26-bf6e-4a75b2b02bae,,25-04-2025
+https://www.linkedin.com/feed/update/urn:li:activity:7314987837550968832,https://media.licdn.com/dms/image/v2/D5622AQFx8-rlSVREbw/feedshare-shrink_800/B56ZYO9MHJHoAk-/0/1744007644788?e=1762992000&v=beta&t=EpS6xCUPFp-AS37z2SgKfaBE2HytzCTB3S1DJ9mqtmE,Image,"319% Higher Conversion than Video Ads! Is This For Real? 😳 😳
+
+As per the 2025 report by SocialPeta Ltd and Playable Factory, non-gaming advertisers are getting ~319% higher conversion from Playable ads. The genre wise break-up is mentioned in the attached bar chart.
+
+WHAT ARE PLAYABLE ADS? 
+Traditionally used by gaming apps to boost installs, Playable Ads (or interactive ad formats) that let users try before they buy are now unlocking powerful conversion opportunities for non-gaming apps and brands.
+
+WHY THEY WORK?
+1️⃣ Engagement: Unlike passive video ads, playable ads turn users into participants. This boosts attention rate by 47% compared to video ads.
+2️⃣ Intent signalling: A user who engages with a mini-experience is already leaning in—making them more likely to convert.
+3️⃣ Personalization: With GenAI tools, brands can now dynamically generate playable creatives tailored to different audience segments.
+
+WHO ARE ADOPTING THESE? AND FOR WHAT?
+🛒  E-commerce: 5-10% Virtual try-ons or product interactions
+👟 Fitness/Health: 3-5% Interactive demos of workout routines
+📚 EdTech: 2-4% Mini-quizzes or skill demos
+📸 Social/Entertainment: 1-3% Filters or short UGC tools
+
+👉 In a world where attention is the currency, interactivity is the new ad creative. Are you exploring playables outside of gaming? Would love to hear your thoughts.
+
+#AdTech #MobileAdvertising #PlayableAds #PerformanceMarketing #GenAI",17,1,2,6mo,Post,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2025-04-25T11:29:00.000Z,,2025-04-07T00:00:00.000Z,,,25-04-2025
+https://www.linkedin.com/feed/update/urn:li:activity:7313553385176055809,https://media.licdn.com/dms/image/v2/D5622AQFQSSg-aUlxKw/feedshare-shrink_800/B56ZX72DJ1GcAk-/0/1743687005288?e=1762992000&v=beta&t=JcI49p0fHoS8drGsjLrT2_eGrvjiOFVgodh3qdC21ls,Image,"AppLovin Buying TikTok?? 🤯 🤯
+
+The rumoured acquisition of TikTok by Applovin (link in comments) isn't just another tech deal - it could be a watershed moment for the entire AdTech landscape.
+
+HERE'S WHY?
+🔹 An Alternative to Google Ads & Meta's Walled Gardens: This deal could position Applovin as a legitimate challenger to Google and Meta, offering advertisers a fresh ecosystem to drive ROAS outside traditional search and social platforms.
+
+🔹 A Major Shake-Up for Gaming & Non-Gaming Apps: TikTok’s influence extends beyond entertainment, shaping consumer behavior across shopping, fintech, and lifestyle apps. With Applovin’s game-centric expertise, this could mean a new era of ad monetization strategies beyond rewarded videos.
+
+🔹 Gaming AdTech Meets Social Commerce at Scale: Applovin, a dominant force in mobile advertising and game app monetization, would gain direct access to TikTok’s 1Bn+ engaged users. This merger could create an unprecedented blend of social media influence and programmatic ad efficiency.
+
+🔹 Ready Playbook: Applovin has already done this in gaming space in the past by acquiring game studios like Lion Studios, a Tripledot Studio and PeopleFun to gather rich user dat and train its AXON AI model. So, with TikTok they have to repeat this once again for non-gaming space.
+
+🔹 The Rise of Playable & Interactive Ads: Applovin has been pioneering Playable Ads in mobile games. With TikTok’s short-video format and creator economy, we could see the evolution of deeply engaging ad experiences powered by AI-driven personalization.
+
+If this deal happens, it won’t just be a headline - it could mark a seismic shift in how ads are created, distributed, and monetized. 🚀
+
+What are your thoughts? How will this acquisition reshape the industry? Drop your take in the comments!",13,1,0,6mo,Post,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2025-04-25T11:29:00.000Z,,2025-04-03T00:00:00.000Z,,,25-04-2025
+https://www.linkedin.com/feed/update/urn:li:activity:7312863869838757890,https://media.licdn.com/dms/image/v2/D5622AQFPN89qZGPfWA/feedshare-shrink_800/B56ZXyC7kaHEAg-/0/1743522610503?e=1762992000&v=beta&t=WJFTL0BjJDvk23azsetsnFKOyn0AJKN-czoc2ONWYgg,Image,"🕹️ Why Long-Format Playable Ads Are the Future of Mobile Advertising?
+
+Unity’s 2025 Mobile Game Trend Insights report (link in comments) highlights the growing importance of long-format playable ads in mobile advertising. 
+
+Here’s why:
+✅ Higher Engagement & Retention – Unlike short ads, long playables keep users immersed, leading to better recall and retention.
+✅ Boosts Conversions – Users are prompted to download at the peak of engagement, such as after completing a challenge or level, increasing install rates.
+✅ Perfect for Puzzle & Hybrid Casual Games – These formats drive strong user acquisition and engagement, making them a key advertising strategy.
+✅ AI-Powered Creativity – AI-generated creatives help maintain user immersion, making ads more dynamic and effective.
+
+With playable advertising expanding beyond gaming, long-format playables are set to revolutionize ad engagement across multiple industries. Is your ad strategy ready? 
+
+At ArcPlay we are at the forefront of this revolution. Let’s discuss! 🔥
+
+#PlayableAds #MobileAdvertising #AdTech #PerformanceAdvertising #UA #InterstitalAds #RewardedAds",10,1,0,6mo,Post,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2025-04-25T11:29:00.000Z,,2025-04-01T00:00:00.000Z,,,25-04-2025
+https://www.linkedin.com/feed/update/urn:li:activity:7310926874543583234,https://media.licdn.com/dms/image/v2/D4D22AQEbQ1YRuFjPeQ/feedshare-shrink_800/B4DZXWhP_EGkAk-/0/1743060796347?e=1762992000&v=beta&t=pAs9gWA5yseQDJJueDTmnJ58AlZDRerZ_KMJ4_MK6yg,Image,"🤖   AI is making app creation easy—but what about distribution? 🚚 
+
+With AI-generated apps improving rapidly, the biggest challenge is shifting from creation to distribution.
+
+The barrier to entry for building an app is getting lower, thanks to no-code AI, generative design, and automation. But getting users, standing out, and monetizing? That’s the new frontier.
+
+⚡ Will app stores adapt?
+⚡ Will new AdTech/ MarTech platforms emerge?
+⚡ Who will build the next-gen distribution model?
+
+Jonathan Lai and Doug McCracken echoes this in the recent newsletter of a16z speedrun!!
+
+Exciting times ahead. What are your thoughts?
+
+#AI #Apps #Distribution #Monetization #Innovation #AdTech #MarTech",9,0,0,6mo,Post,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2025-04-25T11:29:00.000Z,,2025-03-27T00:00:00.000Z,,,25-04-2025
+https://www.linkedin.com/feed/update/urn:li:activity:7308123720202469376,,Text,"Want to build a billion-dollar business? Here's the key 🔐 
+
+You'll never go broke if you delve into the timeless desires of key target audiences:
+
+1️⃣ Lust to Men - Tinder, Grindr, Ashley Madison
+2️⃣ Desire for Beauty to Women - Glossier, Inc., Fenty Beauty, IL MAKIAGE
+3️⃣ Health to Elders - hims & hers, Devoted Health
+4️⃣ Education to Children - Duolingo, Outschool, Quizlet
+5️⃣ Fear of Loss to Rich - Wealthfront, Betterment, Carta
+6️⃣ Get Rich Quick to Poor - DraftKings Inc., Coinbase, Robinhood
+
+Master universal traits, and opportunities will always follow. 😊",15,1,0,7mo,Post,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2025-03-26T11:29:00.000Z,,2025-03-19T00:00:00.000Z,,,26-03-2025
+https://www.linkedin.com/feed/update/urn:li:activity:7305917721001504770,https://media.licdn.com/media/AAYQAQQSAAgAAQAAAAAAABgBrZ2daanMQJ-egBdqUfzcNg.gif,Celebration,"Exciting News in the World of Playable Ads!! 🎉 🎉 
+
+Super excited to welcome Nikita Zatsepin as an Advisor to ArcPlay to push the boundaries in Playable Ads.
+
+He brings a wealth of experience in AdTech, and we couldn’t be more thrilled to have him on board. Nikita has done some groundbreaking work at Unity Ads and recently founded Lumora.
+
+Looking forward to learning, growing, and building something great together! Onward & Upward 🚀 🚀 
+
+P.S: If you are a mobile app or game publisher looking to generate incremental revenue, feel free to reach out.
+
+#Welcome #ExcitingTimes #Advisor #AdTech #AI #PlayableAds #Startups #Growth #Leadership",17,0,0,7mo,Post,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2025-03-26T11:29:00.000Z,,2025-03-13T00:00:00.000Z,,https://www.linkedin.com/feed/update/urn:li:activity:7305908787528306689/,26-03-2025
+https://www.linkedin.com/feed/update/urn:li:activity:7305233578152390657,https://media.licdn.com/dms/image/v2/D4E22AQHaV6RJ4AeSlg/feedshare-shrink_800/B4EZVxSxmeHgAk-/0/1741362502641?e=1762992000&v=beta&t=T_wBOXE0sIDOCjms6zrwKf1oUIbMyWf2rZRRJ2S-4UQ,Image,"🕹️ Why are Playable Ads Suddenly Taking Off ?? 🚀 
+
+Big shift happening in mobile advertising - GenAI have gone beyond creation of image and video ad creatives. Advertisers are now leveraging GenAI coding models to produce Playable Ads. This has skyrocketed their adoption by 2x, jumping from 3% in 2023 to 7% in 2024 (Mintegral’s State of Media Buying report). Interactive ads are clearly gaining traction, and it’s not hard to see why:
+
+📈 Better ROAS – Higher intent users mean stronger conversion rates.
+🎮 Meaningful engagement – Users try before they converting, leading to higher LTV.
+🎨 Open Canvas – Creative teams are tired of the being stuck with the levers provided by video and Playable Ads are opening up new horizons for user engagement
+
+It's not only apps/ games, but also luxury brands (Moet & Chandon, PRADA, etc) are firsthand experimenting with Playable Ads to boost performance. If you’re not using them yet, probably now’s the time to start!
+
+#PlayableAds #MobileMarketing #AdTech #Growth",9,0,0,7mo,Post,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2025-03-26T11:29:00.000Z,,2025-03-11T00:00:00.000Z,,,26-03-2025
+https://www.linkedin.com/feed/update/urn:li:activity:7303795162550321152,https://media.licdn.com/dms/image/v2/D5622AQFMPbUMn56Z-Q/feedshare-shrink_800/B56ZVxK_yhGUAg-/0/1741360463540?e=1762992000&v=beta&t=IkbECYlFbYI9rAsPNOxmJ532clTNKHVR97v-1pdDYqQ,Image,"📉 Rising CAC: The Tough Reality for Mobile Apps & Games
+
+It’s no secret that customer acquisition costs (CAC) is skyrocketing, making it harder than ever for mobile apps and games to scale profitably. 🚀
+
+What’s driving the surge?
+⚡ Increased competition – More apps, games and brands (read eCom) are flooding the market and fighting for the same users.
+🔒 Privacy changes – Limited tracking (thanks to ATT & GDPR) is reducing targeting efficiency.
+
+So, what’s the way forward?
+✅ Retention-first strategies – Keeping users engaged matters more than ever using mechanics such as Hybrid Casual
+✅ Playable & interactive ads – Higher intent capture leading to better conversion rates.
+
+The market is evolving, and so should our strategies. How is your team tackling these rising costs? Let’s discuss! 👇
+
+#MobileMarketing #UserAcquisition #Gaming #AdTech #Growth",12,1,0,7mo,Post,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2025-03-26T11:29:00.000Z,,2025-03-07T00:00:00.000Z,,,26-03-2025
+https://www.linkedin.com/feed/update/urn:li:activity:7269292018554531840,https://media.licdn.com/dms/image/v2/D5622AQFdlET3pgOW_g/feedshare-shrink_800/feedshare-shrink_800/0/1733134273403?e=1762992000&v=beta&t=UCz1fTjoKa1WXQ_8GCR3X7Qh087kRK-p9THflCOA7yk,Image,"🎉🎉 Major Announcement: ArcPlay x Josh (TikTok of India) 🎮✨
+
+We’re beyond excited to share a key milestone for ArcPlay.ai 🏆 Josh app (179 Mn+ MAUs) by VerSe Innovation has rolled out Rewarded Instant Games, delivering an innovative way for creators and users to connect while creating new revenue streams.
+
+At ArcPlay.ai, we pride ourselves on building robust, scalable, and engaging gaming ecosystems. Our proposition is simple but powerful:
+✔ Revenue Maximization – Reward mechanisms drive monetization for consumer platforms and casual games.
+✔ Enhanced Engagement – Gamified experiences to boost user retention and satisfaction.
+✔ Seamless Integration – Designed to fit effortlessly within any consumer apps.
+
+This launch is a testament to our mission of helping partners unlock their full potential through innovative gaming solutions.
+
+A huge thanks to Ravanan N for your kind words and belief in our vision. 🙏 To Sahil Bhagat, Karandeep Singh Gujral and Kartikay Bhardwaj, your dedication to ensuring flawless integration has been nothing short of exceptional. Your efforts truly define teamwork and innovation! Here’s to pushing boundaries and creating groundbreaking experiences together. Onwards and upwards! 🚀
+
+Read more in this Financial Express (India) article: https://lnkd.in/g4cBCvv6
+
+dailyhunt ADGULLY Medianews4u.com APN NEWS Mediabrief.com Passionate in Marketing TechnoSports Media Group #Innovation #RewardedGaming #CasualGaming #AppMonetization #AdTech #MilestoneAchievement #GamingSolutions #Partnerships #Gratitude",109,20,6,10mo,Post,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2024-12-26T11:29:00.000Z,,2024-12-02T00:00:00.000Z,,,26-12-2024
+https://www.linkedin.com/feed/update/urn:li:activity:7267192106027229185,https://media.licdn.com/dms/image/v2/D5622AQFSlmfcRc9sEg/feedshare-shrink_800/feedshare-shrink_800/0/1732633613919?e=1762992000&v=beta&t=R2lUSHcaUl8AV0CXxGoHcvmmqdVXlzh0d2uSMXmyZsM,Image,"🎥 The Future of OTT and CTV: Ads, Innovation & Missed Opportunities 🤦‍♂️ 
+
+Streaming is evolving, with India leading the shift to ad-supported models. As subscriptions stagnate, freemium strategies are reshaping OTT platforms and creating new opportunities for brands.
+
+📊 Key Trends:
+- Ad-supported streaming drove 47% of global OTT adoption in Q2 2024.
+- India’s OTT audience grew 14% in 2024 to 547.3M, with a 21% surge in AVoD audiences.
+- Netflix’s ad-tier pricing has been a global success and could debut in India soon, making premium content affordable.
+
+🚀 Amazon’s Moves:
+- The merger of Amazon miniTV and Amazon MX Player created India’s largest free streaming platform, with 250M+ users.
+- Starting in 2025, Prime Video & Amazon MGM Studios India will feature ads, following success in markets like the US and UK.
+
+💻 Tech’s Role in CTV:
+The Trade Desk’s Ventura - Connected TV (CTV) OS - is set to redefine ad targeting, offering brands tools to engage audiences more effectively.
+
+📉 Google’s Missed Ads Opportunity:
+Despite owning desktop with Google Chrome and mobile with Android, Google fell behind in the CTV race. Platforms like Amazon Fire TV and Roku have dominated, leaving Google’s Chromecast with a smaller market share. In a rapidly growing CTV ecosystem, this is a rare slip for the tech giant. 
+
+This is going to be a massive regret as Google could have eaten up the Ads revenue which was traditionally behind the walls of linear TV operators.
+
+🌟 Why It Matters?
+Price-sensitive markets like India are perfect for freemium models, while CTV’s rise signals a massive shift in how OTT content is monetised via ads.
+
+How do you see these shifts impacting OTT and ad landscape? Share your thoughts below! 👇
+
+Source: The CapTable GumGum
+
+#StreamingRevolution #OTTTrends #AdTech #ConnectedTV #DigitalAdvertising #FreemiumModel #MediaInnovation #AVoD #FutureOfStreaming #TechTrends
+#AdSupportedStreaming #ContentMonetization",15,0,0,10mo,Post,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2024-12-26T11:29:00.000Z,,2024-11-26T00:00:00.000Z,,,26-12-2024
+https://www.linkedin.com/feed/update/urn:li:activity:7265761996237668353,https://media.licdn.com/dms/image/v2/D4D22AQHICohGU3julA/feedshare-shrink_800/feedshare-shrink_800/0/1732292638479?e=1762992000&v=beta&t=kcdmO5Vy6B1-KFP7EWL3mqKOka9Wc8W1cRruKpKwVEY,Image,"🚀 Thrilled to have attended an incredible session by Elevation Capital on the hot topic 'New Era of Consumer App Monetization'💰
+
+The sessions were packed with successful case studies to drive Ad Revenue, Subscriptions and Micro-Transactions: 
+1️⃣ Revenue models
+2️⃣ GenAI use cases
+3️⃣ User engagement strategies
+4️⃣ Data science based recommendation models
+
+Key insights from stellar founders who shared their experiences and set the tone for 2025:
+
+🫡 Ankush Sachdeva (ShareChat) - Experiment extensively and build a robust A/B testing framework to identify winners by projecting their 6-month revenue contribution
+
+📚 Rohit Choudhary (Seekho) - If users find value in your product, they will pay for it. Don’t hesitate to introduce a paywall
+
+🛕 Prashant Sachan (AppsForBharat) - Understand the why behind your users' willingness to pay. If your product isn’t solving a painkiller-level problem, identify a stronger use case that organically makes them pay
+
+🦹 Sanidhya Narain (Dashverse) - While Bharat offers immense potential, don’t limit your product to India. Explore developed markets like North America, where higher willingness to pay and greater ARPU can drive significant growth
+
+As a founder, staying ahead in monetization trends is crucial, and this event delivered actionable strategies that can truly elevate revenue growth.
+
+👋  Big thanks to the Elevation team for fostering a dynamic networking space to strike friendships with amazing folks from the ecosystem: Maurice Patel, Shailesh Sahu, Karan Singh, Akshat Saxena, Hemasri Indrani Kota, Manohar Nagarajachar
+
+#AppMonetization #StartupJourney #ElevationVC",35,1,0,10mo,Post,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2024-12-26T11:29:00.000Z,,2024-11-22T00:00:00.000Z,,,26-12-2024
+https://www.linkedin.com/feed/update/urn:li:activity:7264916814566961152,https://media.licdn.com/dms/image/v2/D5622AQH9B1b1EfVzWg/feedshare-shrink_800/feedshare-shrink_800/0/1732091142066?e=1762992000&v=beta&t=NdeaifM0dnee9GDXCAgAiBczBFyyzPb5qmQGryxySoQ,Image,"📈 ROAS = Monetization x Marketing : Key to App Success in 2025? 🚀
+
+The AppsFlyer State of App Marketing and Monetization Report 2024 reveals just how critical ROAS is to driving sustainable growth. Here are some eye-opening insights:
+
+💡 Hybrid Monetization Wins: Apps that combine In-App Purchases (IAP) with In-App Advertising (IAA) are seeing 300% Day 90 ROAS in Mid-core iOS games, compared to just 200% with IAP alone. This approach maximizes revenue streams without sacrificing user experience 🎮📊.
+
+📊 Paid Traffic Drives Revenue: In Casual and Hypercasual games, 73% of revenue comes from paid traffic sources. This shows how critical it is to invest in high-performing, targeted ad campaigns for scalable growth 📲💸.
+
+🎯 Platform Matters: Non-gaming subscription apps report an ARPU (Average Revenue Per User) of $8.39 on iOS, compared to $1.54 on Android. For marketers, platform-specific strategies are no longer optional—they’re essential 🌍📱.
+
+What Does This Mean for App Developers?
+
+🧭 ROAS is not just a metric—it’s a compass guiding every marketing and monetization decision.
+
+🥗 Diversified monetization models, particularly hybrid strategies, unlock higher revenue and longer user lifetimes 
+
+⚖️ Aligning marketing spend with monetization data ensures every dollar spent drives measurable results
+
+In today’s app ecosystem, maximizing ROAS isn’t about one-size-fits-all strategies. It’s about leveraging data to tailor campaigns, test new monetization models, and meet users where they are.
+
+How are you aligning monetization to optimize ROAS for 2025?
+
+#ROAS #AppMarketing #AdMonetization #AdTech #AppsFlyer #GamingApps #MobileGrowth #DigitalMarketing #AdRevenue #Innovation",8,1,0,11mo,Post,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2024-11-26T11:29:00.000Z,,2024-11-20T00:00:00.000Z,,,26-11-2024
+https://www.linkedin.com/feed/update/urn:li:activity:7263946574437769218,https://media.licdn.com/dms/image/v2/D5622AQFvHCmWOV_NTQ/feedshare-shrink_800/feedshare-shrink_800/0/1731859820050?e=1762992000&v=beta&t=IkGNufWWXVVi670SZuJrXzAJHDSM00t38QLtdJbSLpw,Image,"🚀 AppLovin + Unity: What If This Merger Actually Happened? 🎮📊
+
+Applovin has cracked the code of M&A with a chain of successful acquistions:
+
+2014 - moboqo - Mobile advertising network for game developers
+2018 - MAX - Programmatic ad buying platform 
+2019 - SafeDK - Ad management platform
+2020 - Machine Zone - Mobile game developer 
+2021 - Adjust - Mobile marketing provider
+2021 - MoPub has been acquired by AppLovin - Mobile ad serving platform for publishers
+2022 - Wurl - CTV ads solutions
+2022 - Wordle - Not the New York Times one but the OG Wordle game
+
+In 2022, AppLovin proposed a $20 billion all-stock merger with Unity, but Unity rejected the offer in favor of acquiring ironSource. Fast forward to today, with Unity facing challenges like the controversial Runtime Fee and leadership changes, could there be a renewed case for a merger? 🤔
+
+Here’s why this idea is worth revisiting:
+📈 AppLovin’s Strength: AppLovin posted $1.06 billion in revenue in Q1 2024—a whopping 59.4% YoY increase. Its AI-driven monetization platform is a leader in scaling user acquisition and maximizing ad revenue.
+📉 Unity’s Challenges: Unity reported $460 million in revenue in the same quarter—a decline of 8% YoY—while facing backlash over pricing and losing key leadership, including former CEO John Riccitiello.
+🎯 Synergy in Gaming and AdTech: Together, AppLovin’s monetization engine and Unity’s 3D game creation tools could form a powerhouse for developers, offering end-to-end solutions from creation to monetization. Imagine the possibilities of a full-stack platform for building, scaling, and monetizing apps and games.
+
+🔮 While a merger isn’t currently on the table, the dynamics of both companies—and their industry leadership—make this scenario one to watch. Could AppLovin’s growth strategy align with Unity’s need to rebuild trust and innovation?
+
+🤔 What’s your take? 
+Would this partnership create a win-win for developers or introduce new challenges in the gaming and ad tech landscape?
+
+Source: Konvoy (link to the report in comments)
+#Gaming #AdTech #Unity #AppLovin #Monetization #Innovation #GameDevelopment #DigitalAdvertising #IndustryInsights",17,3,0,11mo,Post,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2024-11-26T11:29:00.000Z,,2024-11-17T00:00:00.000Z,,,26-11-2024
+https://www.linkedin.com/feed/update/urn:li:activity:7263237110931890176,https://media.licdn.com/dms/image/v2/D5622AQFBYLDbI1hjaA/feedshare-shrink_2048_1536/feedshare-shrink_2048_1536/0/1731690670306?e=1762992000&v=beta&t=E8iEmiE2rT56rqJnvQK0CW9O2WJ4zdrEqy8rmHFXXJw,Image,"🚀 Google AdMob Policy Updates: 💰 Big News for Reward & Loyalty Apps! 🎁
+
+AdMob just introduced a game-changing update, and it’s fantastic news for apps in the rewards and loyalty space. This news has come shortly after AdMob a week back announced that it's now allowing high-engagement ads (performance demand) in full screen placements like Interstitial and Rewarded. 
+
+AdMob is on a roll and pubs are lov'in it !!
+
+What's the key change? Apps compensating users for completing surveys, watching videos, or engaging with non-ad content—including cash or cash-equivalent payouts can now monetize with AdMob by !
+
+🤔 Why this is exciting for your app:
+1️⃣ If you are developer of Reward or Loyalty app - Unlock new revenue streams by integrating AdMob into your user engagement flows.
+2️⃣ App developers of rest of the genre - Increase engagement by incentivising users to consume your app content/ services.
+
+This update opens doors to monetize your app responsibly while enhancing user satisfaction. Best of all, there’s no allow-listing required, so you can start today!
+
+📢 Important Note:
+1️⃣ There are no changes in policies for Rewarded Ads.
+2️⃣ Apps promising rewards for clicking/viewing ads—or apps promoting such practices—will still be prohibited. Make sure your app aligns with these guidelines to stay compliant.
+
+Let’s work together to make the most of these changes—boost engagement and revenue! Policy details linked in the comments.
+
+🤩 It's so exciting to see Google AdMob roll-out policies to unlock ad revenue for app publishers who have been struggling in the post-pandemic High CAC - Low LTV era.
+
+Sources: Eren Gökgür, BigKnol 
+#AppMonetization #AdTransparency #AdTech #DigitalMarketing #UserExperience #AdMonetization #DataDriven",6,1,0,11mo,Post,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2024-11-26T11:29:00.000Z,,2024-11-15T00:00:00.000Z,,,26-11-2024
+https://www.linkedin.com/feed/update/urn:li:activity:7262471103208435712,https://media.licdn.com/dms/image/v2/D5622AQFYY47DbCVRbw/feedshare-shrink_800/feedshare-shrink_800/0/1731508039644?e=1762992000&v=beta&t=33yRDvRLZ0n0KcVr0YGHHB_Q2L9Xy1HhOoRop54T5Qw,Image,"📈 Meta has launched AdROAS based UA Campaigns 🎯 - What does it mean for Mobile Marketers and Ad Monetization Managers? 🗣️
+
+AdROAS (Ad Return on Ad Spend) provides the precision needed to track and optimize for high-ROI ad spend. As per industry sources this feature is only live for 50% of advertisers (doc link of Meta for Business in the comments). So, if you’re relying on in-app ads (IAA) for revenue, here’s why AdROAS is a must-have metric:
+
+🏷️ Monetize Free Users Effectively: In apps where revenue is driven by ads instead of purchases, AdROAS lets you track exactly how much ad revenue each user contributes, enabling budget allocation that maximizes ad impressions rather than just installs.
+
+🕵️ Granular Event Tracking: Measure ad revenue tied to events like banner clicks, rewarded video views, and interstitial interactions. AdROAS offers insight into which ad types generate the highest returns, allowing you to focus on the best-performing ad placements.
+
+💰Optimize for High Lifetime Value (LTV) Users: AdROAS helps identify users with high LTV by tracking ongoing ad engagements, not just initial installs. This is crucial for IAA-based apps, where frequent engagement directly correlates to revenue.
+
+📊 Gain Transparency in Revenue Streams: IAA revenue data, paired with AdROAS, enables full visibility into ad-driven revenue channels, letting you pinpoint high-value users that keep coming back to generate impressions.
+
+🤩 This is positive signal for the app and game industry which is suffering from low RPMs and high CPIs. Though IAP has been growing over the years but still mamoth 60% of app revenue 🤯 is driven by IAA. AdROAS puts IAA-focused apps in the driver’s seat, letting marketers optimize budget based on blended revenue impact: IAP + IAAs.
+
+🤔 But when will other UA platforms adopt AdROAS? 
+🤔 Will Meta also recognise OfferWall revenue in AdROAS?
+
+Source: Matej 🦩 Lancaric
+#AdMonetization #MobileMarketing #AdROAS #InAppAds #Monetization #AppGrowth",9,1,1,11mo,Post,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2024-11-26T11:29:00.000Z,,2024-11-13T00:00:00.000Z,,,26-11-2024
+https://www.linkedin.com/feed/update/urn:li:activity:7261778722146402305,https://media.licdn.com/dms/image/v2/D5622AQEFI-s3OiRP6g/feedshare-shrink_800/feedshare-shrink_800/0/1731342962227?e=1762992000&v=beta&t=NR3icPXYBfH7RG--2oVlxbwdv2tLSasSbhsQ76i4jWY,Image,"🚀 Struggling to increase revenue of your app? Imagine just one click of user adds $200 eCPM to your top line - Introducing the Bright SDK 📈
+
+With mobile apps relying on ads for up to 70% of revenue and getting users to pay is a herculean task, this new approach gives developers data and controls to balance revenue with user experience. Here’s what’s new:
+
+1. 🔕  Works in background: Bright SDK pays you on top of your existing ad and IAP revenue, but works silently in the background.
+2. 🎯 ZERO personal data collection: No permissions required. GDPR/CCPA compliant.
+3. 📊 No impact on App performance: It only operates when there is enough CPU, memory and battery.
+4. ✅  Approved by many appstores: Approved by Apple, Amazon, LG, Huawei, Samsung app stores, and is whitelisted by top Antivirus companies.
+5. 🔍 Transparent communications: Simple, configurable screen ensures users willingly opt-in.
+
+🦸‍♂️ About the Team: Bright SDK was created by Or Lenchner, CEO of Bright Data, whose vision is to bring ethical data practices and transparency into public web data.
+
+🫡 Bright SDK’s model signals a shift in mobile ad tech, prioritizing transparency and user-experience —potentially setting a new standard for monetization.
+
+🤔 Would you like to experiment this for your app? or is it too good to be true?
+
+#MobileMonetization #BrightSDK #AdTransparency #AdTech #DigitalMarketing #UserExperience #AdMonetization #DataDriven",9,3,0,11mo,Post,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2024-11-26T11:29:00.000Z,,2024-11-11T00:00:00.000Z,,,26-11-2024
+https://www.linkedin.com/feed/update/urn:li:activity:7259950301510594560,https://media.licdn.com/dms/image/v2/D4D22AQH-E96W4n69KA/feedshare-shrink_800/feedshare-shrink_800/0/1730905590603?e=1762992000&v=beta&t=G3d3EituGkVoKRN9RryrOrKMYrEmC8gDNX9YXbYhKaE,Image,"👑 Google Ads is Finally Eyeing the $177 Billion In-App Performance Ads Market!! 📈 Should AppLovin and ironSource be Proud? or Scared? 🙃
+
+Google minted $237 Billion Revenue from Ads in 2023. It's flagship mobile ads product - Google AdMob is now enabling the performance demand for inventories of it's publisher network and is calling it 'High-Engagement Ads'.
+
+Google indicated this in an email sent couple of days back which lists new ad controls designed to boost engagement and improve ad experience – a direct move to compete with AppLovin and IronSource! This update brings fresh capabilities to app developers aiming to maximize ad revenue and enhance user retention.
+
+Here’s what’s new:
+
+🔄 Real-Time Bidding for Multi-Format Ads: AdMob’s latest controls support multi-format ads with real-time bidding across app inventory, with potential to increase ad revenue by up to 30% 💸.
+
+🎯 Enhanced Ad Placements & User Targeting: By refining ad placement options, developers can now serve more relevant ads aligned with user behavior, improving user retention and session time 📲. High-engagement placements like these are proven to drive up engagement metrics.
+
+📊 Advanced Analytics & Control: New reporting tools allow developers to track ad performance in detail, from impressions to engagement rates. This data-driven approach lets developers adjust their strategies for maximum impact and efficiency 🧑‍💻.
+
+As AdMob steps up to gulp down the market painstakingly created over the last decade by AppLovin and IronSource, it’s a new era for app developers looking to maximise ads revenue while. With better control and smarter targeting, these updates are bound to make waves in mobile ad monetization 🌊. 
+
+😎 Two things are for sure: 
+💰 App publishers using Applovin/ IronSource are going to see higher fills from Google
+🗺️ Gaming advertisers can now use the massive scale of Google's network to drive UA
+
+🧐 But few questions that reamin to be awnsered: 
+1️⃣ How will this impact performance DSPs like Moloco?
+2️⃣ Is Google doing this to increase it's footprint in the gaming app market?
+3️⃣ Will premium publishers, the core market of AdMob, accept this new demand for higher eCPMs?
+
+#AdTech #Google #AdMob #AppLovin #IronSource #MobileAds #DigitalMarketing #AdMonetization #UserEngagement #AppRevenue",17,0,0,11mo,Post,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2024-11-26T11:29:00.000Z,,2024-11-06T00:00:00.000Z,,,26-11-2024
+https://www.linkedin.com/feed/update/urn:li:activity:7258870024055005184,https://media.licdn.com/dms/image/v2/D5622AQFsSXsTFmqF0A/feedshare-shrink_800/feedshare-shrink_800/0/1730649475698?e=1762992000&v=beta&t=NQmdEBSltWGw_iWWOyBZ6XjJnHVUUjm8-e35KGbUbHI,Image,"🚀 Roblox Q3 Earnings: $0.9 Billion Revenue & 88.9 Million Daily Users 📊 – But How Can it Solve The Ads Revenue Problem? 🤔
+
+Roblox just reported impressive Q3 numbers, with revenue up 29% to $919 million and an incredible 88.9 million daily active users logging in to create, play, and socialize 🎮🌍. But as growth continues, Roblox faces a major challenge: replicate the market benchmark of in-app ads driving 50% revenue for the $220 Billion gaming market.
+
+Here’s the breakdown:
+
+📈 Record Growth: Roblox’s user count rose by 19% YoY, showing its pull among Gen Z and beyond 👩‍🎤
+
+💰 Ad Monetization Struggles: Despite high engagement yet only 20% of the users are monetized as ads haven’t become a big revenue driver yet. Roblox needs to balance user experience with advertiser needs to make ads work without disrupting gameplay 🎯
+
+🎮 Big Potential in Rewarded Ads: With brands exploring virtual worlds, in-game immersive ads on Roblox could be huge! 🌐 But it’s experimenting with the most popular ad format in the app ecosystem: Rewarded In-Game Ads while keeping the immersive experience intact 🕹️
+
+🧐Will Roblox find the right formula to make ads work? 
+👨🏻‍🔬Read an in-depth take by Naavik. Link shared in the comments.
+
+#Roblox #Gaming #AdTech #VirtualWorlds #InGameAds #DigitalAdvertising #RevenueGrowth #UserEngagement #AdMonetization",13,1,0,11mo,Post,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2024-11-26T11:29:00.000Z,,2024-11-03T00:00:00.000Z,,,26-11-2024
+https://www.linkedin.com/feed/update/urn:li:activity:7258143280855449600,https://media.licdn.com/dms/image/v2/D5622AQHMd09lVxugKw/feedshare-shrink_800/feedshare-shrink_800/0/1730476206251?e=1762992000&v=beta&t=spQeswedljJ7GUa-3JThCQz8Rv58XPkSUg0_1RDj-sM,Image,"🚀 Digital Turbine Doubles Down on One store Co, Ltd,. - it’s $50 Million Investment💰 to Challenge Google and Apple’s App Store Duopoly!
+
+Digital Turbine and South Korea’s ONE Store are opening a multi-billion dollar opportunity in mobile app distribution. This follows ONE Store’s previous funding round of $150 million 🤑 from top funds like Microsoft, Deutsche Telekom, KRAFTON Inc..
+
+🌐 Expanding Market Access: As anti-monopoly regulations drive change, Digital Turbine and ONE Store are ready to enter North America, Europe, and beyond, offering an attractive, lower-cost option for developers.
+
+⚡️Instant Installs: SingleTap install technology of Digital Turbine will enable ONE Store to provide a similar experience as PlayStore and AppStore
+
+📈 Revenue Growth for Developers: ONE Store’s low-fee model offers developers a more equitable revenue split, creating new revenue streams for those who diversify beyond the big players.
+
+🧐How Does This Impact You?
+📲 For app publishers, this means expanded distribution channels and better revenue potential. 
+📢 AdTech players gain a new space to innovate in mobile ads and in-app monetization, driving more relevant ad opportunities.
+
+Is this the start of a new era for app distribution and ad revenue growth?
+
+Sources: AP News, Prnewswire, Financial Times
+#DigitalTurbine #ONEStore #AppMarket #AdTech #AppMonetization #AntiMonopoly #MobileInnovation #MobileApps",10,0,0,11mo,Post,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2024-11-26T11:29:00.000Z,,2024-11-01T00:00:00.000Z,,,26-11-2024
+https://www.linkedin.com/feed/update/urn:li:activity:7257413478083112961,https://media.licdn.com/dms/image/v2/D5622AQEk7hiFv4jCtQ/feedshare-shrink_800/feedshare-shrink_800/0/1730296185270?e=1762992000&v=beta&t=CcCRwO0a9akv6jbxxIJ2kzVQa9Eb3KYUlb9tYzv0vvs,Image,"🚀 Grubhub Launches Ad Business 🤑 — Can it Outpace Uber Eats and DoorDash? 🍔
+
+Grubhub is making a bold move inby rolling out a full ad tech a.k.a commerce media business powered by Koddi aimed at empowering brands to reach 32 million active diners 🤤 through its new platform. Here’s what you need to know:
+
+🎯 Targeted Ads with Precision: New ad placements will allow restaurants and brands to target specific audiences across Grubhub’s ecosystem, enhancing targeted ad campaigns by as much as 40% in reach (Adweek).
+
+📈 Power Play with Amazon: Partnering with Amazon gives Grubhub a major edge in the delivery and ad space, offering Prime members unique perks when using Grubhub 🍕.
+
+💪 Upping the Ante Against Uber Eats and DoorDash: This development is Grubhub’s latest move to compete with Uber Eats and DoorDash in the increasingly ad-driven delivery space. For brands, this means new advertising opportunities to engage foodies where they’re already ordering 🛍️.
+
+As ad tech becomes more central to food delivery platforms, Grubhub’s push into this space could set a new standard for ad-driven growth in delivery space. 🛵 
+
+🤔 What’s your take on food delivery companies adding more ads? 
+🏆 Is this Grubhub’s chance to overtake the competition?
+
+Sources: ADWEEK
+#AdTech #DigitalMarketing #FoodDelivery #Grubhub #Amazon #UberEats #DoorDash #ProgrammaticAds #Ecommerce",3,0,0,11mo,Post,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2024-11-26T11:29:00.000Z,,2024-10-30T00:00:00.000Z,,,26-11-2024
+https://www.linkedin.com/feed/update/urn:li:activity:7256345657899130880,https://media.licdn.com/dms/image/v2/D5622AQHNlMWI9Xs4AQ/feedshare-shrink_800/feedshare-shrink_800/0/1730047620142?e=1762992000&v=beta&t=MGrDKTdCVjefzwrAsnP5TPcihq6i1wWGTyDzgzAaYMg,Image,"📣 Spotify Launches Ad Exchange (SAX): Has the Era of Audio Ads 🎧 Finally Arrived? 👀
+
+Spotify Advertising has officially launched its own ad exchange, the Spotify Ad Exchange (SAX) as it is targeting $4.2 Billion in ad revenue 🤑 by 2026. Spotify's stock has been already rallying for the last 24 months ​​📅 and after this news the market made the stock reach all-time peak of $379 🥵.
+
+SAX's first demand side partner The Trade Desk commented that “Digital audio, in particular, is fast emerging as an essential digital advertising channel for our clients looking to reach consumers in a logged-in, authenticated environment”. Here’s what this translates to:
+
+📺 Pilot with Video- SAX currently targets video ads in North America as the demand rich video will make it easier for Spotify to test the exchange at scale.
+
+🔊 Scale with Audio- Subsequently Spotify has plans to unlock the gold mine: massive audio inventory.
+
+👩‍🌾 Mini Walled Gardens- Spotify has followed up the footsteps of Netflix which launched its own Ad Tech just 6 months back. 
+
+💊 Steroids for Audio AdTech Cos- Investors, entrepreneurs and customers are again becoming believers in the Audio AdTech companies e.g. Audiomob
+
+🤔 Ques: But why is it important for app publishers?
+💡Ans: Start experimenting with audio ads placements asap because audio fill rates and eCPMs are expected to skyrocket with audio becoming SAXyyyy. 😉
+
+Source: Digiday, Axios
+#AdTech #IAA #AdMonetisation #AdRevenue #DigitalAdvertising #SSP #ProgrammaticAdvertising",25,0,0,11mo,Post,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2024-11-26T11:29:00.000Z,,2024-10-27T00:00:00.000Z,,,26-11-2024
+https://www.linkedin.com/feed/update/urn:li:activity:7255617477626220544,https://media.licdn.com/dms/image/v2/D5622AQE1-AL6al5euA/feedshare-shrink_800/feedshare-shrink_800/0/1729874008612?e=1762992000&v=beta&t=UQ0S5nOunjhsXY3WqfiXmyPxgqpfIpMbCFmy98AUgoc,Image,"🚀 AppLovin Hits All-Time High of $162 🤑 — Is There More Growth Ahead? 📈
+
+Analysts such as Bank of America have nearly doubled AppLovin's stock price target to $210 🤯 . Market is seeing AppLovin as an emerging force in mobile gaming, leveraging AI and big data to drive rapid growth.
+
+It still deserves a meatier valuation 😮 when compared with The Trade Desk which trades at 20 times sales and 48 times EBITDA, while AppLovin is currently trading at only 10 times sales and 18 times EBITDA . As AppLovin breaks out from the shadows, it’s a stock worth watching closely!
+
+AppLovin’s recent stock price growth also signals a shift in the market's evolving perception of mobile gaming and AdTech. This highlights a central theme: AdTech and mobile gaming are set for a comeback with a BANG in 2025. 🔥 
+
+But what does this mean 🤔 for developers, advertisers, and investors? How do we stay ahead of the curve as AI is redefining AdTech?
+
+Source: Investing.com
+#AdTech #MobileGaming #NYSE #AdMonetisation #AdRevenue #ProgrammaticAdvertising",42,0,0,11mo,Post,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2024-11-26T11:29:00.000Z,,2024-10-25T00:00:00.000Z,,,26-11-2024
+https://www.linkedin.com/feed/update/urn:li:activity:7254884317103828994,https://media.licdn.com/dms/image/v2/D5622AQFS__TiYlfLMQ/feedshare-shrink_800/feedshare-shrink_800/0/1729682190424?e=1762992000&v=beta&t=L0AWa0g_VNLxXmK6A9S7jDteMFQ3Ip54VWM8gCaUjn4,Image,"The New York Times' transition from an ads-first to a subscription-first business model was driven by games. But will ads once again become the growth driver, this time also because of games?
+
+NYT Games has been growing at such an explosive rate that, on a day in mid-October of 2023, the average daily active users in the Times Games app—iOS and Android combined—reached 2,615,333. These users aren't just coming to the NYT app to kill time; this is serious business. The NYT subscription bundle starts at $25 a month and surpassed 10 million subscribers in November, with a goal of 15 million by the end of 2027. “A lot of people are actually buying the bundle through our Games product,” says Alex Hardiman, Chief Product Officer at NYT.
+
+But is subscription the only monetization lever for games? No—ads monetization accounts for 60% of revenue for casual games worldwide. So, what's NYT planning in this regard?
+
+Joy Robins, Global Chief Advertising Officer of NYT, mentioned that The New York Times' puzzles and games were played more than 8 billion times last year, with 10 million daily gamers—more than many primetime television shows attract. This is a habitual, engaged, and high-income audience. New York Times Advertising is launching ads within its newest game, Connections, with launch sponsors like Uber Eats. Internal testing by New York Times Advertising has shown that this new ad placement ensures a non-disruptive user experience and is effective for advertisers (with a 0.60% average CTR from Wordle’s collaboration with DoorDash).
+
+While news publishers have historically excelled at awareness-based ad campaigns on a massive scale, the high-engagement nature of games is proving effective at driving lower-funnel tactics. This is a great case study for SME non-gaming app publishers to consider incorporating ad-monetized casual games into their apps to boost their bottom line.
+
+Did you know? 
+The Washington Post has also experimented with games, albeit with mixed results. According to two sources familiar with the matter, the paper even considered buying Wordle but missed the opportunity, which was later seen as a significant loss after the Times acquired it.
+
+Sources: Vanity Fair, AdForum, ADWEEK, Axios",6,0,0,11mo,Post,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2024-11-26T11:29:00.000Z,,2024-10-23T00:00:00.000Z,,,26-11-2024
+https://www.linkedin.com/feed/update/urn:li:activity:7254159507805593601,https://media.licdn.com/dms/image/v2/D5622AQGcGchSBKA8Wg/feedshare-shrink_800/feedshare-shrink_800/0/1729516900718?e=1762992000&v=beta&t=_pSL0HeU9SUCo1DAbieDQxDOJgtn1jJP3vxGT-ogtIc,Image,"🚀 Is YouTube Secretly Building the Future of In-Game Advertising? 🎮
+
+YouTube's Playables is a strategic initiative aimed at capturing the attention of casual gamers by offering simple yet addictive games directly on its platform. While the company has been mum over the details, tech industry insiders predict a mid-2025 roll out.
+
+Playables taps into the behavior of engaged YouTube users who are already 11% more likely to play mobile games, outperforming general U.S. gaming patterns. And what’s interesting is that while Playables is currently available only to Premium users, consumers who pay a fixed amount for an ad-free experience, when the general roll-out happens, expect your Playables to be punctuated by ads.
+
+This is a massive opportunity for performance advertisers to tap into Youtube's audience which was esrtwhile a darling of brand advertisers. Expect interactive ad experiences in full-screen placements driving higher conversions.
+
+What you should be doing after reading this?
+1. Web game developer -> List your games on YouTube right now (link in first comment)
+2. Mobile game marketeer -> Strike partnerships with web game developers to drive installs using their games on YouTube
+3. App marketeer -> Start running full-screen gamefied ads to tap into gaming audiences
+4. App monetisation manager -> Onboard web games to unlock higher monetistion just like YouTube but in a 10x better way using ArcPlay
+
+#AdTech #YouTube #CasualGaming #AdMonetization #AdTech #AppMonetization #DigitalAds #MobileFirst",13,1,0,1yr,Post,Avi Aggarwal,https://www.linkedin.com/in/avi-aggarwal-product-manager,https://www.linkedin.com/in/avi-aggarwal-product-manager/,2025-10-22T11:29:00.000Z,,2024-10-21T00:00:00.000Z,,,22-10-2024

@@ -1,0 +1,61 @@
+# Cursor Rules for LinkedIn Analytics App
+
+## shadcn/ui Guidelines
+
+### Component Usage
+- **Always prefer shadcn/ui components** over custom HTML elements when available
+- Use the following shadcn/ui components:
+  - `Button` instead of `<button>` elements
+  - `Card`, `CardContent`, `CardHeader`, `CardTitle` instead of custom card classes
+  - `Badge` for status indicators and labels
+  - `Input` for form inputs
+  - `Separator` for dividers
+  - `Sheet` for modals and overlays
+  - `Sidebar` components for navigation
+  - `Skeleton` for loading states
+  - `Tooltip` for hover information
+
+### Color Scheme
+- Use the custom color variables defined in the project:
+  - `--color-beige: #FAF9F5` (background accent)
+  - `--color-primary: #157187` (main brand color)
+  - `--color-secondary: #C4E5ED` (secondary accent)
+- Apply colors using Tailwind classes: `bg-primary`, `text-primary`, `border-primary`
+- Use `text-muted-foreground` for secondary text
+- Use `text-destructive` for error states
+
+### Layout Structure
+- Use `SidebarProvider` and `SidebarInset` for main layout
+- Implement responsive sidebar with `AppSidebarTrigger` for mobile
+- Use `Card` components for content sections
+- Apply consistent spacing with `gap-4`, `p-4`, `space-y-6`
+
+### Component Migration
+- Replace custom `.card` classes with shadcn/ui `Card` components
+- Replace custom buttons with shadcn/ui `Button` components
+- Use `Badge` components for status indicators
+- Apply consistent styling with shadcn/ui design tokens
+
+### Accessibility
+- Maintain proper ARIA labels and roles
+- Use semantic HTML structure
+- Ensure keyboard navigation works properly
+- Test with screen readers
+
+### Code Organization
+- Keep components in `/src/components/ui/` for shadcn/ui components
+- Create custom components in `/src/components/` 
+- Use proper imports: `import { Component } from '@/components/ui/component'`
+- Follow React best practices for component composition
+
+### Styling Guidelines
+- Use Tailwind CSS classes with shadcn/ui design tokens
+- Avoid custom CSS when shadcn/ui provides equivalent functionality
+- Use `cn()` utility for conditional class names
+- Maintain consistent spacing and typography
+
+### Non-Breaking Changes
+- When migrating components, create new versions alongside existing ones
+- Use feature flags or conditional rendering to switch between old and new
+- Ensure rollback capability by keeping original implementations
+- Test thoroughly before removing legacy code

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Table Test</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Override for test to match exact image colors */
+    .distribution-table-container {
+      border: 1px solid #cccccc !important;
+      background: white !important;
+      font-family: Arial, sans-serif !important;
+    }
+    .distribution-table {
+      font-size: 14px !important;
+      font-family: Arial, sans-serif !important;
+    }
+    .distribution-table th {
+      background-color: #D6E3DD !important;
+      color: #000000 !important;
+      font-weight: normal !important;
+      border: 1px solid #cccccc !important;
+      font-size: 14px !important;
+      height: 32px !important;
+      padding: 8px 12px !important;
+    }
+    .distribution-table td {
+      background-color: #F6F5F1 !important;
+      color: #000000 !important;
+      border: 1px solid #cccccc !important;
+      font-size: 14px !important;
+      height: 32px !important;
+      padding: 8px 12px !important;
+    }
+    .distribution-table .total-row th {
+      background-color: #D6E3DD !important;
+      font-weight: bold !important;
+      color: #000000 !important;
+      border: 1px solid #cccccc !important;
+    }
+    .distribution-table .total-row td {
+      background-color: #D6E3DD !important;
+      font-weight: bold !important;
+      color: #000000 !important;
+      border: 1px solid #cccccc !important;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <div class="max-w-4xl mx-auto p-6">
+    <h1 class="text-2xl font-bold mb-6">Distribution Tables Test</h1>
+    
+    <!-- Monthly Distribution Table -->
+    <div class="mb-8">
+      <h2 class="text-lg font-semibold mb-3">Monthly Post Distribution & Engagement</h2>
+      <div id="monthlyDistributionTable" class="distribution-table-container">
+        <div class="text-sm text-gray-500 italic">Loading monthly data...</div>
+      </div>
+    </div>
+    
+    <!-- Weekday Distribution Table -->
+    <div>
+      <h2 class="text-lg font-semibold mb-3">Weekday Post Distribution & Engagement</h2>
+      <div id="weekdayDistributionTable" class="distribution-table-container">
+        <div class="text-sm text-gray-500 italic">Loading weekday data...</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Test data
+    const testData = {
+      trends: {
+        posts_per_month: [
+          { month: '2024-01', count: 5 },
+          { month: '2024-02', count: 8 },
+          { month: '2024-03', count: 12 },
+          { month: '2024-04', count: 6 },
+          { month: '2024-05', count: 9 },
+          { month: '2024-06', count: 15 }
+        ],
+        month_median: [
+          { month: '2024-01', median: 45 },
+          { month: '2024-02', median: 52 },
+          { month: '2024-03', median: 38 },
+          { month: '2024-04', median: 61 },
+          { month: '2024-05', median: 47 },
+          { month: '2024-06', median: 55 }
+        ]
+      },
+      timingInsights: {
+        day_of_week: {
+          Monday: { count: 8, median: 45 },
+          Tuesday: { count: 12, median: 52 },
+          Wednesday: { count: 15, median: 48 },
+          Thursday: { count: 10, median: 55 },
+          Friday: { count: 6, median: 42 },
+          Saturday: { count: 3, median: 38 },
+          Sunday: { count: 2, median: 35 }
+        }
+      }
+    };
+
+    // Copy the functions from main.js
+    function renderMonthlyDistributionTable(d) {
+      const root = document.getElementById('monthlyDistributionTable');
+      if (!root) return;
+      
+      const trends = d?.trends || {};
+      const postsPerMonth = trends.posts_per_month || [];
+      const monthMedian = trends.month_median || [];
+      
+      if (postsPerMonth.length === 0) {
+        root.innerHTML = '<div class="text-sm text-gray-500">No monthly data available.</div>';
+        return;
+      }
+      
+      // Create a map for easy lookup
+      const monthData = {};
+      postsPerMonth.forEach(item => {
+        monthData[item.month] = { posts: item.count, engagement: 0 };
+      });
+      
+      monthMedian.forEach(item => {
+        if (monthData[item.month]) {
+          monthData[item.month].engagement = item.median;
+        }
+      });
+      
+      // Sort months chronologically
+      const sortedMonths = Object.keys(monthData).sort();
+      
+      // Calculate totals
+      const totalPosts = Object.values(monthData).reduce((sum, item) => sum + item.posts, 0);
+      const totalEngagement = Object.values(monthData).reduce((sum, item) => sum + (item.engagement * item.posts), 0);
+      const avgEngagement = totalPosts > 0 ? Math.round(totalEngagement / totalPosts) : 0;
+      
+      // Create table HTML
+      let tableHTML = `
+        <table class="distribution-table">
+          <thead>
+            <tr>
+              <th class="month-cell">Month</th>
+              <th>Posts</th>
+              <th>Engagement</th>
+            </tr>
+          </thead>
+          <tbody>
+      `;
+      
+      // Add data rows
+      sortedMonths.forEach(month => {
+        const data = monthData[month];
+        const monthName = formatMonthName(month);
+        tableHTML += `
+          <tr>
+            <td class="month-cell">${monthName}</td>
+            <td class="number-cell">${data.posts}</td>
+            <td class="number-cell">${data.engagement}</td>
+          </tr>
+        `;
+      });
+      
+      // Add total row
+      tableHTML += `
+            <tr class="total-row">
+              <th class="month-cell">Total</th>
+              <th class="number-cell">${totalPosts}</th>
+              <th class="number-cell">${avgEngagement}</th>
+            </tr>
+          </tbody>
+        </table>
+      `;
+      
+      root.innerHTML = tableHTML;
+    }
+
+    function renderWeekdayDistributionTable(d) {
+      const root = document.getElementById('weekdayDistributionTable');
+      if (!root) return;
+      
+      const timing = d?.timingInsights || {};
+      const dayOfWeek = timing.day_of_week || {};
+      
+      if (Object.keys(dayOfWeek).length === 0) {
+        root.innerHTML = '<div class="text-sm text-gray-500">No weekday data available.</div>';
+        return;
+      }
+      
+      // Define day order
+      const dayOrder = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+      const dayAbbr = { 
+        Monday: 'Mon', Tuesday: 'Tue', Wednesday: 'Wed', Thursday: 'Thu', 
+        Friday: 'Fri', Saturday: 'Sat', Sunday: 'Sun' 
+      };
+      
+      // Calculate totals
+      const totalPosts = Object.values(dayOfWeek).reduce((sum, day) => sum + (day.count || 0), 0);
+      const totalEngagement = Object.values(dayOfWeek).reduce((sum, day) => sum + ((day.median || 0) * (day.count || 0)), 0);
+      const avgEngagement = totalPosts > 0 ? Math.round(totalEngagement / totalPosts) : 0;
+      
+      // Create table HTML
+      let tableHTML = `
+        <table class="distribution-table">
+          <thead>
+            <tr>
+              <th class="day-cell">Day</th>
+              <th>Posts</th>
+              <th>Engagement</th>
+            </tr>
+          </thead>
+          <tbody>
+      `;
+      
+      // Add data rows
+      dayOrder.forEach(day => {
+        const data = dayOfWeek[day];
+        const posts = data?.count || 0;
+        const engagement = data?.median || 0;
+        
+        tableHTML += `
+          <tr>
+            <td class="day-cell">${dayAbbr[day]}</td>
+            <td class="number-cell">${posts}</td>
+            <td class="number-cell">${engagement}</td>
+          </tr>
+        `;
+      });
+      
+      // Add total row
+      tableHTML += `
+            <tr class="total-row">
+              <th class="day-cell">Total</th>
+              <th class="number-cell">${totalPosts}</th>
+              <th class="number-cell">${avgEngagement}</th>
+            </tr>
+          </tbody>
+        </table>
+      `;
+      
+      root.innerHTML = tableHTML;
+    }
+
+    function formatMonthName(monthKey) {
+      if (!monthKey) return 'Unknown';
+      
+      try {
+        const [year, month] = monthKey.split('-');
+        const date = new Date(parseInt(year), parseInt(month) - 1, 1);
+        return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short' });
+      } catch (e) {
+        return monthKey;
+      }
+    }
+
+    // Render the tables
+    document.addEventListener('DOMContentLoaded', function() {
+      renderMonthlyDistributionTable(testData);
+      renderWeekdayDistributionTable(testData);
+    });
+  </script>
+</body>
+</html>

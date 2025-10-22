@@ -1,0 +1,551 @@
+postUrl,imgUrl,postContent,type,likeCount,commentCount,repostCount,postDate,action,author,authorUrl,profileUrl,timestamp,viewCount,postTimestamp,videoUrl,sharedPostUrl,approximateDate
+https://www.linkedin.com/feed/update/urn:li:activity:7386417956492247040,,"The ""DevOps Tax"" Reality Check
+While you're configuring cloud (AWS, gcp..) someone just shipped your idea.
+Harsh? Maybe. True? Definitely.
+what kills most side projects and early-stage ideas? It's not the coding. It's the infrastructure maze.
+Setting up databases, configuring deployments, managing security, backup systems... You're solving DevOps problems before you've validated if anyone even wants what you're building.
+I've watched brilliant developers spend 3 weeks setting up their stack before writing a single line of product code. That's not building—that's just paying the ""getting started"" tax.
+The worst part? You do it all over again for the next idea.
+We built TableSprint to break this pattern. Native database, security handled, deployments sorted. Not because it's convenient—because your time should go into the thing that matters: solving the actual problem. Keep vibe coding. AI has made things way faster and simpler....
+
+#VibeCoding #TableSprint #InfraCost #Devops",Text,4,0,0,14h,Post,Abhijeet Kumar,https://www.linkedin.com/in/abhijeet-kumar-5088a31,https://www.linkedin.com/in/abhijeet-kumar-5088a31/,2025-10-22T11:09:00.000Z,,,,,2025-10-21
+https://www.linkedin.com/feed/update/urn:li:activity:7382090677733687296,https://media.licdn.com/dms/image/v2/D5605AQFW3b4-mfxHJA/videocover-low/B56ZnJ0M4pHQB4-/0/1760027557181?e=1761717600&v=beta&t=t3NB-l3tRKLwD5_jwXocWz8Kgqjh7a2GwokDtAuXDIw,"We've been shipping features at lightning speed, but this new release is different.
+Now you can vibe code complete, production-ready applications with a single prompt.
+
+No more wrestling with infrastructure. No more security configurations. No more complex automation setups.
+Just describe what you need, and the TableSprint Agent handles everything:
+Full-stack applications – from landing pages to inventory management systems.
+Enterprise-grade security – built-in
+Automated work Agents – configured and ready to go
+Complete infrastructure – deployed and managed
+Automatic data backups – your data is safe
+Scalable – grow as you need
+
+We are working hard to make every idea a reality.
+
+Describe your vision in plain English, and watch it come to life as a production application.
+
+Watch it in action in the video attached.
+
+We are also putting up booth at expand north star - Gitex global this week. 
+Come meet us at event to explore more.
+
+
+#AI #VibeCoding #AppDevelopment #Innovation #TableSprint",Video (LinkedIn Source),32,5,2,1w,Post,Abhijeet Kumar,https://www.linkedin.com/in/abhijeet-kumar-5088a31,https://www.linkedin.com/in/abhijeet-kumar-5088a31/,2025-10-15T11:09:00.000Z,,2025-10-09T00:00:00.000Z,blob:https://www.linkedin.com/26423e67-838a-46e5-9693-d053ca9cef77,,2025-10-15
+https://www.linkedin.com/feed/update/urn:li:activity:7381506448100556800,https://media.licdn.com/dms/image/v2/D4D22AQGvfFIzxcWZQA/feedshare-shrink_800/B4DZm_BUa1G8Ag-/0/1759846419945?e=1762992000&v=beta&t=DRfdr4UxIhdJhIIwi8oKeJXjPWyKJmtjkiYaX21CCjE,#vibecoding #TableSprint,Celebration,11,0,1,2w,Post,Abhijeet Kumar,https://www.linkedin.com/in/abhijeet-kumar-5088a31,https://www.linkedin.com/in/abhijeet-kumar-5088a31/,2025-10-07T11:09:00.000Z,,2025-10-08T00:00:00.000Z,,https://www.linkedin.com/feed/update/urn:li:activity:7381330884701892608/,2025-10-08
+https://www.linkedin.com/feed/update/urn:li:activity:7366843964320018432,,"#TableSprint #Vibecoding #indianexpress
+
+https://lnkd.in/ekhhxkUF",Article,13,0,1,1mo,Post,Abhijeet Kumar,https://www.linkedin.com/in/abhijeet-kumar-5088a31,https://www.linkedin.com/in/abhijeet-kumar-5088a31/,2025-09-22T11:09:00.000Z,,2025-08-28T00:00:00.000Z,,https://indianexpress.com/article/technology/tech-news-technology/as-vibe-coding-becomes-silicon-valleys-latest-catchphrase-bengaluru-startup-promises-enterprise-app-development-in-minutes-10215774/,2025-09-22
+https://www.linkedin.com/feed/update/urn:li:activity:7366842361877778434,https://media.licdn.com/dms/image/v2/D4D22AQHIgWeKq4Z7Zg/feedshare-shrink_800/B4DZjviJI1GgAg-/0/1756365367944?e=1762992000&v=beta&t=WpUtvd6eiVZSG09ymL_3HuR5g43dRX85WqDJ-NVtrXY,#vibecoding #MicroApp #TableSprint,Image,12,0,0,1mo,Post,Abhijeet Kumar,https://www.linkedin.com/in/abhijeet-kumar-5088a31,https://www.linkedin.com/in/abhijeet-kumar-5088a31/,2025-09-22T11:09:00.000Z,,2025-08-28T00:00:00.000Z,,https://www.linkedin.com/feed/update/urn:li:activity:7366730292948021248/,2025-09-22
+https://www.linkedin.com/feed/update/urn:li:activity:7360996145503899648,,"Here is a microapp that one can use along with the LinkedIn posts for hiring and automated candidate wise acknowledgement. For why this is recommended practice for hiring process, read below. Happy to help anyone to set this up.
+
+https://lnkd.in/gbzfJqwN
+
+Many hiring posts, including those from very big companies, publicly display personal and professional emails asking candidates to send their resumes. Is it a best practice for candidates to share the resumes on individual email accounts? There can be many downsides to this:
+
+1. High chance of spamming the hiring manager
+2. Overload of emails impacting the regular emails
+3. Risk of losing the resumes with the email
+4. Piling up of all documents with one individual
+5. Acknowledging all the candidates becomes almost impossible 
+
+What about having one excel like database where candidates can share their resumes so that teams can coordinate the interview process and also use them for future communication? Following can be its core benefits:
+
+1. Central repository without manually transferring candidate resumes and documents
+2. Automatic acknowledgement of candidate submissions and also decisions of the interview process
+3. Avoiding losing resumes due to individual actions and movement in and out of the organization
+4. Manage the overall hiring process in a coordinated manner with multiple reviewers
+
+Additional Benefits:
+
+1. Get automated summary such as number of resumes submitted every day
+2. Provide filters to screen resumes that meet specific criteria
+
+ #vibecoding #TableSprint #Automation #hiringmanagers #FormsAlternatives #jobapplications #resume #TalentAcquisition",Text,12,4,4,2mo,Abhijeet Kumar reposted this,Nagasanthosh Josyula,https://www.linkedin.com/in/santosh-josyula,https://www.linkedin.com/in/abhijeet-kumar-5088a31/,2025-08-23T11:09:00.000Z,,2025-08-12T00:00:00.000Z,,,2025-08-23
+https://www.linkedin.com/feed/update/urn:li:activity:7359164954551185409,,"Yesterday, I read an insightful post by Dr.Gopal on the question, ""Why is my child so angry?"" On diving deeper into the MSLSS tool to evaluate the satisfaction level of children, it seemed worthy to create a digital version of the tool.
+
+This will calculate the scores automatically and anyone can share and use it for the survey. Thanks Anustup Nayak for your comment which made me land on Dr. Gopal's post.
+
+Here is the link to digital version of MSLSS tool:
+
+https://lnkd.in/dfBwXukf
+
+Here is the link to post I was referring to:
+
+https://lnkd.in/dYVuSsYb
+
+Thanks Ajay Bhanap and Shantveer Biradar in helping to create the tool.
+
+#vibecoding #TableSprint #survey #MSLSS #Education #Forms #Psychology",Text,13,1,1,2mo,Abhijeet Kumar reposted this,Nagasanthosh Josyula,https://www.linkedin.com/in/santosh-josyula,https://www.linkedin.com/in/abhijeet-kumar-5088a31/,2025-08-23T11:09:00.000Z,,2025-08-07T00:00:00.000Z,,,2025-08-23
+https://www.linkedin.com/feed/update/urn:li:activity:7358401018130255873,https://media.licdn.com/dms/image/v2/D5605AQFiiq0sLjBjTg/feedshare-thumbnail_720_1280/B56Zh5B4WSHcA0-/0/1754377193932?e=1761717600&v=beta&t=7h4-CefVrlqiIyEBif4v7PT4uumH6wCrkMKC6Dt8mV8,#TableSprint #vibecoding,Video (LinkedIn Source),3,0,0,2mo,Post,Abhijeet Kumar,https://www.linkedin.com/in/abhijeet-kumar-5088a31,https://www.linkedin.com/in/abhijeet-kumar-5088a31/,2025-08-23T11:09:00.000Z,,2025-08-05T00:00:00.000Z,,https://www.linkedin.com/feed/update/urn:li:activity:7358391336917454848/,2025-08-23
+https://www.linkedin.com/feed/update/urn:li:activity:7358022217160404993,https://media.licdn.com/dms/image/v2/D5622AQHZ16_TkpdFXQ/feedshare-shrink_2048_1536/B56ZhzpiU8HUAo-/0/1754286925611?e=1762992000&v=beta&t=hQGKQsemjX8c8dfxukqsph5vI9m_O8-z9_cC1THCx8I,#TableSprint #vibecoding,Image,4,0,0,2mo,Post,Abhijeet Kumar,https://www.linkedin.com/in/abhijeet-kumar-5088a31,https://www.linkedin.com/in/abhijeet-kumar-5088a31/,2025-08-23T11:09:00.000Z,,2025-08-04T00:00:00.000Z,,https://www.linkedin.com/feed/update/urn:li:activity:7358012674175062016/,2025-08-23
+https://www.linkedin.com/feed/update/urn:li:activity:7356921663441022976,https://media.licdn.com/dms/image/v2/D5605AQHv86hSxExNeg/videocover-low/B56ZhkFyfsHUCE-/0/1754025905003?e=1761717600&v=beta&t=58lo75WwMMAXPdm3iWHDlismgUhoYaHQLQ73CU7-b8E,"this list is really useful...
+
+#vibecoding #TableSprint #alternateschools #directory",Video (LinkedIn Source),3,0,1,2mo,Post,Abhijeet Kumar,https://www.linkedin.com/in/abhijeet-kumar-5088a31,https://www.linkedin.com/in/abhijeet-kumar-5088a31/,2025-08-23T11:09:00.000Z,,2025-08-01T00:00:00.000Z,,https://www.linkedin.com/feed/update/urn:li:activity:7356917887275601920/,2025-08-23
+https://www.linkedin.com/feed/update/urn:li:activity:7356686916315963392,https://media.licdn.com/dms/image/v2/D5622AQHye6y33HAYAA/feedshare-shrink_2048_1536/B56ZhgzwkoG4As-/0/1753970839337?e=1762992000&v=beta&t=78taQ5_zVhIOZTbkTobtKc7zbbVpl59gF_TnIhKG7tg,"How many tables do you use?
+
+This is my litmus test for tech solutions and engineering reviews. This applies to most businesses, if not all.
+
+Any non-tech person can easily do this check of their database. It has a nice Excel-like UI through phpMyAdmin, Workbench, pgAdmin, or SQL Developer. You can have it on your laptop or ask your team for read-only access.
+
+Most use cases will involve single-digit tables...
+If you discover that you need hundreds of tables to scale, that's a red flag.
+
+The impact of reducing tables is huge for scale and agility:
+Cloud costs will go down
+Development costs will go down
+Scaling will be easier
+Team movement and maintenance will be 10x easier
+
+A simple hack of requiring CEO or founder approval for each new table will do wonders for your tech output.
+
+WordPress has 12 core tables covering admin, webpages, SEO...
+
+#Scale #InfraCost #TableSprint #VibeCoding #EngineeringReview #Database",Image,11,1,1,2mo,Post,Abhijeet Kumar,https://www.linkedin.com/in/abhijeet-kumar-5088a31,https://www.linkedin.com/in/abhijeet-kumar-5088a31/,2025-08-23T11:09:00.000Z,,2025-07-31T00:00:00.000Z,,,2025-08-23
+https://www.linkedin.com/feed/update/urn:li:activity:7356547604513525762,https://media.licdn.com/dms/image/v2/D5605AQFI_rJVZX6zVQ/feedshare-thumbnail_720_1280/B56Zhet.opG4A0-/0/1753935769016?e=1761717600&v=beta&t=MkRHeYeWb6h_vnhzK_cht6OHUVfH9UzQJZDeA3oi0kg,"Today's topic: Converting pdf to web page
+
+Pdfs are the common files in which data is quickly stored and shared. Often, the pdf documents are loaded with information, not editable and ways of interaction are limited.
+
+I took school holiday calendar pdf and created a web page representing the same using TableSprint AI assistant. May be a better way to share information and also better user experience. Sharing the video below.
+
+PS: Anyone can create account in TableSprint and start experimenting with vibe coding. 
+
+#vibecoding #pdfconverter #TableSprint #MicroApp #GenAI #Agent #Automation",Video (LinkedIn Source),10,0,1,2mo,Abhijeet Kumar reposted this,Nagasanthosh Josyula,https://www.linkedin.com/in/santosh-josyula,https://www.linkedin.com/in/abhijeet-kumar-5088a31/,2025-08-23T11:09:00.000Z,,2025-07-31T00:00:00.000Z,,,2025-08-23
+https://www.linkedin.com/feed/update/urn:li:activity:7356388092909404160,https://media.licdn.com/dms/image/v2/D5605AQG1vScYu8I-xQ/videocover-low/B56Zhcj7jsH0CE-/0/1753899589076?e=1761717600&v=beta&t=Zzv-yvBoo254rtyDJAsTTqr1lcYX8sCuJ0557cBlSxA,"Your app worked perfectly for 2-4 users. Now you need to roll it out to 5,000. What could go wrong?
+
+Building for a small team and for enterprise are two different things.
+The moment you scale beyond your core team, user and data permissions become your biggest bottleneck. I've seen promising solutions crash and burn during enterprise rollouts—not because of performance issues, but because of permission complexity.
+
+Here's the reality: Even the best RBAC systems and software don't perform well here and can't fulfill all types of users and permissions. Most of the time, we keep struggling to assign roles to users, and the same user needs three roles but only partial permissions from each role.
+
+At TableSprint, we have built the first of its kind and the most granular permission system, which starts from table fields and goes up to the micro-app level!
+
+Field-level precision: You can attach one user to one field of one worksheet with edit/view/delete permissions.
+
+Role-based orchestration: You can put all users, emails, roles, and departments in one sheet and use it to orchestrate all permissions across all available datasets.
+
+Multi-tenant flexibility: For micro-apps and view-level access, you can choose domain-wise permissions (your domain, partners, or vendors) with a few emails included, excluded, or both.
+
+Universal configurability: However one wants, they can configure permissions for datasets and UIs.
+
+The whole permission architecture is built with first principles and a second-to-none configuration style.
+
+The result? Rolling out apps to thousands of users is just like sharing a link on WhatsApp.
+
+#EnterpriseApps #Permissions #RBAC #VibeCoding #TableSprint #DataSecurity #Enterprise #ScaleUp",Video (LinkedIn Source),16,0,2,2mo,Post,Abhijeet Kumar,https://www.linkedin.com/in/abhijeet-kumar-5088a31,https://www.linkedin.com/in/abhijeet-kumar-5088a31/,2025-08-23T11:09:00.000Z,,2025-07-30T00:00:00.000Z,,,2025-08-23
+https://www.linkedin.com/feed/update/urn:li:activity:7356214377747791872,https://media.licdn.com/dms/image/v2/D4D05AQFvVHL2r_Efaw/videocover-low/B4DZhaDyh1GkCE-/0/1753857616402?e=1761717600&v=beta&t=cCo9UuIayw9LC5Zc-0JpwrW1L8m--DgzWOOxKcJWhaQ,"Today's topic: Chatting Dashboards
+
+Creating dashboards has been one of the most common but most dragging projects that I have been involved in. Many times, it becomes difficult to arrive at a consensus on what metrics to show, prioritize them in given space. In most cases, what users want to see and analyze does not fit in the small space. 
+
+At TableSprint, anyone can vibe code dashboards and then chat with them to view and analyze the data. Sharing the video demo of one such micro app for a BFSI application. By the way, we can easily clone this application and share it with anyone who wants to build such dashboards and chat feature.
+
+#vibecoding #TableSprint #MicroApp #Dashboards #AI #Agent #Automation #Analytics #Visualization",Video (LinkedIn Source),16,0,3,2mo,Abhijeet Kumar reposted this,Nagasanthosh Josyula,https://www.linkedin.com/in/santosh-josyula,https://www.linkedin.com/in/abhijeet-kumar-5088a31/,2025-08-23T11:09:00.000Z,,2025-07-30T00:00:00.000Z,,,2025-08-23
+https://www.linkedin.com/feed/update/urn:li:activity:7356019579120242688,https://media.licdn.com/dms/image/v2/D5605AQGLdYABlGl1uw/videocover-low/B56ZhXUz5hHkCI-/0/1753811733641?e=1761717600&v=beta&t=dK57mciEtEO3h1BQMLyuLdjwEpcqZ0saJpdagFofNcc,#VibeCoding #TableSprint #ComingUp,Video (LinkedIn Source),9,0,0,2mo,Post,Abhijeet Kumar,https://www.linkedin.com/in/abhijeet-kumar-5088a31,https://www.linkedin.com/in/abhijeet-kumar-5088a31/,2025-08-23T11:09:00.000Z,,2025-07-29T00:00:00.000Z,,,2025-08-23
+https://www.linkedin.com/feed/update/urn:li:activity:7355848235015393280,https://media.licdn.com/dms/image/v2/D5605AQH5nNaJhwa5PA/feedshare-thumbnail_720_1280/B56ZhU3QfmHUBA-/0/1753770429607?e=1761717600&v=beta&t=DIoGM6i99A6W6MMfXEY-gWzmNi--y9Ipc3Gd7OjP2ZM,#vibecoding #TableSprint #MicroApp,Video (LinkedIn Source),4,0,1,2mo,Post,Abhijeet Kumar,https://www.linkedin.com/in/abhijeet-kumar-5088a31,https://www.linkedin.com/in/abhijeet-kumar-5088a31/,2025-08-23T11:09:00.000Z,,2025-07-29T00:00:00.000Z,,https://www.linkedin.com/feed/update/urn:li:activity:7355846437756162048/,2025-08-23
+https://www.linkedin.com/feed/update/urn:li:activity:7355604151541592067,https://media.licdn.com/dms/image/v2/D4E05AQFSnxLJrXI91g/videocover-low/B4EZhRa1uhGwDg-/0/1753712668546?e=1761717600&v=beta&t=ktGi62x2j1AMwfM5Q-ttm9Q_LuESGBwAq7T6G1IQh14,"Spent the weekend building a LinkedIn prospecting agent that actually works. Watch Video
+
+Using TableSprint's VibeCoding feature, I created an automated system that handles the entire lead qualification process without any coding knowledge required.
+
+Phantombuster - one of the most used tool linkedin prospecting- they have free plan
+openai - you can use any other llm as well
+
+Here's what it does:
+
+1. Scrapes LinkedIn profiles through PhantomBuster integration
+2. Extracts profile data: name, company, followers, skills, job title, connections, location
+Pulls email addresses automatically
+3. Uses OpenAI to score each lead based on profile fit
+4. Composes personalized outreach emails
+5. Only sends emails to leads above your defined threshold score
+6. It mimics human and agents from phantombuster takes care of limits and do drip campaign
+
+The entire workflow runs through a single MicroApp. You just need to plug in your PhantomBuster API, OpenAI key, and set your targeting criteria. Then it runs completely hands-free.
+
+What's interesting is how this replaces expensive prospecting tools that charge thousand dollars. 
+The same functionality, built in a weekend, using WorkAgent by TableSprint.
+
+The scoring system analyzes company size, role relevance, and engagement patterns to determine lead quality before crafting personalized messages.
+
+If you're curious about the setup, feel free to DM me. Happy to share the agent clone.
+
+PhantomBuster
+OpenAI
+
+#VibeCoding #TableSprint #WorkAgent #MicroApp #LinkedInProspecting #SalesAutomation",Video (LinkedIn Source),23,4,1,2mo,Post,Abhijeet Kumar,https://www.linkedin.com/in/abhijeet-kumar-5088a31,https://www.linkedin.com/in/abhijeet-kumar-5088a31/,2025-08-23T11:09:00.000Z,,2025-07-28T00:00:00.000Z,,,2025-08-23
+https://www.linkedin.com/feed/update/urn:li:activity:7355500614476320768,https://media.licdn.com/dms/image/v2/D5605AQGqLL9PKnL2RA/feedshare-thumbnail_720_1280/B56ZhPhM.QG0A0-/0/1753680762131?e=1761717600&v=beta&t=cDsWQosFh13OAqYBiIJXaD13RL3QjMRYcMzMoF6muFc,#vibecoding #TableSprint,Video (LinkedIn Source),2,0,0,2mo,Post,Abhijeet Kumar,https://www.linkedin.com/in/abhijeet-kumar-5088a31,https://www.linkedin.com/in/abhijeet-kumar-5088a31/,2025-08-23T11:09:00.000Z,,2025-07-28T00:00:00.000Z,blob:https://www.linkedin.com/07b7083b-be1b-4546-b38a-4a1b4ad04ccb,https://www.linkedin.com/feed/update/urn:li:activity:7355470482265067521/,2025-08-23
+https://www.linkedin.com/feed/update/urn:li:activity:7354483905720176640,https://media.licdn.com/dms/image/v2/D5605AQGhxL3Heh_EEQ/videocover-low/B56ZhBfTqeH0DE-/0/1753445590318?e=1761717600&v=beta&t=w52TZoVPPLksjl9CjQReba--yZ96UxPiQOPpOduPp3s,"After months of coding sessions and way too much coffee, here's what our team has actually pulled off - an AI platform where you just chat to build apps with all hosted Infra!
+
+Four pillars of our platform -small video 
+
+1. MicroApps through Chat - We've designed something pretty cool - just tell our AI what you want and it builds your app! No more dragging boxes around or learning complex tools. Want a kanban board for your sales team? Just ask. Need a calendar view for projects? Say the word. It honestly feels like magic sometimes.
+
+2. Worksheets for Data & Views - We've built this smart data layer that's like Excel on steroids. Parent-child relationships, unlimited views, crazy formulas - all the nerdy stuff that makes data actually useful. Our users can structure data once and slice it a million different ways.
+
+3. WorkAgents for Flows & LLMs - This one took a lot of effort and brainpower! We've created AgentSprint - think workflows that actually understand context. LLM calls, embeddings, RAG, web scraping - it's like having a really smart intern that never sleeps and can talk to any API.
+
+4. Chatbots for Discovery - My personal favorite - users can build chatbots that know their business inside out. ""Find me all red widgets under $50"" or ""Show me last quarter's reports"" - it just works with their actual data through embeddings.
+
+Building tools that actually make complex things simple is harder than it looks. Still tweaking this every day - will come up with new updates and features of TableSprint.
+
+#vibecoding #TableSprint #Startups",Video (LinkedIn Source),46,5,5,2mo,Post,Abhijeet Kumar,https://www.linkedin.com/in/abhijeet-kumar-5088a31,https://www.linkedin.com/in/abhijeet-kumar-5088a31/,2025-08-23T11:09:00.000Z,,2025-07-25T00:00:00.000Z,blob:https://www.linkedin.com/2cfd1635-a19e-49ec-8f5b-e380b0af6520,,2025-08-23
+https://www.linkedin.com/feed/update/urn:li:activity:7353824760679579648,https://media.licdn.com/dms/image/v2/D5622AQHbQSC3I2llHA/feedshare-shrink_2048_1536/B56Zg4IpDgG4Ao-/0/1753288448699?e=1762992000&v=beta&t=qJyJrHR038dTHnkofxxPOHX8kjiHkbYdGjph6DpZwi4,"Interesting observation about AI builder platforms...
+
+I've been subscribed to newsletters from several AI App builder platforms. Something caught my attention recently.
+One of these platforms—which promises rapid app development—sends submission requests for user-created apps through Google Forms. They've recently upgraded to Typeform. 
+
+It got me thinking about forms as a fundamental building block. For most applications beyond simple landing pages, you need robust form functionality: user registration, data collection, feedback systems, contact forms.
+
+There's something telling about the tools a company chooses for their own operations.
+When evaluating any development platform, one needs to pay attention not just to marketing demos, but to what they actually use to run their own business.
+
+P.S. - If any of these platforms are reading this, might I suggest trying TableSprint forms? You can build one through chat and it won't cost a fortune... just saying! :)
+
+Sometimes the most honest product review is hidden in plain sight.
+
+
+#vibecoding #TableSprint #Feedback",Image,14,0,0,2mo,Post,Abhijeet Kumar,https://www.linkedin.com/in/abhijeet-kumar-5088a31,https://www.linkedin.com/in/abhijeet-kumar-5088a31/,2025-08-23T11:09:00.000Z,,2025-07-23T00:00:00.000Z,,,2025-08-23
+https://www.linkedin.com/feed/update/urn:li:activity:7352380372438933505,https://media.licdn.com/dms/image/v2/D5605AQEkdeFio6SGIw/videocover-low/B56Zgjm999HcCE-/0/1752944079916?e=1761717600&v=beta&t=CCFiHTOeladXehRgt0aAblKX6VZhn9sliEy8YyZbA0E,"TableSprint Work Agents are coming for every use case ....
+
+#vibecoding #TableSprint #WorkAgents",Video (LinkedIn Source),21,0,1,3mo,Post,Abhijeet Kumar,https://www.linkedin.com/in/abhijeet-kumar-5088a31,https://www.linkedin.com/in/abhijeet-kumar-5088a31/,2025-07-24T11:09:00.000Z,,2025-07-19T00:00:00.000Z,blob:https://www.linkedin.com/d951d46e-5b87-4c29-aad6-ed37fa549ef2,,2025-07-24
+https://www.linkedin.com/feed/update/urn:li:activity:7352004791125860352,https://media.licdn.com/dms/image/v2/D5605AQGUj4rwwmV5BQ/videocover-low/B56ZgeRXT4H0CI-/0/1752854534203?e=1761717600&v=beta&t=Ia7091M4ATHGigS2CeqKKtLFqbt7CoCNySnsehQAXOg,"The Fastest Enterprise App Builder ...
+
+
+#TableSprint #VibeCoding
+
+video by Gemini",Video (LinkedIn Source),17,3,0,3mo,Post,Abhijeet Kumar,https://www.linkedin.com/in/abhijeet-kumar-5088a31,https://www.linkedin.com/in/abhijeet-kumar-5088a31/,2025-07-24T11:09:00.000Z,,2025-07-18T00:00:00.000Z,blob:https://www.linkedin.com/5dc59556-f7b5-4aa8-9c01-63d1594d796d,,2025-07-24
+https://www.linkedin.com/feed/update/urn:li:activity:7351639927169703940,,"The brutal truth about why 90% of engineering teams hate their jobs.
+
+It's not the code. It's the friction.
+
+Here's what the data actually shows:
+Developers spend less than 32% of their time writing new code. The rest? Fighting infrastructure, waiting for approvals, and debugging environments.
+
+This is the silent killer of every company:
+
+❌ 23% of developer time wasted on legacy system maintenance
+❌ 64% of developers spend 90+ minutes daily just searching for solutions
+❌ 10-20% of new product budgets diverted to fixing broken infrastructure
+❌ 5-15 hours per developer per week lost to unproductive work
+
+Meanwhile, your competitors are shipping features while you're still in sprint planning.
+
+The game has changed.
+Companies that figure out how to eliminate this friction will dominate the next decade.
+Imagine if building enterprise applications was as easy as having a conversation.
+
+No more:
+
+Wrestling with 15 different deployment tools
+Waiting 3 days for DevOps approval
+Losing momentum in endless technical meetings
+Brilliant ideas dying in development hell
+
+The future belongs to teams that can think at the speed of conversation and build at the speed of thought.
+
+Your best developers shouldn't be infrastructure experts. They should be problem solvers.
+
+
+#vibecoding #TableSprint #TechDebt",Text,12,0,0,3mo,Post,Abhijeet Kumar,https://www.linkedin.com/in/abhijeet-kumar-5088a31,https://www.linkedin.com/in/abhijeet-kumar-5088a31/,2025-07-24T11:09:00.000Z,,2025-07-17T00:00:00.000Z,,,2025-07-24
+https://www.linkedin.com/feed/update/urn:li:activity:7351263669634162689,,"Last month: 'Where's your receipt for that  lunch bill?' This month: AI found it, categorized it, and approved it before you realized..
+
+Here's what actually happened: We finally automated our expense management process with AI.
+
+No more chasing for receipts. No more month-end expense report nightmares.
+
+Our team vibe coded the employee expense management system which handles it all:
+
+🤖 AI Agent: Automatically reads receipts, extracts data, and categorizes expenses with utmost accuracy
+
+💬 policy Agent: Employees can instantly ask ""What's our meal policy?"" or ""Show me Q3 travel expenses by department"" and get filtered data in seconds
+
+📊 Real-time Intelligence: Instantly flags policy violations and spending patterns
+
+⚡ Smart Workflows: Automated approval routing based on amount thresholds and policy rules
+
+Try using our free forever plan and reach out to our team for any blocker..
+
+Link below for templates..
+https://lnkd.in/gEDfWes9
+
+More Templates and agents on the way..
+
+
+#ExpenseManagement #ChatBot #TableSprint #VibeCoding #FreePlan",Text,22,0,0,3mo,Post,Abhijeet Kumar,https://www.linkedin.com/in/abhijeet-kumar-5088a31,https://www.linkedin.com/in/abhijeet-kumar-5088a31/,2025-07-24T11:09:00.000Z,,2025-07-16T00:00:00.000Z,,,2025-07-24
+https://www.linkedin.com/feed/update/urn:li:activity:7350730400677154816,,"Vibe coding all the way to production is a tough ask.The UI gives instant gratification — you see something working, it feels good, and that dopamine hit keeps you going. From a marketing point of view, that’s smart — it hooks the user.
+
+But the real work begins where most platforms stop — infra, security, scale, reliability. That’s the hard, unglamorous part. And honestly, most vibe coding tools avoid it — because it takes years of work, real-world pain, and deep experience to get it right.
+
+At TableSprint, we’ve done that groundwork.We didn’t just build a flashy front-end tool. We built the infra, added enterprise-grade security, and designed it to handle real-world use cases — not just prototypes.
+
+If you’re building for production, and want something that goes beyond landing pages and UI mockups, TableSprint’s vibe coding approach can take you there.
+
+I haven’t come across many platforms that bring together infra, security, AI, and flexibility the way we’ve tried to do.
+
+I strongly suggest stop wasting time on landing page builders disguised as development work. It's better to spend that time on tools like TableSprint, where you'll actually build something real — something people can truly use.
+
+
+#VibeCoding #BuildersGonnaBuild #Startups #AIInfra #InfraMatters #SecurityByDesign #BuildInPublic #TableSprint #FromIdeaToProduct #IndieHackers #ProductDevelopment #DevInfra #Founders",Text,14,0,0,3mo,Post,Abhijeet Kumar,https://www.linkedin.com/in/abhijeet-kumar-5088a31,https://www.linkedin.com/in/abhijeet-kumar-5088a31/,2025-07-24T11:09:00.000Z,,2025-07-15T00:00:00.000Z,,https://www.linkedin.com/feed/update/urn:li:activity:7350622622356783104/,2025-07-24
+https://www.linkedin.com/feed/update/urn:li:activity:7349498663921995777,,"We've been using Postgres as both our primary database and vector store, and it's worked incredibly well for our needs and our users.  At TableSprint, the internal tools we’ve built are deeply integrated into our AI workflows and play a major role in delivering fast, flexible solutions.
+
+Over the past few months, I took a deep dive into Claude’s MCP. While it’s a solid innovation, I haven’t yet found a practical or high-impact use case for our users. We even tried to force-fit it into some scenarios—but honestly, the combination of LLMs and engineering has been more than enough. If you’re not using MCP, that seems perfectly fine and you are not missing anything. Most use cases don’t really need it.
+
+While our focus is on enterprise-grade capabilities, we’re also seeing how well our products work for individuals and small teams. We’ll keep an eye on how we bring MCP in our stack..
+
+#AI #LLM #Postgres #VectorDB #Claude #TableSprint #StartupLife #EnterpriseAI #vibecoding",Text,19,0,0,3mo,Post,Abhijeet Kumar,https://www.linkedin.com/in/abhijeet-kumar-5088a31,https://www.linkedin.com/in/abhijeet-kumar-5088a31/,2025-07-24T11:09:00.000Z,,2025-07-11T00:00:00.000Z,,,2025-07-24
+https://www.linkedin.com/feed/update/urn:li:activity:7348009648441933824,,#VibeCoding #TableSprint #AgentSprint,Article,17,1,1,3mo,Post,Abhijeet Kumar,https://www.linkedin.com/in/abhijeet-kumar-5088a31,https://www.linkedin.com/in/abhijeet-kumar-5088a31/,2025-07-24T11:09:00.000Z,,2025-07-07T00:00:00.000Z,,https://startuptalky.com/how-businesses-are-building-full-apps-with-chat-based-platforms/,2025-07-24
+https://www.linkedin.com/feed/update/urn:li:activity:7343984702279557120,https://media.licdn.com/dms/image/v2/D5605AQGi_HFdM2V6-w/videocover-high/B56ZesS_wdHQCQ-/0/1750942390454?e=1761717600&v=beta&t=_q__WVt47CRWKOOe2raEmKKg8LrreOCi_gsptXo9hYY,"AI is taking App Building to next level...listen to our baby podcaster...:)..
+
+#vibecoding #TableSprint #AppBuilding #EnterpriseApps",Video (LinkedIn Source),16,0,0,3mo,Post,Abhijeet Kumar,https://www.linkedin.com/in/abhijeet-kumar-5088a31,https://www.linkedin.com/in/abhijeet-kumar-5088a31/,2025-07-24T11:09:00.000Z,,2025-06-26T00:00:00.000Z,blob:https://www.linkedin.com/5c2db952-bf82-46d7-a424-3e2d42b7314a,,2025-07-24
+https://www.linkedin.com/feed/update/urn:li:activity:7343333097645449217,,"Partner management in 2025...Still giving Excel PTSD.
+
+🧾 Spreadsheet for onboarding.
+ 📧 Email thread for approvals.
+ 📞 Phone call for payout issues. 
+🧠 Memory for who closed what.
+
+
+
+So... the TableSprint team vibe coded their way out. We built a Partner Management template that actually understands the chaos:
+
+✅ Instant partner & vendor onboarding
+✅ Revenue attribution that makes sense 
+✅ Auto-handled payouts & earnings 
+✅ Agent-level workflows that don’t need a 5-page SOP
+
+No dev cycles. No duct-taped ops. Just structured partner management — launched in days.
+
+You can stop CTRL+F-ing through spreadsheets.
+
+🔗 Get it from here → https://lnkd.in/gEDfWes9 
+
+More Templates coming soon...
+
+#vibecoding #TableSprint #fintech #banks #partners #nocode #nbfc #automation #partnersmanagement",Text,29,2,1,3mo,Post,Abhijeet Kumar,https://www.linkedin.com/in/abhijeet-kumar-5088a31,https://www.linkedin.com/in/abhijeet-kumar-5088a31/,2025-07-24T11:09:00.000Z,,2025-06-24T00:00:00.000Z,,,2025-07-24
+https://www.linkedin.com/feed/update/urn:li:activity:7339327675850792960,,"Most project management tools charge extra just to share read-only updates with clients or stakeholders. But we think that’s broken.
+
+New Project Management Template vibecoded on TableSprint — designed to simplify work and collaboration without hidden costs.
+
+💡 What you get: 
+✅ Task & project tracking - industry wise
+✅ Kanban, Calendar, Timeline & Table views 
+✅ Assign owners, due dates, priorities
+✅ Custom statuses & fields 
+✅ Customer Portal
+✅ All built on TableSprint’s Free Forever plan 
+
+🔓 Share projects freely. Keep everyone in sync. 
+
+📥 Download it now : https://lnkd.in/gEDfWes9
+📢 This template is everything you need to run fast-moving projects with full transparency.
+
+More templates soon..
+
+#nocode #vibecoding #projectmanagement #agency #startups #productivitytools #TableSprint",Text,20,5,0,4mo,Post,Abhijeet Kumar,https://www.linkedin.com/in/abhijeet-kumar-5088a31,https://www.linkedin.com/in/abhijeet-kumar-5088a31/,2025-06-24T11:09:00.000Z,,2025-06-13T00:00:00.000Z,,,2025-06-24
+https://www.linkedin.com/feed/update/urn:li:activity:7338254929192525824,,"Most CRMs make follow-ups feel like a chore.
+We fixed that.
+
+With TableSprint’s AI App Builder, our team vibe coded CRM templates where follow-ups just flow — reminders, nudges, and smart workflows that actually help you close the loop (and the deal).
+
+🛠 Fully customizable by industry
+🚀 Built for speed and simplicity
+🌐📱 Seamlessly works on web and mobile.
+📧 Email | 💬 WhatsApp | 📞 Call - Just works
+🆓 Free forever plan - No Credit Card
+
+
+Perfect for teams, enterprises, and anyone tired of over-complicated CRMs.
+
+📥 Download a ready-to-use CRM template at 
+
+https://lnkd.in/gEDfWes9
+
+More templates coming soon.
+#nocode #crm #startups #salesautomation #productivitytools #vibecoding #TableSprint",Text,30,3,2,4mo,Post,Abhijeet Kumar,https://www.linkedin.com/in/abhijeet-kumar-5088a31,https://www.linkedin.com/in/abhijeet-kumar-5088a31/,2025-06-24T11:09:00.000Z,,2025-06-10T00:00:00.000Z,,,2025-06-24
+https://www.linkedin.com/feed/update/urn:li:activity:7333808428848467969,https://media.licdn.com/dms/image/v2/D5622AQFWDUP3qzeoVw/feedshare-shrink_800/B56ZcbofoLHoAo-/0/1748515291345?e=1762992000&v=beta&t=ToUEE8x9Fpvb7U83C-ac7xmhC8tyTBgGXE9G0_9IOAU,#TableSprint #vibecoding #nocode #chatnbuild,Image,25,0,0,4mo,Post,Abhijeet Kumar,https://www.linkedin.com/in/abhijeet-kumar-5088a31,https://www.linkedin.com/in/abhijeet-kumar-5088a31/,2025-06-24T11:09:00.000Z,,2025-05-29T00:00:00.000Z,,https://www.linkedin.com/feed/update/urn:li:activity:7333804686401032192/,2025-06-24
+https://www.linkedin.com/feed/update/urn:li:activity:7329003835765481476,,"From Silicon Valley to Bengaluru, the future of software development is here!
+ 
+Our investment in TableSprint, a startup changing how apps are built through AI-powered, collaborative development got features in Mint 
+
+While OpenAI’s $3B acquisition of Windsurf signals how serious this change is globally and we believe that India is not far behind.
+
+TableSprint is reducing dependency on senior engineers and empowering teams to build internal tools and apps with speed and clarity.
+
+What excites us is that this is structured, scalable and aligned with how modern teams actually work.
+
+As AI tools improve the dev space, we’re betting on those that make collaboration, iteration and execution dramatically easier.
+
+Big shoutout to the TableSprint team for leading this charge 🚀
+
+Nagasanthosh Josyula chirag jadhav Abhijeet Kumar Replit, Supabase, Bolt, Lovable Zoho Rocket Accel Blue Lotus Ventures 
+
+TDV Partners 
+
+Article - https://lnkd.in/g_ZdCEpC
+
+#AI #tools #tech #vc #investment",Article,32,4,3,5mo,Abhijeet Kumar reposted this,Ujwal Sutaria,https://www.linkedin.com/in/ujwal-sutaria,https://www.linkedin.com/in/abhijeet-kumar-5088a31/,2025-05-25T11:09:00.000Z,,2025-05-16T00:00:00.000Z,,https://www.livemint.com/ai/vibe-coding-no-code-low-code-platforms-artificial-intelligence-app-developers-openai-zoho-creator-11747229028312.html,2025-05-25
+https://www.linkedin.com/feed/update/urn:li:activity:7328976694852182017,,#EnterpriseApps #vibecoding #TableSprint,Text,6,1,0,5mo,Post,Abhijeet Kumar,https://www.linkedin.com/in/abhijeet-kumar-5088a31,https://www.linkedin.com/in/abhijeet-kumar-5088a31/,2025-05-25T11:09:00.000Z,,2025-05-16T00:00:00.000Z,,https://www.linkedin.com/feed/update/urn:li:activity:7328875471679471617/,2025-05-25
+https://www.linkedin.com/feed/update/urn:li:activity:7321101826836062209,,"Better the question, better the answer. #EY taught me
+Better the data, better the solution model. #INSOFE data science taught me
+See hard into the future, you can create it. #CMU Carnegie Mellon University taught me.
+
+Combining all these learnings, I am glad that time is giving me opportunity to play my role in building the future of data driven business applications. Chat with Keval was one of those reflections in this journey where I got a chance to showcase the possibilities with #TableSprint 
+
+Happy to share with you all.
+
+#Entrepreneurship #vibecoding #AI #Nocode 
+https://lnkd.in/g4fe7Ywz",Article,17,1,2,5mo,Abhijeet Kumar reposted this,Nagasanthosh Josyula,https://www.linkedin.com/in/santosh-josyula,https://www.linkedin.com/in/abhijeet-kumar-5088a31/,2025-05-25T11:09:00.000Z,,2025-04-24T00:00:00.000Z,,https://geekflare.com/news/no-code-is-not-replacing-engineers-tablesprint-co-founder/,2025-05-25
+https://www.linkedin.com/feed/update/urn:li:activity:7320307519602446336,https://media.licdn.com/dms/image/v2/D5605AQFEUle5mw2blQ/feedshare-thumbnail_720_1280/B56ZZZoBp4GQAw-/0/1745260388706?e=1761717600&v=beta&t=XMLSUGw6WNXAJn_9WQDfiOvOeJiHx1R919wJhylB4LM,"Creating learning is tough. Learning teams bring life to imaginations. Such creation is naturally slow and deep. However, businesses demand speed and scale. Balancing speed, scale and creation is challenging. AI offers opportunities to alleviate those challenges. This session presents larger trends in L&D and how we can leverage emerging technologies for best practices in learning and development projects. Learning teams can network, get insights into #vibecoding for #learning and experiment with #AI tools for learning and development. Looking forward to spend time on a Saturday (10th May) with our L&D community.",Video (LinkedIn Source),15,1,2,6mo,Abhijeet Kumar reposted this,Nagasanthosh Josyula,https://www.linkedin.com/in/santosh-josyula,https://www.linkedin.com/in/abhijeet-kumar-5088a31/,2025-04-25T11:09:00.000Z,,2025-04-22T00:00:00.000Z,blob:https://www.linkedin.com/5fd1c795-1e8d-4f7d-8a8f-d2ccba18af73,https://www.linkedin.com/feed/update/urn:li:activity:7320280191014957056/,2025-04-25
+https://www.linkedin.com/feed/update/urn:li:activity:7317918870491570177,,"Less typing, more vibing:  AI is fundamentally changing software development.
+
+What was once the domain of seasoned developers writing thousands of lines of code is now being reimagined by AI agents that respond to plain English—and even images. Coding is evolving into a more intuitive, artistic, and radically faster process.
+
+In this insightful story for The businessline, Sanjana B speaks to Nagasanthosh Josyula Co-founder of TableSprint, a full-stack, chat-based AI app builder. Enterprises like Flipkart, Vedantu, Elever and Easebuzz are already using Tablesprint to build complex, scalable tools—without writing a single line of code.
+
+Their platform, DevConsult AI, pioneers ""vibe coding""—where users describe their idea and the app builds itself, competing with global players like Replit and Lovable. 
+💬 “The barrier to building tech has dropped dramatically,” Joysula says. “Anyone with an idea can prototype and test it—without formal CS training.”
+Experts like Jaspreet Bindra, AI&Beyond and Mayank Maggon of TechChefz Digital agree: AI won't replace engineers—but will elevate their roles to focus on strategy, debugging, and refinement.
+
+A new era of software creation is here—and it’s powered by conversation.
+ 📖 Read the story: https://lnkd.in/gcWXrqaS
+
+Abhijeet Kumar chirag jadhav
+
+#VibeCoding #AIinTech #NoCode #LowCode #AITools #StartupIndia #Tablesprint #GenerativeAI #FutureOfWork #DevConsult #DigitalTransformation #EnterpriseTech #SaaS #IndianStartups #ArtificialIntelligence",Document,23,0,4,6mo,Abhijeet Kumar reposted this,Deepa Nair,https://www.linkedin.com/in/deepa-nair-ab06a314,https://www.linkedin.com/in/abhijeet-kumar-5088a31/,2025-04-25T11:09:00.000Z,,2025-04-15T00:00:00.000Z,,,2025-04-25
+https://www.linkedin.com/feed/update/urn:li:activity:7315384305294192640,,"This Indian startup enables you to create business apps—with no coding required.
+
+🔹 Bengaluru-based TableSprint just launched “Vibe Coding” for non-tech teams
+🔹 No code, no hassle—just tell it what you want
+🔹 AI Consult engine handles everything from logic to UI
+🔹 Already used by Flipkart, Aspire Fintech & Vedantu
+
+Read More: https://lnkd.in/dNn3Btew
+
+#TableSprint 
+#VibeCoding 
+#NoCode 
+#EnterpriseTech 
+#TechNews",Article,12,0,3,6mo,Abhijeet Kumar reposted this,Keval Vachharajani,https://www.linkedin.com/in/keval-vachharajani-3bb415121,https://www.linkedin.com/in/abhijeet-kumar-5088a31/,2025-04-25T11:09:00.000Z,,2025-04-08T00:00:00.000Z,,https://geekflare.com/news/this-indian-startup-brings-vibe-coding-to-enterprises/,2025-04-25
+https://www.linkedin.com/feed/update/urn:li:activity:7314529888713986048,https://media.licdn.com/dms/image/v2/D5605AQGBQOhAUXIGOA/videocover-low/B56ZYJq3HcHoCQ-/0/1743918962533?e=1761717600&v=beta&t=2mLMxrNKR3TPeDpPco2aricWHgihnaSo5iBva_ioPYY,"Recently, I got to know about the time management principle called ""Eat that Frog"". Since then, I was trying to eat frogs :). The challenge was that it was difficult to figure out the frogs. 
+
+Sharing my first productivity tool to eat frogs using TableSprint AI agent. If anyone wants to discuss how to create such applications using AI agents, happy to connect.
+
+To those who are new to this technique like me, frogs are the tasks that we have high tendency to procrastinate or they may be most difficult tasks. 
+
+So, I built a small tool that orders the given tasks according to their difficulty level. The most helpful feature is that the difficult levels are auto assigned by AI. It allows me to provide list of tasks and get a bar chart or a table that orders the tasks according to the difficulty level. The top most task is my frog. :)
+
+If any of you are facing issues with the frogs, happy to share the tool. Time taken to build = 5 mins Tool used = DevConsult (TableSprint AI Agent)
+
+#TableSprint #AgenticAI #AI #Agents #Timemanagement #Productivity",Video (LinkedIn Source),23,2,1,6mo,Abhijeet Kumar reposted this,Nagasanthosh Josyula,https://www.linkedin.com/in/santosh-josyula,https://www.linkedin.com/in/abhijeet-kumar-5088a31/,2025-04-25T11:09:00.000Z,,2025-04-06T00:00:00.000Z,blob:https://www.linkedin.com/a7122316-9ceb-42e8-925d-bb54b2312257,,2025-04-25
+https://www.linkedin.com/feed/update/urn:li:activity:7313781982008602624,https://media.licdn.com/dms/image/v2/D4D22AQFao7scTZRpwA/feedshare-shrink_800/B4DZX6EsUHH4Ak-/0/1743657294089?e=1762992000&v=beta&t=QsgDuWdFGE_N6Vgxi_hdKhPbw28_UWIpCQFAhtbiQEk,"Build an app in minutes, intuitively – with AI-powered prompts, chat & no code!
+
+As vibe-coding trends and startups like Lovable Replit and Bolt heat up in Silicon Valley, Bengaluru-based TableSprint is leading the charge back home.
+Founded by Abhijeet Kumar and chirag jadhav (in their second innings after building and scaling BBDAILY, acquired by BigBasket), TableSprint is reimagining how enterprise apps are built—with AI Consult, its chat-powered AI builder.
+
+Just describe what you need, and watch it create your app.
+Fast. Intuitive. Enterprise-ready.
+
+Already trusted by leading companies like Flipkart, Elever, Aspire Fintech, Vedantu, and Easebuzz, TableSprint is now actively expanding into global markets. The team is onboarding strategic partners and influencers to help guide clients through implementation and drive growth in the fast-evolving AI-powered no-code app development space.
+
+Read more at: https://lnkd.in/gtdFAUuQ
+
+Thanks Trisha Medhi Jarshad NK 
+and YourStory Media for the feature!
+
+#NoCode #AIPowered #BuildWithAI #IndianStartups #EnterpriseTech #TechInnovation #StartupIndia #DigitalTransformation #vibecoding",Image,69,5,3,6mo,Abhijeet Kumar reposted this,Deepa Nair,https://www.linkedin.com/in/deepa-nair-ab06a314,https://www.linkedin.com/in/abhijeet-kumar-5088a31/,2025-04-25T11:09:00.000Z,,2025-04-04T00:00:00.000Z,,https://www.linkedin.com/feed/update/urn:li:activity:7313428770680455168/,2025-04-25
+https://www.linkedin.com/feed/update/urn:li:activity:7309957458368565248,,"#Webinar
+
+TableSprint is hosting an insightful session on a topic that is highly relevant today: Chat with an AI Agent.
+
+To top it off, you can directly - Build and Launch your app exclusively through TableSprint's AI Consult!
+
+All this and more , at our upcoming online DEMO Webinar, ""Chat, Build, Launch: AI-
+Consult for Easy App Development.""
+
+Don't miss this opportunity to connect and learn with the industry expert Abhijeet Kumar.
+
+Register NOW: https://lnkd.in/ggKtyZex
+
+#TableSprint #LinkedInEvent #IndustryInsights #Networking #Winrar #Replit #chatgpt #Ai #chat #gpt #nocode #lowcode #Online #Learning #Free #Demo",Text,174,67,3,6mo,Abhijeet Kumar reposted this,TableSprint,https://www.linkedin.com/company/tablesprint,https://www.linkedin.com/in/abhijeet-kumar-5088a31/,2025-04-25T11:09:00.000Z,,2025-03-24T00:00:00.000Z,,https://www.linkedin.com/feed/update/urn:li:activity:7308075939836420098/,2025-04-25
+https://www.linkedin.com/feed/update/urn:li:activity:7301996321232588800,https://media.licdn.com/dms/image/v2/D5605AQHGzZLt5f4FKQ/videocover-low/B56ZVXm8t5HsCg-/0/1740931585272?e=1761717600&v=beta&t=Yz-7WPbSKR7TbcWRokHQfDRbWxdUVCN5D3alevLwuFY,"Browsers are one powerful and unique feature of TableSprint. One can apply it to any dataset by just drag n drop. This worksheet contains approx 4000 US companies with their employee count, technologies used and other details for ABM purpose. This list is available for everyone...just provide your detail to link below in case you want this sheet:
+https://lnkd.in/gGgCh8cX
+
+#BuiltWithTableSprint #ABM #LeadGeneration #B2BSales #SalesIntelligence #DataDriven #MarketResearch #GrowthHacking",Video (LinkedIn Source),29,1,1,7mo,Post,Abhijeet Kumar,https://www.linkedin.com/in/abhijeet-kumar-5088a31,https://www.linkedin.com/in/abhijeet-kumar-5088a31/,2025-03-26T11:09:00.000Z,,2025-03-02T00:00:00.000Z,blob:https://www.linkedin.com/74de5598-844c-4784-b216-5d8cc660ba7c,,2025-03-26
+https://www.linkedin.com/feed/update/urn:li:activity:7298246654652993536,https://media.licdn.com/dms/image/v2/D5622AQG--8IHM-pNyw/feedshare-shrink_800/B56ZUiF9fMGsAg-/0/1740033744304?e=1762992000&v=beta&t=_fAFHnrCelJggqhTneAMm7rSk8cL3oTdPzvulwz-u3U,"AI no-code Saas Startups vs CRM giants
+
+In this interview Abhijeet Kumar, Co-Founder and CEO of TableSprint, with DQ CHANNELS talks about how AI startups can successfully compete against multinational giants like Salesforce and highlights how Tablesprint plans to disrupt the enterprise Saas market with its offerings :
+1️⃣ Building intuitive platforms with enterprise capabilities 
+2️⃣ Offering flexible customization with rapid implementation
+3️⃣ Providing comprehensive solutions at competitive prices
+
+The key is making AI truly accessible to business users - not as a complex feature, but as a natural extension of how people work.
+
+ ""Success comes from combining enterprise-grade capabilities with intuitive design and accessible pricing,"" said Abhijeet Kumar. 
+Please find the link to the full story in the comments
+#AI #SaaS #Startups #EnterpriseTech #NoCode #AIinBusiness #Innovation",Image,86,1,2,8mo,Abhijeet Kumar reposted this,Deepa Nair,https://www.linkedin.com/in/deepa-nair-ab06a314,https://www.linkedin.com/in/abhijeet-kumar-5088a31/,2025-02-24T11:09:00.000Z,,2025-02-20T00:00:00.000Z,,,2025-02-24
+https://www.linkedin.com/feed/update/urn:li:activity:7297488584415068161,,"In today's data-driven world, surveys are more than just tools for gathering information—they're strategic assets that can transform your business insights and decision-making processes.
+
+Whether you are designing a simple survey for quick assessments or going through complex data analysis, understanding the art and science behind survey creation is crucial.
+
+Let's connect and discuss how tailored surveys can drive your business forward. 
+
+Harness the power of data for informed decision-making here: https://lnkd.in/gM_rMBbU
+
+Repost if you found this helpful.
+
+#TableSprint #Survey #SurveyDesign #DataAnalysis #BusinessInsights #MarketResearch #CustomerFeedback #DataDrivenDecisions #BusinessStrategy #SurveyCreation #UserStories #DataScience #SurveyJunkie #GoogleOpinionRewards #PaidSurveys #SurveysForMoney #GoogleSurvey #SurveysForCash #LikertScale #LimeSurvey",Document,15,0,2,8mo,Abhijeet Kumar reposted this,TableSprint,https://www.linkedin.com/company/tablesprint,https://www.linkedin.com/in/abhijeet-kumar-5088a31/,2025-02-24T11:09:00.000Z,,2025-02-18T00:00:00.000Z,,,2025-02-24
+https://www.linkedin.com/feed/update/urn:li:activity:7295436699172515840,,"Happening today...Let's learn App building with TableSprint...
+
+https://lnkd.in/gCZeGPmi",Text,12,2,0,8mo,Post,Abhijeet Kumar,https://www.linkedin.com/in/abhijeet-kumar-5088a31,https://www.linkedin.com/in/abhijeet-kumar-5088a31/,2025-02-24T11:09:00.000Z,,2025-02-12T00:00:00.000Z,,https://www.linkedin.com/feed/update/urn:li:activity:7292853964767735808/,2025-02-24
+https://www.linkedin.com/feed/update/urn:li:activity:7289268283340439552,,"What is to be an #Indian? What makes me belong to #India? I always had these kind of questions with no definite answer. This #RepublicDay, I sat down to meditate on what message #AshokaChakra gives us. The result is this song inspired by the 24 qualities of Ashoka Chakra. It taught me what our national flag expects from us.
+
+My request to LinkedIn community: This is a telugu song I would like to prepare the #subtitles for this song in as many languages as possible. I do not want to do it the AI route. If there are #patriots around who are interested in collaborating, please comment/DM me. Thanks and Happy #Republic Day to everyone.",Article,21,3,2,8mo,Abhijeet Kumar reposted this,Nagasanthosh Josyula,https://www.linkedin.com/in/santosh-josyula,https://www.linkedin.com/in/abhijeet-kumar-5088a31/,2025-02-24T11:09:00.000Z,,2025-01-26T00:00:00.000Z,,https://youtu.be/fVB_YA7SvIo,2025-02-24
+https://www.linkedin.com/feed/update/urn:li:activity:7263064123393884160,,"Traditional ERP&CRM solutions are expensive and complex for small businesses and entrepreneurs.
+
+We are breaking the mold in ERP&CRM and Form Building with our No-Code App Building Platform!
+
+What sets #TableSprint apart?
+- Easy-to-use interface: Say bye-bye to complex software and welcome a seamless user experience.
+- Collaboration made easy: Share real-time forms and data with your team and clients.
+- Affordable pricing: No more breaking the bank for Form-Building and ERP&CRM solutions.
+- Free Forever plan: Get started with almost all features activated; no credit card is required.
+
+Click to start: https://lnkd.in/geicXCFR
+
+For help - https://lnkd.in/gFw9ED2y
+
+#TableSprint #ERPCRM #NoCode #FormBuilding #AffordableSolutions #SMEBusiness #Entrepreneur #Innovation #RevolutionizeYourWorkflow",Article,26,1,3,11mo,Abhijeet Kumar reposted this,TableSprint,https://www.linkedin.com/company/tablesprint,https://www.linkedin.com/in/abhijeet-kumar-5088a31/,2024-11-26T11:09:00.000Z,,2024-11-15T00:00:00.000Z,,https://analyticsindiamag.com/ai-origins-evolution/this-bengaluru-startup-is-building-a-cheaper-alternative-to-salesforce-and-zoho/,2024-11-26
+https://www.linkedin.com/feed/update/urn:li:activity:7260651707368431619,,"Absolutely thrilled and proud to get featured on Inc42 Media list. 
+This recognition is a testament to the hard work and dedication of our two co-founders, Abhijeet Kumar, and chirag jadhav
+We will continue innovating and pushing the boundaries of #NoCodeRevolution.🚀 #TableSprint #Ai #SaaS #Inc42Media #AppBuilder #FormBuilder #InnovativeTechnology #TechStartup #Recognition",Article,12,0,5,11mo,Abhijeet Kumar reposted this,TableSprint,https://www.linkedin.com/company/tablesprint,https://www.linkedin.com/in/abhijeet-kumar-5088a31/,2024-11-26T11:09:00.000Z,,2024-11-08T00:00:00.000Z,,https://inc42.com/startups/30-startups-to-watch-startups-that-caught-our-eyes-in-october-2024/,2024-11-26
+https://www.linkedin.com/feed/update/urn:li:activity:7255473730837983234,,"Today is a big day for TableSprint. We are live on Product Hunt.
+
+Please visit, explore and support us and share your feedback. We'll be answering any questions and comments throughout the day and would love to hear from you.
+
+You can explore TableSprint with simple use cases like building a form or survey, writing a blog using our AI writer with images, launching a catalog, or using the barcode scanner for inventory. If none of these fits, try it for project management, streamlining HR processes, or onboarding vendors efficiently. Start small, and it will grow with you—or dive right in and start big! 
+
+Look forward to see you at product hunt supporting our journey to build TableSprint.
+
+Click this Link to support us:
+
+https://lnkd.in/ghriqK5v
+
+Tushar Jagtap Neerabh K. Yogesh Wakle Yogesh Wakle Pradip Khamkar Shantveer Biradar Uday Arya Ujwal Sutaria Anshul Sharan Rahul Jindal Nitin Goyal Abhijeet B. Ajeet Khurana SUNIL SHARMA Deepa Nair chirag jadhav Nagasanthosh Josyula Melvin D'Cruz 
+
+#ComingSoon #StartupJourney #CitizenDevelopers #NoCode #TechInnovation #StayTuned #ProductHunt #SaasTools #SaaS #Productivity #AppDevelopment #Developers",Article,81,11,9,11mo,Post,Abhijeet Kumar,https://www.linkedin.com/in/abhijeet-kumar-5088a31,https://www.linkedin.com/in/abhijeet-kumar-5088a31/,2024-11-26T11:09:00.000Z,,2024-10-25T00:00:00.000Z,,https://www.producthunt.com/posts/tablesprint,2024-11-26
+https://www.linkedin.com/feed/update/urn:li:activity:7254330538952466432,,"Building TableSprint has been nothing short of an incredible journey for us. After months of hard work, sleepless nights, and overcoming countless self doubts, we’re almost ready to share something truly special. 🌟
+
+TableSprint is the result of our passion for product development and deep belief that access to good technology without spending fortune is possible and one does not have to be a coder to build an App. 
+
+Every feature, every decision was driven by the desire to create something that will truly empower people to develop and build solutions on their own.
+
+We are launching on Product Hunt this Friday, 25th October. 
+
+Would love to see you there supporting us in our endeavor with feedback and comments.
+
+Link to get notified on day of Launch.
+
+https://lnkd.in/g77HhZdK
+
+Tushar Jagtap Neerabh K. Yogesh Wakle Pradip Khamkar Shantveer Biradar Uday Arya Ujwal Sutaria Anshul Sharan Rahul Jindal Nitin Goyal Abhijeet B. Ajeet Khurana SUNIL SHARMA Deepa Nair chirag jadhav Nagasanthosh Josyula 
+
+#ComingSoon #StartupJourney #CitizenDevelopers #NoCode #TechInnovation #StayTuned #ProductHunt #SaasTools #SaaS #Productivity #AppDevelopment #Developers",Article,73,3,8,1yr,Post,Abhijeet Kumar,https://www.linkedin.com/in/abhijeet-kumar-5088a31,https://www.linkedin.com/in/abhijeet-kumar-5088a31/,2025-10-22T11:09:00.000Z,,2024-10-22T00:00:00.000Z,,https://www.producthunt.com/products/tablesprint,2024-10-22

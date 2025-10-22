@@ -1,0 +1,1549 @@
+postUrl,imgUrl,postContent,type,likeCount,commentCount,repostCount,postDate,action,author,authorUrl,profileUrl,timestamp,viewCount,postTimestamp,sharedPostUrl,videoUrl,approximateDate
+https://www.linkedin.com/feed/update/urn:li:activity:7386330543325360128,,"AI to learn AI.
+
+So much is happening in AI right now that it feels almost impossible to keep up. Every day there’s a new model, a new framework, a new way of doing things.
+
+That got me thinking — maybe the best way to learn AI now is to build with it.
+
+I recently tried building a small AI tutor using ChatGPT itself with a prompt. It’s got simple commands, can quiz you, track your progress, and even guide your next step. And honestly, the process of making it taught me more than any video or article could.
+
+There’s something special about using AI to learn AI — a bit like the tech teaching you about itself. That’s the kind of meta-learning I think we’ll see more of in the future.
+
+It’s fun, fast, and surprisingly personal. Just give it a try and you will find learning AI much more interesting.
+
+#AI #Learning #AITutor #MetaLearning",Text,9,0,0,20h,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-10-22T11:25:00.000Z,,,,,2025-10-21
+https://www.linkedin.com/feed/update/urn:li:activity:7386293728078086144,https://media.licdn.com/dms/image/v2/D4D22AQEgMIzk5cMyFw/feedshare-shrink_800/B4DZoFi_OUGkAg-/0/1761029653692?e=1762992000&v=beta&t=4G1MmkrueJ2ovUFkTX4RwxsCTwrJ5rkXO-muWZOEfxw,"Thanks WeWork India for featuring us. 
+
+Pavan Goyal Harshal Kalve",Image,27,1,0,23h,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-10-22T11:25:00.000Z,,,,,2025-10-21
+https://www.linkedin.com/feed/update/urn:li:activity:7375819851996618752,,"𝗜𝘁’𝘀 𝗻𝗼𝘁 𝗮𝗯𝗼𝘂𝘁 𝘁𝗵𝗲 𝗮𝗴𝗲𝗻𝘁; 𝗜𝘁’𝘀 𝗮𝗯𝗼𝘂𝘁 𝘁𝗵𝗲 𝘄𝗼𝗿𝗸𝗳𝗹𝗼𝘄
+
+When people think of AI today, they often jump straight to “agents” — smart systems that can plan, reason, and act. But the truth is, success in AI doesn’t come from agents alone. It comes from designing the right workflow.
+
+𝗔𝗴𝗲𝗻𝘁𝘀 𝗮𝗿𝗲𝗻’𝘁 𝗮𝗹𝘄𝗮𝘆𝘀 𝘁𝗵𝗲 𝗮𝗻𝘀𝘄𝗲𝗿
+
+Not all tasks need an agent. The type of work matters.
+1. Low variance, high standardization
+Examples: regulatory disclosures, investor onboarding
+Best fit: Rules-based automation + workflow software + predictive models
+
+2. High variance, low standardization
+Examples: compliance checks, extracting complex financial data
+Best fit: Agentic AI
+
+
+𝗦𝘁𝗼𝗽 “𝗔𝗜 𝗦𝗹𝗼𝗽”: 𝗕𝘂𝗶𝗹𝗱 𝘁𝗿𝘂𝘀𝘁 𝘁𝗵𝗿𝗼𝘂𝗴𝗵 𝗲𝘃𝗮𝗹𝘂𝗮𝘁𝗶𝗼𝗻
+
+If users don’t trust AI, they won’t use it. That’s why we need strong evaluations to measure performance. Some useful evaluation methods include:
+- Task success rate: How often does the agent complete the full job correctly without human help?
+- F1 score (precision and recall): Useful when classification or decision-making must be accurate.
+- Retrieval accuracy: Did the system find the right documents, facts, or evidence?
+- Semantic similarity: Does the AI output mean the same thing as the correct reference, even if the words differ?
+- LLM-as-judge: Use another model to rate clarity, helpfulness, and soundness of reasoning.
+- Bias detection: Check if errors affect one group more than others.
+- Hallucination rate: How often does the agent make things up?
+- Calibration error: Does the agent’s confidence level match its actual correctness?
+
+𝗠𝗮𝗸𝗲 𝘄𝗼𝗿𝗸𝗳𝗹𝗼𝘄𝘀 𝘁𝗿𝗮𝗻𝘀𝗽𝗮𝗿𝗲𝗻𝘁 𝗮𝗻𝗱 𝘁𝗿𝗮𝗰𝗲𝗮𝗯𝗹𝗲
+
+It’s not enough to measure results at the end. Every step in the workflow should be monitored and verified.
+
+For eg, if an agent is retrieving data for a compliance check, we need to know:
+
+- Which sources it used
+- Whether its confidence was justified
+- If it skipped or misread any step
+
+𝗧𝗵𝗲 𝗯𝗲𝘀𝘁 𝘂𝘀𝗲 𝗰𝗮𝘀𝗲 𝗶𝘀 𝘁𝗵𝗲 𝗿𝗲𝘂𝘀𝗲 𝗰𝗮𝘀𝗲
+
+Building agents from scratch for every new workflow is inefficient. A better way is to create a central library of reusable services and assets, such as:
+
+- Pre-approved prompts
+- Application patterns
+- Reusable code snippets
+- Observability tools for LLMs
+- Training materials
+
+𝗛𝘂𝗺𝗮𝗻𝘀 𝗿𝗲𝗺𝗮𝗶𝗻 𝗲𝘀𝘀𝗲𝗻𝘁𝗶𝗮𝗹
+
+Even with advanced agents, humans will always be part of the picture. Their role, however, will evolve.
+
+Instead of doing repetitive tasks, humans will supervise, guide, and collaborate with agents. One promising area is human–agent collaborative design, which creates simple interfaces so that non-technical people can interact with AI systems easily.
+
+source: Mckinsey agentic AI report",Text,8,0,0,4w,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-09-22T11:25:00.000Z,,2025-09-22T00:00:00.000Z,,,2025-09-24
+https://www.linkedin.com/feed/update/urn:li:activity:7374695935739715584,,"What if your AI assistant had its own QA manager?
+One that never sleeps, checks every reply, and tells you—in plain English—if it’s good or not.
+
+That’s “LLM-as-a-judge.” One AI grading another, on your rules.
+
+Example: a support bot gets a new “concise and friendly” voice. Instead of reading 2,000 replies, you ask LLM to be “support manager for a day.”
+
+The prompt:
+“You are a senior CX lead. Rate this reply 1–5 for conciseness and empathy. Return only: {score} | {one-sentence reason}.”
+
+Boom. 87% of answers score 4 or higher. The weak 13%? Refund questions. That’s where you add humans.
+
+Result: you ship faster, learn sooner, and let people focus on the tricky cases.
+
+If your QA plan still says, “we’ll spot-check 50 samples,” maybe it’s time to appoint an AI judge.
+
+#LLMEvals #BuildInPublic #AITesting #ProductOps",Text,8,0,0,1mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-09-22T11:25:00.000Z,,2025-09-19T00:00:00.000Z,,,2025-09-22
+https://www.linkedin.com/feed/update/urn:li:activity:7373932752166965248,,"There’s a common belief that AI will close the skill gap between beginners and experts. But a new Stanford-Harvard study shows it’s more complicated. 
+
+Researchers studied three groups inside an organization, all asked to write web articles:
+ • Insiders: SEO web analysts who regularly wrote articles
+ • Adjacent outsiders: marketers in the same department who didn’t usually write
+ • Distant outsiders: technologists whose work was unrelated to writing 
+
+AI didn’t boost every group equally. It helped adjacent outsiders close the gap and perform at insider level. But distant outsiders (technologists) still fell short. Even with AI fine-tuned on company documents, their articles scored lower than insiders’. They hit what the researchers call the “GenAI wall.” 
+
+They lacked too much of the marketers’ tacit knowledge: the instinct for tone, the craft of building a narrative, the ability to weave ideas coherently, and the judgment of what makes an article “good.” AI couldn’t fill that gap or replicate the intuition that insiders had built through experience.
+
+One of the next big challenges, and opportunities, for AI is learning tacit knowledge. Bridging the gap between novices and experts requires more than data. It means capturing the shortcuts, sequences, and judgment calls that turn a draft into a finished product. 
+
+Only when AI understands the real workflows, rhythms, and processes of an organization can it start to absorb that hidden know-how—and begin to shift the “GenAI wall.”",Text,266,33,19,1mo,Vaibhav Goyal reposted this,Arvind Jain,https://www.linkedin.com/in/jain-arvind,https://www.linkedin.com/in/vaibhavg/,2025-09-22T11:25:00.000Z,,2025-09-17T00:00:00.000Z,,,2025-09-22
+https://www.linkedin.com/feed/update/urn:li:activity:7373526370494115840,https://media.licdn.com/dms/image/v2/D4E22AQGw9Pwedz33Tg/feedshare-shrink_800/B4EZlPyrb9KoAg-/0/1757980309585?e=1762992000&v=beta&t=aXH51j3W7Qv__ruRYwjLaLa9wO5CSkNfDTdgXbr-XuM,"this is goldmine for AI founders! 
+thanks Greg Isenberg",Image,5,0,1,1mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-09-22T11:25:00.000Z,,2025-09-16T00:00:00.000Z,https://www.linkedin.com/feed/update/urn:li:activity:7373503849208225792/,,2025-09-22
+https://www.linkedin.com/feed/update/urn:li:activity:7373341024540078080,,"AI is real, here, and now. 
+
+Cost of NOT learning AI > > Cost of learning AI as per India AI Mission's CEO Abhishek Singh
+
+Some interesting applications of AI in governance he mentioned during his interview
+
+1. DigiYatra (airport e-gates),
+2. Jeevan Pramaan (AI-based life certificates),
+3. Smart city AI apps (pothole/garbage detection via delivery drivers’ cameras, by Nayan tech startup),
+4. Supreme Court AI tool (LRA) for case summarization
+
+https://lnkd.in/dpmDKuEH",Article,11,0,0,1mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-09-22T11:25:00.000Z,,2025-09-15T00:00:00.000Z,https://www.youtube.com/watch?v=2FNwnSMKBSk,,2025-09-22
+https://www.linkedin.com/feed/update/urn:li:activity:7372890494273499137,,"AI isn’t just about building the future.
+Sometimes, it’s about bringing the past back to life. 
+
+Recently, I pulled out some really old family photos.
+Faded, scratched, almost torn.
+The kind of memories you’re scared to even touch.
+
+I decided to try Google Gemini / Veo to restore and animate them.
+
+At first, it wasn’t perfect.
+Faces looked blurry, eyes came out strange, and the colors felt too modern.
+But with some trial and error—and the right prompts—things started to change.
+
+Here’s what worked for me:
+“Restore old black and white photo, remove scratches, sharpen face details, natural skin tones.”
+“Animate portrait — subtle eye blink, gentle smile, natural head movement, realistic lighting.”
+
+And suddenly… that grainy picture of my parents turned sharp, clear, and alive.
+When the animation played—eyes blinking, lips moving softly—it felt like time was breathing again.
+Honestly, it gave me goosebumps.
+
+For me, this is the real magic of AI.
+Not just automation. Not just scale.
+But giving forgotten memories a second life.
+
+If you’ve got old photos lying in an album somewhere, maybe let AI give them a little nudge.
+You might be surprised how the past comes alive.",Text,16,2,0,1mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-09-22T11:25:00.000Z,,2025-09-14T00:00:00.000Z,,,2025-09-22
+https://www.linkedin.com/feed/update/urn:li:activity:7368244213152460800,https://media.licdn.com/dms/image/v2/D5622AQGU0_1la94wDg/feedshare-shrink_800/B56ZkE70l7H8Ak-/0/1756724419321?e=1762992000&v=beta&t=yGW5s10Wd99SvGiiyfsbYpMfsyBeyl8wxe-YFDBWWRQ,"The operating principles of Enterprise AI
+
+What did I get wrong in this list? It is WIP, looking to get it down to 10 principles",Image,139,39,8,1mo,Vaibhav Goyal reposted this,Armand Ruiz,https://www.linkedin.com/in/armand-ruiz,https://www.linkedin.com/in/vaibhavg/,2025-09-22T11:25:00.000Z,,2025-09-01T00:00:00.000Z,,,2025-09-22
+https://www.linkedin.com/feed/update/urn:li:activity:7368092686341287939,,"AI professionals prefer markdown (.md) format in workflows for prompts, documentation, data feeding, and even output formatting
+
+This format’s simplicity and semantic structure enhance LLMs’ ability to accurately parse, understand, and generate text, leading to more precise, factual, and cost-effective AI outputs.
+
+Here is an example 
+----------------------------------------------------------------------
+# Project Summary
+**Objective:** Improve team productivity
+## Steps
+- Set clear goals
+- Streamline meetings
+- Use collaboration tools
+----------------------------------------------------------------------
+
+Learn the pet language of LLMs to level up your AI game :)",Text,14,0,0,1mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-09-22T11:25:00.000Z,,2025-09-01T00:00:00.000Z,,,2025-09-22
+https://www.linkedin.com/feed/update/urn:li:activity:7366391196497121282,,"Just played around with Google’s new image gen model ""Nano Banana"" — and feels that, it’s a game-changer for creators
+
+Some of the coolest bits I noticed:
+1. Character consistency – same person/product across multiple scenes & edits.
+2. Prompt-based editing – blur background, remove stuff, change poses, all with simple text.
+3. World knowledge – thanks to Gemini, it just “gets” real-world context.
+4. Multi-image fusion – mash up different images, restyle rooms, or drop objects into scenes with ease.
+
+Honestly, this feels way ahead of the others in this segment
+
+The best part is that it is directly available inside Gemini flash 2.5. 
+
+Go banana with nano banana!",Text,16,0,0,1mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-09-22T11:25:00.000Z,,2025-08-27T00:00:00.000Z,,,2025-09-22
+https://www.linkedin.com/feed/update/urn:li:activity:7365732410308681729,,"As per MIT's report ""The GenAI Divide""  - Five myths about GenAI in the enterprise
+
+1. AI will replace most jobs in the next few years → Research found limited
+layoffs from GenAI, and only in industries that are already affected
+significantly by AI. There is no consensus among executives as to hiring
+levels over the next 3-5 years.
+2. Gen AI is transforming business → Adoption is high, but
+transformation is rare. Only 5% of enterprises have AI tools integrated in
+workflows at scale.
+3. Enterprises are slow in adopting new tech → Enterprises are extremely eager to adopt AI and 90% have seriously explored buying an AI solution.
+4. The biggest thing holding back AI is model quality, legal, data, risk → What's really holding it back is that most AI tools don't learn and don’t integrate well into workflows.
+5. The best enterprises are building their own tools → Internal builds fail twice as often.",Text,15,3,0,1mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-09-22T11:25:00.000Z,,2025-08-25T00:00:00.000Z,,,2025-09-22
+https://www.linkedin.com/feed/update/urn:li:activity:7365244079477084160,,"A 3-year journey: My kiddo & personal brand 
+
+Three years ago, two journeys began almost at the same time — the birth of my son and the birth of my personal brand.
+
+The first step as parents was naming. My wife and I wanted our son’s name to reflect our values. That clarity made the decision quick. I realise now — conceptualising my brand was the same. Identity comes first and it needs to stem from your deep vision.
+
+Soon, my son started crawling, then walking. Every day was a baby step forward. Some falls, some wins. That’s how a personal brand grows too — small, steady efforts like writing one post, connecting with one person, sharing one idea.
+
+Next came the exploring phase. He began noticing and engaging with things on his own. Some guidance helped, but most of the learning came naturally. My brand also grew this way — not only from planning but also from experiments and surprises.
+
+Then he began running. Chasing what he liked, leaving what he didn’t. I’ve learned to do the same — focusing on work that feels right and letting go of what doesn’t.
+
+Finally came speaking. At first, he repeated words like a parrot. Slowly, his own voice came out. For any brand, this is the most important stage too — moving from copying others to finding your own voice.
+
+Today, as I see my son turning 3, I see my journey reflected in his. 
+Growth — whether of a child or a brand — is never instant. It’s made of small steps, curiosity, focus, and finally, a voice that is truly yours.
+
+Both journeys continue to inspire each other. Both remind me: nurturing brings growth, and being authentic brings magic.",Text,31,6,0,1mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-09-22T11:25:00.000Z,,2025-08-24T00:00:00.000Z,,,2025-09-22
+https://www.linkedin.com/feed/update/urn:li:activity:7364256373452288000,,"AI is transforming finance—but how can it do so with trust and accountability? 
+
+Join us this Sat, 23rd Aug (2–3 PM IST) with leaders from policy, academia, law, and BFSI for an insightful session on evolving governance frameworks in India and beyond.
+
+Let’s explore how India can lead in building responsible, trusted AI for finance. 
+
+👉 Register here: https://lu.ma/gwop3tz4.",Text,6,0,0,2mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-08-23T11:25:00.000Z,,2025-08-21T00:00:00.000Z,https://www.linkedin.com/feed/update/urn:li:activity:7364143931711737856/,,2025-08-23
+https://www.linkedin.com/feed/update/urn:li:activity:7362064885267992577,,"While HR industry debates the use of AI in recruitment
+The fact of the matter is that AI is already deployed as a gatekeeper in many companies. One that shortlists you for the next human round
+Increasingly many of them are video bots too
+
+As a candidate, there are good chances that I might have to face these video bots. 
+Definitely these interviews are different from the regular ones in terms of observations and assessments. I have been thinking about aspects which really matter in these interviews.
+
+Here are some useful tips to ace these AI interviews?
+
+1. Learn the filters
+AI looks for 3 things:
+ •	Voice clarity & tone
+ •	Substance in answers
+ •	Eye contact & body language
+
+2. STAR method works
+ •	Situation
+ •	Task
+ •	Action
+ •	Result
+Example (tech): Fixed payment bug in 5 mins during peak traffic.
+
+3. Keywords without stuffing
+“I used SEO & analytics to grow traffic by 60% in 4 months.”
+and not “I’m great at SEO, marketing, analytics.”
+
+4. Practise your vocal smile
+Yes — AI “hears” warmth.
+Talk like you’re speaking to a friendly teammate.
+
+5. Look at the lens, not your reflection.
+
+6. If you get a surprise question?
+Smile, pause, and say:
+“That’s a great question — let me think for a sec.”
+
+7. Balance warmth and precision
+
+8. Be specific with results
+“Cut load time from 4s to 1.2s, saving 25% server costs.”
+and not “Improved system performance”
+
+9. Practise with mock AI
+Try HireVue practice mode or record yourself on Zoom.
+Fix tone, pace, and keywords.",Document,16,10,1,2mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-08-23T11:25:00.000Z,,2025-08-15T00:00:00.000Z,,,2025-08-23
+https://www.linkedin.com/feed/update/urn:li:activity:7361643587383586816,,"Systems of action are replacing systems of record.
+
+AI-native software doesn’t just store data — it acts on it in real time.
+Don’t bolt AI onto legacy workflows; reimagine the workflow itself.
+
+The shift is from recording events → driving outcomes.
+
+It’s the difference between:
+Hiring an assistant to take notes at your meeting
+vs.
+Hiring an assistant who joins the meeting, negotiates for you, books follow-ups, and closes the loop.
+
+
+In the AI era, action is the new record.",Text,13,1,0,2mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-08-23T11:25:00.000Z,,2025-08-14T00:00:00.000Z,,,2025-08-23
+https://www.linkedin.com/feed/update/urn:li:activity:7361324349192138754,,"Math and physics are important subjects to learn more than ever in the age of AI
+They teach you basics of how our universe works. 
+Every AI breakthrough, and every piece of technology lies something deeper: the fundamental laws of math and physics. 
+
+In this age, learning to prompt/code can make you understand interface to access these AI systems.
+
+Learn the OS and not just the app.",Text,18,1,1,2mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-08-23T11:25:00.000Z,,2025-08-13T00:00:00.000Z,,,2025-08-23
+https://www.linkedin.com/feed/update/urn:li:activity:7359837096506810368,,"Build on this idea #6  - AI community manager
+
+Online community management is increasingly becoming painful and thankless job. Even after clear guidelines and repeated instructions, some members do not follow them religiously. Plus, there is always slew of new people joining the community. Things become panicky and chaotic leading
+to people leaving the community on a bad note. Also some of these communities are spread across the globe, there is a need to manage them around the clock. 
+
+What if there is an AI community manager which works 24x7 as a co-admin and takes care of flagging off concerns, educating members on a periodic basis and promote a healthy growth. 
+
+Manual admin can always over ride decisions which can further train AI to handle complex cases.",Text,11,3,0,2mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-08-23T11:25:00.000Z,,2025-08-09T00:00:00.000Z,,,2025-08-23
+https://www.linkedin.com/feed/update/urn:li:activity:7359562350955245568,https://media.licdn.com/dms/image/v2/D4D22AQF2mneGZjrBZg/feedshare-shrink_800/B4DZiJq8jOG8Ag-/0/1754656397053?e=1762992000&v=beta&t=IWDka9mSstsMGoI0vnbu0lGSyRX4oZDWa5VDJHKw7jU,"8 years ago, I took a big leap—and It changed everything for me
+
+I was working and deeply entrenched in content tech industry after building and launching several products for multiple companies. I don't know why but I wanted to work in AI (btw, I worked on a couple of projects in Neural networks when was in IIT). Also having worked in mid to large companies, my calling was to work in startups. I was keen and determined to change myself. 
+
+I picked up several new technical skills while exploring opportunities. I spoke to a few people who were working in AI. Luckily, I found an AI startup which was in convergence space of content and AI. I pitched and was lucky that I got a good role balancing my aspirations to learn and also lead a team. It was not an easy decision. The whole challenge was to start delivering in the new environment. First 3 months were really hard. 
+
+When I reflect back and see, I always feel that this was the best career decision I took. 
+
+For those of you who are considering career pivots
+
+- What kind of job/change you are looking for? Narrow down your career choices/roles (don't just go with trends and what others are opting)
+- Prepare your mind for the new challenges (very very important)
+- Connect and speak to people who are into similar jobs
+- Identify skill gaps and make an actionable transformation plan 
+- Do side hustles if needed to gain skills
+- Consider taking a break from your existing job if you are financially sound
+- Join a structured program (as needed)
+- Share your work with people who can give you right feedback 
+- Apply for jobs regularly and evaluate your preparedness
+- Take a leap of faith and jump (no easy option)
+
+
+""The only person you are destined to become is the person you decide to be"" - Ralph Waldo Emerson
+
+
+I always found Linkedin as a very good platform to reach new people, explore opportunities and also share my work/views during this journey and post that to build my expertise.
+
+If you are at crossroads and looking for help, I am just a message away!
+
+#careerpivots",Image,25,4,0,2mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-08-23T11:25:00.000Z,,2025-08-08T00:00:00.000Z,,,2025-08-23
+https://www.linkedin.com/feed/update/urn:li:activity:7359441416529358872,,"As I opened ChatGPT this morning and saw something new — all old models were gone in the dropdown - only GPT-5 and GPT-Thinking left
+
+Tried it with a few queries
+1. I asked it to draft a 500-word post — the answer popped up almost instantly
+
+2. I discussed India’s education policy, then shifted to water management.
+Later, when I connected the two, it remembered my earlier points and linked them together
+
+3. When I said “Tier-2 city” in an India plan, it automatically suggested cities like Nagpur, Coimbatore etc
+
+4. I asked for a reform roadmap “without increasing costs.”
+Even after 3–4 refinements, it kept the budget limit intact 
+
+Have you tried it yet?",Text,15,2,0,2mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-08-23T11:25:00.000Z,,2025-08-08T00:00:00.000Z,,,2025-08-23
+https://www.linkedin.com/feed/update/urn:li:activity:7358009775697051648,https://media.licdn.com/dms/image/v2/D4D22AQGUoWvAqnLFYA/feedshare-shrink_800/B4DZhzm5STH4Ao-/0/1754286234079?e=1762992000&v=beta&t=LnpNRTWppBjX75E2mv6_kFxgnz0EtPEdvIIi_xsZ39Y,"Honored to deliver a keynote address at the Impact Educator Awards organised by Maxx Social Welfare Foundation celebrating the incredible mentors shaping young lives through sports, arts, education and mind sports. 
+
+It was inspiring to meet these unsung heroes and changemakers who are shaping young lives with heart and innovation.",Image,70,7,0,2mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-08-23T11:25:00.000Z,,2025-08-04T00:00:00.000Z,,,2025-08-23
+https://www.linkedin.com/feed/update/urn:li:activity:7357990786816184320,,"The future of SaaS is similar to fast fashion - rapid production of trendy, low-cost software that's quickly outdated and replaced as per Sam Altman
+
+So, we are increasingly going to see AI tools enable devs to churn out niche apps (e.g., a viral meme generator) in days for $5/month
+
+Users will rapidly adopt and also switch when the next trend hits, flooding the market with disposable options.
+
+Interesting times to witness rapid transformation of SaaS in AI era!",Text,9,1,0,2mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-08-23T11:25:00.000Z,,2025-08-04T00:00:00.000Z,,,2025-08-23
+https://www.linkedin.com/feed/update/urn:li:activity:7357644816387649536,,"UX → AX (Agentic Experience)
+
+UX currently is static, designed by the creativity of product designers. We are all experiencing the same user journeys while searching for and buying products on Amazon. This is a very transactional relationship, where every time I look for any product, I have to explain what I’m looking for, apply filters, and go through the same cycle all over again.
+
+What if there is an agent on the Amazon app that acted more like a relationship manager—one that understands me and my intents much better? I could simply give my requirements via voice or text: “I’m looking to shop for clothes for my sister’s wedding,” just like I would speak to a shopkeeper. Then, it would ask only the right questions and guides me towards my goal. It can even handle a few background tasks while talking to you.
+
+If anyone is building agentic experiences, I would love to learn from them.",Text,12,3,0,2mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-08-23T11:25:00.000Z,,2025-08-03T00:00:00.000Z,,,2025-08-23
+https://www.linkedin.com/feed/update/urn:li:activity:7357097773323714560,,"Writing is one skill that has changed my life forever
+
+A few years ago, I started writing in my diary, notepad, and then online. It forced me to do structured thinking, which helped me in planning projects and work. It helped me do primary research by analyzing the PoVs of people who read my content and comment
+
+It has helped me build a strong personal brand with a lot of new connections and professional opportunities to speak at various forums, find collaboration opportunities, get new client prospects, and find new people to work with—helping me grow in my founder journey
+
+One of my favorite hashtags in the age of AI is #WrittenByHuman
+
+Using AI for writing might be convenient, but you’d be giving up the chance to strengthen a skill that rewards you for a lifetime
+
+A few things you must do to start developing writing skills:
+
+- Always carry a pen/paper or laptop in every meeting and take notes
+- Pen down your thoughts when they come
+- Follow good writers in your area of interest
+- Pick up your favorite topic and start with freestyle writing
+- Openly share your views and build your unique voice online
+- Read a lot of books, mark important points and share them
+- Use AI wisely to correct your sentences, find new words, polish your thoughts
+
+To do structured writing - jot down your ideas as pointers. build a flow, make  drafts, read and do self review. update and refine.
+
+Start writing now and I am just a DM away for any support!",Text,35,8,0,2mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-08-23T11:25:00.000Z,,2025-08-01T00:00:00.000Z,,,2025-08-23
+https://www.linkedin.com/feed/update/urn:li:activity:7355833636840984578,,"Love the way how Dharmesh BA 🕵🏽‍♂️ breaks down voice agent conversations
+
+Most companies optimize for speed in simple transactions while fumbling the conversations that actually drive revenue. It's like perfecting your small talk while failing every job interview.
+
+Utility Conversations: This governs the simple stuff: reminders, updates, confirmations. Here, brevity is king. Users want information, not intimacy. Get in, deliver value, get out. No small talk required.
+
+Free Flowing Conversations: This operates in the realm of pure relationship. These are the conversations that serve no transactional purpose but fulfill a deeper human need-the digital equivalent of sitting on a porch, sharing silence with someone you trust. This is where AI companions, therapy bots, and digital astrologers live. The goal isn't efficiency; it's presence.
+
+Persuasive Conversations: This sits in the profitable middle ground between Utility and Free Flowing. This is where the real money lives - every conversation that requires changing minds rather than simply providing information. Loan collections, insurance sales, complex purchases, understanding why someone abandoned their shopping cart. They require something more sophisticated: the ability to build just enough trust to accomplish a specific goal, then gracefully exit.
+
+
+The companies that crack this code won't just build better voice agents - they'll unlock an entirely new category of digital relationship, one that respects both human psychology and business reality.",Text,23,0,0,2mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-08-23T11:25:00.000Z,,2025-07-29T00:00:00.000Z,,,2025-08-23
+https://www.linkedin.com/feed/update/urn:li:activity:7355453519253897217,,"Before an AI product becomes truly useful, it needs to learn from real people. 
+
+That’s why I love what Perplexity AI is doing.
+
+Instead of selling to big tech, they chose to offer their Pro plan free to 350 million Airtel users in India—for a full year.
+
+Why?
+Because the best way to build for India… is to learn from India.
+
+- Unlock an unfiltered, grassroots-level learning loop.
+- Invite hundreds of millions of real-world questions from India’s billion users.
+- Create training data from low-resource languages, unique query patterns, and regional worldviews that big tech often misses.
+
+That’s how great AI is made.",Text,27,7,1,2mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-08-23T11:25:00.000Z,,2025-07-28T00:00:00.000Z,,,2025-08-23
+https://www.linkedin.com/feed/update/urn:li:activity:7355132212607909888,,"Build on this idea #5: Stop loss on subscriptions 
+
+Most companies are wasting thousands on unused subscriptions. 
+Companies sign up for tools but never cancel them. 
+Even when nobody uses them anymore.
+
+What is there is an AI agent that checks all your subscriptions and tells you
+- Which ones you actually use
+- Which ones are worth the money
+- Which ones to cancel or downgrade
+
+This could be a periodic audit tool to save a lot of unused money
+
+Who's building this?",Text,9,0,0,2mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-08-23T11:25:00.000Z,,2025-07-27T00:00:00.000Z,,,2025-08-23
+https://www.linkedin.com/feed/update/urn:li:activity:7354370408378155008,,"Want to know more about you?
+
+Try out this simple prompt in your favourite AI tool
+
+""I want you to act as a psychological interviewer. Ask 6-8 questions at a time, designed to uncover a hidden limiting belief I hold about myself. Start with surface-level questions about my patterns or reactions, then dig deeper about my personal responses. Each question should build on the previous answer to reveal layers I'm not consciously aware of. After the final question, analyze my responses and tell me what unconscious belief about myself you've discovered - something that has been driving my behavior but that I don't realize I believed.""",Text,7,1,0,2mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-08-23T11:25:00.000Z,,2025-07-25T00:00:00.000Z,,,2025-08-23
+https://www.linkedin.com/feed/update/urn:li:activity:7353673304760631296,,"I read this great post by Paras Chopra on practical tips on building LLM agents and it really clicked. Here are the top lessons I have learnt:
+
+1. Keep tasks small and clear
+ •	Break down big goals into simple, sequential steps.
+ •	LLMs perform best when each task is focused and can be completed in approximately 10–15 minutes.
+
+2. Rely on one smart agent
+ •	Avoid overengineering with multiple agents and complex inter-agent communication.
+ •	Equip a single agent with long context and tools so it can work end-to-end.
+
+3. Double-check outputs
+ •	Implement a verification step after each task.
+ •	Ask agents to check their own work or specify criteria for success or failure, to catch errors early.
+
+4. Remind the agent of its goal
+ •	Reinforce the end goal repeatedly, especially in long workflows.
+ •	Summarize progress and clarify what remains to be done at each step.
+
+5. Provide tools 
+ •	Let your agent read and write files, take notes, and track progress.
+ •	Treat giving tools as “adding memory”—this enables agents to maintain continuity and avoid forgetting earlier steps.
+
+6. Never change context in midway (for multi-turn agents)
+ •	Keeping a linear, append-only log is simpler, more transparent, and reduces errors.
+
+These strategies help LLM agents move from unpredictable black boxes to dependable, structured teammates in your workflow.",Text,26,3,0,2mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-08-23T11:25:00.000Z,,2025-07-23T00:00:00.000Z,,,2025-08-23
+https://www.linkedin.com/feed/update/urn:li:activity:7353225609931587584,,"humans need to develop advanced supervisory skills (overseeing parallel tasks, take corrective actions and so on) to make full use of AI capabilities. we will see the emergence of new collaborative interfaces which will enable humans to do this",Text,9,1,0,3mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-07-24T11:25:00.000Z,,2025-07-22T00:00:00.000Z,https://www.linkedin.com/feed/update/urn:li:activity:7353107031651725313/,,2025-07-24
+https://www.linkedin.com/feed/update/urn:li:activity:7352965890499317760,,"Software is a network effects business where faster mover wins
+Faster mover translates to faster learning in AI space.
+One of the biggest moat AI companies could build is to develop these exponentially growing learning loops
+
+Traditional user interfaces are going to go away.
+The WIMP model (windows, icons, menus, pull-downs) was built 50 years ago.
+In the age of agents - UI becomes ephemeral, generated on demand, shaped by intent.
+
+(Views shared by Eric Schmidt in Moonshots with Peter Diamandis)",Text,21,0,0,3mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-07-24T11:25:00.000Z,,2025-07-21T00:00:00.000Z,,,2025-07-24
+https://www.linkedin.com/feed/update/urn:li:activity:7351783857307693057,,"Build on this idea #5 –  Plain text → JSON → AI video films
+
+I’ve noticed that making short videos with AI tools is still pretty tricky. One big reason is that you have to describe so many things—like characters, backgrounds, camera angles—for every single shot. And when it’s a multi-shot film, this gets even more complicated because the list of things to explain just keeps growing.
+
+So I was thinking: what if we had a tool where you could just type what you want in plain English? Like, “a man is walking,” “there’s a city background,” “he stops at a bus stop,” etc. You’d do that for each shot, and then the tool would automatically convert all of that into a structured JSON format which can be easily edited as needed.
+
+Why JSON? Because newer AI video tools like Veo3, Sora, and Runway work better when they get well-organized prompts like that. This kind of converter could make it way easier for people to create high-quality videos without needing to be super technical.
+
+I have added a sample JSON in my first comment.",Text,30,9,0,3mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-07-24T11:25:00.000Z,,2025-07-18T00:00:00.000Z,,,2025-07-24
+https://www.linkedin.com/feed/update/urn:li:activity:7351651006943784961,,"Companies still need frontend engineers, but the best ones also work on UX design and a broader product strategy. 
+
+Learning these add-on skills will help you transition into product management role",Text,11,2,0,3mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-07-24T11:25:00.000Z,,2025-07-17T00:00:00.000Z,,,2025-07-24
+https://www.linkedin.com/feed/update/urn:li:activity:7350762903517483008,,"Are LLMs emerging as OS of AI native world? 
+
+We saw a recent deal where Perplexity bought OS dot ai from Dharmesh Shah and that domain now redirects to Perplexity’s new launched agentic browser. Something definitely cooking for sure? 
+
+Karpathy in his recent YC talk spoke about LLMs becoming the new operating systems. Just as operating system made systems programmable, LLMs make everything “promptable.”
+
+So instead of:
+user → GUI → OS → app
+It’s now:
+user → LLM (via natural language) → app, tool, memory, etc.
+
+Very interesting times to live and work!",Text,18,1,0,3mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-07-24T11:25:00.000Z,,2025-07-15T00:00:00.000Z,,,2025-07-24
+https://www.linkedin.com/feed/update/urn:li:activity:7348221182665502720,,"Build on this idea #4
+
+Gone are the days when business opportunities used to be discussed in closed rooms only. A lot of business leads, hiring needs and other requests now pop up in numerous Slack channels, LinkedIn posts/groups, WhatsApp chats/groups, Discord servers, Reddit threads, etc.
+
+But they disappear fast, and most people miss them.
+What if we had a tool that monitor these channels for us, finds relevant posts, and tags them smartly? It can also push those leads straight to our CRM and even send a quick auto-reply targeted pitch.
+
+Basically, a smart AI agent that sniffs out opportunities and acts fast—before anyone else does.
+
+Anybody building this already? Who else wants this product?",Text,16,3,0,3mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-07-24T11:25:00.000Z,,2025-07-08T00:00:00.000Z,,,2025-07-24
+https://www.linkedin.com/feed/update/urn:li:activity:7347145933882601472,,"Silicon valley AI startups playbook that seems to be currently working 
+
+1. Start with open source or free. Make a lot of noise and get a lot of users to sign up for this.
+2. Slowly introduce a paid tier of 20$ and allure users from free tier with premium features. Build a good user base on this paid tier.
+3. Add highest paid tier of 200$. Promise to provide all top notch, unlimited  and upcoming features while throttling other previous tiers.
+
+Looks like ultimate plan is to move users to top paid tier.",Text,17,3,0,3mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-07-24T11:25:00.000Z,,2025-07-05T00:00:00.000Z,,,2025-07-24
+https://www.linkedin.com/feed/update/urn:li:activity:7346701252312850432,,"Build on this idea #3
+
+I often forget important tasks, events, communications for the day which pinches several times. Also I have realised that there are only 2 or 3 big things I am able to do properly 
+
+What if there is an AI agent which scans my work conversations - emails, slack channels, meetings, messages, calendar, drive, meeting notes, calls and present me top 3 tasks for the day with context to prepare / write and also guides me through the day accomplishing them 
+
+Would like to use this product if this already exists?",Text,16,0,0,3mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-07-24T11:25:00.000Z,,2025-07-04T00:00:00.000Z,,,2025-07-24
+https://www.linkedin.com/feed/update/urn:li:activity:7345713980092440577,,"Build on this idea #2
+
+A Slack-like workspace where humans and AI agents work together—natively.
+
+My current Slack is full of ChatGPT responses, Claude code snippets, Perplexity research links. It feels messy and disconnected.
+
+But here’s the thing: these AI tools are now part of my team. And each one is good at something different:
+
+Claude → coding & logic
+ChatGPT → content & communication
+Perplexity → research & insights
+
+So why not create a workspace where I can add different AI agents to each project channel based on what I need?
+
+Just like inviting teammates—add Claude for tech, ChatGPT for copy, Perplexity for digging deep.
+
+A shared space where humans and AIs collaborate like a real team.",Text,22,13,0,3mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-07-24T11:25:00.000Z,,2025-07-01T00:00:00.000Z,,,2025-07-24
+https://www.linkedin.com/feed/update/urn:li:activity:7344976937737408513,,"Build on this idea #1
+
+A smart to-do list that gets things done for you 
+
+Think about this:
+
+You type a task like:
+“Create a weekly summary from my emails and share with the team”
+“Find time in my calendar and set up a call with Raj”
+
+Then, you link your tools—like email, calendar, or documents.
+
+An AI agent takes over, completes the task, and keeps you updated.
+You can also set it on repeat for regular tasks.
+
+So instead of just making a to-do list,
+You give instructions and the AI handles it.
+It’s like having a helpful assistant built right into your task manager.",Text,12,2,0,3mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-07-24T11:25:00.000Z,,2025-06-29T00:00:00.000Z,,,2025-07-24
+https://www.linkedin.com/feed/update/urn:li:activity:7344902461968515073,,"Been vibing with Cursor, Claude Code, and Gemini CLI for lot of my code work. 
+
+I don't use them like only 1 tool at a time but pair them together as per coding needs. I have been able to deeply integrate Cursor into my codebase and it is amazing at context-aware edits and refactoring. I am finding Claude Code very good for high-level reasoning and debugging logic. Gemini CLI has been a good tool to generate code snippets on the fly.
+
+Would like to know your vibing experience/how you are making best use of these tools?",Text,16,0,0,3mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-07-24T11:25:00.000Z,,2025-06-29T00:00:00.000Z,,,2025-07-24
+https://www.linkedin.com/feed/update/urn:li:activity:7344595649545273344,,"Lately, I’ve been wondering — how do we stay useful when AI is doing everything?
+
+We’re all learning prompts, trying AI tools, and chatting with ChatGPT… but the real advantage?
+
+Being more human, not more like a machine.
+
+Don Allen shared some great tips on a podcast with Aishwarya about staying future-ready:
+
+- Be flexible: Learn different things. AI might be faster, but it can’t think like you or handle messy situations.
+- Try improv: It helps you stay calm, think quickly, and handle the unexpected. Plus, it’s fun!
+- Pick people-focused roles: AI can’t build trust, show care, or read emotions. Jobs like coaching, counselling, or community work still need real people.
+
+Instead of stressing about AI, focus on what it can’t do: feel, adapt, and truly connect.
+
+Let’s get better at that.
+
+What’s one human skill you want to pick up soon?
+
+Aishwarya Srinivasan",Text,13,1,0,3mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-07-24T11:25:00.000Z,,2025-06-28T00:00:00.000Z,,,2025-07-24
+https://www.linkedin.com/feed/update/urn:li:activity:7343869749195411457,https://media.licdn.com/dms/image/v2/D4D22AQEIqd0bBR3Mkg/feedshare-shrink_800/B4DZeqqn0cGsAg-/0/1750914989816?e=1762992000&v=beta&t=7RCGIWku2PQfVjTzzr7OyUAIrZRtFseExaljGLjYpjc,"When building AI agents, I always think in terms of autonomy vs. control.
+
+Some tasks need the agent to take charge, others need it to stay on a tight leash.
+
+Like, an AI that writes social media captions can go wild — low risk, high speed. But one that handles medical triage? Better keep it on a short leash with human checks.
+
+What's your mental model to design these agents?
+
+Pic courtesy: Levelup4all",Image,12,1,0,3mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-07-24T11:25:00.000Z,,2025-06-26T00:00:00.000Z,,,2025-07-24
+https://www.linkedin.com/feed/update/urn:li:activity:7343174653323935747,,"You don’t have to be in Bengaluru or Mumbai to think global anymore. Founders from cities like Indore and Jaipur are now choosing London to scale — and it’s working. 
+
+Customers:
+London is a global business hub, with buyers across finance, healthcare, logistics, and more. Thanks to the India-UK trade deal, it’s now easier for SaaS, digital services, and even fashion tech startups to sell in the UK and Europe.
+
+Funding:
+In 2024 alone, London startups raised over $10.8 billion — including $3.5 billion just for AI companies. With 120+ unicorns, it’s now Europe’s top city for venture capital and ranks third in the world for AI funding, after New York and Silicon Valley.
+
+Team building:
+Thanks to new UK-India talent mobility agreements, moving teams or sending founders abroad is much smoother. The Young Professionals scheme alone opens up 3,000 spots annually. Plus, the trade deal removes double social security taxes for temporary staff — saving money when expanding.",Text,16,1,0,3mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-07-24T11:25:00.000Z,,2025-06-24T00:00:00.000Z,,,2025-07-24
+https://www.linkedin.com/feed/update/urn:li:activity:7342792008400277504,,"Everyone’s excited about speech-to-speech LLMs and heard a lot of ppl working on them but here’s the truth: they’re a lot of work needed to make them usable
+
+1.  Hinglish (or other language mix) + Emotion = ASR nightmare
+Even best-in-class ASR models stumble when a user says:
+“Sir woh 12k ka auto-debit hua tha na, wo bounce ho gaya.”
+
+Mix of Hindi-English. Local idioms. Numbers. Emotional charge.
+If your transcript fails here, your LLM never had a chance.
+Now imagine debugging this without even having access to the transcript — because S2S doesn’t give you one.
+
+2. Real-time turn taking
+
+Indian conversations are not “one question, one answer.”
+We interrupt. We change tone. We speed up. We get emotional.
+S2S systems haven’t figured out real-time turn-taking yet.
+
+3. Fine-tuning needs speech-to-speech data, which we don’t have at scale. 
+
+4. Infra costs are massive
+
+Modular pipelines (ASR → LLM → TTS) still win on control, auditability, and resilience.",Text,17,5,0,3mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-07-24T11:25:00.000Z,,2025-06-23T00:00:00.000Z,,,2025-07-24
+https://www.linkedin.com/feed/update/urn:li:activity:7342486301050400768,,"existing capabilities of SOTA models >>>>>> AI products which are built currently using them as per Sam Altman in YC AI startup school event
+
+so there is a huge scope of product innovation waiting to be unlocked
+
+these models are going to better day by day which means founders and builders need to really up the AI product game now",Text,13,1,0,3mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-07-24T11:25:00.000Z,,2025-06-22T00:00:00.000Z,,,2025-07-24
+https://www.linkedin.com/feed/update/urn:li:activity:7342086302420406273,,"🚜 Farm it like OpenAI 🌾
+
+1. Distribute seeds 🌱
+(Models, starter agents, helpful evals)
+
+2. Provide manure 💩
+(Research papers, blog drops, sprinkle some spicy drama)
+
+3. Share best farming practices 📚
+(Open communities, dev days, GitHub repos, tweet threads)
+
+4. Lease out arable land 🟫
+(Give API access, hackathon stages)
+
+5. Let people cultivate all kinds of crops 👨‍🌾
+(GPTs, meme bots, AI girlfriends, recording mode)
+
+6. Watch what grows best — and copy it 👀
+Just with sleeker UI and enterprise packaging.
+
+7. Sell the produce back at enterprise rates 💼
+You just need to upsell 
+
+♻️ Repeat the loop
+🦄 Let 1% sprout unicorns
+🌍 And call it: “ecosystem building”
+
+#OpenAI #AIStrategy #WeekendFun #EcosystemBuilding",Text,12,0,1,4mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-06-24T11:25:00.000Z,,2025-06-21T00:00:00.000Z,,,2025-06-24
+https://www.linkedin.com/feed/update/urn:li:activity:7341331674531598337,,"Partial autonomy LLM apps - a very interesting concept introduced by Andrej Karpathy explained using Perplexity and Cursor
+
+1. Package Context
+
+Capture and condense relevant user state into a context window.
+Perplexity: condenses query + source highlights into a prompt.
+Cursor: packages current file, cursor location, and error stack into LLM prompt.
+
+2. Orchestrate LLM Calls
+
+Dynamically select and sequence LLMs for different tasks.
+Perplexity: summarization + follow-ups + ranking.
+Cursor: uses embedding models (for diffing), chat models (for explanation), and diff-apply models.
+
+3. Application-Specific GUI (HUO)
+
+Human-Use Optimization: UI tailored for high signal extraction and minimal friction.
+Perplexity: inline sources, follow-up buttons, vertical layout.
+Cursor: LLM panel next to editor, accept/suggest fix inline.
+
+4. Autonomy Slider
+
+User can control how much the LLM does:
+Search → Research → Deep Research
+Suggest fix → Autocomplete fix → Implement fix autonomously
+
+Perplexity: follow-up questions = low autonomy; auto-summaries = higher.
+Cursor: Tab → Cmd+K → Cmd+L → Cmd+I shifts toward agent mode.",Text,15,1,0,4mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-06-24T11:25:00.000Z,,2025-06-19T00:00:00.000Z,,,2025-06-24
+https://www.linkedin.com/feed/update/urn:li:activity:7340867174384726016,,"What if ChatGPT could pay your rent and help you knock off items from your bucket list?
+Join me for a no-fluff AI Side Hustles masterclass at Yukio, Pune. We’ll build, test, and launch real income ideas using AI — live.
+
+Free to attend. Seats? Very limited. 
+
+👉 Request free invite now – https://bit.ly/4laIOF3",Text,18,4,0,4mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-06-24T11:25:00.000Z,,2025-06-18T00:00:00.000Z,https://www.linkedin.com/feed/update/urn:li:activity:7340651477599731712/,,2025-06-24
+https://www.linkedin.com/feed/update/urn:li:activity:7340637436932153345,,"I’ve been working on conversational voice agents for a while now — and here’s something I’ve learned the hard way:
+
+It’s not the answers that make a agent feel human.
+It’s everything between the answers.
+
+It’s about rhythm, timing, and subtle social signals we humans take for granted.
+
+Here’s where most voice agents still fall short:
+
+Can it sense when you’re done speaking — or does it jump the gun and interrupt?
+Can it gracefully pause, overlap, or let you finish a sentence without sounding mechanical?
+Humans typically respond in ~200 ms. Agents often take seconds… or worse, talk over you.
+A 2-second silence can mean respect in one culture, awkwardness in another. Most systems don’t account for that.
+
+Until agents master the unspoken parts of conversation,
+they’ll keep sounding like guests at a party who don’t know when to speak — or when to leave.
+
+
+What’s the most “human” agent you’ve encountered lately?",Text,15,5,0,4mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-06-24T11:25:00.000Z,,2025-06-17T00:00:00.000Z,,,2025-06-24
+https://www.linkedin.com/feed/update/urn:li:activity:7340317897858134016,,"spot on Sidu Ponnappa
+
+Clients aren’t looking for suited-up folks with slick decks and buzzwords anymore.
+
+They want problem-solvers.
+
+The real ones show up in T-shirts and sneakers, ask the right questions, and quietly fix stuff the client didn’t even know was broken.
+
+It’s not about looking smart. It’s about actually getting work done.",Document,10,0,0,4mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-06-24T11:25:00.000Z,,2025-06-16T00:00:00.000Z,https://www.linkedin.com/feed/update/urn:li:activity:7340309785105309696/,,2025-06-24
+https://www.linkedin.com/feed/update/urn:li:activity:7340186321182687232,,"𝐆𝐨𝐨𝐝𝐛𝐲𝐞 𝐚𝐝𝐯𝐞𝐫𝐭𝐢𝐬𝐞𝐫𝐬, 𝐡𝐞𝐥𝐥𝐨 𝐮𝐬𝐞𝐫𝐬
+
+The original internet was designed around search (& later social media) and advertisers funded it. Social media is all about seeking eyeballs and feeding user data to marketers 
+
+We are interestingly seeing that GenAI led chat based search model is challenging this business model of internet. Perplexity, ChatGPT offers subscription plans to end users which has seen good acceptance so far forcing Google to announce plans to add AI mode in the search too.
+
+
+Thanks Jaspreet Bindra for your wonderful insights on this topic.",Text,16,2,0,4mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-06-24T11:25:00.000Z,,2025-06-16T00:00:00.000Z,,,2025-06-24
+https://www.linkedin.com/feed/update/urn:li:activity:7338452308373983232,,"𝐒𝐚𝐚𝐒 𝐢𝐬 𝐚𝐥𝐢𝐯𝐞. 𝐁𝐮𝐭 𝐀𝐈-𝐧𝐚𝐭𝐢𝐯𝐞 𝐢𝐬 𝐜𝐥𝐞𝐚𝐫𝐥𝐲 𝐰𝐢𝐧𝐧𝐢𝐧𝐠.
+
+A few years ago, every second pitch deck had the same formula:
+US-first SaaS,  PLG motion & We’ll cross $1M ARR in 14 months
+
+Fast forward to 2025, and something has seriously shifted.
+
+Today, VCs I talk to don’t ask, “What’s your ACV?”
+They ask, “How native is your AI stack?”
+
+And I get it. The data is loud and clear.
+From Jan to June this year, AI-native startups in India raised $454M across 65 deals.
+SaaS startups? $432M across 52 deals.
+First time AI has pulled ahead.
+
+Not by much—but it’s the direction that matters.
+
+So what’s going on?
+
+It’s not that SaaS is going away.
+It’s that AI-first products are showing more velocity, more depth, and more promise.
+
+And I’m not talking about “we added an AI assistant” kind of stuff.
+I mean startups that are built with AI at the core—where the product actually gets better the more people use it.
+
+We’ve felt this shift ourselves.
+
+When we started, our platform was a tool to manage borrower outreach.
+Today, it’s evolved into a full-stack agentic AI platform for debt collection—running multilingual voice and WhatsApp campaigns powered by speech, language, and reasoning models.
+
+Our AI agents negotiate repayments in real-time, adapt to borrower sentiment, and learn from every call.
+We support financial products from personal loans to gold loans, across India’s complex linguistic and behavioral landscape.
+
+Same problem: collections.
+Totally new solution: conversational AI that actually gets results.
+
+𝐈𝐧𝐯𝐞𝐬𝐭𝐨𝐫𝐬 𝐡𝐚𝐯𝐞 𝐜𝐚𝐮𝐠𝐡𝐭 𝐨𝐧.
+
+Had a candid chat recently with a VC friend. His exact words:
+
+“We’re not backing SaaS unless it’s got a serious AI angle now. It’s just too hard to defend otherwise.”
+
+That’s echoed by folks at Accel, Stellaris, Inflection Point—they’re all saying the same thing.
+More than 80% of new SaaS deal flow is AI-led.
+
+Why?
+
+Because AI-native products:
+✅ Have real moats (your data = your advantage)
+✅ Scale faster (less human ops)
+✅ Solve problems in new ways, not just faster ones
+
+Valuations are showing it too. Many AI-native startups are getting 3–4x the multiple of similar SaaS counterparts.
+
+
+The SaaS wave gave us unicorns.
+The AI-native wave might just give us giants.
+
+If you’re building something new—don’t bolt AI onto your roadmap.
+Start from first principles.
+
+What would your product look like if AI was the starting point?
+
+Chances are, it won’t look anything like your old one.
+
+Let’s build that future.
+Let’s build AI-native.
+
+#AINative #SaaS #IndiaStartups #AgenticAI #FintechAI #VCTalk #Founders #ProductDesign #LangGraph #VoiceAI #WhatsAppAI",Text,12,2,0,4mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-06-24T11:25:00.000Z,,2025-06-11T00:00:00.000Z,,,2025-06-24
+https://www.linkedin.com/feed/update/urn:li:activity:7338422581634486274,,"mastering vibe coding is a sought after skill these days 
+
+people who are non coders end up building weekend projects and nothing beyond
+
+fresh engineers struggle to make use of them to build since they lack basic programming/domain skills but they continue with build hacky demos
+
+experience engineers have an interesting choice….either mix vibe with regular coding tools or other way….both ways it is a lot of sweat for most people debugging newly introduced issues",Text,11,0,0,4mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-06-24T11:25:00.000Z,,2025-06-11T00:00:00.000Z,,,2025-06-24
+https://www.linkedin.com/feed/update/urn:li:activity:7338063544577355776,,"“To err is human” - All humans are fallible (idea popularised by Alexander Pope in his 1711 work An Essay on Criticism)
+
+Making mistakes is an inevitable part of our nature.
+
+Any thoughts on why there is so much concern about AI making errors?",Text,8,5,1,4mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-06-24T11:25:00.000Z,,2025-06-10T00:00:00.000Z,,,2025-06-24
+https://www.linkedin.com/feed/update/urn:li:activity:7337704034293760001,,"average prompts without proper context give bad results
+
+try using simple prompts with instructions to generate well designed prompts for your tasks, it might just work wonders.
+
+i have been doing this for a while and finding it really useful",Text,12,0,0,4mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-06-24T11:25:00.000Z,,2025-06-09T00:00:00.000Z,,,2025-06-24
+https://www.linkedin.com/feed/update/urn:li:activity:7334123112390713345,https://media.licdn.com/dms/image/v2/D4D22AQGQ0GNvuQ9KRQ/feedshare-shrink_800/B4DZcgKGhoGgAg-/0/1748591209980?e=1762992000&v=beta&t=RM1AKbeYiNQdH9xE7Sm6I0If7mW9LyFaPnkAjiAvA2k,"It was a wonderful opportunity to share my views on ""Wave of AI and emerging job opportunities"" during round table conference organised in collaboration with Ratan Tata Maharashtra State Skills University and the Government of Maharashtra.
+
+Thanks Ashwin Srivastava to making me part of this memorable event.",Image,88,4,1,4mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-06-24T11:25:00.000Z,,2025-05-30T00:00:00.000Z,,,2025-06-24
+https://www.linkedin.com/feed/update/urn:li:activity:7329033438970179584,,"Sam Altman shared a brilliant observation about AI adoption across different generations 
+
+Older people use it like a better Google — asking for quick answers, definitions, and facts.
+People in their 20s–30s use it like a life coach — helping with decisions, productivity, and self-improvement.
+College students and teens treat it like an operating system — automating tasks, building workflows for everything they need to do
+
+It’s amazing how the same tool is used so differently — from simple lookups to building entire systems. 
+
+The younger the user, the more integrated AI becomes in how they think, work, and create.",Text,31,8,0,5mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-05-25T11:25:00.000Z,,2025-05-16T00:00:00.000Z,,,2025-05-25
+https://www.linkedin.com/feed/update/urn:li:activity:7327969796841476096,,"The smartphone industry is undergoing a seismic shift as AI becomes accessible to all. Features like intelligent cameras and voice assistants—once exclusive to expensive flagship devices—are now making their way into affordable smartphones. This transformation is being driven by smaller brands leveraging a new wave of low-cost, AI-capable chipsets.
+
+Chipmakers are at the heart of this revolution, holding the key to reducing the cost of processing AI tasks. The iQOO Neo 10R, powered by the Snapdragon 8s Gen 3, has dominated the mid-range segment since its April 2025 launch, delivering stellar gaming, multitasking, and AI-enhanced performance. Meanwhile, the Vivo T4X, priced under ₹15,000, introduces AI capabilities to budget-conscious buyers with its MediaTek Dimensity 7300 chipset.
+
+So, what’s driving this democratization of AI?
+
+First, Neural Processing Units (NPUs) like MediaTek’s NPU 655 in the Dimensity 7300 double the efficiency of AI tasks, enabling on-device processing for seamless, cloud-independent experiences.
+
+Second, efficient fabrication processes—such as the 4nm technology used in Qualcomm and MediaTek chipsets—pack more power into smaller, energy-efficient designs, making AI viable at lower price points.
+
+Third, optimized open-source AI models tailored for mobile—like Qualcomm’s Snapdragon 6 Gen 4 supporting Meta’s Llama 3.2—allow mid-tier phones to run sophisticated AI applications locally, enhancing both privacy and performance.
+
+As smaller brands continue to adopt these affordable, AI-capable chipsets, the market is rapidly evolving. IDC predicts that 28% of new smartphones will be generative AI-capable by the end of 2025, rising to 58% by 2028. This trend not only fuels innovation but also empowers consumers with AI-driven features—such as smarter photography, real-time translation, and personalized assistants—without breaking the bank.
+
+The future of mobile technology is inclusive, and it’s exciting to see how these advancements will reshape our digital lives.
+
+#AI #Smartphones #TechInnovation #MobileTech",Text,13,0,0,5mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-05-25T11:25:00.000Z,,2025-05-13T00:00:00.000Z,,,2025-05-25
+https://www.linkedin.com/feed/update/urn:li:activity:7322472826760798210,,"𝗧𝗵𝗲 𝗻𝗲𝘅𝘁 𝗯𝗿𝗲𝗮𝗸𝘁𝗵𝗿𝗼𝘂𝗴𝗵𝘀 𝗶𝗻 𝗔𝗜 𝘄𝗼𝗻’𝘁 𝗰𝗼𝗺𝗲 𝗳𝗿𝗼𝗺 𝗵𝘂𝗺𝗮𝗻 𝗱𝗮𝘁𝗮
+
+AI has grown by learning from human footprints — our texts, images, conversations.
+But that curve is flattening. You can only remix the past for so long.
+
+True breakthroughs — new theorems, new sciences — live outside existing knowledge.
+They won’t be found by scraping more data.
+They’ll come from AI learning like humans truly learn: through experience.
+
+In the next era, AI agents will:
+
+- Move through continuous streams of experience — not static snapshots.
+- Engage deeply with environments — not just human prompts.
+- Ground rewards in real outcomes — not labels.
+- Reason from lived experience — not mimicry.
+
+Example:
+Imagine an AI scientist that doesn’t just study papers but runs its own experiments, sees patterns we missed, and invents theories — not because we programmed it, but because it discovered them.
+
+The future isn’t AI that learns from us.
+It’s AI that builds its own understanding.
+
+Predixion AI",Text,23,10,1,5mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-05-25T11:25:00.000Z,,2025-04-28T00:00:00.000Z,,,2025-05-25
+https://www.linkedin.com/feed/update/urn:li:activity:7320409325317857281,,"Thank you, LinkedIn News India for featuring my thoughts on Conversational AI. 
+
+At Predixion AI we are excited to contribute to this evolving space and build agentic and conversational AI solutions in lending space that truly understand, serve, and scale for users.
+
+Varun Bhalla Harshal Kalve",Document,19,2,0,5mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-05-25T11:25:00.000Z,,2025-04-22T00:00:00.000Z,https://www.linkedin.com/feed/update/urn:li:activity:7320399205804470272/,,2025-05-25
+https://www.linkedin.com/feed/update/urn:li:activity:7320400272046850049,,Talk to your CCTV cameras :),Text,5,0,0,5mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-05-25T11:25:00.000Z,,2025-04-22T00:00:00.000Z,https://www.linkedin.com/feed/update/urn:li:activity:7320378848833896448/,,2025-05-25
+https://www.linkedin.com/feed/update/urn:li:activity:7320385978743898112,,"𝗖𝗼𝗻𝘃𝗲𝗿𝘀𝗮𝘁𝗶𝗼𝗻𝗮𝗹 𝗔𝗜 𝗶𝗻 𝗜𝗻𝗱𝗶𝗮 𝗶𝘀 𝘂𝗻𝗱𝗲𝗿𝗴𝗼𝗶𝗻𝗴 𝗮 𝘀𝗲𝗶𝘀𝗺𝗶𝗰 𝘀𝗵𝗶𝗳𝘁 
+
+It’s no longer confined to voice bots or scripted replies. We’re now looking at omnichannel intelligence—systems that can carry context across WhatsApp, web, voice, and beyond, following the customer rather than resetting the interaction every time. That shift is unlocking a new paradigm in how businesses engage, resolve, and retain.
+
+The surge in demand is growing as:
+– Generative AI is dramatically improving the ability to understand and generate natural language.
+– Customers now expect fluid, personalized experiences across channels.
+– Legacy systems are rigid, transactional and operationally inefficient 
+
+Building for India means tackling code-mixed languages, diverse dialects, and regional accents at scale. The real challenge isn’t just translation—it’s capturing cultural nuance and local expression across hundreds of linguistic identities.
+
+The real value of Conversational AI lies at the intersection of 𝗰𝗼𝗻𝘃𝗲𝗿𝘀𝗮𝘁𝗶𝗼𝗻, 𝗱𝗼𝗺𝗮𝗶𝗻 𝘂𝗻𝗱𝗲𝗿𝘀𝘁𝗮𝗻𝗱𝗶𝗻𝗴, and 𝘄𝗼𝗿𝗸𝗳𝗹𝗼𝘄 𝗼𝗿𝗰𝗵𝗲𝘀𝘁𝗿𝗮𝘁𝗶𝗼𝗻. This is where intelligence becomes impactful—when it can grasp context, trigger the right backend action, and do so in real time across the customer journey.
+
+It is not about automating conversations, but redesigning how businesses listen, act, and build relationships at scale.",Text,23,3,1,5mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-05-25T11:25:00.000Z,,2025-04-22T00:00:00.000Z,,,2025-05-25
+https://www.linkedin.com/feed/update/urn:li:activity:7319259076779999232,,"I’ve been following Aviral Bhatnagar on LinkedIn/X, and have been reading his essays and listening to his podcast for many years now. His thoughts on startups are always clear, practical, and truly thought-provoking. What I admire most is how genuine and grounded his views are — not just theory, but backed by real insight and experience.
+
+Through countless podcasts, essays, newsletters, and stories, Aviral has built one of the most valuable content platforms in India’s startup ecosystem. His deep dives, sharp frameworks, and thoughtful storytelling have helped countless founders, operators, and investors better understand the fast-evolving world of startups.
+
+In my view, he is one of the smartest and most impactful voices in the Indian startup space today.  I am very sure he is doing a very good job with his pre-seed fund.",Text,51,2,0,6mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-04-25T11:25:00.000Z,,2025-04-19T00:00:00.000Z,,,2025-04-25
+https://www.linkedin.com/feed/update/urn:li:activity:7317409765507133440,,"𝗔 𝗦𝗲𝗹𝗳-𝗛𝗲𝗹𝗽 𝗣𝗿𝗼𝗺𝗽𝘁 𝗨𝘀𝗶𝗻𝗴 𝗖𝗵𝗮𝘁𝗚𝗣𝗧
+
+If you’ve been using ChatGPT regularly (with memory turned on), here’s a powerful prompt for personal growth:
+“𝘕𝘰𝘸 𝘵𝘩𝘢𝘵 𝘺𝘰𝘶 𝘳𝘦𝘮𝘦𝘮𝘣𝘦𝘳 𝘦𝘷𝘦𝘳𝘺𝘵𝘩𝘪𝘯𝘨 𝘐’𝘷𝘦 𝘵𝘺𝘱𝘦𝘥 𝘩𝘦𝘳𝘦, 𝘵𝘦𝘭𝘭 𝘮𝘦 𝘮𝘺 𝘵𝘰𝘱 𝘧𝘪𝘷𝘦 𝘣𝘭𝘪𝘯𝘥 𝘴𝘱𝘰𝘵𝘴”
+
+
+A blind spot is something about yourself that you don’t see clearly—but others (or AI) might. It could be a pattern, habit, or belief holding you back.
+
+Example:
+Let’s say you’ve often asked ChatGPT about starting a business, managing time, and dealing with burnout. It might respond:
+
+“1. 𝘠𝘰𝘶 𝘰𝘷𝘦𝘳𝘵𝘩𝘪𝘯𝘬 𝘣𝘦𝘧𝘰𝘳𝘦 𝘵𝘢𝘬𝘪𝘯𝘨 𝘢𝘤𝘵𝘪𝘰𝘯.
+2. 𝘠𝘰𝘶 𝘴𝘦𝘵 𝘵𝘰𝘰 𝘮𝘢𝘯𝘺 𝘨𝘰𝘢𝘭𝘴 𝘢𝘵 𝘰𝘯𝘤𝘦.
+3. 𝘠𝘰𝘶 𝘳𝘢𝘳𝘦𝘭𝘺 𝘱𝘳𝘪𝘰𝘳𝘪𝘵𝘪𝘻𝘦 𝘳𝘦𝘴𝘵.
+4. 𝘠𝘰𝘶 𝘥𝘰𝘶𝘣𝘵 𝘺𝘰𝘶𝘳 𝘢𝘣𝘪𝘭𝘪𝘵𝘪𝘦𝘴 𝘦𝘷𝘦𝘯 𝘢𝘧𝘵𝘦𝘳 𝘱𝘳𝘰𝘨𝘳𝘦𝘴𝘴.
+5. 𝘠𝘰𝘶 𝘰𝘧𝘵𝘦𝘯 𝘴𝘦𝘦𝘬 𝘢𝘱𝘱𝘳𝘰𝘷𝘢𝘭 𝘣𝘦𝘧𝘰𝘳𝘦 𝘮𝘢𝘬𝘪𝘯𝘨 𝘥𝘦𝘤𝘪𝘴𝘪𝘰𝘯𝘴.”
+
+Why this works: ChatGPT sees patterns over time. It’s like a judgment-free mirror that reflects your habits, mindset, and inconsistencies.
+
+Try it. You might uncover what’s been slowing you down.",Text,9,2,0,6mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-04-25T11:25:00.000Z,,2025-04-14T00:00:00.000Z,,,2025-04-25
+https://www.linkedin.com/feed/update/urn:li:activity:7316670261720707072,,"AI is now doing a lot of the work that users used to do themselves, so more of the code is moving to the backend. That means AI apps are getting super simple on the surface, while all the smart stuff is happening behind the scenes with agents doing the hard work.
+
+For example, think about a smart travel planner. You might just type, “Find me the cheapest flight to Goa,” in a chat box. That looks easy on the outside, but in the backend, AI agents are checking flight sites, comparing prices, checking dates, and figuring out the best option for you.
+
+Also, even basic “vibe coding”—just making things look nice and smooth—is helpful for frontends, since most of the real logic is already handled in the backend.
+
+So yeah, if you’re into backend engineering, this is a great time to be doing it. That’s where the real action is.",Text,25,4,0,6mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-04-25T11:25:00.000Z,,2025-04-12T00:00:00.000Z,,,2025-04-25
+https://www.linkedin.com/feed/update/urn:li:activity:7316347805847973889,,"Looks like memory is emerging as the next major frontier
+
+ChatGPT now offers long-term memory, enabling persistent, personalized interactions across sessions.
+
+As per Arvind’s AMA on reddit, Perplexity’s Comet is going to include context-aware agent to answer questions based on your past browsing tabs, and client-side data that's available on tabs that are already logged-in (even if not open).",Text,15,2,0,6mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-04-25T11:25:00.000Z,,2025-04-11T00:00:00.000Z,,,2025-04-25
+https://www.linkedin.com/feed/update/urn:li:activity:7315607835164196864,https://media.licdn.com/dms/image/v2/D4D22AQGVK0GnAlYNhg/feedshare-shrink_800/B4DZYZCiYXGwAg-/0/1744176822824?e=1762992000&v=beta&t=-4ikw2iEtnGPYLmsplPgLcKQ0zeDleL6RbSncZ2qzRo,"Had an amazing opportunity to speak at a jam-packed session at IIT Bombay to an engaging audience of AI enthusiasts, developers, finance professionals, and students on how enterprises can leverage speech analytics to derive actionable insights in the world of finance
+
+Loved the energy in the room and the depth of questions—it’s always inspiring to see such curiosity and engagement around the real-world impact of AI!
+
+Predixion AI",Image,91,15,1,6mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-04-25T11:25:00.000Z,,2025-04-09T00:00:00.000Z,,,2025-04-25
+https://www.linkedin.com/feed/update/urn:li:activity:7314862626671419392,,"Sam Altman on AI’s Impact on Jobs: 3 transformational shifts
+
+1. Full automation → some jobs will disappear
+Certain roles, especially those involving repetitive, structured tasks, will be entirely automated.
+Take customer support — a space already struggling with efficiency and satisfaction.
+With autonomous agents and advanced conversational AI, this function is on track to be fully handled by machines.
+
+2. Human-AI collaboration → augmenting human professions
+AI won’t replace every job — in many fields, it will amplify human creativity and curiousity.
+Think graphic design, video editing, marketing, coding etc.
+Humans + AI = Faster production, better quality, and new possibilities.
+This is where AI becomes a powerful co-pilot.
+
+3. Emergence of AI-native roles → The new frontier
+Just like coding and YouTube content creation became major career paths,
+we’re now seeing the rise of AI-native roles — jobs that didn’t exist before.
+From prompt engineering to AI trainers, fine-tuners, and multi-agent orchestrators,
+a new class of work is forming around building, managing, and scaling AI systems.",Text,11,1,0,6mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-04-25T11:25:00.000Z,,2025-04-07T00:00:00.000Z,,,2025-04-25
+https://www.linkedin.com/feed/update/urn:li:activity:7314823521287729152,,"No chunking. No context loss. Just smart, deep insights.
+
+What can an AI model do if it can have 10 million tokens context window (LLama4 is already supporting it) at once? A lot—and here are 5 exciting possibilities:
+
+1️⃣ Understand full Indian laws
+Load the entire Income Tax Act, GST rules, or court cases—and ask direct questions without breaking them into pieces.
+“What are the conditions for exemption under Section 10(23C) of the Income Tax Act as per the latest Supreme Court judgment?”
+
+2️⃣ Financial Reports, GST Filings & compliance summaries
+No more manual audits. Feed in years of financial data and filings—get AI to flag anomalies, summarize patterns, or even suggest optimizations, in your native language
+
+3️⃣ AI Agent for rural banking & credit
+Train agents with full loan docs, farmer history, repayment records—enable deep, on-device insights and explainability for underserved communities in Hindi or regional tongues.
+
+4️⃣ Smarter help for developers
+No need to search file by file. Just load your full codebase and ask:
+“Why is this UPI flow breaking?”
+
+5️⃣ Personalize education for students
+An AI tutor can remember full textbooks, notes, and past exams—giving each student personalized support in their own learning journey.",Text,15,1,0,6mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-04-25T11:25:00.000Z,,2025-04-07T00:00:00.000Z,,,2025-04-25
+https://www.linkedin.com/feed/update/urn:li:activity:7313779744410419200,,"Yes, we need consumer internet, D2C, enterprise and deeptech startups in India
+
+For sure, deeptech (EV, AI, Robotics, Semiconductor) startups are super hard to build and needs patient capital, deep expertise and collaboration from industry, govt, regulators and academia. 
+
+Let us work towards building a wholesome startup ecosystem in India.",Text,18,0,0,6mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-04-25T11:25:00.000Z,,2025-04-04T00:00:00.000Z,,,2025-04-25
+https://www.linkedin.com/feed/update/urn:li:activity:7313050818029486080,,"How Ghibli is changing OpenAI’s fortunes? 
+
+When ChatGPT launched in Nov 2022, it gained 1 million users in 5 day. now, it’s adding 1 million users every hour – Sam Altman on X
+
+Building competitive advantage
+🧠Reasoning (Math & Coding): Claude.ai & ChatGPT
+🔍 Deep Research: Gemini / Perplexity & ChatGPT
+🎨 Creativity: ChatGPT (no one is even close!)
+
+Just secured $40B funding led by SoftBank, doubling valuation to $300B.
+
+And the biggest play? OpenAI is now training on millions of personal and face images.
+
+Ghibli isn’t just an upgrade—it’s a game changer for OpenAI
+
+#OpenAI #Ghibli #AIRevolution #SamAltman",Text,20,0,1,6mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-04-25T11:25:00.000Z,,2025-04-02T00:00:00.000Z,,,2025-04-25
+https://www.linkedin.com/feed/update/urn:li:activity:7311357114478690304,,"Here's how we can boost creator economy using AI & Web3
+
+Let’s say a studio like Ghibli owns special characters and art styles. People use AI tools like ChatGPT or other image generators to create pictures or stories that look like Ghibli’s work.
+
+With Web3, we can keep track of who uses these creations. Every time someone uses Ghibli-style content, a small payment (royalty) can automatically go to the studio.
+
+This helps creators earn money fairly, and lets fans create cool things with AI—everyone benefits.",Text,17,0,0,6mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-04-25T11:25:00.000Z,,2025-03-28T00:00:00.000Z,,,2025-04-25
+https://www.linkedin.com/feed/update/urn:li:activity:7310914838736650240,,"Imagine throwing deep research at all of your work and life context that is accessible on the web and asking AI to deeply reason, research, and figure out things for you like booking flights or filling out forms—while operating across platforms without the limitations of standalone apps. 
+
+That is Perplexity AI's new agentic upcoming browser Comet.
+
+I am on Comet's wait list and really excited to try my hands on this browser.
+
+How do you emergence of agentic browsers impacting your web & search experience?",Text,9,0,0,6mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-04-25T11:25:00.000Z,,2025-03-27T00:00:00.000Z,,,2025-04-25
+https://www.linkedin.com/feed/update/urn:li:activity:7310611591144574976,https://media.licdn.com/dms/image/v2/D4D22AQFj0wDKrgkk6Q/feedshare-shrink_800/B4DZXSCeHpG4Ak-/0/1742985620106?e=1762992000&v=beta&t=4CJnaA-WYpqypVVuwdw0zJBUM4BX9hUN9dG_dB20ols,"Wow. creativity unleashed. AI generated animated films are coming soon!
+
+Here is my mandatory post of the day",Image,42,3,0,6mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-04-25T11:25:00.000Z,,2025-03-26T00:00:00.000Z,,,2025-04-25
+https://www.linkedin.com/feed/update/urn:li:activity:7310478838407344128,,"LLMs started off struggling with context and specific knowledge—enter RAG.
+
+Now, we’re asking them to perform actions too—so tools like function calling and MCP are stepping in.",Text,12,1,0,6mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-04-25T11:25:00.000Z,,2025-03-26T00:00:00.000Z,,,2025-04-25
+https://www.linkedin.com/feed/update/urn:li:activity:7309240672492969984,https://media.licdn.com/dms/image/v2/D4D22AQF9KXMiVnFFOQ/feedshare-shrink_800/B4DZW.jp8NHkAo-/0/1742658773542?e=1762992000&v=beta&t=ZenQkrR7iWrhWcZG25oE_Zpd9OxV1KU2pKM_6oW81Vs,"Who still feels ""AI driven calling/messaging"" is a technology of future?
+
+Bajaj Finance is leveraging AI to achieve significant cost savings, with current deployments reportedly saving ₹140-150 crore annually. These savings stem from AI-driven efficiencies in customer outreach, targeted messaging, and automation of routine tasks, freeing up resources for more productive activities.
+
+Their broader AI initiative, ""FinAI,"" aims to triple lead conversions, double back-office productivity, and enhance customer engagement. By integrating AI across operations, the company expects further reductions in operational costs and improved profitability over the next few years.",Image,25,2,1,6mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-04-25T11:25:00.000Z,,2025-03-22T00:00:00.000Z,,,2025-04-25
+https://www.linkedin.com/feed/update/urn:li:activity:7309192638262317056,,"My work principles:
+
+1. Choose people over brand or money
+2. Careers compound more strongly than money
+3. You can love your work
+4. Choose health and family over career
+5. Hard work is irreplaceable 
+6. Show up every day
+7. Good over 100 days beats great over 10 days
+8. Choose something you can do for 20 years, not 2 years
+9. Exit options are overrated
+10. Don’t stop, keep going
+11. Following a set path closes doors
+12. Nothing is more exhilarating than being your own boss
+13. Nothing is more scary than being your own boss
+14. Good professionals solve problems, great anticipate them
+15. Be kind
+16. Tough love is better than fake praise
+17. Care for people you work with
+18. Every decision has a trade-off, there is no free lunch
+19. Curiosity is a superpower
+20. Work is a marathon to run for your lifetime",Text,2685,61,40,6mo,Vaibhav Goyal reposted this,Aviral Bhatnagar,https://www.linkedin.com/in/aviral-bhatnagar-ajuniorvc,https://www.linkedin.com/in/vaibhavg/,2025-04-25T11:25:00.000Z,,2025-03-22T00:00:00.000Z,,,2025-04-25
+https://www.linkedin.com/feed/update/urn:li:activity:7308352585315323904,,"Jensen Huang explained use of reasoning models in his GTC 2025 keynote speech
+
+He shared below example to highlight 2 distinct approaches to problem-solving in AI systems:
+
+“Arrange seating for a wedding dinner, considering traditions, photogenic angles, and feuding family members.”
+
+Traditional Language Model (Llama 3)
+- Generated a seating plan in <500 tokens (result was fast)
+- Produced errors due to insufficient reasoning about complex constraints
+- Failed to account for nuanced family dynamics and photogenic requirements
+
+Reasoning Model (Deepseek R1)
+- Used >8,000 tokens for multi-step analysis
+- Identified family conflicts through relationship mapping
+- Optimized seating angles for photography sightlines
+- Balanced traditional seating protocols with modern preferences
+- Performed iterative validation checks on proposed arrangements
+
+Huang emphasized that while reasoning models consume 16x more tokens, they enable:
+- Comprehensive constraint analysis
+- Solution space exploration
+- Self-verification through ""digital twin"" simulations",Text,13,2,0,7mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-03-26T11:25:00.000Z,,2025-03-20T00:00:00.000Z,,,2025-03-26
+https://www.linkedin.com/feed/update/urn:li:activity:7307453108643684354,,"𝐂𝐡𝐚𝐭 𝐜𝐨𝐦𝐩𝐥𝐞𝐭𝐢𝐨𝐧: 𝐓𝐡𝐞 𝐤𝐞𝐲 𝐭𝐨 𝐜𝐨𝐧𝐭𝐞𝐱𝐭-𝐚𝐰𝐚𝐫𝐞 𝐀𝐈
+
+Traditional AI chatbots struggle with context, treating each query independently. This results in fragmented conversations and poor user experience. Chat completion solves this by enabling AI to remember previous interactions, creating more coherent and intelligent responses.
+
+Look at this example
+
+User: “Who is Marie Curie?”
+AI: “Marie Curie was a physicist.”
+
+User: “What did she discover?”
+AI: “Can you specify which person you are referring to?” (without chat completion)
+AI: “She discovered polonium and radium.” (with chat completion)
+
+This technology is crucial for AI assistants, customer support, and conversational AI, improving engagement and efficiency in real-world applications.
+
+Predixion AI",Text,11,5,0,7mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-03-26T11:25:00.000Z,,2025-03-17T00:00:00.000Z,,,2025-03-26
+https://www.linkedin.com/feed/update/urn:li:activity:7306992571354877953,,"Hiring backend engineer (FastAPI + LangGraph)!
+
+Do you breathe AI (in Kunal Shah’s words) and love vibing with code (as per Andrej Karpathy)? 
+
+If backend engineering excites you and you thrive on building scalable, AI-driven systems, let’s talk!
+
+Must-have:
+- Proficiency with coding assistants (Cursor or Github copilot)
+- Experience integrating AI models & multi-agent frameworks (LangGraph)
+
+Join us in shaping the future of AI-first fintech at Predixion AI! 
+Drop me a DM to take this further. 
+
+#Hiring #BackendEngineer #FastAPI #LangGraph #AI #Fintech #StartupJobs",Text,21,1,0,7mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-03-26T11:25:00.000Z,,2025-03-16T00:00:00.000Z,,,2025-03-26
+https://www.linkedin.com/feed/update/urn:li:activity:7306314663237976066,,"Humans Need to Apply Critical Reasoning to Vibe Coding to Extract Real Value
+
+🔎In the context of vibe coding, why is there little discussion or analysis on its application in large-scale product codebases beyond application-level, medium-scale, or simple projects? 
+
+⚡ The lack of visibility raises questions about its real-world impact, adoption challenges, and the proprietary nature of enterprise code intelligence systems.
+
+1️⃣ Are these Code Intelligent AI systems really solving design-level challenges or just generating snippets of code?
+2️⃣ A prompt can generate basic code.
+3️⃣ A prompt can generate better code with more reusable methods and improved handling of multiple failure cases
+4️⃣ How secure, maintainable, and scalable is AI-generated code?
+⚠️ What happens when prompting-driven code generation overrides architectural decision-making?
+
+✅ However, understanding what you truly need is critical, otherwise, you risk compromising your design, code quality, and overall solution with AI-generated outputs.
+
+#CriticalReasoning #Vibe #LLM #Productivity #Coding #Lovable #Cursor #SoftwareEngineering #CodeIntelligence #TechDebt #SystemDesign #GenAI #CodingTools #HumanopinionAIEdited",Text,6,0,2,7mo,Vaibhav Goyal reposted this,Sivaram A.,https://www.linkedin.com/in/siva-ak,https://www.linkedin.com/in/vaibhavg/,2025-03-26T11:25:00.000Z,,2025-03-14T00:00:00.000Z,,,2025-03-26
+https://www.linkedin.com/feed/update/urn:li:activity:7305817639572922368,,"$1.29B raised in first 2 months of 2025 - What’s driving Indian fintech’s funding surge?
+
+I feel this recent growth is driven by multiple factors coming together—strong market expansion, wider reach beyond big cities, better digital infrastructure, tech innovation, a young population, changing investor focus, and supportive government policies.
+
+Investors are betting big on the sector as fintech expands beyond metros into Tier II and III cities.
+
+Who’s getting funded?
+• Payments & Lending lead the way – Digital payment startups (ToneTag, Cashfree, HiWiPay, Dodo) and lending-focused fintechs (Infinity Fincorp, Oxyzo, Eduvanz, Bizloan) saw major inflows.
+• Wealth management & finance startups (Waterfield, ArthAlpha, GrayQuest) also gained investor interest.
+• Early-stage funding is strong, signaling confidence in new fintech ventures, while larger Series A/B rounds and even debt financing fuel growth-stage startups.
+
+With India on track to becoming a global fintech hub, this funding surge reflects long-term investor confidence, not just a short-term trend. Low equity penetration and untapped markets beyond urban centers make fintech one of the most promising sectors for sustained growth. 
+
+Here is business standard story on this surge https://lnkd.in/dVqfyk9u
+
+#LinkedInNewsIndia #fintech #startupfunding",Text,13,0,0,7mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-03-26T11:25:00.000Z,,2025-03-13T00:00:00.000Z,,,2025-03-26
+https://www.linkedin.com/feed/update/urn:li:activity:7305264313479352321,,"MCP (or Model context protocol) is increasingly becoming ""USB-C port"" for AI
+
+Imagine you're building an AI assistant that helps manage your work schedule. 
+- With traditional APIs, developers would need to create separate integrations for your calendar, email, project management system, and chat applications.
+- With MCP, your assistant can seamlessly do it through a single, standardized protocol. The AI model doesn't need detailed knowledge of each system's API - it simply communicates through MCP, which handles the specific interactions with each service. The assistant can dynamically discover what tools are available and select the appropriate ones based on your request and context.
+
+As AI moves from simple query-response systems to autonomous agents that reason, plan, and execute tasks, MCP provides the necessary structure for persistent, context-aware interactions.
+🔹 More natural conversations
+🔹 Less redundant data transfer
+🔹 Better user experiences
+
+MCP is a big shift in how AI models interact with applications, bringing us closer to truly intelligent, agentic AI systems.",Text,16,0,0,7mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-03-26T11:25:00.000Z,,2025-03-11T00:00:00.000Z,,,2025-03-26
+https://www.linkedin.com/feed/update/urn:li:activity:7304752994611261442,https://media.licdn.com/dms/image/v2/D4D22AQGwLXLe7UsiIQ/feedshare-shrink_800/B4DZV.yIyFHYAg-/0/1741588828344?e=1762992000&v=beta&t=zsQA8mMKdPhCp_eVhtfd6Ta4wxw63g4e3rGbsus62dc,"As a customer, would you like to continue talking to a human agent who provides scripted responses with no real action or 
+
+like to try an AI agent that speaks naturally, gives accurate information, and promises real solutions to your problem?",Image,12,7,0,7mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-03-26T11:25:00.000Z,,2025-03-10T00:00:00.000Z,,,2025-03-26
+https://www.linkedin.com/feed/update/urn:li:activity:7304400323081601024,https://media.licdn.com/dms/image/v2/D5622AQFglmrOJ8ceig/feedshare-shrink_800/B56ZV1FqstGsAg-/0/1741426185670?e=1762992000&v=beta&t=5YBb2yKK1hjc0UDncGNh6dK_aeH0wk2ljBKpRmk1luU,"Totally agree with this Shankar Maruwada
+For a country like us, Solving bigger problems > Building bigger models
+
+How can we solve problems at population scale with DPI + AI?",Image,11,0,0,7mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-03-26T11:25:00.000Z,,2025-03-09T00:00:00.000Z,https://www.linkedin.com/feed/update/urn:li:activity:7304070822237810688/,,2025-03-26
+https://www.linkedin.com/feed/update/urn:li:activity:7304385594007166976,,"LLM <> Brains  ::  AI Agents <> Brains + Hands 
+
+""Manus"" the new AI sensation from China, the word is derived from the Latin word for ""hand"" is a general AI agent that turns your thoughts into actions.
+
+Loved this hands analogy to how we should think about building these AI agents. 
+
+Predixion AI",Text,17,1,0,7mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-03-26T11:25:00.000Z,,2025-03-09T00:00:00.000Z,,,2025-03-26
+https://www.linkedin.com/feed/update/urn:li:activity:7304060226448588800,,"Treat AI like an intern or fresher for getting work done!
+
+Give clear instructions, break down tasks, and provide all necessary resources.
+
+It’s very useful, but don’t expect magic out of it",Text,26,1,0,7mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-03-26T11:25:00.000Z,,2025-03-08T00:00:00.000Z,,,2025-03-26
+https://www.linkedin.com/feed/update/urn:li:activity:7303726610166288385,https://media.licdn.com/dms/image/v2/D4D22AQHO-yrgENRB2Q/feedshare-shrink_800/B4DZVwMoLYHkAo-/0/1741344118850?e=1762992000&v=beta&t=QsVyn73A694-xk9EV9DbWRJKXDjt34oKiL5mjEcgkmE,"Had an amazing time speaking and connecting with passionate AI startup founders and enthusiasts at last weekend’s AI Salon Mumbai meetup, hosted by the incredible Reuben D'silva
+
+The energy and ideas shared were truly inspiring—let’s keep the momentum going! AI and tech aren’t just shaping the future; they’re transforming the present
+
+Predixion AI",Image,59,1,0,7mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-03-26T11:25:00.000Z,,2025-03-07T00:00:00.000Z,,,2025-03-26
+https://www.linkedin.com/feed/update/urn:li:activity:7301433251900919809,,"A2A: AI Agents talking to each other 
+
+We’re stepping into an exciting new phase of agentic AI where AI agents collaborate seamlessly—handling everything from simple tasks to complex problem-solving without human intervention!
+
+This is just the beginning. Soon, AI-to-AI (A2A) interactions will revolutionize various industries through:
+
+🔹 Real-time communication – Retrieving, querying, and exchanging information effortlessly.
+🔹 Brokering & negotiation – AI agents handling deals, pricing, and queueing requests.
+🔹 Automated transactions – Making purchases, exchanging assets, and managing payments.
+🔹 AI-driven hiring – Recruiting, contracting, and even managing other AI agents.
+🔹 Multi-agent collaboration – Self-organizing teams solving complex problems without human supervision.
+
+I recently came across a fascinating example: two AI agents autonomously booking a hotel room together! 
+
+The implications are massive. 
+
+What are your thoughts on AI agents collaborating like this? Where do you see this heading?",Article,11,3,0,7mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-03-26T11:25:00.000Z,,2025-03-01T00:00:00.000Z,https://youtu.be/EtNagNezo8w?feature=shared,,2025-03-26
+https://www.linkedin.com/feed/update/urn:li:activity:7301099184059740160,https://media.licdn.com/dms/image/v2/D4D22AQF5MIn2xmkiCw/feedshare-shrink_800/B4DZVK3AT9HYAg-/0/1740717691192?e=1762992000&v=beta&t=vZ1ZWq-D5R4lZhIxGCYvtEEgXxw0wL9zcWPe8gxW74A,"𝐓𝐡𝐫𝐨𝐰𝐛𝐚𝐜𝐤 𝐭𝐨 𝐦𝐲 𝐈𝐈𝐓 𝐃𝐚𝐲𝐬 – 𝐒𝐢𝐦𝐩𝐥𝐞 𝐥𝐢𝐯𝐢𝐧𝐠, 𝐡𝐢𝐠𝐡 𝐭𝐡𝐢𝐧𝐤𝐢𝐧𝐠
+
+Some memories never fade. When I received this package, it instantly took me back to my IIT hostel room—22 years ago! I remember how we set up our own local LAN, with servers running in almost every room. My wing mates are still some of my closest friends, forming a strong network that has lasted a lifetime.
+
+At IIT, life was simple but full of learning. Some of the greatest professors in the country would ride cycles, eat in the same canteen as us, and share stories over a cup of chai. Their humility and wisdom left a lasting impact on me.
+
+Proud to be part of the Naukri Campus Scholarship, dedicated to supporting and empowering India’s top engineering talent through scholarships and recognition. With ₹24 Lakhs in main scholarships, ₹39 Lakhs in mini college-level scholarships, and full semester fee coverage for 16 national winners, it opens doors for bright minds. The initiative is open to students from IIT, NIT, IIIT, and BITS, with 264 campus-level winners.
+
+Life at IIT was all about solving problems—workshops, assignments, projects, and all-nighters. But beyond academics, I learned how to think, adapt, and never give up. That mindset has shaped my journey ever since.
+
+Engineering will challenge you every day, but the key is to stay curious, keep solving, and never stop learning. A sharp mind and a never-give-up attitude will take you far!
+
+To apply for the scholarship, please click here - https://bit.ly/41bQJLa
+
+#IITMemories #GreatnessInTheMaking #NaukriCampusScholarship #SimpleLivingHighThinking #collab",Image,148,21,3,7mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-03-26T11:25:00.000Z,,2025-02-28T00:00:00.000Z,,,2025-03-26
+https://www.linkedin.com/feed/update/urn:li:activity:7300439079605735424,,"Intelligence is on tap now so agency is even more important
+
+Agency > Intelligence? Your thoughts?",Text,5,0,0,7mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-03-26T11:25:00.000Z,,2025-02-26T00:00:00.000Z,,,2025-03-26
+https://www.linkedin.com/feed/update/urn:li:activity:7300390779284287489,,"As we know coding is the biggest use of AI by leaps and bounds. 
+
+Stuck on a bug? 
+Cursor : Just highlight the code and ask the AI, and it explains the issue + suggests a fix.
+VS code (with copilot) :You get line-by-line suggestions but refactoring is still manual.
+
+Need a full function refactored for better efficiency? 
+Cursor: AI rewrites it in seconds.
+VS code (with copilot): You get code completions but need manual debugging with extensions.
+
+Ask coding questions like “How do I optimize this SQL query?”
+Cursor: Direct AI chat inside the editor to 
+VS code (with copilot): It suggests queries, but in-depth explanations require extra plugins.",Poll,0,0,0,7mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-03-26T11:25:00.000Z,,2025-02-26T00:00:00.000Z,,,2025-03-26
+https://www.linkedin.com/feed/update/urn:li:activity:7298653802964951040,https://media.licdn.com/dms/image/v2/D5622AQE0Dl5Y9IxLwA/feedshare-shrink_800/B56ZUoG8MIHsAg-/0/1740134667886?e=1762992000&v=beta&t=IPiYE9nBFBQ6IruyWidw_IIED9QFPUnZtFMylDkkZOY,"Blume says - Yes, India will have home grown foundation models in the coming 12-18 months! 
+
+Sajith Pai Blume Ventures",Image,15,4,0,8mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-02-24T11:25:00.000Z,,2025-02-21T00:00:00.000Z,,,2025-02-24
+https://www.linkedin.com/feed/update/urn:li:activity:7298565843817267200,,"📩 What if AI had an Inbox?
+
+Tired of jumping between dashboards, tools, and notifications? Imagine if all your AI agents had a shared inbox—just like email, but way smarter. Instead of chasing updates, you just check your AI inbox and handle everything in one place.
+
+🔥 Example:
+
+🔹 Your HR AI drops a message:
+""Hey, three candidates applied for the AI Research role. Want me to schedule interviews or just pretend we never saw them? 👀""
+✅ Schedule | 📄 Review Applications | ❌ Ignore (not recommended)
+
+🔹 Meanwhile, your Finance AI pings you:
+""Reminder: Vendor ABC’s invoice is due. Pay now or stall like a pro? 😆""
+💰 Pay | 🔍 Request More Info | 🚩 Dispute
+
+No more hunting for updates. No more tool fatigue. Just one inbox where AI keeps you posted—and you get things done in a few clicks.",Text,8,3,0,8mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-02-24T11:25:00.000Z,,2025-02-21T00:00:00.000Z,,,2025-02-24
+https://www.linkedin.com/feed/update/urn:li:activity:7296781465671856129,,"“Vibe Coding: Let the AI code, you just set the vibe. 🚀🎨”
+
+Vibe coding (coined by Andrej Karpathy a couple of weeks back) is perfect for prototyping, creative projects, and fast experimentation.
+
+For uninitiated, it is an AI-driven, intuition-based approach to coding where developers rely on LLMs to generate, debug, and modify code with minimal manual effort, focusing on outcomes over structure.",Text,12,0,0,8mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-02-24T11:25:00.000Z,,2025-02-16T00:00:00.000Z,,,2025-02-24
+https://www.linkedin.com/feed/update/urn:li:activity:7296690510432235520,https://media.licdn.com/dms/image/v2/D4D22AQHaBMdsqxrMEw/feedshare-shrink_800/B4DZUMNWBlGkAg-/0/1739666581687?e=1762992000&v=beta&t=ZeXtSjpbYPfpZ_R7_XNnbdGGtymbBvkVnbUdMyaeDTg,"Try this prompt on your fav AI tool  ""𝐆𝐢𝐯𝐞 𝐦𝐞 𝐚 𝐩𝐢𝐜𝐭𝐮𝐫𝐞 𝐨𝐟 𝐚 𝐩𝐞𝐫𝐬𝐨𝐧 𝐰𝐫𝐢𝐭𝐢𝐧𝐠 𝐰𝐢𝐭𝐡 𝐡𝐢𝐬 𝐥𝐞𝐟𝐭 𝐡𝐚𝐧𝐝"" 
+
+You will be surprised to know that most of these tools are biased towards right handers and are not capable enough to doing this task.
+
+Below are my attempts on ChatGPT 4o",Image,15,0,0,8mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-02-24T11:25:00.000Z,,2025-02-16T00:00:00.000Z,,,2025-02-24
+https://www.linkedin.com/feed/update/urn:li:activity:7296392811887681536,,"Deep research agents from OpenAI and Perplexity offer great information synthesis, summarization, and retrieval capabilities but should be used as assistive tools rather than primary research sources.
+
+When not to fully rely on them?
+
+• For academic or legal research where precise citations and original sources are crucial.
+• When working on cutting-edge AI, science, or finance where real-time updates are essential.
+• For developing original theories, critiques, or deep analysis, as these require human insight.
+• If you need data from premium, paywalled sources like IEEE, Nature, or Harvard Business Review.",Text,19,1,0,8mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-02-24T11:25:00.000Z,,2025-02-15T00:00:00.000Z,,,2025-02-24
+https://www.linkedin.com/feed/update/urn:li:activity:7295731020262174720,,"Ever asked AI a question and got a vague or generic answer? That’s where 𝐤𝐞𝐲𝐭𝐞𝐫𝐦 𝐩𝐫𝐨𝐦𝐩𝐭𝐢𝐧𝐠 helps. 
+
+It’s a simple trick—by adding specific keywords to your prompt, you guide AI to give more accurate, focused, and useful responses.
+
+Example:
+
+🔹 Without keyterm prompting:
+👉 “Tell me about AI.”
+(AI might give a broad answer, covering everything from robots to deep learning.)
+
+🔹 With keyterm prompting:
+👉 “Tell me about AI, focusing on deep learning, neural networks, and model training.”
+(Now, AI sticks to the important details you want.)
+
+This method is super useful for chatbots, research, coding, writing, and even simple Q&A with AI. It helps in:
+- Getting precise information
+- Reducing AI confusion or hallucinations
+- Making AI-generated content more useful
+
+Next time you ask AI something, try adding specific keywords—you’ll see the difference!",Text,10,0,0,8mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-02-24T11:25:00.000Z,,2025-02-13T00:00:00.000Z,,,2025-02-24
+https://www.linkedin.com/feed/update/urn:li:activity:7294572351529127936,,"𝐀𝐈 𝐰𝐢𝐥𝐥 𝐦𝐚𝐤𝐞 𝐮𝐬 𝐦𝐨𝐫𝐞 𝐡𝐮𝐦𝐚𝐧 - 𝐀𝐫𝐚𝐯𝐢𝐧𝐝 𝐒𝐫𝐢𝐧𝐢𝐯𝐚𝐬
+
+𝘏𝘦𝘳𝘦 𝘪𝘴 𝘸𝘩𝘢𝘵 𝘩𝘦 𝘦𝘹𝘢𝘤𝘵𝘭𝘺 𝘴𝘢𝘪𝘥
+
+I believe that AI will make us even more human.
+
+Socrates, the Greek philosopher is famous for saying that wisdom comes from realizing how little we know,
+
+or that progress can only be made by asking better questions.
+
+The Socratic method is essentially the practice of relentless questioning. Relentless questioning is something academics do all the time.
+
+It has been core to the progress of human intellect over the past 1,000 years.
+
+Relentless questioning is also a practice that can be done orders of magnitude better with the power of AI.
+
+The physicist David Deutsch has proposed that we humans are the only species who have curiosity for what is already familiar.
+
+We can know so much about the stars above us or the machines in front of us and yet continue to have more questions about them.
+
+It seems like for humans, every answer leads to a new set of questions. Questions that we haven't even asked before.
+
+Link to his full talk : https://lnkd.in/dDPxYpRy",Text,9,1,0,8mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-02-24T11:25:00.000Z,,2025-02-10T00:00:00.000Z,,,2025-02-24
+https://www.linkedin.com/feed/update/urn:li:activity:7293038818528534528,,"AI reasoning is evolving rapidly, and we’re seeing 3 major approaches emerge:
+
+1. 𝐋𝐋𝐌-𝐜𝐞𝐧𝐭𝐫𝐢𝐜 (𝐃𝐞𝐞𝐩𝐒𝐞𝐞𝐤 𝐑1 & 𝐎1) – “𝐒𝐦𝐚𝐫𝐭𝐞𝐫 𝐋𝐞𝐚𝐫𝐧𝐢𝐧𝐠 𝐖𝐢𝐭𝐡𝐨𝐮𝐭 𝐇𝐮𝐦𝐚𝐧 𝐓𝐞𝐚𝐜𝐡𝐢𝐧𝐠”
+• Imagine a student who learns math not by studying textbooks but by solving problems and figuring out patterns through trial and error.
+DeepSeek R1 skips traditional training with labeled data and instead uses reinforcement learning to improve its reasoning directly.
+
+2. 𝐀𝐠𝐞𝐧𝐭-𝐛𝐚𝐬𝐞𝐝 𝐢𝐭𝐞𝐫𝐚𝐭𝐢𝐯𝐞 (𝐆𝐨𝐨𝐠𝐥𝐞’𝐬 𝐌𝐢𝐧𝐝 𝐄𝐯𝐨𝐥𝐮𝐭𝐢𝐨𝐧) – “𝐀𝐈 𝐓𝐡𝐚𝐭 𝐓𝐡𝐢𝐧𝐤𝐬 𝐋𝐢𝐤𝐞 𝐚 𝐒𝐜𝐢𝐞𝐧𝐭𝐢𝐬𝐭”
+• When solving a mystery, a detective gathers clues, tests different theories, eliminates wrong ones, and refines their conclusion step by step.
+Instead of giving just one answer, the AI generates multiple possibilities, evaluates them, improves them, and repeats the process—like a scientist refining a theory.
+
+3. 𝐄𝐦𝐛𝐞𝐝𝐝𝐢𝐧𝐠-𝐬𝐩𝐚𝐜𝐞 (𝐌𝐞𝐭𝐚’𝐬 𝐋𝐂𝐌) – “𝐓𝐡𝐢𝐧𝐤𝐢𝐧𝐠 𝐁𝐞𝐲𝐨𝐧𝐝 𝐖𝐨𝐫𝐝𝐬”
+• A person understands the meaning of a song not just by its lyrics but by its melody, emotions, and rhythm.
+Instead of analyzing text word by word, the AI works with abstract concepts (embeddings), allowing it to reason more flexibly and deeply.",Text,20,2,0,8mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-02-24T11:31:00.000Z,,2025-02-06T00:00:00.000Z,,,2025-02-24
+https://www.linkedin.com/feed/update/urn:li:activity:7292943842549338112,,"""All models are biased, some are useful."" - a very insightful post from Sridhar Vembu on LLM models. Read on
+
+AI models, even ""open weight"" models like Deepseek are black boxes. 
+
+There are two big unknowns: We do not know what kind of training data went into them and second, we do not know what kind of ""reinforcement learning"" was done to make them ""behave well"". 
+
+Here ""behave well"" includes innocuous things like making the model polite to human users and much more contentious issues like active censorship of ideas the model trainer wants to suppress.
+
+The models reflect the values systems of those that train them.
+
+US trained models show sensitivity in certain areas while Chinese trained models show in other areas. 
+
+In areas like generating code to playing chess, there are objective standards by which we can evaluate models (even here, to give an example, a model could prefer Javascript over C but that is a second order issue). 
+
+This is why I would trust these models only when there are other objective ways to evaluate their output. This is true for fields like programming, computer aided design etc.
+
+I would not trust the AI to give economic development advice - given that I don't find most academic economics useful and these models have memorized the text books and the value-neutral economics they teach. But that is own my bias.
+
+When we deeply reflect on this, we can see that the ultimate model is going to differ from person to person, and that personal model will train itself on the person's own system of values, acting as a faithful mirror of their thinking process.",Text,12,0,0,8mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-02-24T11:31:00.000Z,,2025-02-05T00:00:00.000Z,,,2025-02-24
+https://www.linkedin.com/feed/update/urn:li:activity:7291345214865133569,https://media.licdn.com/dms/image/v2/D4D22AQHVO4whfX05Qw/feedshare-shrink_800/B4DZTAP1JdG8Ag-/0/1738392164700?e=1762992000&v=beta&t=mP82BaV_90UGi8oWYkQfA9QK03EXWrEC69pzwjvpqGs,"With voice agents, every business can always be online. Customer availability and business availability no longer have to match 1:1
+
+Advancements in model development have streamlined the infrastructure ""stack,"" resulting in voice agents with lower latency and improved performance. 
+
+These conversational models are also becoming more affordable over time. In December 2024, OpenAI dropped the price of the GPT-4o realtime API by 60% for input (to $40 / 1M tokens) and 87.5% for output (to $2.50 / 1M tokens). 
+
+source: a16z voice update 2025",Image,14,1,0,8mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-02-24T11:31:00.000Z,,2025-02-01T00:00:00.000Z,,,2025-02-24
+https://www.linkedin.com/feed/update/urn:li:activity:7290187456241401857,,"How to build India specific LLM.. here are very interesting views shared by @bookwormengr on X
+
+AI is not hard 
+————————————
+Many teams that built foundation models are below 50 ppl (e.g. Mixtral). 
+In AI, LLM science part is actually quite easy. 
+All these models are “Transformer Decoder only models”, an architecture that was invented in late 2017. 
+There are improvements since then (flash attention, ROPE, MOE, PPO/DPO/GRPO), but they are relatively minor, open source and easy to implement. 
+
+Since building foundation models is easy and Nvidia is there to help you (if not directly, then by sharing their software like “Megatron” that is assembly line to build AI models) there are so many foundation models built by Chinese labs as well as global labs.
+
+It is machines that learn by themselves…if you give them data & compute. This is unlike writing operating system or database software. Also, everyone trains on same data: internet archives, books, github code for the first stage called “pre-training”.
+
+What is part is hard then?
+———————————-
+It is the parallel & distributed computing to run AI training jobs across thousands of GPUs that is hard. DeepSeek did lot of innovation here to save on “flops” and network calls. They used an innovative architecture called Mixture of Experts and a new approach called GRPO. with verifiable rewards both of which are in open domain through 2024.
+
+Also, there is lot of data curation needed particularly for “post training”
+to teach model on proper style of answering (SFT/DPO) or to teach them learn to reason (GRPO with verifiable reward). SFT/DPO is where “stealing” from existing models to save cost of manual labor may happen.
+
+LLM building is nothing that Indian engineers living in India cannot pull off. Don’t worry about Indians who have left. There are plenty in the country as of today. 
+
+Then why India does not have foundation models?
+———————
+It is for the same reason India does not have Google or Facebook of its own. 
+
+You need to able to walk before you can run.
+
+There is no protected market to practice your craft in early days. You will get replaced by American service providers as they are cheaper and better every single time. That is not the case with Chinese player. They have a protected market and leadership who treats this skillset as existential due to geopolitics. 
+
+So, even if Chinese models are not good in early days they will continue to get funding from their conglomerates as well as provincial governments. Darwinian competition ensures best rise to the top.
+
+Recall DeepSeek took 2 years to get here without much revenue. They were funded by their parent. Also, most of their engineers are not PHDs.
+
+There is nothing that engineers who built Ola/Swiggy/Flipkart cannot build. Remember these services are second to none when you compare them to their Bay Area counterparts. Also , don’t trivialize those services; there is brilliant engineering to make them work at the price points at which they work.",Text,19,5,0,8mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-02-24T11:31:00.000Z,,2025-01-29T00:00:00.000Z,,,2025-02-24
+https://www.linkedin.com/feed/update/urn:li:activity:7290142940801200129,,"Deepseek is definitely a pivotal moment in the world of AI. I don't have 2 thoughts about it. 
+
+While we can always debate about engineering design, cost claims, training times, actual developers involved in the project etc but the truth is that product is out there in the market, has been endorsed by top people in the industry, tested by a lot of users around the globe and moreover it is available as open source supported by a deep technical paper. 
+
+What does it mean for the AI developers and specifically Indian AI ecosystem? Listen to my views on NDTV Profit
+
+Predixion AI",Article,45,14,2,8mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-02-24T11:31:00.000Z,,2025-01-29T00:00:00.000Z,https://youtu.be/QPnVcZk5GC4?si=6r1L1CDVGzijQLMR,,2025-02-24
+https://www.linkedin.com/feed/update/urn:li:activity:7289447680827645952,,"𝐈𝐭’𝐬 𝐭𝐢𝐦𝐞 𝐭𝐨 𝐛𝐚𝐤𝐞 𝐨𝐮𝐫 𝐨𝐰𝐧 𝐛𝐫𝐞𝐚𝐝, 𝐧𝐨𝐭 𝐣𝐮𝐬𝐭 𝐠𝐫𝐨𝐰 𝐭𝐡𝐞 𝐰𝐡𝐞𝐚𝐭
+
+Success in AI isn’t just about developing powerful applications; it’s about creating models and the entire ecosystem that ensures self-reliance and global competitiveness.
+
+China’s DeepSeek V3, with 671 billion parameters, demonstrates the transformative potential of efficient innovation. Surpassing global benchmarks in text understanding, coding, and problem-solving, it was developed at a remarkably low cost of $5.58 million—showcasing the impact of strategic, resource-conscious execution.
+
+India has a history of achieving world-class outcomes on shoestring budgets. The Chandrayaan-3 mission, for instance, cost just $71 million—1/25th of Russia’s lunar mission and less than half the budget of the Hollywood movie Interstellar.
+
+To establish AI sovereignty and global leadership, India must channel this same ingenuity and urgency into developing entire AI ecosystem here. 
+
+source: Devyani Ghosh's view in ET",Text,23,2,0,8mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-02-24T11:31:00.000Z,,2025-01-27T00:00:00.000Z,,,2025-02-24
+https://www.linkedin.com/feed/update/urn:li:activity:7289207686762500096,,"𝘽𝙖𝙡𝙖𝙣𝙘𝙞𝙣𝙜 𝘾𝙤𝙢𝙥𝙡𝙞𝙖𝙣𝙘𝙚 𝙖𝙣𝙙 𝙋𝙚𝙧𝙨𝙤𝙣𝙖𝙡𝙞𝙯𝙖𝙩𝙞𝙤𝙣 𝙞𝙣 𝘼𝙄 𝙑𝙤𝙞𝙘𝙚 𝘼𝙜𝙚𝙣𝙩𝙨 🎙️
+
+The secret to a successful voice agent lies in the perfect mix of standard responses and AI-generated responses:
+
+✅ Standard (60-80%): For compliance, accuracy, and consistency. Think legal disclosures, account details, and FAQs.
+🤖 Generated (20-40%): For empathy, personalization, and dynamic problem-solving. Perfect for offering flexible options or answering unstructured queries.
+
+Example:
+• Standard: “Your payment is overdue by 10 days.”
+• Generated: “Would you like help setting up a payment plan to resolve this?”
+
+In regulated industries, lean on standard responses. For user-centric applications, add dynamic interactions to boost engagement. The right blend creates a bot that’s both compliant and humanized. 💡
+
+What’s your take on this balance? Let’s discuss! 👇
+
+#ConversationalAI #VoiceAgents #AIEngagement #CustomerExperience",Text,10,0,0,8mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-02-24T11:31:00.000Z,,2025-01-26T00:00:00.000Z,,,2025-02-24
+https://www.linkedin.com/feed/update/urn:li:activity:7289202040407257089,,"Some commonly observed AI engineering pitfalls:
+
+𝟭. 𝗨𝘀𝗲 𝗴𝗲𝗻 𝗔𝗜 𝘄𝗵𝗲𝗻 𝘆𝗼𝘂 𝗱𝗼𝗻’𝘁 𝗻𝗲𝗲𝗱 𝗴𝗲𝗻 𝗔𝗜
+Gen AI isn’t a one-size-fits-all solution to all problems. Many problems don’t even need AI.
+
+𝟮. 𝗖𝗼𝗻𝗳𝘂𝘀𝗲 ‘𝗯𝗮𝗱 𝗽𝗿𝗼𝗱𝘂𝗰𝘁’ 𝘄𝗶𝘁𝗵 ‘𝗯𝗮𝗱 𝗔𝗜’
+For many AI product, AI is the easy part, product is the hard part.
+
+𝟯. 𝗦𝘁𝗮𝗿𝘁 𝘁𝗼𝗼 𝗰𝗼𝗺𝗽𝗹𝗲𝘅
+While fancy new frameworks and finetuning can be useful for many projects, they shouldn’t be your first course of action.
+
+𝟰. 𝗢𝘃𝗲𝗿-𝗶𝗻𝗱𝗲𝘅 𝗼𝗻 𝗲𝗮𝗿𝗹𝘆 𝘀𝘂𝗰𝗰𝗲𝘀𝘀
+Initial success can be misleading. Going from demo-ready to production-ready can take much longer than getting to the first demo.
+
+𝟱. 𝗙𝗼𝗿𝗴𝗼 𝗵𝘂𝗺𝗮𝗻 𝗲𝘃𝗮𝗹𝘂𝗮𝘁𝗶𝗼𝗻
+AI judges should be validated and correlated with systematic human evaluation.
+
+𝟲. 𝗖𝗿𝗼𝘄𝗱𝘀𝗼𝘂𝗿𝗰𝗲 𝘂𝘀𝗲 𝗰𝗮𝘀𝗲𝘀
+Have a big-picture strategy to maximize return on investment.
+
+credits: Chip Huyen",Text,8,0,0,8mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-02-24T11:31:00.000Z,,2025-01-26T00:00:00.000Z,,,2025-02-24
+https://www.linkedin.com/feed/update/urn:li:activity:7288616558640132096,,"🚀 Entrepreneurship isn’t just a buzzword – it’s a way to turn big dreams into reality, and I’m all in for it!
+
+That’s why I’m so excited to share about E-Summit ’25 – Pursuit of Eminence, hosted by the incredible team at IIT Bombay’s E-Cell. As someone who’s passionate about innovation and creating something meaningful, this event hits all the right notes for me.
+
+Here’s why I can’t wait for this:
+🔥 The Ten Minute Million (TTMM): Imagine pitching your idea to 16 investors in front of 3,500+ people and potentially walking away with INR 3.5M. Game-changing, right?
+🎤 Unbelievable Speaker Lineup: Nandan Nilekani, Anupam Mittal, Sonam Wangchuk, Technical Guruji, and 120+ other powerhouses are going to share their journeys and lessons.
+🌐 Startup Expo: A chance to check out some amazing innovations and meet the people behind them.
+💡 Fun + Growth: Competitions like IPL Auction, Squid Games, Bid-n-Build, and the hackathon (I-Hack) make learning exciting. And yes, there’s real prize money involved!
+📚 Workshops & Job Fair: Whether it’s learning Ethical Hacking, exploring Data Science, or finding opportunities with top startups, this event has something for everyone.
+
+The vibe at IIT Bombay’s campus on 1st-2nd Feb is going to be electric, and I wouldn’t miss it for anything. Events like these aren’t just about attending sessions—they’re about connecting with incredible people, sparking ideas, and walking away inspired to chase your own dreams.
+
+If you’re someone who loves to dream big and act on it, join me!
+
+👉 Register here: ecell.in/esummit
+💡 Use LINK30 to grab a 30% discount on passes.
+
+I can’t wait to soak up the energy and bring back new ideas to work on. Let’s make this an experience to remember. See you there? ✨
+
+#Entrepreneurship #ESummit25 #Innovation #Networking #Startups #Inspiration",Article,6,1,0,8mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-02-24T11:31:00.000Z,,2025-01-24T00:00:00.000Z,http://ecell.in/esummit,,2025-02-24
+https://www.linkedin.com/feed/update/urn:li:activity:7287040762830082049,,"While AI makes solving problems easier, it’s up to us to define the problem clearly first. 
+
+Without that, even the best solutions will miss the point!
+
+Imagine a hospital wants to “reduce patient complaints” and decides to build an AI chatbot to answer queries. Sounds good, right? But the real issue is long wait times. If they’d defined the problem as “reduce patient wait times by 20%,” they could’ve worked on fixing processes and actually made a big difference.",Text,15,6,0,9mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-01-25T11:31:00.000Z,,2025-01-20T00:00:00.000Z,,,2025-01-25
+https://www.linkedin.com/feed/update/urn:li:activity:7285951690602647552,https://media.licdn.com/dms/image/v2/D4D22AQFr-JZpPNezvQ/feedshare-shrink_800/B4DZRzmdBuHIAg-/0/1737106248740?e=1762992000&v=beta&t=6z_HTxil740dGv2QcOoLbFIR0eZ6N0WeMdJOkWO_BhI,,Image,70,3,1,9mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-01-25T11:31:00.000Z,,2025-01-17T00:00:00.000Z,,,2025-01-25
+https://www.linkedin.com/feed/update/urn:li:activity:7282344437853081600,https://media.licdn.com/dms/image/v2/D4D05AQEDw2VQBR4nlw/videocover-low/B4DZRAVqchHUCQ-/0/1736246211637?e=1761721200&v=beta&t=0Ak7triYGa6HxfDYEBQuE0rDB8zgyriEQyV2nBM-4BM,"“The IT department of every company is going to be the HR department of AI agents in the future.” 
+
+- Jensen Huang at CES 2025",Video (LinkedIn Source),12,2,1,9mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-01-25T11:31:00.000Z,,2025-01-07T00:00:00.000Z,,blob:https://www.linkedin.com/5a473642-0c32-4db9-9d64-de05a546e6da,2025-01-25
+https://www.linkedin.com/feed/update/urn:li:activity:7282336961275514880,https://media.licdn.com/dms/image/v2/D4D22AQHUbzvZnBXGmA/feedshare-shrink_800/B4DZRAO28UHUAg-/0/1736244426861?e=1762992000&v=beta&t=kYA55jIFy9WtYlW5H0GoYcmpr12kP7AKv7pixzdB4Lc,"Agentic AI is here and NVIDIA is super charged to support it. 
+
+Some key highlights from Jensen's keynote CES speech",Image,26,1,0,9mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-01-25T11:31:00.000Z,,2025-01-07T00:00:00.000Z,,,2025-01-25
+https://www.linkedin.com/feed/update/urn:li:activity:7276861239144697856,,"[Agentic RAG at work] 
+Customer Query: “I’ve been charged twice for my subscription, and I was promised a discount last month, but it wasn’t applied. Can you help?”
+
+The system immediately:
+1. Retrieve Data:
+ •	Fetches the customer’s billing history.
+ •	Locates the transcript of the previous promise of a discount.
+ •	Retrieves the company’s policy on handling duplicate charges.
+
+2. Analyze and Summarize:
+ •	Identifies the root issue: a duplicate charge and a missing discount.
+ •	Checks whether the duplicate charge has already been refunded or is pending.
+ •	Flags discrepancies in how the discount was handled.
+
+3. Generate Suggestions for Resolution:
+Prepares multiple actionable solutions:
+ •	Refund one of the duplicate charges.
+ •	Apply the promised discount retroactively.
+ •	Offer additional compensation for the inconvenience (e.g., a credit).",Text,14,0,0,9mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-01-25T11:31:00.000Z,,2024-12-23T00:00:00.000Z,,,2025-01-25
+https://www.linkedin.com/feed/update/urn:li:activity:7276740973269823488,,"Thanks Anshul Kumar for putting this together. Dec '24 is truly a. blockbuster month for all of us in GenAI. 
+
+AI agents with better reasoning models, capabilities like app and computer use are going to be become default apps of AI world. We can expect GenAI development to become a lot easier in coming year. 
+
+Do follow this super insightful newsletter - GenAIMadeSimple to decipher  GenAI.",Text,8,0,0,9mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-01-25T11:31:00.000Z,,2024-12-23T00:00:00.000Z,https://www.linkedin.com/feed/update/urn:li:activity:7276657043556438016/,,2025-01-25
+https://www.linkedin.com/feed/update/urn:li:activity:7276281082163920897,,"Imagine a wildfire spreading rapidly in a forest. A swarm of drones can:
+1.	Divide Tasks: Some drones map the affected area, while others identify people needing rescue.
+2.	Share Data: Each drone shares real-time insights with others in the swarm.
+3.	Optimize Efforts: They adjust their movements to avoid overlap and cover more ground efficiently.
+
+Here, the drones act as ""agents swarm"", collectively working toward mitigating the disaster without needing direct human control.",Text,1,0,0,10mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2024-12-26T11:31:00.000Z,,2024-12-21T00:00:00.000Z,,,2024-12-26
+https://www.linkedin.com/feed/update/urn:li:activity:7274233706293121024,,"Meesho launches India's first GenAI voicebots 
+- Supports Hindi & English
+- Real-time conversations with very low latency
+- Handling 60,000 calls per day 
+- Costs about 1/4 of the Human agent cost (expected to reduce further as it scales up)
+
+Sanjeev Barnwal",Article,14,1,0,10mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2024-12-26T11:31:00.000Z,,2024-12-16T00:00:00.000Z,https://www.youtube.com/watch?v=ama1hX_zuiA,,2024-12-26
+https://www.linkedin.com/feed/update/urn:li:activity:7274225006102929408,https://media.licdn.com/dms/image/v2/D4D22AQGwEmV2t6fBVQ/feedshare-shrink_800/B4DZPM9FsMGUAg-/0/1734310388698?e=1762992000&v=beta&t=Pjn-8lxwyPVjfM_l7oHKYjpMROYI7cBKi_U8ZbFPznQ,"Here are 12 AI-driven trends predicted by Jaspreet Bindra which are expected to get unravelled within next 2-3 years. I am personally excited the most about is Agentic AI impacting enterprises and consumers. 
+
+Please read point no 4 as ""AI creates a new customer"" (you can download the corrected slide from the comments section too)
+
+What excites you the most from the list?
+
+Here is a link to the complete talk on this topic https://lnkd.in/dtGU2gCs",Image,29,4,0,10mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2024-12-26T11:31:00.000Z,,2024-12-16T00:00:00.000Z,,,2024-12-26
+https://www.linkedin.com/feed/update/urn:li:activity:7271820684400414721,,"Aravind Srinivas (CEO of Perplexity) says prompt engineering might not be a long term need in the market.
+
+We need to make products work where a user doesn’t even ask for something but you know that they want it and you give it to them
+
+People are lazy and a better product should be one that allows you to be more lazy, not less. Products need to have some magic to them, and the magic comes from letting you be more lazy.",Text,16,6,0,10mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2024-12-26T11:31:00.000Z,,2024-12-09T00:00:00.000Z,,,2024-12-26
+https://www.linkedin.com/feed/update/urn:li:activity:7270981352966012928,https://media.licdn.com/dms/image/v2/D5622AQG_YfZnvWyDVg/feedshare-shrink_800/feedshare-shrink_800/0/1733501838629?e=1762992000&v=beta&t=HLhm-nWDpI3_R--RAQYB-ZyRWJwhfVpblitb_UGw5uY,This is the one of the best gift for open source AI developers around the world.,Image,6,0,1,10mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2024-12-26T11:31:00.000Z,,2024-12-07T00:00:00.000Z,https://www.linkedin.com/feed/update/urn:li:activity:7270844454133997570/,,2024-12-26
+https://www.linkedin.com/feed/update/urn:li:activity:7270664998455001088,,"Has AI finally arrived?
+
+ChatGPT when it was launched 2 yrs back, it was free
+Then came 20$ monthly slab with plus subscription with premium features
+and now 200$ pro subscription with a promise of advance features
+
+Other providers are still at 20$ + slab and expected to follow this pricing structure too 
+
+If this new pricing paradigm gets wide adoption, then we are truly say that AI promise is getting delivered.",Text,5,3,0,10mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2024-12-26T11:31:00.000Z,,2024-12-06T00:00:00.000Z,,,2024-12-26
+https://www.linkedin.com/feed/update/urn:li:activity:7269930242851434496,,"OrbitShift AI is #hiring Sales folks with min. 3 years experience in IT Service companies for a founding Enterprise Account Executive role.
+
+We're looking for candidates who've been AEs, Business Development Executives, Client Partners, Junior Consultants. 
+
+This is a WFH role, but the candidates must be based in/willing to relocate to New York, New Jersey, Boston, Connecticut, Philadelphia, Delaware. 
+
+Please DM if you're interested. 🚀 #salesjobs #newyorkjobs
+Saurabh Mishra",Text,77,7,5,10mo,Vaibhav Goyal reposted this,Sushmita Venkat,https://www.linkedin.com/in/sushmita-venkat,https://www.linkedin.com/in/vaibhavg/,2024-12-26T11:31:00.000Z,,2024-12-04T00:00:00.000Z,,,2024-12-26
+https://www.linkedin.com/feed/update/urn:li:activity:7269158557575507969,,"Five lessons for enterprises from McKinsey’s own LLM development
+
+1. Prompt matters - a lot 
+Effective prompt engineering requires collaboration between domain experts and technical teams, treating it as an iterative, artistic process rather than a rigid scientific approach.
+
+2. Be vigilant about data curation 
+Not all organizational data is equally valuable; strategic data selection is crucial for controlling costs and maximizing the quality of generative AI outputs.
+
+3. Invest in an orchestration layer 
+A sophisticated routing mechanism can help overcome LLM limitations by intelligently selecting the most appropriate model for specific tasks, improving both performance and cost-efficiency.
+
+4. Test and test again - and again 
+Proactive testing with active learning loops is essential in generative AI development, allowing quick detection and correction of potential issues like model hallucinations or misunderstood intents.
+
+5. It's never just tech 
+Successful AI adoption requires a holistic approach that goes beyond technology, focusing on user experience, continuous learning, leadership engagement, and adaptive support mechanisms.
+
+for complete details, here is the link https://lnkd.in/dSzS-5gS",Article,11,0,0,10mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2024-12-26T11:31:00.000Z,,2024-12-02T00:00:00.000Z,https://www.mckinsey.com/capabilities/mckinsey-digital/how-we-help-clients/rewiring-the-way-mckinsey-works-with-lilli,,2024-12-26
+https://www.linkedin.com/feed/update/urn:li:activity:7267324787381710848,,"Imagine trying to get a workout recommendation while running, navigate a complex route while driving, or get tech support while cooking - all without touching a screen. This is the promise of voice-enabled LLM agents, a technological leap that's redefining how we interact with machines.
+
+Traditional text-based chatbots are like trying to dance with two left feet. They're clunky, impersonal, and frustratingly limited. Consider these real-world friction points:
+- A visually impaired user struggling to type support queries
+- A fitness enthusiast unable to get real-time guidance mid-workout
+- A busy professional multitasking who can't pause to type a complex question
+
+Voice AI breaks these barriers, mimicking how humans have communicated for millennia. We learn to speak by four months, but writing takes years - testament to speech's fundamental naturalness.
+
+Real-World Transformation Examples:
+1️⃣ Healthcare: Emotion-recognizing AI can detect patient stress levels through voice modulation, enabling more empathetic remote consultations.
+2️⃣ Fitness: Hands-free coaching that adapts workout intensity based on your breathing and vocal energy.
+3️⃣ Customer Service: Intelligent voice systems that understand context, emotional undertones, and personalize responses in real-time.
+
+The magic of voice lies in its nuanced communication:
+- Tone reveals emotional landscapes
+- Intensity signals urgency or excitement
+- Rhythm creates conversational flow
+- Inflection adds layers of meaning beyond mere words
+- Recognize emotional states with unprecedented accuracy
+- Support rich, multimodal interactions combining voice, visuals, and context
+- Differentiate speakers in complex conversations
+- Extract subtle contextual intentions
+- Provide personalized responses based on voice characteristics
+
+In short, this technology is about creating more human-centric technology that listens, understands, and responds like a thoughtful companion.
+
+The future of AI isn't about machines talking at us, but talking with us.",Text,10,1,0,10mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2024-12-26T11:31:00.000Z,,2024-11-27T00:00:00.000Z,,,2024-12-26
+https://www.linkedin.com/feed/update/urn:li:activity:7266997714695958528,,"Data integration with LLM apps has got a major leap!
+
+Anthropic just introduced the Model Context Protocol (MCP): A New Open Standard for AI Data Integration
+
+It is an innovative solution that simplifies how AI applications connect to data sources. MCP offers a unified, secure protocol that streamlines how AI tools interact with different systems and resources.
+
+Key Benefits:
+- Single, standardized approach to data integration
+- Works with both local and remote data sources
+- Easy to implement across various platforms
+
+Already, leading tech companies like Block, Apollo, Zed, Replit, Codeium, and Sourcegraph are adopting MCP to enhance their platforms. It has pre-configured servers for popular services including: Google Drive, Slack, GitHub, Git, Postgres and more",Text,13,0,0,10mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2024-12-26T11:31:00.000Z,,2024-11-26T00:00:00.000Z,,,2024-12-26
+https://www.linkedin.com/feed/update/urn:li:activity:7266026169173491712,,"The unique innovation stack that makes IIT Madras the best place to build
+
+Professor Prabhu Rajagopal shares amazing insights in this freshly brewed podcast",Article,16,0,0,10mo,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2024-12-26T11:31:00.000Z,,2024-11-23T00:00:00.000Z,https://youtu.be/jqRVmY2u4OM?feature=share,,2024-12-26
+https://www.linkedin.com/feed/update/urn:li:activity:7258446157335408640,,"It's an honor to be part of this group of thought leaders. I'd love to explore potential collaborations in areas where our expertise and interests align. 
+
+Looking forward to meaningful exchanges and opportunities to work together.",Text,17,0,0,11mo,Post,Top Voice Blue Badge,https://www.linkedin.com/groups/14548274,https://www.linkedin.com/in/vaibhavg/,2024-11-26T11:31:00.000Z,,2024-11-02T00:00:00.000Z,,,2024-11-26
+https://www.linkedin.com/feed/update/urn:li:activity:7254354531851927552,,"As India witnesses an alarming surge in financial fraud cases, financial institutions are turning to cutting-edge voice biometric for enhanced security. This powerful technology analyzes over 100 unique voice characteristics – from vocal tract patterns to speech rhythms – creating a fraud-proof digital voiceprint as unique as a fingerprint. This technology is helpful to prevent account takeover fraud, social engineering attacks, and enables faster customer verification. 
+
+The technology's versatility shines in India's diverse landscape, supporting regional languages and functioning seamlessly on basic feature phones – crucial for reaching 65% of India's rural population. Most impressively, the technology detects synthetic voice attacks in real-time and completes authentication in just 3-5 seconds, all while maintaining strict RBI compliance standards.",Text,32,4,0,1yr,Post,Vaibhav Goyal,https://www.linkedin.com/in/vaibhavg,https://www.linkedin.com/in/vaibhavg/,2025-10-22T11:31:00.000Z,,2024-10-22T00:00:00.000Z,,,2024-10-22

@@ -82,3 +82,17 @@ jspm_packages/
 
 # DynamoDB Local files
 .dynamodb/
+
+# Cursor IDE
+.cursor/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Service account keys
+*service-account*.json
+*service-key*.json
+drive-service-account.json
+google-storage-service-key.json

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Table Test</title>
+  <style>
+    .distribution-table-container {
+      overflow-x: auto;
+      border: 1px solid #cccccc;
+      background: white;
+      font-family: Arial, sans-serif;
+    }
+
+    .distribution-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      min-width: 300px;
+      font-family: Arial, sans-serif;
+    }
+
+    .distribution-table th {
+      background-color: #D6E3DD;
+      color: #000000;
+      font-weight: normal;
+      text-align: center;
+      padding: 8px 12px;
+      border: 1px solid #cccccc;
+      font-size: 14px;
+      height: 32px;
+    }
+
+    .distribution-table td {
+      background-color: #F6F5F1;
+      color: #000000;
+      text-align: center;
+      padding: 8px 12px;
+      border: 1px solid #cccccc;
+      font-size: 14px;
+      min-width: 60px;
+      height: 32px;
+      vertical-align: middle;
+    }
+
+    .distribution-table .total-row th {
+      background-color: #D6E3DD;
+      font-weight: bold;
+      color: #000000;
+      border: 1px solid #cccccc;
+      font-size: 14px;
+    }
+
+    .distribution-table .total-row td {
+      background-color: #D6E3DD;
+      font-weight: bold;
+      color: #000000;
+      border: 1px solid #cccccc;
+      font-size: 14px;
+    }
+
+    .distribution-table .day-cell {
+      text-align: left;
+      font-weight: normal;
+      min-width: 80px;
+      padding-left: 12px;
+    }
+
+    .distribution-table .month-cell {
+      text-align: left;
+      font-weight: normal;
+      min-width: 100px;
+      padding-left: 12px;
+    }
+
+    .distribution-table .number-cell {
+      font-weight: normal;
+      color: #000000;
+      font-family: Arial, sans-serif;
+    }
+  </style>
+</head>
+<body style="background-color: #f9fafb; padding: 20px; font-family: system-ui;">
+  <h1 style="color: #1f2937; margin-bottom: 20px;">Distribution Tables Test</h1>
+  
+  <!-- Monthly Distribution Table -->
+  <div style="margin-bottom: 30px;">
+    <h2 style="color: #374151; margin-bottom: 10px;">Monthly Post Distribution & Engagement</h2>
+    <div class="distribution-table-container">
+      <table class="distribution-table">
+        <thead>
+          <tr>
+            <th class="month-cell">Month</th>
+            <th>Posts</th>
+            <th>Engagement</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="month-cell">Jan 2024</td>
+            <td class="number-cell">5</td>
+            <td class="number-cell">45</td>
+          </tr>
+          <tr>
+            <td class="month-cell">Feb 2024</td>
+            <td class="number-cell">8</td>
+            <td class="number-cell">52</td>
+          </tr>
+          <tr>
+            <td class="month-cell">Mar 2024</td>
+            <td class="number-cell">12</td>
+            <td class="number-cell">38</td>
+          </tr>
+          <tr class="total-row">
+            <th class="month-cell">Total</th>
+            <th class="number-cell">25</th>
+            <th class="number-cell">45</th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <!-- Weekday Distribution Table -->
+  <div>
+    <h2 style="color: #374151; margin-bottom: 10px;">Weekday Post Distribution & Engagement</h2>
+    <div class="distribution-table-container">
+      <table class="distribution-table">
+        <thead>
+          <tr>
+            <th class="day-cell">Day</th>
+            <th>Posts</th>
+            <th>Engagement</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="day-cell">Mon</td>
+            <td class="number-cell">8</td>
+            <td class="number-cell">45</td>
+          </tr>
+          <tr>
+            <td class="day-cell">Tue</td>
+            <td class="number-cell">12</td>
+            <td class="number-cell">52</td>
+          </tr>
+          <tr>
+            <td class="day-cell">Wed</td>
+            <td class="number-cell">15</td>
+            <td class="number-cell">48</td>
+          </tr>
+          <tr>
+            <td class="day-cell">Thu</td>
+            <td class="number-cell">10</td>
+            <td class="number-cell">55</td>
+          </tr>
+          <tr>
+            <td class="day-cell">Fri</td>
+            <td class="number-cell">6</td>
+            <td class="number-cell">42</td>
+          </tr>
+          <tr>
+            <td class="day-cell">Sat</td>
+            <td class="number-cell">3</td>
+            <td class="number-cell">38</td>
+          </tr>
+          <tr>
+            <td class="day-cell">Sun</td>
+            <td class="number-cell">2</td>
+            <td class="number-cell">35</td>
+          </tr>
+          <tr class="total-row">
+            <th class="day-cell">Total</th>
+            <th class="number-cell">56</th>
+            <th class="number-cell">47</th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>

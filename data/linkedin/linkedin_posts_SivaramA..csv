@@ -1,0 +1,16 @@
+postUrl,imgUrl,postContent,type,likeCount,commentCount,repostCount,postDate,action,author,authorUrl,profileUrl,timestamp,viewCount,postTimestamp,sharedPostUrl,videoUrl,approximateDate
+https://www.linkedin.com/feed/update/urn:li:activity:7306314663237976066,,"Humans Need to Apply Critical Reasoning to Vibe Coding to Extract Real Value
+
+🔎In the context of vibe coding, why is there little discussion or analysis on its application in large-scale product codebases beyond application-level, medium-scale, or simple projects? 
+
+⚡ The lack of visibility raises questions about its real-world impact, adoption challenges, and the proprietary nature of enterprise code intelligence systems.
+
+1️⃣ Are these Code Intelligent AI systems really solving design-level challenges or just generating snippets of code?
+2️⃣ A prompt can generate basic code.
+3️⃣ A prompt can generate better code with more reusable methods and improved handling of multiple failure cases
+4️⃣ How secure, maintainable, and scalable is AI-generated code?
+⚠️ What happens when prompting-driven code generation overrides architectural decision-making?
+
+✅ However, understanding what you truly need is critical, otherwise, you risk compromising your design, code quality, and overall solution with AI-generated outputs.
+
+#CriticalReasoning #Vibe #LLM #Productivity #Coding #Lovable #Cursor #SoftwareEngineering #CodeIntelligence #TechDebt #SystemDesign #GenAI #CodingTools #HumanopinionAIEdited",Text,6,0,2,7mo,Vaibhav Goyal reposted this,Sivaram A.,https://www.linkedin.com/in/siva-ak,https://www.linkedin.com/in/vaibhavg/,2025-03-26T11:25:00.000Z,,2025-03-14T00:00:00.000Z,,,2025-03-26

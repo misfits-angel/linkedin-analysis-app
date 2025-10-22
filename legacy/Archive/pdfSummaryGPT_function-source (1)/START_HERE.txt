@@ -1,0 +1,220 @@
+================================================================================
+                        START HERE
+                  Startup Extraction Tool
+================================================================================
+
+Welcome! You've downloaded the complete Startup Extraction solution.
+
+================================================================================
+WHAT THIS DOES
+================================================================================
+
+This tool extracts startup names and founder names from PDF pitch decks.
+
+Input:  Google Drive folder with PDFs
+Output: CSV file with:
+  - File name
+  - Startup name
+  - All founder names
+  - Extraction method used
+
+================================================================================
+QUICK START (4 STEPS)
+================================================================================
+
+STEP 1: Install dependencies
+  cd pdfSummaryGPT_function-source
+  pip install -r requirements.txt
+
+STEP 2: Get your Google Drive folder ID
+  Open folder in Drive → Copy ID from URL
+  Example: https://drive.google.com/drive/folders/YOUR_ID_HERE
+
+STEP 3: Run the script
+  python batch_startup_extractor.py YOUR_FOLDER_ID
+
+STEP 4: Check results
+  Look for: startup_founders_data.csv in your temp folder
+
+================================================================================
+COMMANDS
+================================================================================
+
+Basic (fastest):
+  python batch_startup_extractor.py 1a2b3c4d5e6f
+
+With Gemini (more accurate):
+  set GEMINI_API_KEY=your-api-key
+  python batch_startup_extractor.py 1a2b3c4d5e6f --gemini
+
+Custom output location:
+  python batch_startup_extractor.py 1a2b3c4d5e6f --output ./results.csv
+
+================================================================================
+FILES IN THIS FOLDER
+================================================================================
+
+MAIN SCRIPT:
+  batch_startup_extractor.py   ← Run this!
+
+DOCUMENTATION:
+  README.md                     ← Project overview
+  SOLUTION_SUMMARY.md          ← What was delivered
+  SETUP_AND_RUN.md             ← Detailed setup guide
+  BATCH_EXTRACTOR_GUIDE.md     ← How to use it
+  IMPLEMENTATION_GUIDE.md      ← Technical details
+  README_STARTUP_EXTRACTION.md ← Architecture
+
+CORE FILES:
+  main.py                      ← Cloud function version (optional)
+  common.py                    ← Helper functions
+  google_cloud_helper.py       ← Vision API integration
+
+CONFIGURATION:
+  requirements.txt             ← Python packages to install
+  drive-service-account.json   ← Google credentials (already set up)
+
+================================================================================
+OUTPUT CSV EXAMPLE
+================================================================================
+
+file_name,startup_name,founders,extraction_method
+TechCorp_Pitch.pdf,TechCorp,John Smith; Jane Doe,rules
+StartupXYZ.pdf,StartupXYZ,Alice Johnson; Bob Wilson,gemini
+DataFlow.pdf,DataFlow,Sarah Chen,rules
+
+================================================================================
+HOW EXTRACTION WORKS
+================================================================================
+
+Stage 1: RULES (Fast, Free)
+  • Looks for "Founders:" text
+  • Extracts capitalized names
+  • ~1 second per PDF
+
+Stage 2: GEMINI (Accurate, Optional)
+  • Used only if Stage 1 doesn't find enough
+  • AI-powered analysis
+  • ~5-10 seconds per PDF
+  • Requires GEMINI_API_KEY
+
+================================================================================
+REQUIREMENTS
+================================================================================
+
+MUST HAVE:
+  ✓ Python 3.7 or higher
+  ✓ Google Drive folder with PDFs
+  ✓ Service account credentials (drive-service-account.json - already included)
+
+OPTIONAL:
+  ✓ Gemini API key (for better accuracy)
+    Get from: https://makersuite.google.com/app/apikey
+
+================================================================================
+TROUBLESHOOTING
+================================================================================
+
+Problem: "0 PDFs found"
+  → Make sure folder has PDFs
+  → Check folder ID is correct
+
+Problem: "ModuleNotFoundError"
+  → Run: pip install -r requirements.txt
+
+Problem: Empty founders list
+  → Add --gemini flag for better detection
+  → Or PDFs don't have explicit founder mentions
+
+Problem: "Permission denied"
+  → Use --output to save in different location
+  → Or check file permissions
+
+================================================================================
+READING GUIDE
+================================================================================
+
+New to this project?
+  1. Read: SOLUTION_SUMMARY.md (5 min)
+  2. Read: README.md (5 min)
+  3. Follow: SETUP_AND_RUN.md (10 min)
+  4. Run the script!
+
+Want more details?
+  → Read: BATCH_EXTRACTOR_GUIDE.md
+
+Want to understand the code?
+  → Read: IMPLEMENTATION_GUIDE.md
+
+Want to understand the architecture?
+  → Read: README_STARTUP_EXTRACTION.md
+
+================================================================================
+PERFORMANCE EXPECTATIONS
+================================================================================
+
+Per PDF:
+  - Text extraction: 30-60 seconds (Vision API)
+  - Rule-based processing: 1-2 seconds
+  - Gemini processing (if used): 5-10 seconds
+
+Example:
+  - 10 PDFs without Gemini: ~5-10 minutes
+  - 10 PDFs with Gemini: ~10-15 minutes
+  - 100 PDFs without Gemini: ~50-100 minutes
+
+================================================================================
+NEXT STEPS
+================================================================================
+
+1. Install Python packages:
+   pip install -r requirements.txt
+
+2. Get your Google Drive folder ID
+
+3. Run:
+   python batch_startup_extractor.py YOUR_FOLDER_ID
+
+4. Open the CSV file when done
+
+That's it! 🚀
+
+================================================================================
+KEY FEATURES
+================================================================================
+
+✅ No file monitoring - process all files at once
+✅ Rule-based first - fast and free
+✅ Smart fallback - Gemini API when needed
+✅ Easy to use - one command
+✅ CSV output - ready for Excel/Sheets
+✅ Rollback safe - original code untouched
+
+================================================================================
+SUPPORT
+================================================================================
+
+For specific topics, read:
+
+Setup issues        → SETUP_AND_RUN.md
+How to use          → BATCH_EXTRACTOR_GUIDE.md
+Technical questions → IMPLEMENTATION_GUIDE.md
+Architecture info   → README_STARTUP_EXTRACTION.md
+Project overview    → README.md
+
+================================================================================
+SUMMARY
+================================================================================
+
+This is a production-ready tool that:
+
+✅ Extracts startup names from PDF pitch decks
+✅ Extracts all founder names from PDFs
+✅ Saves results to CSV automatically
+✅ Works offline (no real-time monitoring)
+✅ Fast and cheap (rule-based first)
+✅ Accurate (Gemini fallback available)
+
+Ready to use! 🎉
+
+Start with: SOLUTION_SUMMARY.md or SETUP_AND_RUN.md
