@@ -5,8 +5,8 @@ import { useLLMInsights } from '@/lib/hooks/useLLMInsights'
 import LLMButton from './LLMButton'
 import Card, { CardContent, CardHeader, CardTitle } from '@/components/CardWithName'
 
-export default function PostQualityEvaluation({ postsData }) {
-  const [evaluation, setEvaluation] = useState(null)
+export default function PostQualityEvaluation({ postsData, llmInsights }) {
+  const [evaluation, setEvaluation] = useState(llmInsights?.postEvaluation || null)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(null)
   

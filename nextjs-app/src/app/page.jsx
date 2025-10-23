@@ -21,6 +21,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import CardWithName from '@/components/CardWithName'
 import { Badge } from '@/components/ui/badge'
+import { Input } from '@/components/ui/input'
 import { useDataAnalysis } from '@/lib/hooks/useDataAnalysis'
 import { useDataPersistence } from '@/lib/hooks/useDataPersistence'
 import { generatePDF, printPage } from '@/lib/pdf-utils'
@@ -28,6 +29,7 @@ import { CardNameProvider, useCardNames } from '@/lib/contexts/CardNameContext'
 import ProfileSelector from '@/components/ProfileSelector'
 import ProtectedRoute from '@/components/auth/ProtectedRoute'
 import { useAuth } from '@/lib/contexts/AuthContext'
+import { supabase } from '@/lib/supabase-client'
 
 function HomeContent() {
   const [error, setError] = useState(null)
@@ -35,6 +37,8 @@ function HomeContent() {
   const [currentProfile, setCurrentProfile] = useState(null)
   const [showProfileSelector, setShowProfileSelector] = useState(false)
   const [isInitialLoad, setIsInitialLoad] = useState(true)
+  const [shareableUrl, setShareableUrl] = useState(null)
+  const [isGeneratingReport, setIsGeneratingReport] = useState(false)
   const linkedinCardRef = useRef(null)
   const fileInputRef = useRef(null)
   const { data, isLoading, error: dataError, analyzeCsvData, clearData: clearAnalysisData } = useDataAnalysis(savedData)
@@ -77,6 +81,7 @@ function HomeContent() {
     if (!datasetId) {
       setCurrentProfile(null)
       setSavedData(null)
+      setShareableUrl(null)
       return
     }
 
@@ -87,6 +92,19 @@ function HomeContent() {
         setSavedData(profileData)
         setCurrentProfile({ id: datasetId, name: profileData.profile?.name })
         setShowProfileSelector(false)
+        
+        // Check if shareable URL exists for this dataset
+        const { data: dataset } = await supabase
+          .from('linkedin_datasets')
+          .select('shareable_url')
+          .eq('id', datasetId)
+          .single()
+        
+        if (dataset?.shareable_url) {
+          setShareableUrl(`${window.location.origin}/report/${dataset.shareable_url}`)
+        } else {
+          setShareableUrl(null)
+        }
         
         // Scroll to dashboard section after loading profile
         setTimeout(() => {
@@ -109,10 +127,54 @@ function HomeContent() {
     setShowProfileSelector(false)
     setCurrentProfile(null)
     setSavedData(null)
+    setShareableUrl(null)
     // Clear any existing data analysis
     clearAnalysisData()
     // Trigger file input directly
     fileInputRef.current?.click()
+  }
+
+  // Handle generate shareable report
+  const handleGenerateReport = async () => {
+    if (!currentProfile?.id) return
+
+    try {
+      setIsGeneratingReport(true)
+      setError(null)
+
+      const response = await fetch(`/api/generate-report/${currentProfile.id}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+
+      const result = await response.json()
+
+      if (result.success) {
+        setShareableUrl(result.url)
+      } else {
+        setError(result.error || 'Failed to generate report')
+      }
+    } catch (err) {
+      console.error('Failed to generate report:', err)
+      setError('Failed to generate report')
+    } finally {
+      setIsGeneratingReport(false)
+    }
+  }
+
+  // Handle copy URL to clipboard
+  const handleCopyUrl = async () => {
+    if (!shareableUrl) return
+
+    try {
+      await navigator.clipboard.writeText(shareableUrl)
+      // You could add a toast notification here
+      console.log('URL copied to clipboard')
+    } catch (err) {
+      console.error('Failed to copy URL:', err)
+    }
   }
 
   // Menu dropdown click outside functionality only
@@ -277,6 +339,66 @@ function HomeContent() {
         showUploadButton={true}
         defaultCollapsed={false}
       />
+
+      {/* Shareable Report Section - Show when profile is selected */}
+      {currentProfile && (
+        <Card className="w-full">
+          <CardHeader>
+            <CardTitle className="flex items-center justify-between">
+              <div className="flex items-center space-x-2">
+                <span>Shareable Report</span>
+                <Badge variant="outline" className="text-xs">
+                  {currentProfile.name}
+                </Badge>
+              </div>
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            {shareableUrl ? (
+              <div className="space-y-3">
+                <div className="flex items-center space-x-2">
+                  <Input
+                    value={shareableUrl}
+                    readOnly
+                    className="flex-1"
+                    placeholder="Report URL will appear here..."
+                  />
+                  <Button
+                    onClick={handleCopyUrl}
+                    variant="outline"
+                    size="sm"
+                  >
+                    Copy URL
+                  </Button>
+                </div>
+                <div className="text-sm text-muted-foreground">
+                  Share this URL to give others access to view this report. No login required.
+                </div>
+              </div>
+            ) : (
+              <div className="space-y-3">
+                <div className="text-sm text-muted-foreground">
+                  Generate a shareable URL for this report. Others can view it without logging in.
+                </div>
+                <Button
+                  onClick={handleGenerateReport}
+                  disabled={isGeneratingReport}
+                  className="w-full sm:w-auto"
+                >
+                  {isGeneratingReport ? (
+                    <>
+                      <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                      Generating...
+                    </>
+                  ) : (
+                    'Generate Shareable Report'
+                  )}
+                </Button>
+              </div>
+            )}
+          </CardContent>
+        </Card>
+      )}
 
       {/* Hidden file input for Upload New button */}
       <input

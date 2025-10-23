@@ -9,8 +9,9 @@ import Card, { CardContent, CardHeader, CardTitle } from '@/components/CardWithN
 import { Badge } from '@/components/ui/badge'
 
 export default function InsightsPanel({ data }) {
-  const [narrativeInsights, setNarrativeInsights] = useState(null)
-  const [positioningAnalysis, setPositioningAnalysis] = useState(null)
+  // Initialize with pre-generated LLM insights if available
+  const [narrativeInsights, setNarrativeInsights] = useState(data?.llmInsights?.narrativeInsights || null)
+  const [positioningAnalysis, setPositioningAnalysis] = useState(data?.llmInsights?.positioningAnalysis || null)
   
   // Individual loading states for each button
   const [isLoadingNarrative, setIsLoadingNarrative] = useState(false)
@@ -104,7 +105,7 @@ export default function InsightsPanel({ data }) {
       </Card>
 
       {/* Post Quality Evaluation Section */}
-      <PostQualityEvaluation postsData={data?.posts || []} />
+      <PostQualityEvaluation postsData={data?.posts || []} llmInsights={data?.llmInsights} />
 
       {/* Positioning Analysis Section */}
       <Card cardName="Positioning Analysis Card">

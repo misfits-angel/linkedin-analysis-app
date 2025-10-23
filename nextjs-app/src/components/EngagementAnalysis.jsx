@@ -52,7 +52,7 @@ export default function EngagementAnalysis({ data }) {
         </Card>
 
         {/* Topic Analysis on the right */}
-        <TopicAnalysis postsData={data.posts} />
+        <TopicAnalysis postsData={data.posts} llmInsights={data?.llmInsights} />
       </section>
     )
   }
@@ -197,7 +197,7 @@ export default function EngagementAnalysis({ data }) {
       </Card>
 
       {/* Topic Analysis on the right */}
-      <TopicAnalysis postsData={data.posts} />
+      <TopicAnalysis postsData={data.posts} llmInsights={data?.llmInsights} />
     </section>
   )
 }

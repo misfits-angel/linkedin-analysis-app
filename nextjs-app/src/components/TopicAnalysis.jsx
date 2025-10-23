@@ -5,8 +5,8 @@ import { useLLMInsights } from '@/lib/hooks/useLLMInsights'
 import LLMButton from './LLMButton'
 import Card, { CardContent, CardHeader, CardTitle } from '@/components/CardWithName'
 
-export default function TopicAnalysis({ postsData }) {
-  const [topicAnalysis, setTopicAnalysis] = useState(null)
+export default function TopicAnalysis({ postsData, llmInsights }) {
+  const [topicAnalysis, setTopicAnalysis] = useState(llmInsights?.topicAnalysis || null)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(null)
   
