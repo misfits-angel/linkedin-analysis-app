@@ -30,6 +30,13 @@ export const AuthProvider = ({ children }) => {
     // Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, session) => {
+        // Domain validation for Google OAuth
+        if (session?.user?.email && !session.user.email.endsWith('@misfits.capital')) {
+          console.warn('Non-misfits.capital email detected, signing out')
+          await supabase.auth.signOut()
+          return
+        }
+        
         setUser(session?.user ?? null)
         setLoading(false)
       }
@@ -88,13 +95,26 @@ export const AuthProvider = ({ children }) => {
     if (error) throw error
   }
 
+  const signInWithGoogle = async () => {
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: `${window.location.origin}/auth/callback`
+      }
+    })
+
+    if (error) throw error
+    return data
+  }
+
   const value = {
     user,
     loading,
     signUp,
     signIn,
     signOut,
-    resetPassword
+    resetPassword,
+    signInWithGoogle
   }
 
   return (
