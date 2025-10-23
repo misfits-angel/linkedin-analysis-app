@@ -257,7 +257,7 @@ export function calculatePostDistribution(posts) {
 /**
  * Main CSV analysis function
  */
-export function analyzeCsvData(rows) {
+export function analyzeCsvData(rows, metadata = {}) {
   const validRows = rows.filter(row => 
     row.postContent && 
     row.postContent.trim() !== '' &&
@@ -537,6 +537,11 @@ export function analyzeCsvData(rows) {
     rhythm,
     timingInsights,
     distribution,
-    posts: postsForJson
+    posts: postsForJson,
+    // Include metadata for database storage
+    fileName: metadata.fileName || null,
+    rawCsvData: metadata.rawCsvData || null,
+    storagePath: metadata.storagePath || null,
+    linkedinProfileUrl: metadata.linkedinProfileUrl || null
   }
 }

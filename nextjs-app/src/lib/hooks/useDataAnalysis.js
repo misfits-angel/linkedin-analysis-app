@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { analyzeCsvData as processCsvData } from '@/lib/csv-processor'
 
 export function useDataAnalysis(initialData) {
@@ -8,7 +8,17 @@ export function useDataAnalysis(initialData) {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(null)
 
-  const analyzeCsvData = async (csvData) => {
+  // Update data when initialData changes (e.g., when profile is selected)
+  useEffect(() => {
+    console.log('🔄 useDataAnalysis: initialData changed', initialData ? 'Has data' : 'No data')
+    if (initialData) {
+      console.log('📊 useDataAnalysis: Updating data with profile:', initialData.profile?.name)
+      setData(initialData)
+      setError(null)
+    }
+  }, [initialData])
+
+  const analyzeCsvData = async (csvData, metadata = {}) => {
     setIsLoading(true)
     setError(null)
     
@@ -16,7 +26,7 @@ export function useDataAnalysis(initialData) {
       console.log('Analyzing CSV data:', csvData.length, 'rows')
       
       // Process CSV data using the migrated logic
-      const result = processCsvData(csvData)
+      const result = processCsvData(csvData, metadata)
       
       if (!result) {
         throw new Error('Failed to process CSV data')

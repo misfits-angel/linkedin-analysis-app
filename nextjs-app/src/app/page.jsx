@@ -25,23 +25,93 @@ import { useDataAnalysis } from '@/lib/hooks/useDataAnalysis'
 import { useDataPersistence } from '@/lib/hooks/useDataPersistence'
 import { generatePDF, printPage } from '@/lib/pdf-utils'
 import { CardNameProvider, useCardNames } from '@/lib/contexts/CardNameContext'
+import ProfileSelector from '@/components/ProfileSelector'
 
 function HomeContent() {
   const [error, setError] = useState(null)
   const [savedData, setSavedData] = useState(null)
+  const [currentProfile, setCurrentProfile] = useState(null)
+  const [showProfileSelector, setShowProfileSelector] = useState(false)
+  const [isInitialLoad, setIsInitialLoad] = useState(true)
   const linkedinCardRef = useRef(null)
+  const fileInputRef = useRef(null)
   const { data, isLoading, error: dataError, analyzeCsvData, clearData: clearAnalysisData } = useDataAnalysis(savedData)
-  const { saveData, loadData, clearData, hasStoredData } = useDataPersistence()
+  const { saveData, loadData, loadDatasetById, clearData, hasStoredData } = useDataPersistence()
   const { showCardNames, toggleCardNames } = useCardNames()
 
   // Load saved data on mount
   useEffect(() => {
-    const loadedData = loadData()
-    if (loadedData && !savedData) {
-      setSavedData(loadedData)
-      console.log('Loaded saved data from localStorage')
+    const loadInitialData = async () => {
+      try {
+        const loadedData = await loadData()
+        if (loadedData && !savedData) {
+          setSavedData(loadedData)
+          console.log('Loaded saved data')
+        }
+      } catch (error) {
+        console.error('Failed to load initial data:', error)
+      } finally {
+        setIsInitialLoad(false)
+      }
     }
+    loadInitialData()
   }, [loadData, savedData])
+
+  // Handle profile selection
+  const handleProfileSelect = async (datasetId) => {
+    console.log('🔄 Profile selection started for ID:', datasetId)
+    
+    if (!datasetId) {
+      setCurrentProfile(null)
+      setSavedData(null)
+      return
+    }
+
+    try {
+      console.log('📡 Loading profile data from database...')
+      const profileData = await loadDatasetById(datasetId)
+      console.log('📊 Profile data loaded:', profileData ? 'Success' : 'Failed')
+      
+      if (profileData) {
+        console.log('👤 Profile name:', profileData.profile?.name)
+        console.log('📈 Posts count:', profileData.summary?.posts_last_12m)
+        console.log('💾 Setting savedData state...')
+        
+        setSavedData(profileData)
+        setCurrentProfile({ id: datasetId, name: profileData.profile?.name })
+        setShowProfileSelector(false)
+        console.log('✅ Profile data loaded and state updated')
+        
+        // Scroll to dashboard section after loading profile
+        setTimeout(() => {
+          const dashboardElement = document.getElementById('dashboard')
+          if (dashboardElement) {
+            console.log('🎯 Scrolling to dashboard section')
+            dashboardElement.scrollIntoView({ behavior: 'smooth', block: 'start' })
+          } else {
+            console.warn('⚠️ Dashboard element not found')
+          }
+        }, 100) // Small delay to ensure DOM is updated
+      } else {
+        console.error('❌ No profile data returned from database')
+        setError('Failed to load profile data - no data returned')
+      }
+    } catch (error) {
+      console.error('❌ Failed to load profile:', error)
+      setError('Failed to load profile data')
+    }
+  }
+
+  // Handle upload new profile
+  const handleUploadNew = () => {
+    setShowProfileSelector(false)
+    setCurrentProfile(null)
+    setSavedData(null)
+    // Clear any existing data analysis
+    clearAnalysisData()
+    // Trigger file input directly
+    fileInputRef.current?.click()
+  }
 
   // Menu dropdown click outside functionality only
   useEffect(() => {
@@ -85,22 +155,30 @@ function HomeContent() {
     clearData()
     clearAnalysisData()
     setSavedData(null)
+    setCurrentProfile(null)
     setError(null)
     console.log('Data cleared and state reset')
   }, [clearData, clearAnalysisData])
 
 
-  const handleFileUpload = async (csvData) => {
+  const handleFileUpload = async (csvData, metadata = {}) => {
     setError(null)
     
     try {
       console.log('Processing CSV file with', csvData.length, 'rows')
-      const result = await analyzeCsvData(csvData)
+      const result = await analyzeCsvData(csvData, metadata)
       console.log('CSV analysis completed successfully')
       
-      // Save data to localStorage
+      // Save data to both Supabase and localStorage
       if (result) {
-        saveData(result)
+        const saveResult = await saveData(result)
+        if (saveResult.success) {
+          console.log('Data saved successfully:', saveResult.source)
+          // Update current profile if saved to Supabase
+          if (saveResult.id) {
+            setCurrentProfile({ id: saveResult.id, name: result.profile?.name })
+          }
+        }
       }
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Failed to process CSV file'
@@ -116,12 +194,26 @@ function HomeContent() {
       const text = await file.text()
       const Papa = (await import('papaparse')).default
       
+      // Extract metadata from the file
+      const metadata = {
+        fileName: file.name,
+        rawCsvData: text, // Store the raw CSV text
+        storagePath: null, // Could be set if using Supabase Storage
+        linkedinProfileUrl: null // Could be extracted from CSV or provided by user
+      }
+      
+      // Parse CSV and extract metadata
       Papa.parse(text, {
         header: true,
         skipEmptyLines: true,
         complete: (results) => {
           if (results.data && results.data.length > 0) {
-            handleFileUpload(results.data)
+            // Look for LinkedIn profile URL in the first few rows
+            const firstRow = results.data[0]
+            if (firstRow.profileUrl || firstRow.linkedinUrl || firstRow.authorUrl) {
+              metadata.linkedinProfileUrl = firstRow.profileUrl || firstRow.linkedinUrl || firstRow.authorUrl
+            }
+            handleFileUpload(results.data, metadata)
           }
         }
       })
@@ -129,6 +221,14 @@ function HomeContent() {
       const errorMessage = err instanceof Error ? err.message : 'Failed to process CSV file'
       setError(errorMessage)
       console.error('File upload error:', err)
+    }
+  }
+
+  // Handle file input change (for Upload New button)
+  const handleFileInputChange = async (event) => {
+    const file = event.target.files?.[0]
+    if (file) {
+      await handleFileUploadFromMenu(file)
     }
   }
 
@@ -170,6 +270,25 @@ function HomeContent() {
         </div>
       </div>
 
+      {/* Profile Selector - Always show for multi-user functionality */}
+      <ProfileSelector
+        currentProfile={currentProfile}
+        onProfileSelect={handleProfileSelect}
+        onUploadNew={handleUploadNew}
+        showUploadButton={true}
+        defaultCollapsed={false}
+      />
+
+      {/* Hidden file input for Upload New button */}
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".csv,text/csv"
+        onChange={handleFileInputChange}
+        className="hidden"
+        aria-label="Upload CSV data file"
+      />
+
           {/* Error Display */}
           {displayError && (
             <CardWithName cardName="Error Display Card" className="border-destructive">
@@ -182,19 +301,19 @@ function HomeContent() {
           )}
 
           {/* Loading State */}
-          {isLoading && (
+          {(isLoading || isInitialLoad) && (
             <CardWithName cardName="Loading State Card" className="p-8 text-center">
               <CardContent>
                 <div className="loading-skeleton mb-4" style={{ height: '3rem', borderRadius: '0.5rem' }}></div>
                 <p className="text-muted-foreground">
-                  📊 Processing your CSV file and analyzing LinkedIn posts...
+                  {isInitialLoad ? '🔄 Loading your data...' : '📊 Processing your CSV file and analyzing LinkedIn posts...'}
                 </p>
               </CardContent>
             </CardWithName>
           )}
 
           {/* File Upload - Show when no data */}
-          {!isLoading && !data && !savedData && (
+          {!isLoading && !isInitialLoad && !data && !savedData && (
             <CardWithName cardName="File Upload Card" className="p-8 text-center border-dashed border-2 border-gray-300">
               <CardContent>
                 <div className="mb-4">
