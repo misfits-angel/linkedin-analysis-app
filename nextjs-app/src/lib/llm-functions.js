@@ -111,23 +111,28 @@ Analyze these ${condensedPosts.length} LinkedIn posts. Look at:
 - What specific topics/themes appear repeatedly?
 - What content types get more engagement?
 - What's unique about their posting style?
+- What's one specific area they could improve?
 
 POSTS DATA:
 ${JSON.stringify(condensedPosts, null, 2)}
 
-Return 2-3 insights that are PERSONALIZED to this specific user's content. Examples of good personalized insights:
+Return 2-3 insights that are PERSONALIZED to this specific user's content, including at least ONE area of improvement. Examples of good personalized insights:
 - "Technical deep-dives resonate with your audience."
 - "Team culture posts spark more conversations."
 - "Product launch updates drive peak engagement."
+- "Add more visual content for higher engagement." (improvement)
+- "Increase posting consistency during weekdays." (improvement)
 
 BAD (too generic): "Authentic posts perform well"
 GOOD (specific): "Behind-the-scenes content drives comments"
+GOOD (improvement): "Try more data-driven storytelling posts"
 
-Return JSON:
+Return JSON with at least one improvement suggestion:
 {
   "insights": [
     "[Specific insight about their actual content themes]",
-    "[Specific insight about their posting patterns]"
+    "[Specific insight about their posting patterns]",
+    "[Specific area of improvement - actionable suggestion]"
   ]
 }
 `
