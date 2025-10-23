@@ -51,7 +51,7 @@ export function ProfileSelector({
   const [sortBy, setSortBy] = useState('newest') // newest, oldest, mostPosts, leastPosts, nameAZ, nameZA
   const [currentPage, setCurrentPage] = useState(1)
   const [isCollapsed, setIsCollapsed] = useState(defaultCollapsed)
-  const profilesPerPage = 10
+  const profilesPerPage = 5
   const { loadAllDatasets, deleteDataset } = useDataPersistence()
 
   // Load all available datasets
@@ -258,11 +258,11 @@ export function ProfileSelector({
       
       {/* Collapsible Content */}
       <div className={`transition-all duration-300 ease-in-out overflow-hidden ${
-        isCollapsed ? 'max-h-0 opacity-0' : 'max-h-[2000px] opacity-100'
+        isCollapsed ? 'max-h-0 opacity-0' : 'max-h-[600px] opacity-100'
       }`}>
-        <CardContent className="space-y-4">
+        <CardContent className="space-y-3">
           {/* Search and Sort Controls */}
-          <div className="flex flex-col sm:flex-row gap-3">
+          <div className="flex flex-col sm:flex-row gap-2">
             <div className="flex-1">
               <Input
                 placeholder="Search profiles..."
@@ -316,19 +316,19 @@ export function ProfileSelector({
           </div>
 
         {/* Profiles Grid */}
-        <div className="space-y-2">
+        <div className="space-y-1">
           {paginatedDatasets.map((dataset) => (
             <div
               key={dataset.id}
-              className={`flex items-center justify-between p-2 rounded-lg border transition-colors cursor-pointer hover:bg-gray-50 ${
+              className={`flex items-center justify-between p-1.5 rounded-md border transition-colors cursor-pointer hover:bg-gray-50 ${
                 currentProfile?.id === dataset.id 
                   ? 'bg-blue-50 border-blue-200' 
                   : 'border-gray-200'
               }`}
               onClick={() => handleProfileSelect(dataset.id)}
             >
-              <div className="flex-1 min-w-0 flex items-center space-x-3">
-                <h3 className="font-medium text-sm truncate">
+              <div className="flex-1 min-w-0 flex items-center space-x-2">
+                <h3 className="font-medium text-xs truncate">
                   {dataset.author_name}
                 </h3>
                 
@@ -336,7 +336,7 @@ export function ProfileSelector({
                   <Badge variant="default" className="text-xs">Current</Badge>
                 )}
                 
-                <div className="flex items-center space-x-3 text-xs text-muted-foreground">
+                <div className="flex items-center space-x-2 text-xs text-muted-foreground">
                   <div className="flex items-center space-x-1">
                     <BarChart3 className="h-3 w-3" />
                     <span>{dataset.total_posts || 0}</span>
@@ -394,7 +394,7 @@ export function ProfileSelector({
 
         {/* Pagination Controls */}
         {totalPages > 1 && (
-          <div className="flex items-center justify-between pt-4 border-t">
+          <div className="flex items-center justify-between pt-2 border-t">
             <div className="text-sm text-muted-foreground">
               Showing {((currentPage - 1) * profilesPerPage) + 1} to {Math.min(currentPage * profilesPerPage, totalFiltered)} of {totalFiltered} profiles
             </div>
@@ -452,7 +452,7 @@ export function ProfileSelector({
 
         {/* Footer Info */}
         {totalFiltered > 0 && (
-          <div className="text-xs text-muted-foreground text-center pt-2">
+          <div className="text-xs text-muted-foreground text-center pt-1">
             {searchQuery ? (
               <span>
                 {totalFiltered} of {datasets.length} profiles match "{searchQuery}"
