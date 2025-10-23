@@ -53,7 +53,7 @@ export default function InsightsPanel({ data }) {
   }
 
   return (
-    <>
+    <div className="space-y-6">
       {/* Error Display */}
       {error && (
         <div className="error-message">
@@ -178,6 +178,6 @@ export default function InsightsPanel({ data }) {
           )}
         </CardContent>
       </Card>
-    </>
+    </div>
   )
 }

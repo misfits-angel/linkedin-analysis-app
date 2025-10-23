@@ -10,9 +10,7 @@ export function useDataAnalysis(initialData) {
 
   // Update data when initialData changes (e.g., when profile is selected)
   useEffect(() => {
-    console.log('🔄 useDataAnalysis: initialData changed', initialData ? 'Has data' : 'No data')
     if (initialData) {
-      console.log('📊 useDataAnalysis: Updating data with profile:', initialData.profile?.name)
       setData(initialData)
       setError(null)
     }
@@ -23,8 +21,6 @@ export function useDataAnalysis(initialData) {
     setError(null)
     
     try {
-      console.log('Analyzing CSV data:', csvData.length, 'rows')
-      
       // Process CSV data using the migrated logic
       const result = processCsvData(csvData, metadata)
       

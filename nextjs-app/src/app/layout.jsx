@@ -1,5 +1,6 @@
 import { Manrope, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
+import { AuthProvider } from '@/lib/contexts/AuthContext'
 
 const manrope = Manrope({ subsets: ['latin'] })
 const jetbrainsMono = JetBrains_Mono({ subsets: ['latin'], variable: '--font-mono' })
@@ -13,7 +14,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${manrope.className} ${jetbrainsMono.variable}`}>
-        {children}
+        <AuthProvider>
+          {children}
+        </AuthProvider>
       </body>
     </html>
   )

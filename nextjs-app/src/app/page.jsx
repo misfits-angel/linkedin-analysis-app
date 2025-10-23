@@ -26,6 +26,8 @@ import { useDataPersistence } from '@/lib/hooks/useDataPersistence'
 import { generatePDF, printPage } from '@/lib/pdf-utils'
 import { CardNameProvider, useCardNames } from '@/lib/contexts/CardNameContext'
 import ProfileSelector from '@/components/ProfileSelector'
+import ProtectedRoute from '@/components/auth/ProtectedRoute'
+import { useAuth } from '@/lib/contexts/AuthContext'
 
 function HomeContent() {
   const [error, setError] = useState(null)
@@ -36,17 +38,25 @@ function HomeContent() {
   const linkedinCardRef = useRef(null)
   const fileInputRef = useRef(null)
   const { data, isLoading, error: dataError, analyzeCsvData, clearData: clearAnalysisData } = useDataAnalysis(savedData)
-  const { saveData, loadData, loadDatasetById, clearData, hasStoredData } = useDataPersistence()
+  const { saveData, loadData, loadDatasetById, clearData, hasStoredData, loadAllDatasets } = useDataPersistence()
   const { showCardNames, toggleCardNames } = useCardNames()
+  const { user } = useAuth()
 
   // Load saved data on mount
   useEffect(() => {
     const loadInitialData = async () => {
       try {
-        const loadedData = await loadData()
-        if (loadedData && !savedData) {
-          setSavedData(loadedData)
-          console.log('Loaded saved data')
+        // Check if user is a misfits.capital admin
+        const isAdmin = user?.email?.endsWith('@misfits.capital')
+        
+        if (isAdmin) {
+          // For admin users, don't auto-load - let them select manually
+        } else {
+          // For regular users, try to load their personal data
+          const loadedData = await loadData()
+          if (loadedData) {
+            setSavedData(loadedData)
+          }
         }
       } catch (error) {
         console.error('Failed to load initial data:', error)
@@ -54,13 +64,16 @@ function HomeContent() {
         setIsInitialLoad(false)
       }
     }
-    loadInitialData()
-  }, [loadData, savedData])
+    
+    if (user && isInitialLoad) {
+      loadInitialData()
+    } else if (!user) {
+      setIsInitialLoad(false)
+    }
+  }, [user, isInitialLoad])
 
   // Handle profile selection
   const handleProfileSelect = async (datasetId) => {
-    console.log('🔄 Profile selection started for ID:', datasetId)
-    
     if (!datasetId) {
       setCurrentProfile(null)
       setSavedData(null)
@@ -68,36 +81,25 @@ function HomeContent() {
     }
 
     try {
-      console.log('📡 Loading profile data from database...')
       const profileData = await loadDatasetById(datasetId)
-      console.log('📊 Profile data loaded:', profileData ? 'Success' : 'Failed')
       
       if (profileData) {
-        console.log('👤 Profile name:', profileData.profile?.name)
-        console.log('📈 Posts count:', profileData.summary?.posts_last_12m)
-        console.log('💾 Setting savedData state...')
-        
         setSavedData(profileData)
         setCurrentProfile({ id: datasetId, name: profileData.profile?.name })
         setShowProfileSelector(false)
-        console.log('✅ Profile data loaded and state updated')
         
         // Scroll to dashboard section after loading profile
         setTimeout(() => {
           const dashboardElement = document.getElementById('dashboard')
           if (dashboardElement) {
-            console.log('🎯 Scrolling to dashboard section')
             dashboardElement.scrollIntoView({ behavior: 'smooth', block: 'start' })
-          } else {
-            console.warn('⚠️ Dashboard element not found')
           }
-        }, 100) // Small delay to ensure DOM is updated
+        }, 100)
       } else {
-        console.error('❌ No profile data returned from database')
         setError('Failed to load profile data - no data returned')
       }
     } catch (error) {
-      console.error('❌ Failed to load profile:', error)
+      console.error('Failed to load profile:', error)
       setError('Failed to load profile data')
     }
   }
@@ -157,7 +159,6 @@ function HomeContent() {
     setSavedData(null)
     setCurrentProfile(null)
     setError(null)
-    console.log('Data cleared and state reset')
   }, [clearData, clearAnalysisData])
 
 
@@ -165,15 +166,13 @@ function HomeContent() {
     setError(null)
     
     try {
-      console.log('Processing CSV file with', csvData.length, 'rows')
       const result = await analyzeCsvData(csvData, metadata)
-      console.log('CSV analysis completed successfully')
       
       // Save data to both Supabase and localStorage
       if (result) {
+        console.log('CSV analysis completed successfully')
         const saveResult = await saveData(result)
         if (saveResult.success) {
-          console.log('Data saved successfully:', saveResult.source)
           // Update current profile if saved to Supabase
           if (saveResult.id) {
             setCurrentProfile({ id: saveResult.id, name: result.profile?.name })
@@ -312,8 +311,8 @@ function HomeContent() {
             </CardWithName>
           )}
 
-          {/* File Upload - Show when no data */}
-          {!isLoading && !isInitialLoad && !data && !savedData && (
+          {/* File Upload - Show when no data and user is not admin */}
+          {!isLoading && !isInitialLoad && !data && !savedData && !user?.email?.endsWith('@misfits.capital') && (
             <CardWithName cardName="File Upload Card" className="p-8 text-center border-dashed border-2 border-gray-300">
               <CardContent>
                 <div className="mb-4">
@@ -324,6 +323,25 @@ function HomeContent() {
                   </p>
                 </div>
                 <FileUpload onFileUpload={handleFileUpload} />
+              </CardContent>
+            </CardWithName>
+          )}
+
+          {/* Admin Message - Show when no data and user is admin */}
+          {!isLoading && !isInitialLoad && !data && !savedData && user?.email?.endsWith('@misfits.capital') && (
+            <CardWithName cardName="Admin Message Card" className="p-8 text-center">
+              <CardContent>
+                <div className="mb-4">
+                  <div className="text-4xl mb-4">🔑</div>
+                  <h2 className="text-xl font-semibold mb-2">Admin Access</h2>
+                  <p className="text-muted-foreground mb-6">
+                    As a misfits.capital admin, you have access to all LinkedIn datasets. 
+                    Use the Profile Selector above to choose which dataset to view.
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    If no datasets are available, you can upload new data using the "Upload New" button in the Profile Selector.
+                  </p>
+                </div>
               </CardContent>
             </CardWithName>
           )}
@@ -543,8 +561,10 @@ function HomeContent() {
 
 export default function Home() {
   return (
-    <CardNameProvider>
-      <HomeContent />
-    </CardNameProvider>
+    <ProtectedRoute>
+      <CardNameProvider>
+        <HomeContent />
+      </CardNameProvider>
+    </ProtectedRoute>
   )
 }

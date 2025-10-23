@@ -2,6 +2,7 @@
 
 import { useEffect, useCallback } from 'react'
 import { supabase, isSupabaseAvailable } from '@/lib/supabase-client'
+import { useAuth } from '@/lib/contexts/AuthContext'
 
 const STORAGE_KEYS = {
   data: 'linkedin_analysis_data',
@@ -10,23 +11,22 @@ const STORAGE_KEYS = {
 }
 
 export function useDataPersistence() {
+  const { user } = useAuth()
+  
   // Save to both Supabase AND localStorage (fallback)
   const saveData = useCallback(async (data) => {
     try {
       // Always save to localStorage as backup
       localStorage.setItem(STORAGE_KEYS.data, JSON.stringify(data))
       localStorage.setItem(STORAGE_KEYS.timestamp, new Date().toISOString())
-      console.log('✅ Data saved to localStorage')
 
-      // If Supabase is configured, save there too
-      if (isSupabaseAvailable()) {
-        console.log('🔄 Attempting to save to Supabase...')
-        console.log('Author name:', data.profile?.name || 'Unknown')
-        console.log('Total posts:', data.summary?.posts_last_12m || 0)
+      // If Supabase is configured and user is authenticated, save there too
+      if (isSupabaseAvailable() && user) {
         
         const { data: savedData, error } = await supabase
           .from('linkedin_datasets')
           .insert({
+            user_id: user.id, // This will be automatically set by trigger, but we include it for clarity
             author_name: data.profile?.name || 'Unknown',
             file_name: data.fileName || null,
             analysis_data: data,
@@ -41,8 +41,7 @@ export function useDataPersistence() {
           .single()
 
         if (error) {
-          console.error('❌ Failed to save to Supabase:', error)
-          console.log('💡 Tip: Check SUPABASE_SETUP.md for configuration help')
+          console.error('Failed to save to Supabase:', error)
           return { success: true, source: 'localStorage', id: null }
         }
 
@@ -51,9 +50,6 @@ export function useDataPersistence() {
         console.log('✅ Data saved to Supabase with ID:', savedData.id)
         
         return { success: true, source: 'supabase', id: savedData.id }
-      } else {
-        console.log('⚠️ Supabase not configured - using localStorage only')
-        console.log('💡 To enable cloud storage, see SUPABASE_SETUP.md')
       }
 
       return { success: true, source: 'localStorage', id: null }
@@ -97,13 +93,11 @@ export function useDataPersistence() {
       const maxAge = 7 * 24 * 60 * 60 * 1000 // 7 days in milliseconds
       
       if (dataAge > maxAge) {
-        console.log('Saved data is too old, clearing...')
         clearData()
         return null
       }
 
       const parsedData = JSON.parse(data)
-      console.log('✅ Data loaded from localStorage')
       return parsedData
     } catch (error) {
       console.error('Failed to load data:', error)
@@ -135,8 +129,7 @@ export function useDataPersistence() {
 
   // Load all available datasets (for multi-user dropdown)
   const loadAllDatasets = useCallback(async () => {
-    if (!isSupabaseAvailable()) {
-      console.warn('Supabase not configured')
+    if (!isSupabaseAvailable() || !user) {
       return []
     }
 
@@ -146,18 +139,22 @@ export function useDataPersistence() {
         .select('id, author_name, file_name, created_at, total_posts, median_engagement, date_range_start, date_range_end')
         .order('created_at', { ascending: false })
 
-      if (error) throw error
+      if (error) {
+        console.error('Failed to load datasets:', error)
+        throw error
+      }
+      
       return data || []
     } catch (error) {
       console.error('Failed to load all datasets:', error)
       return []
     }
-  }, [])
+  }, [user])
 
   // Load specific dataset by ID
   const loadDatasetById = useCallback(async (datasetId) => {
-    if (!isSupabaseAvailable()) {
-      console.warn('Supabase not configured')
+    if (!isSupabaseAvailable() || !user) {
+      console.warn('Supabase not configured or user not authenticated')
       return null
     }
 
@@ -178,12 +175,12 @@ export function useDataPersistence() {
       console.error('Failed to load dataset:', error)
       return null
     }
-  }, [])
+  }, [user])
 
   // Delete a dataset
   const deleteDataset = useCallback(async (datasetId) => {
-    if (!isSupabaseAvailable()) {
-      console.warn('Supabase not configured')
+    if (!isSupabaseAvailable() || !user) {
+      console.warn('Supabase not configured or user not authenticated')
       return false
     }
 
@@ -206,14 +203,13 @@ export function useDataPersistence() {
       console.error('Failed to delete dataset:', error)
       return false
     }
-  }, [])
+  }, [user])
 
   const clearData = useCallback(() => {
     try {
       localStorage.removeItem(STORAGE_KEYS.data)
       localStorage.removeItem(STORAGE_KEYS.timestamp)
       localStorage.removeItem(STORAGE_KEYS.datasetId)
-      console.log('Data cleared from localStorage')
     } catch (error) {
       console.error('Failed to clear data from localStorage:', error)
     }
