@@ -1,6 +1,6 @@
 # LinkedIn GTM Analytics Platform
 
-A comprehensive analytics platform for analyzing LinkedIn post performance with AI-powered insights.
+A comprehensive analytics platform for analyzing LinkedIn post performance with AI-powered insights, built with Next.js, Supabase, and Google Gemini.
 
 ## 🌐 Live Demo
 
@@ -8,198 +8,269 @@ A comprehensive analytics platform for analyzing LinkedIn post performance with 
 
 The application is now live and ready to use! Upload your LinkedIn data and get AI-powered insights instantly.
 
+## 🎯 Key Features
+
+### ✅ Implemented Features
+
+- **📊 Multi-Profile Dashboard** - Manage multiple LinkedIn profiles in one place
+- **🔐 Supabase Authentication** - Secure @misfits.capital email-based authentication
+- **🤖 AI-Powered Insights** - Narrative insights, topic analysis, post evaluation, and positioning analysis using Google Gemini
+- **📈 Advanced Analytics** - Comprehensive charts and metrics for engagement patterns
+- **🔗 Shareable Reports** - Generate public shareable reports with customizable visibility
+- **✏️ Editable Content** - Customize report sections including Unstoppable, Next Steps, and Investment Terms
+- **🎛️ Card Visibility Control** - Show/hide specific cards in reports
+- **💾 Data Persistence** - All profiles automatically saved to Supabase
+- **🔄 Update Reports** - Update existing reports without changing the shareable URL
+- **📱 Responsive Design** - Works seamlessly on desktop and mobile devices
+
+### 🏗️ Technical Architecture
+
+- **Frontend**: Next.js 14+ with React and TypeScript
+- **Styling**: Tailwind CSS with shadcn/ui components
+- **Database**: Supabase (PostgreSQL) with Row Level Security
+- **Authentication**: Supabase Auth with OAuth support
+- **AI**: Google Gemini API for content analysis
+- **Charts**: Chart.js for data visualization
+- **Deployment**: Vercel with serverless functions
+
 ## 📁 Project Structure
 
 ```
 GTM/
-├── api/                          # Backend API
-│   ├── linkedin_analysis_api.py  # Flask API for comprehensive LinkedIn analysis
-│   └── requirements.txt          # Python dependencies
+├── nextjs-app/                   # Main Next.js application
+│   ├── src/
+│   │   ├── app/                  # Next.js App Router
+│   │   │   ├── api/             # API routes
+│   │   │   ├── report/[token]/  # Shareable report pages
+│   │   │   ├── layout.jsx       # Root layout with auth
+│   │   │   └── page.jsx         # Main dashboard
+│   │   ├── components/          # React components
+│   │   │   ├── ui/              # shadcn/ui components
+│   │   │   ├── cards/           # Analytics card components
+│   │   │   ├── charts/          # Chart components
+│   │   │   └── ...              # Other components
+│   │   └── lib/                 # Utilities and helpers
+│   │       ├── contexts/        # React contexts
+│   │       ├── hooks/           # Custom React hooks
+│   │       └── utils/           # Utility functions
+│   ├── public/                  # Static assets
+│   ├── supabase-schema.sql      # Database schema
+│   ├── supabase-auth-schema.sql # Auth schema
+│   └── package.json
 │
-├── web/                          # Frontend Application
-│   ├── index.html                # Main web interface
-│   └── assets/
-│       └── sample-data.json      # Sample data for demo
+├── data/                         # LinkedIn data storage
+│   └── linkedin/                 # CSV files
 │
-├── data/                         # Data Storage
-│   └── linkedin/                 # LinkedIn CSV files
-│       ├── *.csv                 # Your LinkedIn post data
+├── legacy/                       # Legacy Flask/vanilla JS version
+│   ├── api/                      # Flask API (deprecated)
+│   ├── web/                      # Vanilla JS frontend (deprecated)
+│   └── scripts/                  # Utility scripts
 │
-├── scripts/                      # Utility Scripts
-│   ├── start_insights_server.bat # Windows launcher
-│   └── start_insights_server.sh  # Mac/Linux launcher
-│
-├── backups/                      # Stable Working Versions
-│   ├── api/                      # API backups
-│   └── web/                      # Frontend backups
-│
-├── linkedin_parser/              # LinkedIn Data Parser
-│   ├── parse_and_append.py       # CSV parser
-│   ├── html_input.txt            # Input file for HTML
-│   └── README.md                 # Parser documentation
-│
-├── Archive/                      # Old/Deprecated Files
 └── YC - alums/                   # YC Founders Data
 ```
 
 ## 🚀 Quick Start
 
-### 1. Setup Environment
+### Prerequisites
 
-Create a `.env` file in the project root:
-```bash
-GEMINI_API_KEY=your_api_key_here
-```
+- Node.js 18+ and npm
+- Supabase account (free tier works)
+- Google Gemini API key
 
-Get your API key from: https://makersuite.google.com/app/apikey
+### Installation
 
-### 2. Install Dependencies
+1. **Clone the repository:**
+   ```bash
+   git clone <your-repo-url>
+   cd GTM
+   ```
 
-```bash
-pip install -r api/requirements.txt
-```
+2. **Install dependencies:**
+   ```bash
+   cd nextjs-app
+   npm install
+   ```
 
-### 3. Start the Server
+3. **Set up environment variables:**
+   Create a `.env.local` file in `nextjs-app/`:
+   ```bash
+   NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+   GEMINI_API_KEY=your_gemini_api_key
+   NEXT_PUBLIC_SITE_URL=http://localhost:3000
+   ```
 
-**Windows:**
-```bash
-scripts\start_insights_server.bat
-```
+4. **Set up Supabase database:**
+   - Create a new Supabase project
+   - Run `supabase-schema.sql` in the SQL Editor
+   - Run `supabase-auth-schema.sql` for authentication
+   - Run `add-shareable-report-fields.sql` for shareable reports
 
-**Mac/Linux:**
-```bash
-bash scripts/start_insights_server.sh
-```
+5. **Run the development server:**
+   ```bash
+   npm run dev
+   ```
 
-### 4. Open the Web Interface
+6. **Open your browser:**
+   Navigate to [http://localhost:3000](http://localhost:3000)
 
-Open `web/index.html` in your browser.
+## 📚 Documentation
 
-## 📊 Features
+For detailed documentation, see the Next.js app documentation:
 
-### AI-Powered Insights
-- **Narrative Insights**: Human-friendly observations about your posting patterns
-- **Topic Analysis**: Identify which topics perform best
-- **Post Quality Evaluation**: Thought-leadership scoring and feedback
-- **Positioning Analysis**: Current vs future personal branding recommendations
-- **Engagement Patterns**: Understand what drives comments vs likes
-
-### Analytics Dashboard
-- Posting cadence over time
-- Engagement metrics (median, P90)
-- Format performance (text, image, video, carousel)
-- Best posting days
-- Top performing posts
-
-### Data Processing
-- CSV upload and analysis
-- Automatic timestamp conversion
-- Multi-page data aggregation
-- Export to PDF
-
-## 📁 Working with Data
-
-### Upload Your LinkedIn Data
-
-1. **Export from LinkedIn**: Use the `linkedin_parser` tool
-2. **Upload CSV**: Click the menu (⋮) → "Upload CSV"
-3. **Analyze**: Generate insights with AI
-
-### Data Location
-
-All your CSV files are stored in:
-```
-data/linkedin/
-```
+- **[Next.js App README](./nextjs-app/README.md)** - Detailed setup and features
+- **[Card Components Guide](./nextjs-app/CARD_COMPONENTS_GUIDE.md)** - Component system
+- **[Context Usage Guide](./nextjs-app/CONTEXT_USAGE_GUIDE.md)** - State management
+- **[Update Report Feature](./nextjs-app/UPDATE_REPORT_FEATURE.md)** - Shareable reports
+- **[Code Review Improvements](./nextjs-app/CODE_REVIEW_IMPROVEMENTS.md)** - Recent improvements
+- **[Vercel Deployment](./VERCEL_QUICK_START.md)** - Deployment guide
 
 ## 🔧 Development
 
 ### File Organization
 
-- **Production files**: `api/` and `web/`
-- **Backup files**: `backups/` (stable working versions)
-- **Experiments**: Work on production files, rollback from backups if needed
+- **Main Application**: `nextjs-app/` - Active Next.js application
+- **Legacy Files**: `legacy/` - Old Flask/vanilla JS version (maintained for reference)
+- **Data Files**: `data/` - LinkedIn CSV data
 
-### API Endpoints
+### Key API Routes
 
-- `GET  /health` - Health check
-- `POST /generate-insights` - Generate narrative insights
-- `POST /analyze-topics` - Analyze post topics
-- `POST /evaluate-posts` - Evaluate post quality with rubric
-- `POST /analyze-positioning` - Analyze current and future positioning
+- `POST /api/generate-insights` - Generate narrative insights
+- `POST /api/analyze-topics` - Analyze post topics
+- `POST /api/evaluate-posts` - Evaluate post quality
+- `POST /api/analyze-positioning` - Analyze positioning
+- `POST /api/generate-report/[datasetId]` - Create shareable report
+- `PUT /api/update-report/[datasetId]` - Update existing report
+- `DELETE /api/delete-report/[datasetId]` - Delete report
 
 ### Running Locally
 
 ```bash
-# Start API server
-python api/linkedin_analysis_api.py
+# Start development server
+cd nextjs-app
+npm run dev
 
-# Open web interface
-# Just open web/index.html in your browser
+# Build for production
+npm run build
+
+# Start production server
+npm start
 ```
 
-## 📝 Key Files
+## 🚀 Deployment
 
-| File | Purpose |
-|------|---------|
-| `web/index.html` | Main web interface |
-| `api/linkedin_analysis_api.py` | Flask API server |
-| `api/requirements.txt` | Python dependencies |
-| `scripts/start_insights_server.*` | Launcher scripts |
-| `data/linkedin/*.csv` | Your LinkedIn data |
-| `.env` | API keys (create this) |
+### Vercel (Recommended)
 
-## 🔄 Backup Strategy
+1. Connect your GitHub repository to Vercel
+2. Set environment variables in Vercel dashboard
+3. Deploy automatically on push to main branch
 
-The `backups/` folder contains stable working versions:
-- `backups/api/linkedin_analysis_api_working.py`
-- `backups/web/index_improved_working.html`
+See [VERCEL_QUICK_START.md](./VERCEL_QUICK_START.md) for detailed instructions.
 
-Use these to rollback if experiments go wrong.
+## 🔐 Authentication
 
-## 📦 Dependencies
+The application uses Supabase authentication with domain-based access control:
+- Only `@misfits.capital` email addresses can access the platform
+- Google OAuth and email/password authentication supported
+- Row Level Security (RLS) ensures data privacy
 
-See `api/requirements.txt` for full list:
-- Flask (API server)
-- Flask-CORS (CORS support)
-- google-generativeai (Gemini AI)
-- python-dotenv (Environment variables)
+## 📊 Data Management
 
-## 🎯 Next Steps
+### Upload LinkedIn Data
 
-1. ✅ Export your LinkedIn data using `linkedin_parser`
-2. ✅ Create `.env` file with your Gemini API key
-3. ✅ Start the server using `scripts/start_insights_server.*`
-4. ✅ Upload your CSV and generate insights!
+1. Export your LinkedIn posts (CSV format)
+2. Click "Upload CSV" in the dashboard
+3. Wait for analysis to complete
+4. View insights and generate reports
 
-## 📚 Additional Resources
+### Profile Management
 
-- **LinkedIn Parser Guide**: `linkedin_parser/README.md`
-- **API Documentation**: See docstrings in `api/linkedin_analysis_api.py`
-- **Sample Data**: `web/assets/sample-data.json`
+- Multiple profiles can be managed from one account
+- Each profile stores its own analysis data
+- Profiles are automatically saved to Supabase
+
+### Shareable Reports
+
+- Generate public shareable links for any profile
+- Control which cards appear in the report
+- Customize editable sections
+- Update reports without changing URLs
+- Delete reports when no longer needed
+
+## 🎨 UI Features
+
+### Card System
+
+The application uses a sophisticated card component system:
+- **GridCard** - Standard cards with visibility control
+- **CollapsibleGridCard** - Large cards with expand/collapse
+- **ConditionalCard** - Wrap components with visibility control
+- **Card Visibility Settings** - UI to control which cards are shown
+
+### Responsive Design
+
+- Mobile-first approach
+- Responsive grid layouts
+- Collapsible sections for mobile
+- Touch-friendly interactions
+
+## 🔧 Configuration
+
+### Environment Variables
+
+```bash
+# Supabase
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+
+# AI
+GEMINI_API_KEY=your_google_gemini_api_key
+
+# Application
+NEXT_PUBLIC_SITE_URL=https://your-domain.com
+```
+
+### Database Schema
+
+The application requires these Supabase tables:
+- `linkedin_datasets` - Main data storage
+- `auth.users` - User authentication (managed by Supabase)
+
+See SQL files in the `nextjs-app/` directory for complete schema.
 
 ## 🐛 Troubleshooting
 
 **Server won't start?**
-- Check if `.env` file exists in project root
-- Verify GEMINI_API_KEY is set correctly
-- Install dependencies: `pip install -r api/requirements.txt`
+- Check if `.env.local` file exists
+- Verify all environment variables are set
+- Install dependencies: `npm install`
 
-**Can't generate insights?**
-- Ensure server is running (green in console)
+**Can't authenticate?**
+- Ensure your email is `@misfits.capital`
+- Check Supabase authentication settings
+- Verify environment variables
+
+**API not working?**
+- Check if GEMINI_API_KEY is set correctly
+- Verify Supabase connection
 - Check browser console for errors
-- Verify API key has credits
 
-**CSV upload fails?**
-- Check CSV format (use LinkedIn parser)
-- Ensure postTimestamp column exists
-- Try with sample data first
+**Report not generating?**
+- Ensure profile has analysis data
+- Check if LLM analysis completed
+- Verify Supabase database permissions
 
-## 📄 License
+## 📝 License
 
 Private project for GTM analytics.
 
+## 🙏 Acknowledgments
+
+- Built with Next.js, Supabase, and Google Gemini
+- Uses shadcn/ui for UI components
+- Chart.js for data visualization
+
 ---
 
-**Last Updated**: October 2025
+**Last Updated**: January 2025
 

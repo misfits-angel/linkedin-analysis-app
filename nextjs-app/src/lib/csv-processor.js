@@ -1,5 +1,27 @@
 // ============= CSV PROCESSING =============
 // Main CSV analysis orchestrator - delegates to specialized utilities
+//
+// ============================================================================
+// DATA FILTERING RULE - READ THIS FIRST
+// ============================================================================
+// 
+// CRITICAL RULE FOR POST DATA FILTERING:
+//
+// 1. Post vs Reshare Chart: Uses ALL posts (including reshares)
+//    - This chart specifically shows the split between original and reshared content
+//    - Calculated in action_share and action_counts
+//
+// 2. ALL OTHER ANALYSIS: Uses ONLY original posts (excluding reshares)
+//    - Summary metrics (post count, engagement, etc.)
+//    - Trends (posts per month, engagement over time)
+//    - Type distribution (text, video, image, etc.)
+//    - Timing insights and posting rhythm
+//    - Distribution analysis
+//    - LLM analysis (narrative insights, topic analysis, etc.)
+//
+// This ensures accurate analysis while still showing the full picture of
+// posting behavior in the Post vs Reshare Chart.
+// ============================================================================
 
 import {
   parseCSVDate,
@@ -117,13 +139,26 @@ export function analyzeCsvData(rows, metadata = {}, options = {}) {
 
   posts.sort((a, b) => a.date.getTime() - b.date.getTime())
 
-  // Filter out reshares - ONLY use original posts for ALL analysis
+  // ============================================================================
+  // DATA FILTERING STRATEGY - CRITICAL RULE
+  // ============================================================================
+  // 
+  // RULE: Post vs Reshare Chart uses ALL posts (including reshares)
+  //       ALL OTHER analysis uses ONLY original posts (excluding reshares)
+  //
+  // This is because:
+  // 1. Post vs Reshare Chart specifically shows the split between original and reshared content
+  // 2. All other metrics (engagement, trends, etc.) should only analyze original content
+  // ============================================================================
+  
+  // Filter out reshares - ONLY use original posts for MOST analysis
   const originalPosts = posts.filter(p => !p.action.toLowerCase().includes('reposted'))
   
   if (originalPosts.length === 0) {
     throw new Error('No original posts found in the analysis period. Only reposts/reshares were found.')
   }
   
+  // Use original posts for all analysis EXCEPT action distribution
   const postsForAnalysis = originalPosts
 
   // Get author name (most common author)
@@ -133,7 +168,7 @@ export function analyzeCsvData(rows, metadata = {}, options = {}) {
   })
   const authorName = Object.keys(authorCounts).reduce((a, b) => authorCounts[a] > authorCounts[b] ? a : b)
 
-  // Summary metrics
+  // Summary metrics - USES ORIGINAL POSTS ONLY
   const engagementScores = postsForAnalysis.map(p => p.eng)
   const summary = {
     posts_last_12m: postsForAnalysis.length, // Keep for backward compatibility
@@ -144,7 +179,7 @@ export function analyzeCsvData(rows, metadata = {}, options = {}) {
     p90_engagement: percentile(engagementScores, 90)
   }
 
-  // Trends: Posts per month - dynamically based on actual data
+  // Trends: Posts per month - USES ORIGINAL POSTS ONLY
   const postsPerMonth = {}
   const monthMedian = {}
   const monthTotal = {}
@@ -173,7 +208,7 @@ export function analyzeCsvData(rows, metadata = {}, options = {}) {
     monthMedian[month] = median(monthEngagements[month])
   })
 
-  // Mix: Type distribution
+  // Mix: Type distribution - USES ORIGINAL POSTS ONLY
   const typeCounts = {}
   const typeEngagements = {}
   
@@ -199,12 +234,18 @@ export function analyzeCsvData(rows, metadata = {}, options = {}) {
     type_max_engagement[type] = Math.max(...typeEngagements[type])
   })
 
-  // Mix: Action distribution (Post vs Reshare)
-  // Note: We only analyze original posts, so this will show breakdown of original post types
+  // ============================================================================
+  // Mix: Action distribution (Post vs Reshare) - USES ALL POSTS (INCLUDING RESHARES)
+  // ============================================================================
+  // EXCEPTION TO THE RULE: This is the ONLY metric that uses ALL posts including reshares
+  // This is because the Post vs Reshare Chart specifically needs to show the split
+  // between original posts and reshared content
+  // ============================================================================
   const actionCounts = {}
   const actionEngagements = {}
   
-  postsForAnalysis.forEach(p => {
+  // Use ALL posts (including reshares) for action distribution
+  posts.forEach(p => {
     actionCounts[p.action] = (actionCounts[p.action] || 0) + 1
     if (!actionEngagements[p.action]) actionEngagements[p.action] = []
     actionEngagements[p.action].push(p.eng)
@@ -214,21 +255,21 @@ export function analyzeCsvData(rows, metadata = {}, options = {}) {
   const action_median_engagement = {}
   
   Object.keys(actionCounts).forEach(action => {
-    action_share[action] = actionCounts[action] / postsForAnalysis.length
+    action_share[action] = actionCounts[action] / posts.length  // Divide by ALL posts, not just original
     action_median_engagement[action] = median(actionEngagements[action])
   })
 
-  // Topics - No manual analysis, LLM only
+  // Topics - No manual analysis, LLM only - USES ORIGINAL POSTS ONLY
   const tag_share = {}
   const tag_median_engagement = {}
   const tag_counts = {}
 
-  // Use helper functions for rhythm and timing
+  // Use helper functions for rhythm and timing - USES ORIGINAL POSTS ONLY
   const rhythm = calculatePostingRhythm(postsForAnalysis)
   const timingInsights = calculateTimingInsights(postsForAnalysis)
   const distribution = calculatePostDistribution(postsForAnalysis, analysisPeriodMonths)
 
-  // Prepare posts array for JSON
+  // Prepare posts array for JSON - USES ORIGINAL POSTS ONLY
   const postsForJson = postsForAnalysis.map(p => ({
     content: p.content,
     date: p.date,

@@ -18,6 +18,20 @@ export default function MonthlyDistributionCard({ data }) {
     // Get month order (last 12 months)
     const months = Object.keys(monthly_daily).sort()
 
+    // Get actual first and last post dates from the posts data
+    let startDate = null
+    let endDate = null
+    
+    if (data?.posts && data.posts.length > 0) {
+      const sortedPosts = [...data.posts].sort((a, b) => {
+        const dateA = a.date instanceof Date ? a.date : new Date(a.date)
+        const dateB = b.date instanceof Date ? b.date : new Date(b.date)
+        return dateA.getTime() - dateB.getTime()
+      })
+      startDate = sortedPosts[0].date instanceof Date ? sortedPosts[0].date : new Date(sortedPosts[0].date)
+      endDate = sortedPosts[sortedPosts.length - 1].date instanceof Date ? sortedPosts[sortedPosts.length - 1].date : new Date(sortedPosts[sortedPosts.length - 1].date)
+    }
+
     // Calculate monthly totals
     const monthlyTotals = months.map(month => {
       let totalPosts = 0
@@ -44,7 +58,9 @@ export default function MonthlyDistributionCard({ data }) {
 
     return {
       months,
-      monthlyTotals
+      monthlyTotals,
+      startDate,
+      endDate
     }
   }, [data])
 
@@ -71,7 +87,7 @@ export default function MonthlyDistributionCard({ data }) {
     )
   }
 
-  const { months, monthlyTotals } = monthlyData
+  const { months, monthlyTotals, startDate, endDate } = monthlyData
   
   // Determine how many rows to show initially (12 rows + total row)
   const initialRowsToShow = 12
@@ -82,9 +98,9 @@ export default function MonthlyDistributionCard({ data }) {
     <div className="space-y-4">
       <div className="flex flex-row items-center justify-between">
         <div className="text-xs text-muted-foreground">
-          {data?.summary?.analysis_period_months ? 
-            `Last ${data.summary.analysis_period_months} months: ${labelMonth(months[0])} - ${labelMonth(months[months.length - 1])}` :
-            `Last 12 months: ${labelMonth(months[0])} - ${labelMonth(months[months.length - 1])}`
+          {startDate && endDate
+            ? `${startDate.getDate()} ${startDate.toLocaleDateString('en-US', { month: 'short' })} ${startDate.getFullYear()} - ${endDate.getDate()} ${endDate.toLocaleDateString('en-US', { month: 'short' })} ${endDate.getFullYear()}`
+            : 'No data available'
           }
         </div>
         <button 

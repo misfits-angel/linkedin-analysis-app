@@ -28,6 +28,35 @@ import ValuePropositionCard from '@/components/ValuePropositionCard'
 import ConditionalCard from '@/components/ConditionalCard'
 
 export default function LinkedInAnalyticsSection({ data }) {
+  // Calculate months duration and round to nearest option (12, 24, or 36 months)
+  const calculateMonthsDuration = () => {
+    if (!data?.posts || data.posts.length === 0) return 12
+    
+    const sortedPosts = [...data.posts].sort((a, b) => {
+      const dateA = a.date instanceof Date ? a.date : new Date(a.date)
+      const dateB = b.date instanceof Date ? b.date : new Date(b.date)
+      return dateA.getTime() - dateB.getTime()
+    })
+    
+    const firstDate = sortedPosts[0].date instanceof Date ? sortedPosts[0].date : new Date(sortedPosts[0].date)
+    const lastDate = sortedPosts[sortedPosts.length - 1].date instanceof Date ? sortedPosts[sortedPosts.length - 1].date : new Date(sortedPosts[sortedPosts.length - 1].date)
+    
+    // Calculate total months between first and last post
+    const yearsDiff = lastDate.getFullYear() - firstDate.getFullYear()
+    const monthsDiff = lastDate.getMonth() - firstDate.getMonth()
+    const totalMonths = (yearsDiff * 12) + monthsDiff + 1
+    
+    // Choose closest option: 12, 24, or 36 months
+    const options = [12, 24, 36]
+    const closest = options.reduce((prev, curr) => {
+      return Math.abs(curr - totalMonths) < Math.abs(prev - totalMonths) ? curr : prev
+    })
+    
+    return closest
+  }
+  
+  const monthsDuration = calculateMonthsDuration()
+  
   return (
     <section className="space-y-6">
       {/* Section Header with Profile Info */}
@@ -44,10 +73,7 @@ export default function LinkedInAnalyticsSection({ data }) {
             })}
           </Badge>
           <Badge variant="outline" className="text-xs">
-            {data?.summary?.analysis_period_months ? 
-              `Last ${data.summary.analysis_period_months} months` : 
-              'Last 12 months'
-            }
+            {monthsDuration > 1 ? `Last ${monthsDuration} months` : `Last month`}
           </Badge>
         </div>
         <p className="text-muted-foreground">Comprehensive insights into your LinkedIn performance</p>

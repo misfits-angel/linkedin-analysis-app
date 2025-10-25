@@ -1,5 +1,13 @@
 import { GoogleGenerativeAI } from '@google/generative-ai'
 
+// ============================================================================
+// LLM ANALYSIS - DATA FILTERING
+// ============================================================================
+// All LLM functions in this file analyze ONLY original posts (excluding reshares).
+// The post data passed to these functions has already been filtered by csv-processor.js
+// to exclude reshared content, ensuring accurate content analysis.
+// ============================================================================
+
 // Configure Gemini
 const genai = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '')
 
@@ -82,7 +90,7 @@ function prepareCondensedPosts(postsData, limit = 50) {
       engagement,
       has_image: Boolean(post.imgUrl || post.has_image),
       type: post.type || 'Text',
-      date: post.postTimestamp || post.postDate || post.date || ''
+      date: post.postTimestamp || ''
     })
   }
   

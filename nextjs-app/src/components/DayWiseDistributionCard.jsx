@@ -20,6 +20,20 @@ export default function DayWiseDistributionCard({ data }) {
     // Get all months from actual data (sorted chronologically)
     const months = Object.keys(monthly_daily).sort()
 
+    // Get actual first and last post dates from the posts data
+    let startDate = null
+    let endDate = null
+    
+    if (data?.posts && data.posts.length > 0) {
+      const sortedPosts = [...data.posts].sort((a, b) => {
+        const dateA = a.date instanceof Date ? a.date : new Date(a.date)
+        const dateB = b.date instanceof Date ? b.date : new Date(b.date)
+        return dateA.getTime() - dateB.getTime()
+      })
+      startDate = sortedPosts[0].date instanceof Date ? sortedPosts[0].date : new Date(sortedPosts[0].date)
+      endDate = sortedPosts[sortedPosts.length - 1].date instanceof Date ? sortedPosts[sortedPosts.length - 1].date : new Date(sortedPosts[sortedPosts.length - 1].date)
+    }
+
     // Calculate day-wise totals
     const dayWiseTotals = dayOrder.map(day => {
       let totalPosts = 0
@@ -48,7 +62,9 @@ export default function DayWiseDistributionCard({ data }) {
       dayOrder,
       dayAbbr,
       dayWiseTotals,
-      months
+      months,
+      startDate,
+      endDate
     }
   }, [data])
 
@@ -75,14 +91,14 @@ export default function DayWiseDistributionCard({ data }) {
     )
   }
 
-  const { dayOrder, dayAbbr, dayWiseTotals, months } = dayWiseData
+  const { dayOrder, dayAbbr, dayWiseTotals, months, startDate, endDate } = dayWiseData
 
   return (
     <div className="space-y-4">
       <div className="flex flex-row items-center justify-between">
         <div className="text-xs text-muted-foreground">
-          {months.length > 0 
-            ? `Analysis period: ${months[0]} - ${months[months.length - 1]} (${months.length} ${months.length === 1 ? 'month' : 'months'})`
+          {startDate && endDate
+            ? `${startDate.getDate()} ${startDate.toLocaleDateString('en-US', { month: 'short' })} ${startDate.getFullYear()} - ${endDate.getDate()} ${endDate.toLocaleDateString('en-US', { month: 'short' })} ${endDate.getFullYear()}`
             : 'No data available'
           }
         </div>

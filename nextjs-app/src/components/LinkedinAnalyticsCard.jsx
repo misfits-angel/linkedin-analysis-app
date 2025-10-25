@@ -67,35 +67,49 @@ const LinkedinAnalyticsCard = forwardRef(({
     handleGenerateBriefSummary
   }))
 
-  // Calculate dynamic start date from postsPerMonth data
-  const dynamicStart = useMemo(() => {
+  // Calculate dynamic start and end dates from postsPerMonth data
+  const { dynamicStart, dynamicEnd } = useMemo(() => {
     if (!postsPerMonth || Object.keys(postsPerMonth).length === 0) {
       // Fallback to current date minus 12 months
       const now = new Date()
-      return { month: now.getMonth() - 11, year: now.getFullYear() }
+      return { 
+        dynamicStart: { month: now.getMonth() - 11, year: now.getFullYear() },
+        dynamicEnd: { month: now.getMonth(), year: now.getFullYear() }
+      }
     }
     
     // Get all month keys and sort them
     const monthKeys = Object.keys(postsPerMonth).sort()
     if (monthKeys.length === 0) {
       const now = new Date()
-      return { month: now.getMonth() - 11, year: now.getFullYear() }
+      return { 
+        dynamicStart: { month: now.getMonth() - 11, year: now.getFullYear() },
+        dynamicEnd: { month: now.getMonth(), year: now.getFullYear() }
+      }
     }
     
     // Parse the first month key (e.g., "2024-10" -> { year: 2024, month: 9 })
     const firstMonth = monthKeys[0]
-    const [year, month] = firstMonth.split('-').map(Number)
-    return { month: month - 1, year } // month is 0-indexed in Date constructor
+    const [startYear, startMonth] = firstMonth.split('-').map(Number)
+    
+    // Parse the last month key for accurate end date
+    const lastMonth = monthKeys[monthKeys.length - 1]
+    const [endYear, endMonth] = lastMonth.split('-').map(Number)
+    
+    return { 
+      dynamicStart: { month: startMonth - 1, year: startYear }, // month is 0-indexed in Date constructor
+      dynamicEnd: { month: endMonth - 1, year: endYear }
+    }
   }, [postsPerMonth])
 
   // Build left/right labels (e.g., Jan 2024 … Dec 2024) - dynamically calculated from data
   const { leftLabel, rightLabel } = useMemo(() => {
     const left = new Date(dynamicStart.year, dynamicStart.month, 1)
-    const right = new Date(dynamicStart.year, dynamicStart.month + (monthlyCounts.length - 1), 1)
+    const right = new Date(dynamicEnd.year, dynamicEnd.month, 1)
     const fmt = (d) =>
       d.toLocaleString('en-US', { month: 'short' }) + ' ' + d.getFullYear()
     return { leftLabel: fmt(left), rightLabel: fmt(right) }
-  }, [dynamicStart, monthlyCounts.length])
+  }, [dynamicStart, dynamicEnd])
 
   const canvasRef = useRef(null)
   const chartRef = useRef(null)

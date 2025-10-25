@@ -59,3 +59,44 @@
 - Use feature flags or conditional rendering to switch between old and new
 - Ensure rollback capability by keeping original implementations
 - Test thoroughly before removing legacy code
+
+## Data Filtering Rules
+
+### Post vs Reshare Analysis - CRITICAL RULE
+
+**IMPORTANT: There is ONE exception to the data filtering rule in this application.**
+
+#### The Rule:
+1. **Post vs Reshare Chart** (TopTopicsChart.jsx / createActionMixChart):
+   - Uses **ALL posts including reshares**
+   - Shows the split between original posts and reshared content
+   - Calculated in `action_share` and `action_counts` in csv-processor.js
+
+2. **ALL OTHER Analysis** (everywhere else in the app):
+   - Uses **ONLY original posts (excluding reshares)**
+   - This includes:
+     - Summary metrics (post count, engagement, active months, etc.)
+     - Trends (posts per month, engagement over time)
+     - Type distribution (text, video, image, etc.)
+     - Timing insights and posting rhythm
+     - Distribution analysis (day-wise, monthly)
+     - LLM analysis (narrative insights, topic analysis, positioning, etc.)
+     - Top posts
+     - All other charts and metrics
+
+#### Why This Matters:
+- The Post vs Reshare Chart specifically needs to show the full picture of posting behavior
+- All other analysis should focus on original content to provide accurate insights
+- Reshared content doesn't reflect the user's original thought leadership
+
+#### Implementation:
+- Filtering happens in `csv-processor.js` at line ~133
+- `originalPosts` variable contains filtered data for most analysis
+- `posts` variable (all posts) is used ONLY for action distribution
+- See detailed comments in csv-processor.js, chart-utils.js, and llm-functions.js
+
+#### When Making Changes:
+- Always check if your change affects post data filtering
+- Maintain the distinction between `posts` (all) and `originalPosts` (filtered)
+- Add comments if you're working with post data to clarify which dataset you're using
+- Never accidentally use `posts` when you should use `originalPosts` or vice versa

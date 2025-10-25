@@ -299,8 +299,11 @@ export function createFormatMixChart(data) {
 }
 
 /**
- * Generate action mix chart configuration
- * Note: Only uses original posts (reshares are excluded from analysis)
+ * Generate action mix chart configuration (Post vs Reshare Chart)
+ * 
+ * CRITICAL: This is the ONLY chart that uses ALL posts including reshares.
+ * This chart specifically shows the split between original posts and reshared content.
+ * All other analysis in the app uses ONLY original posts (excluding reshares).
  */
 export function createActionMixChart(data) {
   const donutData = toDonut(data?.mix?.action_share)
