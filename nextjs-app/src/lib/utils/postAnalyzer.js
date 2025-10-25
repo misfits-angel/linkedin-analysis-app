@@ -28,25 +28,27 @@ export function detectPostType(row) {
 
 /**
  * Calculate post distribution across months and days
+ * Uses all posts provided without filtering by pre-generated month arrays
  */
 export function calculatePostDistribution(posts, analysisPeriodMonths = 12) {
-  const analysisMonths = generateMonthsArray(analysisPeriodMonths)
   const dayOrder = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
   
-  // Initialize the distribution structure
+  // Initialize the distribution structure dynamically based on actual posts
   const monthly_daily = {}
-  
-  analysisMonths.forEach(month => {
-    monthly_daily[month] = {}
-    dayOrder.forEach(day => {
-      monthly_daily[month][day] = { count: 0, avg_engagement: 0 }
-    })
-  })
-  
-  // Process posts and populate distribution
   const dayEngagements = {}
   const monthCounts = {}
   
+  // First pass: collect all unique months from posts and initialize structure
+  posts.forEach(post => {
+    if (post.month && !monthly_daily[post.month]) {
+      monthly_daily[post.month] = {}
+      dayOrder.forEach(day => {
+        monthly_daily[post.month][day] = { count: 0, avg_engagement: 0 }
+      })
+    }
+  })
+  
+  // Second pass: populate distribution with actual post data
   posts.forEach(post => {
     if (post.month && post.dayOfWeek && monthly_daily[post.month]) {
       monthly_daily[post.month][post.dayOfWeek].count++
@@ -79,6 +81,9 @@ export function calculatePostDistribution(posts, analysisPeriodMonths = 12) {
     }
   })
   
+  // Get all months sorted
+  const allMonths = Object.keys(monthly_daily).sort()
+  
   const most_active_day = dayOrder.reduce((a, b) => 
     dayStats[a].count > dayStats[b].count ? a : b, dayOrder[0]
   )
@@ -87,12 +92,14 @@ export function calculatePostDistribution(posts, analysisPeriodMonths = 12) {
     dayStats[a].avg_engagement > dayStats[b].avg_engagement ? a : b, dayOrder[0]
   )
   
-  const peak_month = analysisMonths.reduce((a, b) => 
-    (monthCounts[a] || 0) > (monthCounts[b] || 0) ? a : b, analysisMonths[0]
-  )
+  const peak_month = allMonths.length > 0 
+    ? allMonths.reduce((a, b) => (monthCounts[a] || 0) > (monthCounts[b] || 0) ? a : b, allMonths[0])
+    : null
   
-  const activeMonths = analysisMonths.filter(month => (monthCounts[month] || 0) > 0).length
-  const consistency_score = Math.round((activeMonths / analysisPeriodMonths) * 100)
+  const activeMonths = allMonths.length
+  const consistency_score = analysisPeriodMonths > 0 
+    ? Math.round((activeMonths / analysisPeriodMonths) * 100)
+    : 100
   
   return {
     monthly_daily,

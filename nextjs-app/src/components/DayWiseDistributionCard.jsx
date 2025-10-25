@@ -17,7 +17,7 @@ export default function DayWiseDistributionCard({ data }) {
       Thursday: 'Thu', Friday: 'Fri', Saturday: 'Sat' 
     }
 
-    // Get month order (last 12 months)
+    // Get all months from actual data (sorted chronologically)
     const months = Object.keys(monthly_daily).sort()
 
     // Calculate day-wise totals
@@ -81,9 +81,9 @@ export default function DayWiseDistributionCard({ data }) {
     <div className="space-y-4">
       <div className="flex flex-row items-center justify-between">
         <div className="text-xs text-muted-foreground">
-          {data?.summary?.analysis_period_months ? 
-            `Last ${data.summary.analysis_period_months} months: ${months[0]} - ${months[months.length - 1]}` :
-            `Last 12 months: ${months[0]} - ${months[months.length - 1]}`
+          {months.length > 0 
+            ? `Analysis period: ${months[0]} - ${months[months.length - 1]} (${months.length} ${months.length === 1 ? 'month' : 'months'})`
+            : 'No data available'
           }
         </div>
         <button 

@@ -300,9 +300,10 @@ export function createFormatMixChart(data) {
 
 /**
  * Generate action mix chart configuration
+ * Note: Only uses original posts (reshares are excluded from analysis)
  */
 export function createActionMixChart(data) {
-  const donutData = toDonut(data?.mix?.action_share_full_data)
+  const donutData = toDonut(data?.mix?.action_share)
   
   // Sort data by percentage (highest first) for both chart and legend order - same as Format Mix
   const sortedData = [...donutData].sort((a, b) => b.value - a.value)
@@ -345,11 +346,11 @@ export function createActionMixChart(data) {
   // Generate colors for sorted data (darker for higher percentages) - same as Format Mix
   const colors = sortedData.map((_, index) => generateGreenShade(index, sortedData.length))
   
-  // Calculate actual counts - derive from action_counts (full dataset counts)
-  const actionCounts = data?.mix?.action_counts_full_data || {}
+  // Calculate actual counts - derive from action_counts (original posts only)
+  const actionCounts = data?.mix?.action_counts || {}
   const actualCounts = sortedData.map(d => {
     // Map display names back to action names
-    const actionName = d.name === 'Post' ? 'Post' : d.name === 'Reshare' ? 'Reshare' : d.name
+    const actionName = d.name
     return actionCounts[actionName] || 0
   })
   

@@ -117,9 +117,14 @@ export function analyzeCsvData(rows, metadata = {}, options = {}) {
 
   posts.sort((a, b) => a.date.getTime() - b.date.getTime())
 
-  // Filter out reshares - only count original posts for main metrics
+  // Filter out reshares - ONLY use original posts for ALL analysis
   const originalPosts = posts.filter(p => !p.action.toLowerCase().includes('reposted'))
-  const postsForAnalysis = originalPosts.length > 0 ? originalPosts : posts
+  
+  if (originalPosts.length === 0) {
+    throw new Error('No original posts found in the analysis period. Only reposts/reshares were found.')
+  }
+  
+  const postsForAnalysis = originalPosts
 
   // Get author name (most common author)
   const authorCounts = {}
@@ -139,34 +144,31 @@ export function analyzeCsvData(rows, metadata = {}, options = {}) {
     p90_engagement: percentile(engagementScores, 90)
   }
 
-  // Trends: Posts per month
+  // Trends: Posts per month - dynamically based on actual data
   const postsPerMonth = {}
   const monthMedian = {}
   const monthTotal = {}
-  const analysisMonths = generateMonthsArray(analysisPeriodMonths)
-  
-  analysisMonths.forEach(month => {
-    postsPerMonth[month] = 0
-    monthMedian[month] = 0
-    monthTotal[month] = 0
-  })
-
-  postsForAnalysis.forEach(p => {
-    if (p.month && postsPerMonth.hasOwnProperty(p.month)) {
-      postsPerMonth[p.month]++
-    }
-  })
-
-  // Calculate median and total engagement per month
   const monthEngagements = {}
+
+  // Process all posts and collect data by month
   postsForAnalysis.forEach(p => {
-    if (p.month && postsPerMonth[p.month] > 0) {
-      if (!monthEngagements[p.month]) monthEngagements[p.month] = []
+    if (p.month) {
+      // Initialize month if not exists
+      if (!postsPerMonth[p.month]) {
+        postsPerMonth[p.month] = 0
+        monthMedian[p.month] = 0
+        monthTotal[p.month] = 0
+        monthEngagements[p.month] = []
+      }
+      
+      // Increment count and collect engagement data
+      postsPerMonth[p.month]++
       monthEngagements[p.month].push(p.eng)
       monthTotal[p.month] += p.eng
     }
   })
 
+  // Calculate median engagement for each month
   Object.keys(monthEngagements).forEach(month => {
     monthMedian[month] = median(monthEngagements[month])
   })
@@ -198,6 +200,7 @@ export function analyzeCsvData(rows, metadata = {}, options = {}) {
   })
 
   // Mix: Action distribution (Post vs Reshare)
+  // Note: We only analyze original posts, so this will show breakdown of original post types
   const actionCounts = {}
   const actionEngagements = {}
   
@@ -213,18 +216,6 @@ export function analyzeCsvData(rows, metadata = {}, options = {}) {
   Object.keys(actionCounts).forEach(action => {
     action_share[action] = actionCounts[action] / postsForAnalysis.length
     action_median_engagement[action] = median(actionEngagements[action])
-  })
-
-  // Calculate action distribution from FULL posts (including reshares) for the pie chart
-  const fullActionCounts = {}
-  posts.forEach(p => {
-    const actionType = p.action.toLowerCase().includes('reposted') ? 'Reshare' : 'Post'
-    fullActionCounts[actionType] = (fullActionCounts[actionType] || 0) + 1
-  })
-  
-  const action_share_full_data = {}
-  Object.keys(fullActionCounts).forEach(action => {
-    action_share_full_data[action] = fullActionCounts[action] / posts.length
   })
 
   // Topics - No manual analysis, LLM only
@@ -273,9 +264,7 @@ export function analyzeCsvData(rows, metadata = {}, options = {}) {
       type_counts: typeCounts,
       action_share,
       action_median_engagement,
-      action_counts: actionCounts,
-      action_share_full_data: action_share_full_data,
-      action_counts_full_data: fullActionCounts
+      action_counts: actionCounts
     },
     topics: {
       tag_share,
