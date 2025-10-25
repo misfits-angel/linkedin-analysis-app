@@ -26,6 +26,7 @@ function HomeContent() {
   const [isInitialLoad, setIsInitialLoad] = useState(true)
   const [shareableUrl, setShareableUrl] = useState(null)
   const [isGeneratingReport, setIsGeneratingReport] = useState(false)
+  const [isUpdatingReport, setIsUpdatingReport] = useState(false)
   const [isDeletingReport, setIsDeletingReport] = useState(false)
   const [isShareableReportCollapsed, setIsShareableReportCollapsed] = useState(false)
   const linkedinCardRef = useRef(null)
@@ -168,6 +169,50 @@ function HomeContent() {
       setError('Failed to generate report')
     } finally {
       setIsGeneratingReport(false)
+    }
+  }
+
+  // Handle update report
+  const handleUpdateReport = async () => {
+    if (!currentProfile?.id) return
+
+    try {
+      setIsUpdatingReport(true)
+      setError(null)
+
+      // Get current card visibility settings from the UI preferences context
+      const cardVisibilitySettings = JSON.parse(localStorage.getItem('cardVisibility') || '{}')
+      
+      // Get current editable content from localStorage
+      const editableContent = JSON.parse(localStorage.getItem('unstoppableContent') || '{}')
+
+      const response = await fetch(`/api/update-report/${currentProfile.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          cardVisibility: cardVisibilitySettings,
+          editableContent: editableContent,
+          regenerateInsights: false // Set to true if you want to regenerate AI insights
+        }),
+      })
+
+      const result = await response.json()
+
+      if (result.success) {
+        // URL stays the same, just show success
+        console.log('Report updated successfully:', result)
+        // You could add a toast notification here
+        alert('✅ Report updated successfully! The shareable URL remains the same.')
+      } else {
+        setError(result.error || 'Failed to update report')
+      }
+    } catch (err) {
+      console.error('Failed to update report:', err)
+      setError('Failed to update report')
+    } finally {
+      setIsUpdatingReport(false)
     }
   }
 
@@ -407,6 +452,8 @@ function HomeContent() {
         setIsShareableReportCollapsed={setIsShareableReportCollapsed}
         onGenerateReport={handleGenerateReport}
         isGeneratingReport={isGeneratingReport}
+        onUpdateReport={handleUpdateReport}
+        isUpdatingReport={isUpdatingReport}
         onCopyUrl={handleCopyUrl}
         onDeleteReport={handleDeleteReport}
         isDeletingReport={isDeletingReport}

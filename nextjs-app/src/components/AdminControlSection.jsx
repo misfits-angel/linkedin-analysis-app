@@ -18,6 +18,8 @@ export default function AdminControlSection({
   setIsShareableReportCollapsed,
   onGenerateReport,
   isGeneratingReport,
+  onUpdateReport,
+  isUpdatingReport,
   onCopyUrl,
   onDeleteReport,
   isDeletingReport,
@@ -116,7 +118,7 @@ export default function AdminControlSection({
               
               {/* Collapsible Content */}
               <div className={`transition-all duration-300 ease-in-out overflow-hidden ${
-                isShareableReportCollapsed ? 'max-h-0 opacity-0' : 'max-h-[200px] opacity-100'
+                isShareableReportCollapsed ? 'max-h-0 opacity-0' : 'max-h-[300px] opacity-100'
               }`}>
                 <div className="space-y-4">
                   {shareableUrl ? (
@@ -135,6 +137,27 @@ export default function AdminControlSection({
                         >
                           Copy URL
                         </Button>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <Button
+                          onClick={onUpdateReport}
+                          disabled={isUpdatingReport}
+                          variant="default"
+                          size="sm"
+                          className="flex-1 flex items-center justify-center space-x-1"
+                        >
+                          {isUpdatingReport ? (
+                            <>
+                              <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                              <span>Updating...</span>
+                            </>
+                          ) : (
+                            <>
+                              <span>🔄</span>
+                              <span>Update Report</span>
+                            </>
+                          )}
+                        </Button>
                         <Button
                           onClick={onDeleteReport}
                           disabled={isDeletingReport}
@@ -148,6 +171,8 @@ export default function AdminControlSection({
                       </div>
                       <div className="text-sm text-muted-foreground">
                         Share this URL to give others access to view this report. No login required.
+                        <br />
+                        <span className="text-blue-600 font-medium">💡 Click "Update Report" to save changes to card visibility and editable content.</span>
                         <br />
                         <span className="text-destructive font-medium">⚠️ Deleting will permanently remove this report and cannot be undone.</span>
                       </div>
