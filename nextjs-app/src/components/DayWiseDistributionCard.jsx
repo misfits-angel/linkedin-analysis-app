@@ -3,9 +3,12 @@
 import { useMemo, useRef } from 'react'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { exportElementAsPNG, getCleanFilename, getTimestamp } from '@/lib/visual-export-utils'
+import Card, { CardContent, CardHeader, CardTitle } from '@/components/CardWithName'
+import { useReportContext } from '@/lib/hooks/useReportContext'
 
 export default function DayWiseDistributionCard({ data }) {
   const containerRef = useRef(null)
+  const isReportContext = useReportContext()
   
   const dayWiseData = useMemo(() => {
     if (!data?.distribution) return null
@@ -94,56 +97,63 @@ export default function DayWiseDistributionCard({ data }) {
   const { dayOrder, dayAbbr, dayWiseTotals, months, startDate, endDate } = dayWiseData
 
   return (
-    <div className="space-y-4">
-      <div className="flex flex-row items-center justify-between">
-        <div className="text-xs text-muted-foreground">
-          {startDate && endDate
-            ? `${startDate.getDate()} ${startDate.toLocaleDateString('en-US', { month: 'short' })} ${startDate.getFullYear()} - ${endDate.getDate()} ${endDate.toLocaleDateString('en-US', { month: 'short' })} ${endDate.getFullYear()}`
-            : 'No data available'
-          }
+    <Card cardName="Day-wise Distribution Card">
+      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
+        <CardTitle className="text-lg font-semibold">📅 Day-wise Distribution</CardTitle>
+        <div className="flex items-center gap-2">
+          <div className="text-xs text-muted-foreground">
+            {startDate && endDate
+              ? `${startDate.getDate()} ${startDate.toLocaleDateString('en-US', { month: 'short' })} ${startDate.getFullYear()} - ${endDate.getDate()} ${endDate.toLocaleDateString('en-US', { month: 'short' })} ${endDate.getFullYear()}`
+              : 'No data available'
+            }
+          </div>
+          {!isReportContext && (
+            <button 
+              className="chart-export-btn" 
+              onClick={handleExport}
+              title="Export as High-Resolution PNG"
+            >
+              📥
+            </button>
+          )}
         </div>
-        <button 
-          className="chart-export-btn" 
-          onClick={handleExport}
-          title="Export as High-Resolution PNG"
-        >
-          📥
-        </button>
-      </div>
-      <div ref={containerRef}>
-        <div className="rounded-md border">
-          <Table>
-            <TableHeader>
-              <TableRow style={{ backgroundColor: '#D6E3DD' }}>
-                <TableHead className="w-[120px]">Day</TableHead>
-                <TableHead className="w-[80px] text-center">Posts</TableHead>
-                <TableHead className="w-[80px] text-center">Avg Engagement</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {/* Data Rows */}
-              {dayWiseTotals.map(({ day, totalPosts, avgEngagement }) => (
-                <TableRow key={day} className="bg-muted/50">
-                  <TableCell className="font-medium">{dayAbbr[day]}</TableCell>
-                  <TableCell className="text-center">{totalPosts > 0 ? totalPosts : ''}</TableCell>
-                  <TableCell className="text-center">{avgEngagement > 0 ? Math.round(avgEngagement) : ''}</TableCell>
+      </CardHeader>
+      <CardContent className="p-4">
+        <div ref={containerRef}>
+          <div className="rounded-md border">
+            <Table>
+              <TableHeader>
+                <TableRow style={{ backgroundColor: '#D6E3DD' }}>
+                  <TableHead className="w-[120px]">Day</TableHead>
+                  <TableHead className="w-[80px] text-center">Posts</TableHead>
+                  <TableHead className="w-[80px] text-center">Avg Engagement</TableHead>
                 </TableRow>
-              ))}
-              
-              {/* Total Row */}
-              <TableRow className="bg-muted font-semibold">
-                <TableCell className="font-semibold">Total</TableCell>
-                <TableCell className="text-center font-semibold">
-                  {(data?.summary?.posts_in_period ?? data?.summary?.posts_last_12m) || 0}
-                </TableCell>
-                <TableCell className="text-center font-semibold">
-                  {Math.round(dayWiseTotals.reduce((sum, day) => sum + day.avgEngagement, 0) / dayWiseTotals.length)}
-                </TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
+              </TableHeader>
+              <TableBody>
+                {/* Data Rows */}
+                {dayWiseTotals.map(({ day, totalPosts, avgEngagement }) => (
+                  <TableRow key={day} className="bg-muted/50">
+                    <TableCell className="font-medium">{dayAbbr[day]}</TableCell>
+                    <TableCell className="text-center">{totalPosts > 0 ? totalPosts : ''}</TableCell>
+                    <TableCell className="text-center">{avgEngagement > 0 ? Math.round(avgEngagement) : ''}</TableCell>
+                  </TableRow>
+                ))}
+                
+                {/* Total Row */}
+                <TableRow className="bg-muted font-semibold">
+                  <TableCell className="font-semibold">Total</TableCell>
+                  <TableCell className="text-center font-semibold">
+                    {(data?.summary?.posts_in_period ?? data?.summary?.posts_last_12m) || 0}
+                  </TableCell>
+                  <TableCell className="text-center font-semibold">
+                    {Math.round(dayWiseTotals.reduce((sum, day) => sum + day.avgEngagement, 0) / dayWiseTotals.length)}
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </div>
         </div>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   )
 }

@@ -3,6 +3,7 @@
 import { useRef } from 'react'
 import Card, { CardContent, CardHeader, CardTitle } from '@/components/CardWithName'
 import { exportElementAsPNG, getCleanFilename, getTimestamp } from '@/lib/visual-export-utils'
+import { useReportContext } from '@/lib/hooks/useReportContext'
 
 /**
  * Horizontal Stacked Bar Chart for Post Type Distribution
@@ -13,6 +14,7 @@ export default function PostTypeDistribution({
   cardName = 'Post Type Distribution'
 }) {
   const containerRef = useRef(null)
+  const isReportContext = useReportContext()
   const sorted = [...data].sort((a, b) => b.value - a.value)
 
   const handleExport = async () => {
@@ -120,13 +122,15 @@ export default function PostTypeDistribution({
     <Card cardName={cardName}>
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
         <CardTitle className="text-lg font-semibold">📊 Post Type Distribution</CardTitle>
-        <button 
-          className="chart-export-btn" 
-          onClick={handleExport}
-          title="Export as High-Resolution PNG"
-        >
-          📥
-        </button>
+        {!isReportContext && (
+          <button 
+            className="chart-export-btn" 
+            onClick={handleExport}
+            title="Export as High-Resolution PNG"
+          >
+            📥
+          </button>
+        )}
       </CardHeader>
       <CardContent>
         <div ref={containerRef}>

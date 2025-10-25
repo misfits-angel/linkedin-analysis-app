@@ -4,10 +4,13 @@ import { useMemo, useRef, useState } from 'react'
 import { labelMonth } from '@/lib/utils/dateUtils'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { exportElementAsPNG, getCleanFilename, getTimestamp } from '@/lib/visual-export-utils'
+import Card, { CardContent, CardHeader, CardTitle } from '@/components/CardWithName'
+import { useReportContext } from '@/lib/hooks/useReportContext'
 
 export default function MonthlyDistributionCard({ data }) {
   const containerRef = useRef(null)
   const [isExpanded, setIsExpanded] = useState(false)
+  const isReportContext = useReportContext()
   
   const monthlyData = useMemo(() => {
     if (!data?.distribution) return null
@@ -95,78 +98,85 @@ export default function MonthlyDistributionCard({ data }) {
   const visibleRows = isExpanded ? monthlyTotals : monthlyTotals.slice(0, initialRowsToShow)
 
   return (
-    <div className="space-y-4">
-      <div className="flex flex-row items-center justify-between">
-        <div className="text-xs text-muted-foreground">
-          {startDate && endDate
-            ? `${startDate.getDate()} ${startDate.toLocaleDateString('en-US', { month: 'short' })} ${startDate.getFullYear()} - ${endDate.getDate()} ${endDate.toLocaleDateString('en-US', { month: 'short' })} ${endDate.getFullYear()}`
-            : 'No data available'
-          }
-        </div>
-        <button 
-          className="chart-export-btn" 
-          onClick={handleExport}
-          title="Export as High-Resolution PNG"
-        >
-          📥
-        </button>
-      </div>
-      <div ref={containerRef}>
-        <div className="rounded-md border">
-          <Table>
-            <TableHeader>
-              <TableRow style={{ backgroundColor: '#D6E3DD' }}>
-                <TableHead className="w-[120px]">Month</TableHead>
-                <TableHead className="w-[80px] text-center">Posts</TableHead>
-                <TableHead className="w-[80px] text-center">Avg Engagement</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {/* Data Rows - Monthly */}
-              {visibleRows.map(({ month, totalPosts, avgEngagement }) => (
-                <TableRow key={month} className="bg-muted/50">
-                  <TableCell className="font-medium">{labelMonth(month)}</TableCell>
-                  <TableCell className="text-center">{totalPosts > 0 ? totalPosts : ''}</TableCell>
-                  <TableCell className="text-center">{avgEngagement > 0 ? Math.round(avgEngagement) : ''}</TableCell>
-                </TableRow>
-              ))}
-              
-              {/* Total Row */}
-              <TableRow className="bg-muted font-semibold">
-                <TableCell className="font-semibold">Total</TableCell>
-                <TableCell className="text-center font-semibold">
-                  {(data?.summary?.posts_in_period ?? data?.summary?.posts_last_12m) || 0}
-                </TableCell>
-                <TableCell className="text-center font-semibold">
-                  {Math.round(monthlyTotals.reduce((sum, month) => sum + month.avgEngagement, 0) / monthlyTotals.length)}
-                </TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
-        </div>
-        
-        {/* See More/Less Toggle Button */}
-        {hasMoreRows && (
-          <div className="flex justify-center pt-2">
-            <button
-              onClick={() => setIsExpanded(!isExpanded)}
-              className="text-xs text-gray-500 hover:text-gray-700 transition-colors duration-200 flex items-center gap-1 px-2 py-1 rounded-md hover:bg-gray-50"
-            >
-              {isExpanded ? (
-                <>
-                  <span>See Less</span>
-                  <span className="text-gray-400">↑</span>
-                </>
-              ) : (
-                <>
-                  <span>See More ({monthlyTotals.length - initialRowsToShow} more)</span>
-                  <span className="text-gray-400">↓</span>
-                </>
-              )}
-            </button>
+    <Card cardName="Monthly Distribution Card">
+      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
+        <CardTitle className="text-lg font-semibold">📊 Monthly Distribution</CardTitle>
+        <div className="flex items-center gap-2">
+          <div className="text-xs text-muted-foreground">
+            {startDate && endDate
+              ? `${startDate.getDate()} ${startDate.toLocaleDateString('en-US', { month: 'short' })} ${startDate.getFullYear()} - ${endDate.getDate()} ${endDate.toLocaleDateString('en-US', { month: 'short' })} ${endDate.getFullYear()}`
+              : 'No data available'
+            }
           </div>
-        )}
-      </div>
-    </div>
+          {!isReportContext && (
+            <button 
+              className="chart-export-btn" 
+              onClick={handleExport}
+              title="Export as High-Resolution PNG"
+            >
+              📥
+            </button>
+          )}
+        </div>
+      </CardHeader>
+      <CardContent className="p-4">
+        <div ref={containerRef}>
+          <div className="rounded-md border">
+            <Table>
+              <TableHeader>
+                <TableRow style={{ backgroundColor: '#D6E3DD' }}>
+                  <TableHead className="w-[120px]">Month</TableHead>
+                  <TableHead className="w-[80px] text-center">Posts</TableHead>
+                  <TableHead className="w-[80px] text-center">Avg Engagement</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {/* Data Rows - Monthly */}
+                {visibleRows.map(({ month, totalPosts, avgEngagement }) => (
+                  <TableRow key={month} className="bg-muted/50">
+                    <TableCell className="font-medium">{labelMonth(month)}</TableCell>
+                    <TableCell className="text-center">{totalPosts > 0 ? totalPosts : ''}</TableCell>
+                    <TableCell className="text-center">{avgEngagement > 0 ? Math.round(avgEngagement) : ''}</TableCell>
+                  </TableRow>
+                ))}
+                
+                {/* Total Row */}
+                <TableRow className="bg-muted font-semibold">
+                  <TableCell className="font-semibold">Total</TableCell>
+                  <TableCell className="text-center font-semibold">
+                    {(data?.summary?.posts_in_period ?? data?.summary?.posts_last_12m) || 0}
+                  </TableCell>
+                  <TableCell className="text-center font-semibold">
+                    {Math.round(monthlyTotals.reduce((sum, month) => sum + month.avgEngagement, 0) / monthlyTotals.length)}
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </div>
+          
+          {/* See More/Less Toggle Button */}
+          {hasMoreRows && (
+            <div className="flex justify-center pt-2">
+              <button
+                onClick={() => setIsExpanded(!isExpanded)}
+                className="text-xs text-gray-500 hover:text-gray-700 transition-colors duration-200 flex items-center gap-1 px-2 py-1 rounded-md hover:bg-gray-50"
+              >
+                {isExpanded ? (
+                  <>
+                    <span>See Less</span>
+                    <span className="text-gray-400">↑</span>
+                  </>
+                ) : (
+                  <>
+                    <span>See More ({monthlyTotals.length - initialRowsToShow} more)</span>
+                    <span className="text-gray-400">↓</span>
+                  </>
+                )}
+              </button>
+            </div>
+          )}
+        </div>
+      </CardContent>
+    </Card>
   )
 }

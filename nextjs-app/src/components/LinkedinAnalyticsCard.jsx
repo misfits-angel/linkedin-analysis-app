@@ -13,6 +13,7 @@ import Card, { CardContent, CardHeader, CardTitle } from '@/components/CardWithN
 import { useLLMInsights } from '@/lib/hooks/useLLMInsights'
 import LLMButton from './LLMButton'
 import { Zap, Loader2 } from 'lucide-react'
+import { useReportContext } from '@/lib/hooks/useReportContext'
 
 Chart.register(LineController, LineElement, PointElement, LinearScale, CategoryScale)
 
@@ -35,6 +36,7 @@ const LinkedinAnalyticsCard = forwardRef(({
   const [isGenerating, setIsGenerating] = useState(false)
   const { generateNarrativeInsights } = useLLMInsights('linkedin-analytics')
   const containerRef = useRef(null)
+  const isReportContext = useReportContext()
 
   // Direct property access - no need for useMemo for simple property lookup
   const totalPosts = summaryData?.posts_last_12m || 0
@@ -203,56 +205,63 @@ const LinkedinAnalyticsCard = forwardRef(({
               <Zap className="h-4 w-4" />
             )}
           </button>
-          <button 
-            className="chart-export-btn-inline" 
-            onClick={handleExport}
-            title="Export as High-Resolution PNG"
-          >
-            📥
-          </button>
+          {!isReportContext && (
+            <button 
+              className="chart-export-btn-inline" 
+              onClick={handleExport}
+              title="Export as High-Resolution PNG"
+            >
+              📥
+            </button>
+          )}
         </div>
       </CardHeader>
-      <CardContent className="p-0">
+      <CardContent className="p-4">
         <div ref={containerRef}>
-          {/* Top (chart) */}
-          <div className="bg-[#307254] p-4">
-            <div className="flex flex-col">
-              <span className="text-white text-sm font-medium tracking-wide">
-                Total Posts
-              </span>
-              <span className="text-white text-5xl font-bold mt-1">{totalPosts}</span>
-            </div>
+          {/* Inner card with reduced width */}
+          <div className="flex justify-center">
+            <div className="w-3/4">
+              {/* Top (chart) */}
+              <div className="bg-[#307254] p-4">
+                <div className="flex flex-col">
+                  <span className="text-white text-sm font-medium tracking-wide">
+                    Total Posts
+                  </span>
+                  <span className="text-white text-5xl font-bold mt-1">{totalPosts}</span>
+                </div>
 
-            <div className="relative w-full mt-2">
-              {/* Chart area with maximum bottom spacing to separate from footer */}
-              <div className="relative h-[90px] w-full overflow-hidden pb-8">
-                <canvas
-                  ref={canvasRef}
-                  aria-label="Posts trend chart"
-                  role="img"
-                  className="border-none"
-                  style={{ border: 'none', background: 'transparent' }}
-                ></canvas>
+                <div className="relative w-full mt-2">
+                  {/* Chart area with maximum bottom spacing to separate from footer */}
+                  <div className="relative h-[90px] w-full overflow-hidden pb-8">
+                    <canvas
+                      ref={canvasRef}
+                      aria-label="Posts trend chart"
+                      role="img"
+                      className="border-none"
+                      style={{ border: 'none', background: 'transparent' }}
+                    ></canvas>
+                  </div>
+
+                  {/* Horizontal line - clear footer divider */}
+                  <div className="border-t-2 border-white w-full opacity-70"></div>
+
+                  {/* Date labels - right at the border, no padding below */}
+                  <div className="flex justify-between items-center pt-1 pb-0">
+                    <span className="text-xs text-white">{leftLabel}</span>
+                    <span className="text-xs text-white">{rightLabel}</span>
+                  </div>
+                </div>
               </div>
 
-              {/* Horizontal line - clear footer divider */}
-              <div className="border-t-2 border-white w-full opacity-70"></div>
-
-              {/* Date labels - right at the border, no padding below */}
-              <div className="flex justify-between items-center pt-1 pb-0">
-                <span className="text-xs text-white">{leftLabel}</span>
-                <span className="text-xs text-white">{rightLabel}</span>
+              {/* Insight (LLM observation) */}
+              <div className="p-4 text-black text-sm font-normal leading-relaxed whitespace-pre-line">
+                {dynamicInsight || insight || (
+                  <>
+                    Founder stories outperformed other themes.
+                  </>
+                )}
               </div>
             </div>
-          </div>
-
-          {/* Insight (LLM observation) */}
-          <div className="p-4 text-black text-sm font-normal leading-relaxed whitespace-pre-line">
-            {dynamicInsight || insight || (
-              <>
-                Founder stories outperformed other themes.
-              </>
-            )}
           </div>
         </div>
       </CardContent>
