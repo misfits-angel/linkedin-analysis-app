@@ -2,34 +2,21 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react'
 import FileUpload from '@/components/FileUpload'
-import MetricsDisplay from '@/components/MetricsDisplay'
-import ChartSection from '@/components/ChartSection'
-import InsightsPanel from '@/components/InsightsPanel'
-import EngagementAnalysis from '@/components/EngagementAnalysis'
-import PostingRhythm from '@/components/PostingRhythm'
-import TimingInsights from '@/components/TimingInsights'
-import PostDistributionHeatmap from '@/components/PostDistributionHeatmap'
-import TopPosts from '@/components/TopPosts'
-import PeerComparison from '@/components/PeerComparison'
-import ValueProposition from '@/components/ValueProposition'
-import LinkedinAnalyticsCard from '@/components/LinkedinAnalyticsCard'
-import PostTypeMosaic from '@/components/PostTypeMosaic'
-import PostTypeDistributionCard from '@/components/PostTypeDistributionCard'
-import LLMButton from '@/components/LLMButton'
 import MenuDropdown from '@/components/MenuDropdown'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import CardWithName from '@/components/CardWithName'
 import { Badge } from '@/components/ui/badge'
-import { Input } from '@/components/ui/input'
 import { useDataAnalysis } from '@/lib/hooks/useDataAnalysis'
 import { useDataPersistence } from '@/lib/hooks/useDataPersistence'
 import { generatePDF, printPage } from '@/lib/pdf-utils'
-import { CardNameProvider, useCardNames } from '@/lib/contexts/CardNameContext'
-import ProfileSelector from '@/components/ProfileSelector'
+import { useCardNames } from '@/lib/contexts/UIPreferencesContext'
 import ProtectedRoute from '@/components/auth/ProtectedRoute'
 import { useAuth } from '@/lib/contexts/AuthContext'
 import { supabase } from '@/lib/supabase-client'
+import AdminControlSection from '@/components/AdminControlSection'
+import LinkedInAnalyticsSection from '@/components/LinkedInAnalyticsSection'
+import UnstoppableSection from '@/components/UnstoppableSection'
 
 function HomeContent() {
   const [error, setError] = useState(null)
@@ -39,6 +26,8 @@ function HomeContent() {
   const [isInitialLoad, setIsInitialLoad] = useState(true)
   const [shareableUrl, setShareableUrl] = useState(null)
   const [isGeneratingReport, setIsGeneratingReport] = useState(false)
+  const [isDeletingReport, setIsDeletingReport] = useState(false)
+  const [isShareableReportCollapsed, setIsShareableReportCollapsed] = useState(false)
   const linkedinCardRef = useRef(null)
   const fileInputRef = useRef(null)
   const { data, isLoading, error: dataError, analyzeCsvData, clearData: clearAnalysisData } = useDataAnalysis(savedData)
@@ -48,6 +37,8 @@ function HomeContent() {
 
   // Load saved data on mount
   useEffect(() => {
+    let isMounted = true // Track if component is still mounted
+    
     const loadInitialData = async () => {
       try {
         // Check if user is a misfits.capital admin
@@ -58,14 +49,18 @@ function HomeContent() {
         } else {
           // For regular users, try to load their personal data
           const loadedData = await loadData()
-          if (loadedData) {
+          // Only update state if component is still mounted
+          if (isMounted && loadedData) {
             setSavedData(loadedData)
           }
         }
       } catch (error) {
         console.error('Failed to load initial data:', error)
       } finally {
-        setIsInitialLoad(false)
+        // Only update state if component is still mounted
+        if (isMounted) {
+          setIsInitialLoad(false)
+        }
       }
     }
     
@@ -74,7 +69,12 @@ function HomeContent() {
     } else if (!user) {
       setIsInitialLoad(false)
     }
-  }, [user, isInitialLoad])
+    
+    // Cleanup function to prevent state updates after unmount
+    return () => {
+      isMounted = false
+    }
+  }, [user, isInitialLoad, loadData])
 
   // Handle profile selection
   const handleProfileSelect = async (datasetId) => {
@@ -86,25 +86,22 @@ function HomeContent() {
     }
 
     try {
+      // Fetch both profile data AND shareable URL together to avoid race conditions
       const profileData = await loadDatasetById(datasetId)
       
       if (profileData) {
-        setSavedData(profileData)
-        setCurrentProfile({ id: datasetId, name: profileData.profile?.name })
-        setShowProfileSelector(false)
-        
-        // Check if shareable URL exists for this dataset
+        // Check shareable URL BEFORE updating state
         const { data: dataset } = await supabase
           .from('linkedin_datasets')
           .select('shareable_url')
           .eq('id', datasetId)
           .single()
         
-        if (dataset?.shareable_url) {
-          setShareableUrl(`${window.location.origin}/report/${dataset.shareable_url}`)
-        } else {
-          setShareableUrl(null)
-        }
+        // Update all state together atomically
+        setSavedData(profileData)
+        setCurrentProfile({ id: datasetId, name: profileData.profile?.name })
+        setShareableUrl(dataset?.shareable_url ? `${window.location.origin}/report/${dataset.shareable_url}` : null)
+        setShowProfileSelector(false)
         
         // Scroll to dashboard section after loading profile
         setTimeout(() => {
@@ -142,11 +139,21 @@ function HomeContent() {
       setIsGeneratingReport(true)
       setError(null)
 
+      // Get current card visibility settings from the UI preferences context
+      const cardVisibilitySettings = JSON.parse(localStorage.getItem('cardVisibility') || '{}')
+      
+      // Get current editable content from localStorage
+      const editableContent = JSON.parse(localStorage.getItem('unstoppableContent') || '{}')
+
       const response = await fetch(`/api/generate-report/${currentProfile.id}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
+        body: JSON.stringify({
+          cardVisibility: cardVisibilitySettings,
+          editableContent: editableContent
+        }),
       })
 
       const result = await response.json()
@@ -174,6 +181,47 @@ function HomeContent() {
       console.log('URL copied to clipboard')
     } catch (err) {
       console.error('Failed to copy URL:', err)
+    }
+  }
+
+  // Handle delete report
+  const handleDeleteReport = async () => {
+    if (!currentProfile?.id) return
+
+    const confirmMessage = `Are you sure you want to delete the report for ${currentProfile.name}?\n\nThis will permanently remove:\n- The shareable report URL\n- AI insights and analysis\n- Report customization settings\n\nNote: The original LinkedIn data and analysis will be preserved.\nThis action cannot be undone.`
+
+    if (!window.confirm(confirmMessage)) {
+      return
+    }
+
+    try {
+      setIsDeletingReport(true)
+      setError(null)
+
+      const response = await fetch(`/api/delete-report/${currentProfile.id}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+
+      const result = await response.json()
+
+      if (result.success) {
+        // Clear only report-related data, keep profile and analysis data
+        setShareableUrl(null)
+        // Note: We keep currentProfile, savedData, and analysis data intact
+        // since we only cleared the report-specific columns from the database
+        
+        console.log('Report data cleared successfully:', result.clearedDataset)
+      } else {
+        setError(result.error || 'Failed to clear report data')
+      }
+    } catch (err) {
+      console.error('Failed to clear report data:', err)
+      setError('Failed to clear report data')
+    } finally {
+      setIsDeletingReport(false)
     }
   }
 
@@ -296,109 +344,7 @@ function HomeContent() {
   const displayError = error || dataError
 
   return (
-    <div className="flex flex-1 flex-col gap-4 py-8 px-8 md:py-12 md:px-20 lg:px-32 xl:px-40 2xl:px-48 w-full max-w-[1600px] mx-auto">
-      {/* Page Header with Actions */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pb-2">
-        <div className="flex-1">
-          <h2 className="text-2xl font-bold">
-            {data?.profile?.name || 'LinkedIn Yearly Wrap'}
-          </h2>
-          <div className="flex items-center gap-2 mt-1">
-            <Badge variant="secondary" className="text-xs">
-              {new Date().toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-              })}
-            </Badge>
-            <Badge variant="outline" className="text-xs">Last 12 months</Badge>
-          </div>
-        </div>
-        <div className="flex items-center gap-2">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={toggleCardNames}
-            className="text-xs"
-          >
-            {showCardNames ? '🙈 Hide Names' : '🏷️ Show Names'}
-          </Button>
-          <MenuDropdown
-            onFileUpload={handleFileUploadFromMenu}
-            onPrint={handlePrint}
-            onDownloadPDF={handleDownloadPDF}
-          />
-        </div>
-      </div>
-
-      {/* Profile Selector - Always show for multi-user functionality */}
-      <ProfileSelector
-        currentProfile={currentProfile}
-        onProfileSelect={handleProfileSelect}
-        onUploadNew={handleUploadNew}
-        showUploadButton={true}
-        defaultCollapsed={false}
-      />
-
-      {/* Shareable Report Section - Show when profile is selected */}
-      {currentProfile && (
-        <Card className="w-full">
-          <CardHeader>
-            <CardTitle className="flex items-center justify-between">
-              <div className="flex items-center space-x-2">
-                <span>Shareable Report</span>
-                <Badge variant="outline" className="text-xs">
-                  {currentProfile.name}
-                </Badge>
-              </div>
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            {shareableUrl ? (
-              <div className="space-y-3">
-                <div className="flex items-center space-x-2">
-                  <Input
-                    value={shareableUrl}
-                    readOnly
-                    className="flex-1"
-                    placeholder="Report URL will appear here..."
-                  />
-                  <Button
-                    onClick={handleCopyUrl}
-                    variant="outline"
-                    size="sm"
-                  >
-                    Copy URL
-                  </Button>
-                </div>
-                <div className="text-sm text-muted-foreground">
-                  Share this URL to give others access to view this report. No login required.
-                </div>
-              </div>
-            ) : (
-              <div className="space-y-3">
-                <div className="text-sm text-muted-foreground">
-                  Generate a shareable URL for this report. Others can view it without logging in.
-                </div>
-                <Button
-                  onClick={handleGenerateReport}
-                  disabled={isGeneratingReport}
-                  className="w-full sm:w-auto"
-                >
-                  {isGeneratingReport ? (
-                    <>
-                      <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-                      Generating...
-                    </>
-                  ) : (
-                    'Generate Shareable Report'
-                  )}
-                </Button>
-              </div>
-            )}
-          </CardContent>
-        </Card>
-      )}
+    <div className="flex flex-1 flex-col gap-8 py-8 px-8 md:py-12 md:px-20 lg:px-32 xl:px-40 2xl:px-48 w-full max-w-[1600px] mx-auto">
 
       {/* Hidden file input for Upload New button */}
       <input
@@ -410,273 +356,79 @@ function HomeContent() {
         aria-label="Upload CSV data file"
       />
 
-          {/* Error Display */}
-          {displayError && (
-            <CardWithName cardName="Error Display Card" className="border-destructive">
-              <CardContent className="p-4">
-                <div className="text-destructive text-sm">
-                  {displayError}
-                </div>
-              </CardContent>
-            </CardWithName>
-          )}
-
-          {/* Loading State */}
-          {(isLoading || isInitialLoad) && (
-            <CardWithName cardName="Loading State Card" className="p-8 text-center">
-              <CardContent>
-                <div className="loading-skeleton mb-4" style={{ height: '3rem', borderRadius: '0.5rem' }}></div>
-                <p className="text-muted-foreground">
-                  {isInitialLoad ? '🔄 Loading your data...' : '📊 Processing your CSV file and analyzing LinkedIn posts...'}
-                </p>
-              </CardContent>
-            </CardWithName>
-          )}
-
-          {/* File Upload - Show when no data and user is not admin */}
-          {!isLoading && !isInitialLoad && !data && !savedData && !user?.email?.endsWith('@misfits.capital') && (
-            <CardWithName cardName="File Upload Card" className="p-8 text-center border-dashed border-2 border-gray-300">
-              <CardContent>
-                <div className="mb-4">
-                  <div className="text-4xl mb-4">📊</div>
-                  <h2 className="text-xl font-semibold mb-2">Upload Your LinkedIn Data</h2>
-                  <p className="text-muted-foreground mb-6">
-                    Upload your LinkedIn posts CSV file to generate your yearly analytics report
-                  </p>
-                </div>
-                <FileUpload onFileUpload={handleFileUpload} />
-              </CardContent>
-            </CardWithName>
-          )}
-
-          {/* Admin Message - Show when no data and user is admin */}
-          {!isLoading && !isInitialLoad && !data && !savedData && user?.email?.endsWith('@misfits.capital') && (
-            <CardWithName cardName="Admin Message Card" className="p-8 text-center">
-              <CardContent>
-                <div className="mb-4">
-                  <div className="text-4xl mb-4">🔑</div>
-                  <h2 className="text-xl font-semibold mb-2">Admin Access</h2>
-                  <p className="text-muted-foreground mb-6">
-                    As a misfits.capital admin, you have access to all LinkedIn datasets. 
-                    Use the Profile Selector above to choose which dataset to view.
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    If no datasets are available, you can upload new data using the "Upload New" button in the Profile Selector.
-                  </p>
-                </div>
-              </CardContent>
-            </CardWithName>
-          )}
-
-          {/* Main Content - Always Show */}
-          {!isLoading && (data || savedData) && (
-            <div id="main-content" className="space-y-6">
-              {/* Dashboard Section */}
-              <section id="dashboard" className="scroll-mt-20">
-              {/* Key Numbers Section */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <CardWithName cardName="Posts Count Card">
-                  <CardContent className="p-4">
-                    <div className="text-sm text-muted-foreground mb-1">
-                      Posts <span className="text-xs">(excl. reshares)</span>
-                    </div>
-                    <div className="text-2xl font-bold text-primary">
-                      {data?.summary?.posts_last_12m ?? '-'}
-                    </div>
-                  </CardContent>
-                </CardWithName>
-                <CardWithName cardName="Active Months Card">
-                  <CardContent className="p-4">
-                    <div className="text-sm text-muted-foreground mb-1">
-                      Active months
-                    </div>
-                    <div className="text-2xl font-bold text-primary">
-                      {data?.summary?.active_months ?? '-'}
-                    </div>
-                  </CardContent>
-                </CardWithName>
-                <CardWithName cardName="Median Engagement Card">
-                  <CardContent className="p-4">
-                    <div className="text-sm text-muted-foreground mb-1">
-                      Median engagement
-                    </div>
-                    <div className="text-2xl font-bold text-primary">
-                      {data?.summary?.median_engagement ?? '-'}
-                    </div>
-                  </CardContent>
-                </CardWithName>
-                <CardWithName cardName="P90 Engagement Card">
-                  <CardContent className="p-4">
-                    <div className="text-sm text-muted-foreground mb-1">
-                      P90 engagement
-                    </div>
-                    <div className="text-2xl font-bold text-primary">
-                      {data?.summary?.p90_engagement ?? '-'}
-                    </div>
-                  </CardContent>
-                </CardWithName>
-              </div>
-
-              {/* Analytics Cards Row */}
-              <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
-                {/* LinkedIn Analytics Card */}
-                <div className="space-y-4">
-                  {/* Generate Brief Summary Button - Outside card area */}
-                  <div className="flex justify-start">
-                    <LLMButton
-                      onClick={() => {
-                        if (linkedinCardRef.current && linkedinCardRef.current.handleGenerateBriefSummary) {
-                          linkedinCardRef.current.handleGenerateBriefSummary()
-                        }
-                      }}
-                      isLoading={false}
-                      text="Generate Brief Summary"
-                      loadingText="Analyzing posts..."
-                      variant="outline"
-                      size="sm"
-                    />
-                  </div>
-
-                  {data?.trends?.posts_per_month && (
-                    <LinkedinAnalyticsCard
-                      ref={linkedinCardRef}
-                      monthlyCounts={Object.values(data.trends.posts_per_month)}
-                      start={{ month: 9, year: 2024 }}
-                      insight=""
-                      posts={data.posts || []}
-                      summaryData={data.summary}
-                    />
-                  )}
-                </div>
-
-                {/* Post Type Distribution Cards - Side by Side Comparison */}
-                {data?.mix?.type_share && (
-                  <div className="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    {/* Original PostTypeMosaic - Single Column Stack */}
-                    <div className="space-y-4">
-                      <h3 className="text-sm font-medium text-gray-600 text-center">Single Column Stack</h3>
-                      <div className="flex justify-center">
-                        <div className="w-[280px]">
-                          <PostTypeMosaic
-                            data={(() => {
-                              const entries = Object.entries(data.mix.type_share);
-                              
-                              // Use the same simple rounding logic as Format Mix Chart
-                              return entries.map(([type, share]) => ({
-                                type: type.charAt(0).toUpperCase() + type.slice(1),
-                                value: Math.round((share || 0) * 100),
-                                color: undefined // Let component generate green shades
-                              }));
-                            })()}
-                            options={{
-                              columns: 1, // Force single column
-                              preferOneColumnForThree: false,
-                              minH: 80,
-                              maxH: 250,
-                              unit: 2.5
-                            }}
-                          />
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* New PostTypeDistributionCard - Two Column Weighted */}
-                    <div className="space-y-4">
-                      <h3 className="text-sm font-medium text-gray-600 text-center">Two Column Weighted</h3>
-                      <div className="flex justify-center">
-                        <div className="w-[280px] h-[400px]">
-                          <PostTypeDistributionCard
-                            data={(() => {
-                              const entries = Object.entries(data.mix.type_share);
-                              
-                              // Use the same simple rounding logic as Format Mix Chart
-                              return entries.map(([type, share]) => ({
-                                type: type.charAt(0).toUpperCase() + type.slice(1),
-                                desc: type === 'text' ? 'Pure text updates' :
-                                      type === 'image' ? 'Posts with static visuals' :
-                                      type === 'video' ? 'Clips or video snippets' : `${type} content`,
-                                value: Math.round((share || 0) * 100),
-                                color: undefined // Let component generate green shades
-                              }));
-                            })()}
-                            options={{
-                              columns: 2, // Force two column layout
-                              preferOneColumnForThree: false,
-                              minH: 0, // No minimum height threshold
-                              maxH: 400, // Increased maximum height
-                              unit: 4 // Increased unit for taller rectangles
-                            }}
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </div>
-              </section>
-
-            <section id="analytics" className="scroll-mt-20">
-              <ChartSection data={data} />
-            </section>
-
-            <section id="engagement" className="scroll-mt-20">
-              <EngagementAnalysis data={data} />
-            </section>
-
-            <section id="ai-insights" className="scroll-mt-20">
-              <InsightsPanel data={data} />
-            </section>
-
-            {/* Timing Insights */}
-            <section id="timing" className="scroll-mt-20">
-              <TimingInsights data={data} />
-            </section>
-
-            {/* Post Distribution Heatmap */}
-            <section id="heatmap" className="scroll-mt-20">
-              <PostDistributionHeatmap data={data} />
-            </section>
-
-            {/* Posting Rhythm & Top Posts */}
-            <section id="top-posts" className="scroll-mt-20 grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <PostingRhythm data={data} />
-              <TopPosts data={data} />
-            </section>
-
-            {/* Peer Comparison */}
-            <section id="peer-comparison" className="scroll-mt-20">
-              <PeerComparison data={data} />
-            </section>
-
-            {/* Value Proposition Section */}
-            <section id="value-proposition" className="scroll-mt-20">
-              <ValueProposition data={data} />
-            </section>
-
-              {/* Data Management */}
-              <CardWithName cardName="Data Management Card">
-                <CardHeader>
-                  <CardTitle>Data Management</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex justify-between items-center">
-                    <div>
-                      <div className="text-sm text-muted-foreground">Clear saved data or download analysis</div>
-                    </div>
-                    <div className="flex gap-2">
-                      <Button
-                        onClick={handleClearData}
-                        variant="destructive"
-                        size="sm"
-                      >
-                        🗑️ Clear Data
-                      </Button>
-                    </div>
-                  </div>
-                </CardContent>
-              </CardWithName>
+      {/* Error Display */}
+      {displayError && (
+        <CardWithName cardName="Error Display Card" className="border-destructive">
+          <CardContent className="p-4">
+            <div className="text-destructive text-sm">
+              {displayError}
             </div>
-          )}
+          </CardContent>
+        </CardWithName>
+      )}
+
+      {/* Loading State */}
+      {(isLoading || isInitialLoad) && (
+        <CardWithName cardName="Loading State Card" className="p-8 text-center">
+          <CardContent>
+            <div className="loading-skeleton mb-4" style={{ height: '3rem', borderRadius: '0.5rem' }}></div>
+            <p className="text-muted-foreground">
+              {isInitialLoad ? '🔄 Loading your data...' : '📊 Processing your CSV file and analyzing LinkedIn posts...'}
+            </p>
+          </CardContent>
+        </CardWithName>
+      )}
+
+      {/* File Upload - Show when no data and user is not admin */}
+      {!isLoading && !isInitialLoad && !data && !savedData && !user?.email?.endsWith('@misfits.capital') && (
+        <CardWithName cardName="File Upload Card" className="p-8 text-center border-dashed border-2 border-gray-300">
+          <CardContent>
+            <div className="mb-4">
+              <div className="text-4xl mb-4">📊</div>
+              <h2 className="text-xl font-semibold mb-2">Upload Your LinkedIn Data</h2>
+              <p className="text-muted-foreground mb-6">
+                Upload your LinkedIn posts CSV file to generate your yearly analytics report
+              </p>
+            </div>
+            <FileUpload onFileUpload={handleFileUpload} />
+          </CardContent>
+        </CardWithName>
+      )}
+
+
+      {/* Section 1: Admin Control */}
+      <AdminControlSection
+        currentProfile={currentProfile}
+        onProfileSelect={handleProfileSelect}
+        onUploadNew={handleUploadNew}
+        showProfileSelector={showProfileSelector}
+        shareableUrl={shareableUrl}
+        isShareableReportCollapsed={isShareableReportCollapsed}
+        setIsShareableReportCollapsed={setIsShareableReportCollapsed}
+        onGenerateReport={handleGenerateReport}
+        isGeneratingReport={isGeneratingReport}
+        onCopyUrl={handleCopyUrl}
+        onDeleteReport={handleDeleteReport}
+        isDeletingReport={isDeletingReport}
+        data={data}
+        savedData={savedData}
+        isLoading={isLoading}
+        isInitialLoad={isInitialLoad}
+        user={user}
+        showCardNames={showCardNames}
+        toggleCardNames={toggleCardNames}
+        onFileUpload={handleFileUploadFromMenu}
+        onPrint={handlePrint}
+        onDownloadPDF={handleDownloadPDF}
+      />
+
+      {/* Section 2: LinkedIn Analytics - Show when data is available */}
+      {!isLoading && (data || savedData) && (
+        <LinkedInAnalyticsSection data={data} />
+      )}
+
+      {/* Section 3: Unstoppable - Always show */}
+      <UnstoppableSection />
     </div>
   )
 }
@@ -684,9 +436,7 @@ function HomeContent() {
 export default function Home() {
   return (
     <ProtectedRoute>
-      <CardNameProvider>
-        <HomeContent />
-      </CardNameProvider>
+      <HomeContent />
     </ProtectedRoute>
   )
 }

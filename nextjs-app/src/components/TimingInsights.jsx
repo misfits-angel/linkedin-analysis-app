@@ -7,14 +7,7 @@ export default function TimingInsights({ data }) {
   
   if (!timing.day_of_week || Object.keys(timing.day_of_week).length === 0) {
     return (
-      <Card cardName="Timing Insights Card">
-        <CardHeader>
-          <CardTitle>⏰ Timing Insights</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="text-sm text-muted-foreground">Timing data not available.</div>
-        </CardContent>
-      </Card>
+      <div className="text-sm text-muted-foreground">Timing data not available.</div>
     )
   }
 
@@ -25,11 +18,7 @@ export default function TimingInsights({ data }) {
   }
 
   return (
-    <Card cardName="Timing Insights Card">
-      <CardHeader>
-        <CardTitle>⏰ Timing Insights</CardTitle>
-      </CardHeader>
-      <CardContent>
+    <div>
         {/* Day of Week Performance */}
         <div className="mb-4">
           <div className="text-sm font-semibold mb-2">📅 Performance by Day of Week</div>
@@ -82,7 +71,6 @@ export default function TimingInsights({ data }) {
             </div>
           </div>
         )}
-      </CardContent>
-    </Card>
+    </div>
   )
 }

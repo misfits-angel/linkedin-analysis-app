@@ -11,7 +11,7 @@ export default function MetricsDisplay({ data }) {
             Posts <span className="text-xs">(excl. reshares)</span>
           </div>
           <div className="text-2xl font-bold text-primary" role="status" aria-live="polite">
-            {data?.summary?.posts_last_12m || '-'}
+            {(data?.summary?.posts_in_period ?? data?.summary?.posts_last_12m) || '-'}
           </div>
         </CardContent>
       </Card>

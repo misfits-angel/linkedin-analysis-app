@@ -34,7 +34,7 @@ export function useDataPersistence() {
             storage_path: data.storagePath || null,
             linkedin_profile_url: data.linkedinProfileUrl || null,
             // Quick metrics will be auto-extracted by trigger
-            total_posts: data.summary?.posts_last_12m || 0,
+            total_posts: (data.summary?.posts_in_period ?? data.summary?.posts_last_12m) || 0,
             median_engagement: data.summary?.median_engagement || 0
           })
           .select()
@@ -57,7 +57,7 @@ export function useDataPersistence() {
       console.error('Failed to save data:', error)
       return { success: false, error }
     }
-  }, [])
+  }, [user])
 
   // Load from Supabase first, fallback to localStorage
   const loadData = useCallback(async () => {
@@ -177,8 +177,52 @@ export function useDataPersistence() {
     }
   }, [user])
 
-  // Delete a dataset
+  const clearData = useCallback(() => {
+    try {
+      localStorage.removeItem(STORAGE_KEYS.data)
+      localStorage.removeItem(STORAGE_KEYS.timestamp)
+      localStorage.removeItem(STORAGE_KEYS.datasetId)
+    } catch (error) {
+      console.error('Failed to clear data from localStorage:', error)
+    }
+  }, [])
+
+  // Clear report data from a dataset (preserves core LinkedIn data)
   const deleteDataset = useCallback(async (datasetId) => {
+    if (!isSupabaseAvailable() || !user) {
+      console.warn('Supabase not configured or user not authenticated')
+      return false
+    }
+
+    try {
+      const { error } = await supabase
+        .from('linkedin_datasets')
+        .update({
+          shareable_url: null,
+          llm_insights: null,
+          card_visibility_settings: null,
+        })
+        .eq('id', datasetId)
+
+      if (error) throw error
+      
+      // If this was the current dataset, clear only report-related data
+      const currentId = localStorage.getItem(STORAGE_KEYS.datasetId)
+      if (currentId === datasetId) {
+        // Clear only report-related data, keep analysis data
+        localStorage.removeItem(STORAGE_KEYS.datasetId)
+        // Note: We don't call clearData() as it would remove all analysis data
+      }
+      
+      return true
+    } catch (error) {
+      console.error('Failed to clear report data:', error)
+      return false
+    }
+  }, [user])
+
+  // Delete entire profile row from database
+  const deleteProfile = useCallback(async (datasetId) => {
     if (!isSupabaseAvailable() || !user) {
       console.warn('Supabase not configured or user not authenticated')
       return false
@@ -192,28 +236,19 @@ export function useDataPersistence() {
 
       if (error) throw error
       
-      // If this was the current dataset, clear it
+      // If this was the current dataset, clear everything
       const currentId = localStorage.getItem(STORAGE_KEYS.datasetId)
       if (currentId === datasetId) {
+        localStorage.removeItem(STORAGE_KEYS.datasetId)
         clearData()
       }
       
       return true
     } catch (error) {
-      console.error('Failed to delete dataset:', error)
+      console.error('Failed to delete profile:', error)
       return false
     }
-  }, [user])
-
-  const clearData = useCallback(() => {
-    try {
-      localStorage.removeItem(STORAGE_KEYS.data)
-      localStorage.removeItem(STORAGE_KEYS.timestamp)
-      localStorage.removeItem(STORAGE_KEYS.datasetId)
-    } catch (error) {
-      console.error('Failed to clear data from localStorage:', error)
-    }
-  }, [])
+  }, [user, clearData])
 
   const hasStoredData = useCallback(() => {
     return localStorage.getItem(STORAGE_KEYS.data) !== null
@@ -226,6 +261,7 @@ export function useDataPersistence() {
     loadAllDatasets,
     loadDatasetById,
     deleteDataset,
+    deleteProfile,
     clearData,
     hasStoredData
   }

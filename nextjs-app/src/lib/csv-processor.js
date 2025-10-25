@@ -1,263 +1,59 @@
-// ============= CSV PROCESSING UTILITIES =============
+// ============= CSV PROCESSING =============
+// Main CSV analysis orchestrator - delegates to specialized utilities
 
-/**
- * Parse date from various formats including relative dates
- */
-export function parseCSVDate(dateStr) {
-  if (!dateStr) return null
-  
-  // Handle relative dates (e.g., "1w", "2w", "1mo", "3d")
-  const relativeMatch = dateStr.match(/^(\d+)(w|d|mo|h|m|y)$/)
-  if (relativeMatch) {
-    const value = parseInt(relativeMatch[1])
-    const unit = relativeMatch[2]
-    const now = new Date()
-    
-    switch(unit) {
-      case 'h': // hours
-        return new Date(now.getTime() - value * 60 * 60 * 1000)
-      case 'd': // days
-        return new Date(now.getTime() - value * 24 * 60 * 60 * 1000)
-      case 'w': // weeks
-        return new Date(now.getTime() - value * 7 * 24 * 60 * 60 * 1000)
-      case 'mo': // months (approximate)
-        return new Date(now.getFullYear(), now.getMonth() - value, now.getDate())
-      case 'm': // minutes
-        return new Date(now.getTime() - value * 60 * 1000)
-      case 'y': // years
-        return new Date(now.getFullYear() - value, now.getMonth(), now.getDate())
-    }
-  }
-  
-  // Try ISO format
-  let date = new Date(dateStr)
-  if (!isNaN(date.getTime())) return date
-  
-  // Try other formats
-  const formats = [
-    /(\d{4})-(\d{2})-(\d{2})/,  // YYYY-MM-DD
-    /(\d{2})\/(\d{2})\/(\d{4})/, // MM/DD/YYYY
-  ]
-  
-  for (const regex of formats) {
-    const match = dateStr.match(regex)
-    if (match) {
-      date = new Date(match[0])
-      if (!isNaN(date.getTime())) return date
-    }
-  }
-  
-  return null
-}
+import {
+  parseCSVDate,
+  getMonthKey,
+  getDayOfWeek,
+  generateMonthsArray,
+  generateLast12Months,
+  labelMonth
+} from './utils/dateUtils'
 
-/**
- * Get month key in YYYY-MM format
- */
-export function getMonthKey(date) {
-  if (!date) return null
-  const year = date.getFullYear()
-  const month = String(date.getMonth() + 1).padStart(2, '0')
-  return `${year}-${month}`
-}
+import {
+  median,
+  percentile,
+  mean,
+  ensureArray,
+  clip,
+  toDonut
+} from './utils/statisticsUtils'
 
-/**
- * Get day of week name
- */
-export function getDayOfWeek(date) {
-  if (!date) return null
-  const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-  return days[date.getDay()]
-}
+import {
+  ANALYSIS_CONFIG,
+  detectPostType,
+  calculatePostDistribution,
+  calculatePostingRhythm,
+  calculateTimingInsights,
+  detectAnalysisPeriod
+} from './utils/postAnalyzer'
 
-/**
- * Calculate median of array
- */
-export function median(arr) {
-  if (!arr || arr.length === 0) return 0
-  const sorted = [...arr].sort((a, b) => a - b)
-  const mid = Math.floor(sorted.length / 2)
-  return sorted.length % 2 === 0 
-    ? Math.round((sorted[mid - 1] + sorted[mid]) / 2)
-    : sorted[mid]
-}
-
-/**
- * Calculate percentile of array
- */
-export function percentile(arr, p) {
-  if (!arr || arr.length === 0) return 0
-  const sorted = [...arr].sort((a, b) => a - b)
-  const index = Math.ceil((p / 100) * sorted.length) - 1
-  return sorted[Math.max(0, index)]
-}
-
-/**
- * Calculate mean of array
- */
-export function mean(arr) {
-  if (!arr || arr.length === 0) return 0
-  const sum = arr.reduce((a, b) => a + b, 0)
-  return Math.round(sum / arr.length)
-}
-
-/**
- * Detect post type from row data
- */
-export function detectPostType(row) {
-  if (row.type && row.type.trim() !== '') {
-    const typeValue = row.type.toLowerCase().trim()
-    const match = typeValue.match(/^([a-z]+)/)
-    if (match) return match[1]
-  }
-  
-  if (row.videoUrl) return 'video'
-  if (row.imgUrl) return 'image'
-  return 'text'
-}
-
-/**
- * Generate last 12 months array
- */
-export function generateLast12Months() {
-  const months = []
-  const now = new Date()
-  
-  for (let i = 11; i >= 0; i--) {
-    const date = new Date(now.getFullYear(), now.getMonth() - i, 1)
-    const year = date.getFullYear()
-    const month = String(date.getMonth() + 1).padStart(2, '0')
-    months.push(`${year}-${month}`)
-  }
-  
-  return months
-}
-
-/**
- * Format month label for display
- */
-export function labelMonth(m) {
-  if (!m) return ''
-  if (/^\d{4}-\d{2}$/.test(m)) {
-    const [y, mm] = m.split('-')
-    const d = new Date(Number(y), Number(mm) - 1, 1)
-    return d.toLocaleString('en-US', { month: 'short' }) + " '" + String(y).slice(-2)
-  }
-  if (/^\d{2}$/.test(m)) {
-    const d = new Date(2000, Number(m) - 1, 1)
-    return d.toLocaleString('en-US', { month: 'short' })
-  }
-  return m
-}
-
-/**
- * Convert share object to donut chart format
- */
-export function toDonut(shareObj = {}) {
-  return Object.entries(shareObj).map(([name, frac]) => ({
-    name, 
-    value: Math.round((frac || 0) * 100)
-  }))
-}
-
-/**
- * Ensure value is an array
- */
-export function ensureArray(a) {
-  return Array.isArray(a) ? a : []
-}
-
-/**
- * Clip string to specified length
- */
-export function clip(s, n = 120) {
-  if (!s) return ''
-  s = String(s)
-  return s.length > n ? s.slice(0, n - 1) + '…' : s
-}
-
-/**
- * Calculate post distribution across months and days
- */
-export function calculatePostDistribution(posts) {
-  const last12Months = generateLast12Months()
-  const dayOrder = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-  
-  // Initialize the distribution structure
-  const monthly_daily = {}
-  
-  last12Months.forEach(month => {
-    monthly_daily[month] = {}
-    dayOrder.forEach(day => {
-      monthly_daily[month][day] = { count: 0, avg_engagement: 0 }
-    })
-  })
-  
-  // Process posts and populate distribution
-  const dayEngagements = {}
-  const monthCounts = {}
-  
-  posts.forEach(post => {
-    if (post.month && post.dayOfWeek && monthly_daily[post.month]) {
-      monthly_daily[post.month][post.dayOfWeek].count++
-      monthly_daily[post.month][post.dayOfWeek].avg_engagement += post.eng
-      
-      if (!dayEngagements[post.dayOfWeek]) dayEngagements[post.dayOfWeek] = []
-      dayEngagements[post.dayOfWeek].push(post.eng)
-      
-      monthCounts[post.month] = (monthCounts[post.month] || 0) + 1
-    }
-  })
-  
-  // Calculate average engagement for each cell
-  Object.keys(monthly_daily).forEach(month => {
-    dayOrder.forEach(day => {
-      const cell = monthly_daily[month][day]
-      if (cell.count > 0) {
-        cell.avg_engagement = Math.round(cell.avg_engagement / cell.count)
-      }
-    })
-  })
-  
-  // Calculate insights
-  const dayStats = {}
-  dayOrder.forEach(day => {
-    const engagements = dayEngagements[day] || []
-    dayStats[day] = {
-      count: engagements.length,
-      avg_engagement: engagements.length > 0 ? Math.round(mean(engagements)) : 0
-    }
-  })
-  
-  const most_active_day = dayOrder.reduce((a, b) => 
-    dayStats[a].count > dayStats[b].count ? a : b, dayOrder[0]
-  )
-  
-  const best_engagement_day = dayOrder.reduce((a, b) => 
-    dayStats[a].avg_engagement > dayStats[b].avg_engagement ? a : b, dayOrder[0]
-  )
-  
-  const peak_month = last12Months.reduce((a, b) => 
-    (monthCounts[a] || 0) > (monthCounts[b] || 0) ? a : b, last12Months[0]
-  )
-  
-  const activeMonths = last12Months.filter(month => (monthCounts[month] || 0) > 0).length
-  const consistency_score = Math.round((activeMonths / 12) * 100)
-  
-  return {
-    monthly_daily,
-    insights: {
-      most_active_day,
-      best_engagement_day,
-      consistency_score,
-      peak_month
-    }
-  }
+// Re-export commonly used utilities for backward compatibility
+export {
+  parseCSVDate,
+  getMonthKey,
+  getDayOfWeek,
+  generateMonthsArray,
+  generateLast12Months,
+  labelMonth,
+  median,
+  percentile,
+  mean,
+  ensureArray,
+  clip,
+  toDonut,
+  detectPostType,
+  calculatePostDistribution
 }
 
 /**
  * Main CSV analysis function
+ * @param {Array} rows - CSV data rows
+ * @param {Object} metadata - Analysis metadata
+ * @param {Object} options - Analysis options
+ * @param {number} options.analysisPeriodMonths - Number of months to analyze (default: auto-detect)
  */
-export function analyzeCsvData(rows, metadata = {}) {
+export function analyzeCsvData(rows, metadata = {}, options = {}) {
   const validRows = rows.filter(row => 
     row.postContent && 
     row.postContent.trim() !== '' &&
@@ -269,8 +65,16 @@ export function analyzeCsvData(rows, metadata = {}) {
   }
 
   const now = new Date()
-  const twelveMonthsAgo = new Date(now.getFullYear(), now.getMonth() - 12, now.getDate())
-  twelveMonthsAgo.setHours(0, 0, 0, 0)
+  
+  // Auto-detect analysis period based on data range, or use provided option
+  let analysisPeriodMonths = options.analysisPeriodMonths
+  
+  if (!analysisPeriodMonths) {
+    analysisPeriodMonths = detectAnalysisPeriod(validRows)
+  }
+  
+  const analysisStartDate = new Date(now.getFullYear(), now.getMonth() - analysisPeriodMonths, now.getDate())
+  analysisStartDate.setHours(0, 0, 0, 0)
 
   const rowsWithoutTimestamp = validRows.filter(row => !row.postTimestamp || row.postTimestamp.trim() === '')
   if (rowsWithoutTimestamp.length > 0) {
@@ -304,20 +108,17 @@ export function analyzeCsvData(rows, metadata = {}) {
     }
   }).filter(p => p.date) // Only filter out posts without dates
 
-  // Filter posts from last 12 months for summary
-  const posts = allPosts.filter(p => p.date && p.date >= twelveMonthsAgo)
+  // Filter posts from the analysis period
+  const posts = allPosts.filter(p => p.date && p.date >= analysisStartDate)
   
   if (posts.length === 0) {
-    throw new Error('No posts found within the last 12 months. Your CSV might contain older data or have date format issues.')
+    throw new Error(`No posts found within the last ${analysisPeriodMonths} months. Your CSV might contain older data or have date format issues.`)
   }
 
   posts.sort((a, b) => a.date.getTime() - b.date.getTime())
 
   // Filter out reshares - only count original posts for main metrics
-  // Reshares are identified by action containing "reposted"
   const originalPosts = posts.filter(p => !p.action.toLowerCase().includes('reposted'))
-
-  // If all posts are reshares, use all posts as fallback
   const postsForAnalysis = originalPosts.length > 0 ? originalPosts : posts
 
   // Get author name (most common author)
@@ -330,7 +131,9 @@ export function analyzeCsvData(rows, metadata = {}) {
   // Summary metrics
   const engagementScores = postsForAnalysis.map(p => p.eng)
   const summary = {
-    posts_last_12m: postsForAnalysis.length,
+    posts_last_12m: postsForAnalysis.length, // Keep for backward compatibility
+    posts_in_period: postsForAnalysis.length,
+    analysis_period_months: analysisPeriodMonths,
     active_months: new Set(postsForAnalysis.map(p => p.month).filter(Boolean)).size,
     median_engagement: median(engagementScores),
     p90_engagement: percentile(engagementScores, 90)
@@ -339,11 +142,13 @@ export function analyzeCsvData(rows, metadata = {}) {
   // Trends: Posts per month
   const postsPerMonth = {}
   const monthMedian = {}
-  const last12Months = generateLast12Months()
+  const monthTotal = {}
+  const analysisMonths = generateMonthsArray(analysisPeriodMonths)
   
-  last12Months.forEach(month => {
+  analysisMonths.forEach(month => {
     postsPerMonth[month] = 0
     monthMedian[month] = 0
+    monthTotal[month] = 0
   })
 
   postsForAnalysis.forEach(p => {
@@ -352,12 +157,13 @@ export function analyzeCsvData(rows, metadata = {}) {
     }
   })
 
-  // Calculate median engagement per month
+  // Calculate median and total engagement per month
   const monthEngagements = {}
   postsForAnalysis.forEach(p => {
     if (p.month && postsPerMonth[p.month] > 0) {
       if (!monthEngagements[p.month]) monthEngagements[p.month] = []
       monthEngagements[p.month].push(p.eng)
+      monthTotal[p.month] += p.eng
     }
   })
 
@@ -426,69 +232,10 @@ export function analyzeCsvData(rows, metadata = {}) {
   const tag_median_engagement = {}
   const tag_counts = {}
 
-  // Posting Rhythm & Continuity
-  const sortedPosts = [...postsForAnalysis].sort((a, b) => a.date.getTime() - b.date.getTime())
-  const postGaps = []
-  let longestGapInfo = { days: 0, startDate: null, endDate: null }
-  
-  for (let i = 1; i < sortedPosts.length; i++) {
-    const gapDays = Math.floor((sortedPosts[i].date.getTime() - sortedPosts[i-1].date.getTime()) / (1000 * 60 * 60 * 24))
-    postGaps.push(gapDays)
-    
-    if (gapDays > longestGapInfo.days) {
-      longestGapInfo = {
-        days: gapDays,
-        startDate: sortedPosts[i-1].date,
-        endDate: sortedPosts[i].date
-      }
-    }
-  }
-  
-  const avgPostingGap = postGaps.length > 0 ? Math.round(mean(postGaps)) : 0
-  const consistencyScore = Math.max(0, 100 - (avgPostingGap * 2)) // Simple consistency score
-
-  const rhythm = {
-    avg_posting_gap: avgPostingGap,
-    longest_gap: longestGapInfo.days,
-    longest_gap_start: longestGapInfo.startDate,
-    longest_gap_end: longestGapInfo.endDate,
-    consistency_score: Math.min(100, consistencyScore)
-  }
-
-  // Timing Insights
-  const dayOfWeekStats = {}
-  const dayEngagements = {}
-  
-  postsForAnalysis.forEach(p => {
-    if (p.dayOfWeek) {
-      dayOfWeekStats[p.dayOfWeek] = { count: 0, avg_engagement: 0 }
-      dayEngagements[p.dayOfWeek] = []
-    }
-  })
-  
-  postsForAnalysis.forEach(p => {
-    if (p.dayOfWeek) {
-      dayOfWeekStats[p.dayOfWeek].count++
-      dayEngagements[p.dayOfWeek].push(p.eng)
-    }
-  })
-  
-  Object.keys(dayOfWeekStats).forEach(day => {
-    dayOfWeekStats[day].avg_engagement = Math.round(mean(dayEngagements[day]))
-  })
-  
-  const bestDay = Object.keys(dayOfWeekStats).reduce((a, b) => 
-    dayOfWeekStats[a].avg_engagement > dayOfWeekStats[b].avg_engagement ? a : b, 
-    Object.keys(dayOfWeekStats)[0] || 'Monday'
-  )
-
-  const timingInsights = {
-    day_of_week: dayOfWeekStats,
-    best_day: bestDay
-  }
-
-  // Calculate post distribution
-  const distribution = calculatePostDistribution(postsForAnalysis)
+  // Use helper functions for rhythm and timing
+  const rhythm = calculatePostingRhythm(postsForAnalysis)
+  const timingInsights = calculateTimingInsights(postsForAnalysis)
+  const distribution = calculatePostDistribution(postsForAnalysis, analysisPeriodMonths)
 
   // Prepare posts array for JSON
   const postsForJson = postsForAnalysis.map(p => ({
@@ -513,7 +260,8 @@ export function analyzeCsvData(rows, metadata = {}) {
     summary,
     trends: {
       posts_per_month: postsPerMonth,
-      month_median: monthMedian
+      month_median: monthMedian,
+      month_total: monthTotal
     },
     mix: {
       type_share,

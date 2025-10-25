@@ -1,11 +1,19 @@
 'use client'
 
 import { useState } from 'react'
+import { useCardVisibilityCheck } from './useCardVisibilityCheck'
 
-export function useLLMInsights() {
+export function useLLMInsights(cardId = null) {
   const [error, setError] = useState(null)
+  const isCardVisible = useCardVisibilityCheck(cardId)
 
   const callLLMAPI = async (endpoint, data) => {
+    // Check if card is visible before making LLM call
+    if (cardId && !isCardVisible) {
+      console.log(`🚫 Skipping LLM call for ${endpoint} - card ${cardId} is not visible`)
+      throw new Error(`Card ${cardId} is not visible, skipping LLM call`)
+    }
+
     setError(null)
 
     try {
@@ -59,5 +67,6 @@ export function useLLMInsights() {
     evaluatePosts,
     analyzePositioning,
     clearError,
+    isCardVisible,
   }
 }

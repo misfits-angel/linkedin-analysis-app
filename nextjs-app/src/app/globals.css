@@ -114,6 +114,7 @@ body {
 .mx-auto { margin-left: auto !important; margin-right: auto !important; }
 .p-6 { padding: 2rem !important; }
 .space-y-6 > * + * { margin-top: 2rem !important; }
+.space-y-8 > * + * { margin-top: 2.5rem !important; }
 .flex { display: flex !important; }
 .flex-wrap { flex-wrap: wrap !important; }
 .items-center { align-items: center !important; }
@@ -225,18 +226,88 @@ button:not([data-sidebar]):not([data-sidebar] button):disabled {
   position: absolute !important;
   top: 0.5rem !important;
   right: 0.5rem !important;
-  background: #6b7280 !important;
+  background: rgb(90, 140, 130) !important;
   color: white !important;
   border: none !important;
   border-radius: 0.25rem !important;
-  padding: 0.25rem 0.5rem !important;
+  padding: 0.25rem !important;
   font-size: 0.75rem !important;
   cursor: pointer !important;
   z-index: 10 !important;
+  width: 1.75rem !important;
+  height: 1.75rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
 
 .chart-export-btn:hover {
-  background: #4b5563 !important;
+  background: rgb(70, 120, 110) !important;
+}
+
+.chart-export-btn-summary {
+  background: rgb(90, 140, 130) !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 0.25rem !important;
+  padding: 0.25rem !important;
+  font-size: 0.75rem !important;
+  cursor: pointer !important;
+  width: 1.75rem !important;
+  height: 1.75rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.chart-export-btn-summary:hover {
+  background: rgb(70, 120, 110) !important;
+}
+
+.chart-export-btn-summary:disabled {
+  background: rgb(120, 120, 120) !important;
+  cursor: not-allowed !important;
+}
+
+.chart-export-btn-inline {
+  background: rgb(90, 140, 130) !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 0.25rem !important;
+  padding: 0.25rem !important;
+  font-size: 0.75rem !important;
+  cursor: pointer !important;
+  width: 1.75rem !important;
+  height: 1.75rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.chart-export-btn-inline:hover {
+  background: rgb(70, 120, 110) !important;
+}
+
+.chart-header-export-btn {
+  background: rgb(90, 140, 130);
+  color: white;
+  border: none;
+  border-radius: 0.25rem;
+  padding: 0.25rem;
+  font-size: 0.75rem;
+  cursor: pointer;
+  width: 1.75rem;
+  height: 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.chart-header-export-btn:hover {
+  background: rgb(70, 120, 110);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 /* Loading skeleton */
@@ -354,6 +425,7 @@ button:not([data-sidebar]):not([data-sidebar] button):disabled {
 .gap-3 { gap: 0.75rem !important; }
 .gap-4 { gap: 1rem !important; }
 .gap-6 { gap: 1.5rem !important; }
+.gap-8 { gap: 2.5rem !important; }
 
 /* Spacing improvements */
 .space-y-1 > * + * { margin-top: 0.25rem !important; }
@@ -495,20 +567,25 @@ body {
   top: 0.5rem;
   right: 0.5rem;
   z-index: 10;
-  background: white;
-  border: 1px solid #e5e7eb;
+  background: rgb(90, 140, 130);
+  color: white;
+  border: none;
   border-radius: 0.25rem;
-  padding: 0.25rem 0.5rem;
-  font-size: 0.7rem;
+  padding: 0.25rem;
+  font-size: 0.75rem;
   cursor: pointer;
   opacity: 1;
   transition: all 0.2s;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 1.75rem;
+  height: 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .chart-export-btn:hover {
-  background: #f9fafb;
-  border-color: var(--color-primary);
+  background: rgb(70, 120, 110);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 

@@ -76,8 +76,11 @@ CREATE TRIGGER update_linkedin_datasets_updated_at
 CREATE OR REPLACE FUNCTION extract_quick_metrics()
 RETURNS TRIGGER AS $$
 BEGIN
-    -- Extract total posts
-    NEW.total_posts = (NEW.analysis_data->'summary'->>'posts_last_12m')::INTEGER;
+    -- Extract total posts (prefer new field, fallback to old)
+    NEW.total_posts = COALESCE(
+        (NEW.analysis_data->'summary'->>'posts_in_period')::INTEGER,
+        (NEW.analysis_data->'summary'->>'posts_last_12m')::INTEGER
+    );
     
     -- Extract median engagement
     NEW.median_engagement = (NEW.analysis_data->'summary'->>'median_engagement')::INTEGER;

@@ -4,13 +4,18 @@ import { useState } from 'react'
 import { useLLMInsights } from '@/lib/hooks/useLLMInsights'
 import LLMButton from './LLMButton'
 import Card, { CardContent, CardHeader, CardTitle } from '@/components/CardWithName'
+import { usePathname } from 'next/navigation'
 
 export default function TopicAnalysis({ postsData, llmInsights }) {
   const [topicAnalysis, setTopicAnalysis] = useState(llmInsights?.topicAnalysis || null)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(null)
+  const pathname = usePathname()
   
-  const { analyzeTopics } = useLLMInsights()
+  const { analyzeTopics } = useLLMInsights('ai-topic-analysis')
+  
+  // Check if we're in report mode (not dashboard)
+  const isReportMode = pathname?.startsWith('/report/')
 
   const handleAnalyzeTopics = async () => {
     if (!postsData || postsData.length === 0) {
@@ -64,47 +69,58 @@ export default function TopicAnalysis({ postsData, llmInsights }) {
     console.log('🎨 Rendering topic analysis:', { summary, topicStats, keysCount: Object.keys(topicStats).length })
     
     return (
-      <div className="space-y-3">
-        {/* Summary */}
+      <div className="space-y-4">
+        {/* Summary Header */}
         {summary && (
-          <div className="p-3 bg-gradient-to-r from-purple-50 to-indigo-50 border-l-4 border-purple-500 rounded-lg">
-            <div className="text-xs font-semibold text-purple-900 mb-1">🤖 AI Analysis</div>
-            <div className="text-xs text-purple-800">{summary}</div>
+          <div className="p-4 bg-gradient-to-r from-purple-50 to-indigo-50 border-l-4 border-purple-500 rounded-lg">
+            <div className="text-sm text-purple-700">{summary}</div>
           </div>
         )}
         
-        {/* Topic breakdown with bars */}
+        {/* Topic breakdown with horizontal fill bars */}
         {Object.keys(topicStats).length > 0 && (
-          <div className="space-y-2">
-            <div className="text-xs font-semibold text-gray-600 mb-2">📊 Topic Breakdown</div>
-            {Object.entries(topicStats)
-              .sort((a, b) => b[1].count - a[1].count)
-              .slice(0, 10)
-              .map(([topic, stats]) => {
-                const maxCount = Object.values(topicStats).reduce((max, stat) => Math.max(max, stat.count), 0) || 1
-                const percentage = Math.round((stats.count / maxCount) * 100)
-                const topicLabel = topic.charAt(0).toUpperCase() + topic.slice(1)
-                
-                return (
-                  <div key={topic} className="space-y-1">
-                    <div className="flex justify-between items-baseline text-xs">
-                      <span className="font-medium text-gray-700">{topicLabel}</span>
-                      <span className="text-gray-500">{stats.count} posts • avg: {Math.round(stats.avg_engagement)}</span>
+          <div className="space-y-3">
+            <div className="text-sm font-semibold text-gray-700">📊 Topic Breakdown</div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              {Object.entries(topicStats)
+                .sort((a, b) => b[1].count - a[1].count)
+                .slice(0, 8)
+                .map(([topic, stats]) => {
+                  const maxCount = Object.values(topicStats).reduce((max, stat) => Math.max(max, stat.count), 0) || 1
+                  const percentage = Math.round((stats.count / maxCount) * 100)
+                  const topicLabel = topic.charAt(0).toUpperCase() + topic.slice(1)
+                  
+                  let colorClass = 'bg-purple-200'
+                  if (percentage >= 80) colorClass = 'bg-gradient-to-r from-purple-500 to-indigo-600'
+                  else if (percentage >= 60) colorClass = 'bg-gradient-to-r from-purple-400 to-indigo-500'
+                  else if (percentage >= 40) colorClass = 'bg-gradient-to-r from-purple-300 to-indigo-400'
+                  else colorClass = 'bg-gradient-to-r from-purple-200 to-indigo-300'
+                  
+                  return (
+                    <div key={topic} className="p-3 bg-white rounded-lg border border-gray-200">
+                      <div className="flex justify-between items-center mb-1">
+                        <span className="text-xs font-medium text-gray-700">{topicLabel}</span>
+                        <span className="text-xs font-semibold text-gray-600">{stats.count} posts</span>
+                      </div>
+                      <div className="w-full bg-gray-200 rounded-full h-2 mb-2">
+                        <div 
+                          className={`${colorClass} h-2 rounded-full transition-all duration-500`}
+                          style={{ width: `${percentage}%` }}
+                        />
+                      </div>
+                      <div className="text-xs text-gray-600">
+                        Avg engagement: {Math.round(stats.avg_engagement)}
+                      </div>
                     </div>
-                    <div className="w-full bg-gray-200 rounded-full h-1.5">
-                      <div 
-                        className="bg-gradient-to-r from-purple-500 to-indigo-600 h-1.5 rounded-full transition-all duration-500" 
-                        style={{ width: `${percentage}%` }}
-                      />
-                    </div>
-                  </div>
-                )
-              })}
+                  )
+                })}
+            </div>
           </div>
         )}
         
         {!summary && Object.keys(topicStats).length === 0 && (
-          <div className="text-xs text-gray-500 italic">
+          <div className="text-sm text-gray-500 italic">
             No topic analysis available. Check console for debugging info.
           </div>
         )}
@@ -115,20 +131,9 @@ export default function TopicAnalysis({ postsData, llmInsights }) {
   return (
     <Card cardName="Topic Analysis Card">
       <CardHeader>
-        <div className="flex justify-between items-center">
-          <CardTitle className="flex items-center gap-2">
-            🔍 Topic insights
-          </CardTitle>
-        <LLMButton
-          onClick={handleAnalyzeTopics}
-          isLoading={isLoading}
-          icon="🎯"
-          text="Analyze"
-          loadingText="Analyzing..."
-          variant="secondary"
-          size="sm"
-        />
-        </div>
+        <CardTitle className="flex items-center gap-2">
+          🔍 Topic insights
+        </CardTitle>
       </CardHeader>
       <CardContent>
 
@@ -149,11 +154,29 @@ export default function TopicAnalysis({ postsData, llmInsights }) {
       
       {topicAnalysis && !isLoading && renderTopicAnalysis()}
       
-        {!topicAnalysis && !isLoading && !error && (
-          <div className="text-sm text-muted-foreground italic">
-            Click "Analyze with AI" to discover key topics in your content.
-          </div>
-        )}
+      {/* Show button only in dashboard mode, not in report mode */}
+      {!isReportMode && !topicAnalysis && !isLoading && !error && (
+        <div className="flex justify-center mb-4">
+          <LLMButton
+            onClick={handleAnalyzeTopics}
+            isLoading={isLoading}
+            text="Analyze with AI"
+            loadingText="Analyzing topics..."
+            icon="🤖"
+            variant="primary"
+            size="sm"
+          />
+        </div>
+      )}
+      
+      {!topicAnalysis && !isLoading && !error && (
+        <div className="text-sm text-muted-foreground italic">
+          {isReportMode 
+            ? "Topic analysis will be available when this report is generated."
+            : "Click 'Analyze with AI' to discover key topics in your content."
+          }
+        </div>
+      )}
       </CardContent>
     </Card>
   )

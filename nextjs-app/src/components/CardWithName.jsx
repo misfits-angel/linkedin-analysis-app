@@ -1,7 +1,7 @@
 'use client'
 
 import { Card as UICard, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { useCardNames } from '@/lib/contexts/CardNameContext'
+import { useCardNames } from '@/lib/contexts/UIPreferencesContext'
 
 export default function Card({ 
   children, 

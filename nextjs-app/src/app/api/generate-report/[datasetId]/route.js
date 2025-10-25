@@ -21,6 +21,19 @@ export async function POST(request, { params }) {
       return NextResponse.json({ error: 'Dataset ID is required' }, { status: 400 })
     }
 
+    // Get card visibility settings and editable content from request body
+    let cardVisibilitySettings = {}
+    let editableContent = {}
+    try {
+      const requestBody = await request.json()
+      cardVisibilitySettings = requestBody.cardVisibility || {}
+      editableContent = requestBody.editableContent || {}
+      console.log('🎛️ Card visibility settings received:', cardVisibilitySettings)
+      console.log('✏️ Editable content received:', Object.keys(editableContent))
+    } catch (error) {
+      console.warn('⚠️ Could not parse request body for settings:', error.message)
+    }
+
     // Get the origin from the request headers (works for both local and Vercel)
     const origin = request.headers.get('origin') || request.headers.get('host')
     let baseUrl
@@ -150,14 +163,15 @@ export async function POST(request, { params }) {
       // Continue with report generation even if LLM analysis fails
     }
 
-    // Skip static HTML generation for now - focus on LLM insights
-    console.log('📄 Skipping static HTML generation - using dynamic rendering')
-    let staticHtml = null
+    // Using dynamic rendering for all reports
+    console.log('📄 Using dynamic rendering for consistent user experience')
 
-    // Update dataset with shareable URL and LLM insights
+    // Update dataset with shareable URL, LLM insights, card visibility settings, and editable content
     const updateData = { 
       shareable_url: token,
       llm_insights: llmInsights,
+      card_visibility_settings: cardVisibilitySettings,
+      editable_content: editableContent,
       updated_at: new Date().toISOString()
     }
 
@@ -206,186 +220,3 @@ export async function POST(request, { params }) {
   }
 }
 
-/**
- * Generate static HTML content with embedded data and insights
- */
-function generateStaticHtml(analysisData, llmInsights, baseUrl) {
-  const profileName = analysisData?.profile?.name || 'LinkedIn Analytics Report'
-  const currentDate = new Date().toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  })
-
-  // Escape JSON for embedding in HTML
-  const escapedData = JSON.stringify(analysisData).replace(/</g, '\\u003c').replace(/>/g, '\\u003e')
-  const escapedInsights = JSON.stringify(llmInsights).replace(/</g, '\\u003c').replace(/>/g, '\\u003e')
-
-  return `<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${profileName} - LinkedIn Analytics Report</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        .animate-spin {
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-    </style>
-</head>
-<body class="bg-gray-50">
-    <!-- Header -->
-    <div class="bg-white border-b border-gray-200">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-            <div class="text-center">
-                <h1 class="text-3xl font-bold text-gray-900 mb-2">${profileName}</h1>
-                <div class="flex items-center justify-center gap-2">
-                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
-                        ${currentDate}
-                    </span>
-                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                        Last 12 months
-                    </span>
-                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                        Static Report
-                    </span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Main Content -->
-    <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
-        <div id="report-content" class="space-y-8">
-            <!-- Content will be rendered by JavaScript -->
-        </div>
-    </div>
-
-    <!-- Embedded Data -->
-    <script>
-        window.REPORT_DATA = ${escapedData};
-        window.LLM_INSIGHTS = ${escapedInsights};
-    </script>
-
-    <!-- Report Rendering Script -->
-    <script>
-        // Simple report rendering without external dependencies
-        function renderReport() {
-            const data = window.REPORT_DATA;
-            const insights = window.LLM_INSIGHTS;
-            const container = document.getElementById('report-content');
-            
-            if (!data) {
-                container.innerHTML = '<div class="text-center text-gray-500">No data available</div>';
-                return;
-            }
-
-            let html = '';
-
-            // Key Metrics Section
-            html += \`
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-                    <div class="bg-white p-4 rounded-lg shadow">
-                        <div class="text-sm text-gray-600 mb-1">Posts (excl. reshares)</div>
-                        <div class="text-2xl font-bold text-blue-600">\${data.summary?.posts_last_12m ?? '-'}</div>
-                    </div>
-                    <div class="bg-white p-4 rounded-lg shadow">
-                        <div class="text-sm text-gray-600 mb-1">Active months</div>
-                        <div class="text-2xl font-bold text-blue-600">\${data.summary?.active_months ?? '-'}</div>
-                    </div>
-                    <div class="bg-white p-4 rounded-lg shadow">
-                        <div class="text-sm text-gray-600 mb-1">Median engagement</div>
-                        <div class="text-2xl font-bold text-blue-600">\${data.summary?.median_engagement ?? '-'}</div>
-                    </div>
-                    <div class="bg-white p-4 rounded-lg shadow">
-                        <div class="text-sm text-gray-600 mb-1">P90 engagement</div>
-                        <div class="text-2xl font-bold text-blue-600">\${data.summary?.p90_engagement ?? '-'}</div>
-                    </div>
-                </div>
-            \`;
-
-            // LLM Insights Section
-            if (insights && Object.keys(insights).length > 0) {
-                html += '<div class="bg-white p-6 rounded-lg shadow mb-8">';
-                html += '<h2 class="text-xl font-bold mb-4">AI-Powered Insights</h2>';
-                
-                if (insights.narrativeInsights?.insights) {
-                    html += '<div class="mb-6">';
-                    html += '<h3 class="text-lg font-semibold mb-3">Narrative Insights</h3>';
-                    html += '<ul class="space-y-2">';
-                    insights.narrativeInsights.insights.forEach(insight => {
-                        html += \`<li class="flex items-start"><span class="text-blue-500 mr-2">•</span><span>\${insight}</span></li>\`;
-                    });
-                    html += '</ul>';
-                    html += '</div>';
-                }
-
-                if (insights.topicAnalysis?.topics) {
-                    html += '<div class="mb-6">';
-                    html += '<h3 class="text-lg font-semibold mb-3">Content Topics</h3>';
-                    html += '<div class="flex flex-wrap gap-2">';
-                    insights.topicAnalysis.topics.forEach(topic => {
-                        html += \`<span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">\${topic}</span>\`;
-                    });
-                    html += '</div>';
-                    html += '</div>';
-                }
-
-                if (insights.postEvaluation?.one_line_summary) {
-                    html += '<div class="mb-6">';
-                    html += '<h3 class="text-lg font-semibold mb-3">Content Quality Assessment</h3>';
-                    html += \`<p class="text-gray-700">\${insights.postEvaluation.one_line_summary}</p>\`;
-                    if (insights.postEvaluation.score_100) {
-                        html += \`<div class="mt-2 text-sm text-gray-600">Overall Score: \${insights.postEvaluation.score_100}/100</div>\`;
-                    }
-                    html += '</div>';
-                }
-
-                if (insights.positioningAnalysis?.current_branding?.positioning_summary) {
-                    html += '<div class="mb-6">';
-                    html += '<h3 class="text-lg font-semibold mb-3">Personal Branding Analysis</h3>';
-                    html += \`<p class="text-gray-700">\${insights.positioningAnalysis.current_branding.positioning_summary}</p>\`;
-                    html += '</div>';
-                }
-
-                html += '</div>';
-            }
-
-            // Posts Timeline (Simple)
-            if (data.posts && data.posts.length > 0) {
-                html += '<div class="bg-white p-6 rounded-lg shadow">';
-                html += '<h2 class="text-xl font-bold mb-4">Recent Posts</h2>';
-                html += '<div class="space-y-4 max-h-96 overflow-y-auto">';
-                
-                // Show last 10 posts
-                data.posts.slice(-10).reverse().forEach(post => {
-                    const postDate = post.date ? new Date(post.date).toLocaleDateString() : 'Unknown date';
-                    const content = post.content ? post.content.substring(0, 200) + (post.content.length > 200 ? '...' : '') : 'No content';
-                    
-                    html += \`
-                        <div class="border-l-4 border-blue-500 pl-4 py-2">
-                            <div class="text-sm text-gray-600 mb-1">\${postDate} • \${post.type} • \${post.eng} engagement</div>
-                            <div class="text-gray-800">\${content}</div>
-                        </div>
-                    \`;
-                });
-                
-                html += '</div>';
-                html += '</div>';
-            }
-
-            container.innerHTML = html;
-        }
-
-        // Render when page loads
-        document.addEventListener('DOMContentLoaded', renderReport);
-    </script>
-</body>
-</html>`;
-}

@@ -102,15 +102,18 @@ export default function ProtectedRoute({ children }) {
               </div>
             </div>
             
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={signOut}
-              className="flex items-center space-x-2"
-            >
-              <LogOut className="h-4 w-4" />
-              <span>Sign Out</span>
-            </Button>
+            <div className="flex items-center space-x-3">
+              <span className="text-sm text-gray-600">Admin Access</span>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={signOut}
+                className="flex items-center space-x-2"
+              >
+                <LogOut className="h-4 w-4" />
+                <span>Sign Out</span>
+              </Button>
+            </div>
           </div>
         </div>
       </div>

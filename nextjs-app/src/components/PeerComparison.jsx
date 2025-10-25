@@ -57,8 +57,8 @@ export default function PeerComparison({ data }) {
     const insights = []
     
     // Posts comparison
-    const yourPosts = you?.summary?.posts_last_12m || 0
-    const peerPosts = peer?.summary?.posts_last_12m || 0
+    const yourPosts = (you?.summary?.posts_in_period ?? you?.summary?.posts_last_12m) || 0
+    const peerPosts = (peer?.summary?.posts_in_period ?? peer?.summary?.posts_last_12m) || 0
     if (yourPosts > 0 && peerPosts > 0) {
       const postDiff = Math.round(((yourPosts - peerPosts) / peerPosts) * 100)
       if (Math.abs(postDiff) > 10) {
@@ -172,7 +172,7 @@ export default function PeerComparison({ data }) {
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between">
                   <span className="text-gray-600">Posts (12m):</span>
-                  <span className="font-semibold">{data.summary?.posts_last_12m || 0}</span>
+                  <span className="font-semibold">{(data.summary?.posts_in_period ?? data.summary?.posts_last_12m) || 0}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-600">Median Engagement:</span>
@@ -198,7 +198,7 @@ export default function PeerComparison({ data }) {
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between">
                   <span className="text-gray-600">Posts (12m):</span>
-                  <span className="font-semibold">{peerData.summary?.posts_last_12m || 0}</span>
+                  <span className="font-semibold">{(peerData.summary?.posts_in_period ?? peerData.summary?.posts_last_12m) || 0}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-600">Median Engagement:</span>

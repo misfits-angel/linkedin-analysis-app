@@ -1,7 +1,7 @@
 'use client'
 
 import { useMemo } from 'react'
-import { labelMonth } from '@/lib/csv-processor'
+import { labelMonth } from '@/lib/utils/dateUtils'
 import Card, { CardContent, CardHeader, CardTitle } from '@/components/CardWithName'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 
@@ -82,7 +82,12 @@ export default function PostDistributionHeatmap({ data }) {
     <Card cardName="Post Distribution Heatmap Card">
       <CardHeader>
         <CardTitle>📅 Post Distribution</CardTitle>
-        <div className="text-xs text-muted-foreground">Last 12 months: {labelMonth(months[0])} - {labelMonth(months[months.length - 1])}</div>
+        <div className="text-xs text-muted-foreground">
+          {data?.summary?.analysis_period_months ? 
+            `Last ${data.summary.analysis_period_months} months: ${labelMonth(months[0])} - ${labelMonth(months[months.length - 1])}` :
+            `Last 12 months: ${labelMonth(months[0])} - ${labelMonth(months[months.length - 1])}`
+          }
+        </div>
       </CardHeader>
       <CardContent>
       
@@ -94,7 +99,7 @@ export default function PostDistributionHeatmap({ data }) {
           <div className="rounded-md border">
             <Table>
               <TableHeader>
-                <TableRow className="bg-muted">
+                <TableRow style={{ backgroundColor: '#D6E3DD' }}>
                   <TableHead className="w-[120px]">Day</TableHead>
                   <TableHead className="w-[80px] text-center">Posts</TableHead>
                   <TableHead className="w-[80px] text-center">Engagement</TableHead>
@@ -132,7 +137,7 @@ export default function PostDistributionHeatmap({ data }) {
               <TableRow className="bg-muted font-semibold">
                 <TableCell className="font-semibold">Total</TableCell>
                 <TableCell className="text-center font-semibold">
-                  {data?.summary?.posts_last_12m || 0}
+                  {(data?.summary?.posts_in_period ?? data?.summary?.posts_last_12m) || 0}
                 </TableCell>
                 <TableCell className="text-center font-semibold">
                   {Math.round(Object.values(monthly_daily).reduce((sum, monthData) => {
@@ -152,7 +157,7 @@ export default function PostDistributionHeatmap({ data }) {
           <div className="rounded-md border">
             <Table>
               <TableHeader>
-                <TableRow className="bg-muted">
+                <TableRow style={{ backgroundColor: '#D6E3DD' }}>
                   <TableHead className="w-[120px]">Month</TableHead>
                   <TableHead className="w-[80px] text-center">Posts</TableHead>
                   <TableHead className="w-[80px] text-center">Engagement</TableHead>
@@ -190,7 +195,7 @@ export default function PostDistributionHeatmap({ data }) {
               <TableRow className="bg-muted font-semibold">
                 <TableCell className="font-semibold">Total</TableCell>
                 <TableCell className="text-center font-semibold">
-                  {data?.summary?.posts_last_12m || 0}
+                  {(data?.summary?.posts_in_period ?? data?.summary?.posts_last_12m) || 0}
                 </TableCell>
                 <TableCell className="text-center font-semibold">
                   {Math.round(Object.values(monthly_daily).reduce((sum, monthData) => {

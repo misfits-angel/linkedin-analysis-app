@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Card, { CardContent, CardHeader, CardTitle } from '@/components/CardWithName'
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
 
 export default function TopPosts({ data }) {
   const [expandedPosts, setExpandedPosts] = useState(new Set())
@@ -10,10 +11,10 @@ export default function TopPosts({ data }) {
   if (posts.length === 0) {
     return (
       <Card cardName="Top Posts Card">
-        <CardHeader>
+        <CardHeader className="pb-0">
           <CardTitle>🏆 Top Performing Posts</CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className="pt-0 -mt-12">
           <div className="text-sm text-muted-foreground">No post-level data available. Upload CSV to enable this.</div>
         </CardContent>
       </Card>
@@ -57,10 +58,10 @@ export default function TopPosts({ data }) {
 
   return (
     <Card cardName="Top Posts Card">
-      <CardHeader>
+      <CardHeader className="pb-0">
         <CardTitle>🏆 Top Performing Posts</CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className="pt-0 -mt-12">
       
       <div className="space-y-3">
         {topPosts.map((post, index) => {
@@ -78,38 +79,24 @@ export default function TopPosts({ data }) {
               </div>
               
               <div className="text-sm text-gray-800">
-                <span className="post-content-preview">{clippedContent}</span>
-                {needsExpansion && (
-                  <div className={`post-content-full mt-2 pt-2 border-t border-gray-200 ${isExpanded ? 'block' : 'hidden'}`}>
-                    {post.content}
+                <Collapsible open={isExpanded} onOpenChange={() => togglePostExpansion(index)}>
+                  <div>
+                    {isExpanded ? post.content : clippedContent}
+                    {needsExpansion && (
+                      <CollapsibleTrigger asChild>
+                        <a className="text-gray-500 hover:text-gray-700 ml-1 text-xs underline cursor-pointer">
+                          {isExpanded ? 'Show less' : 'Show more'}
+                        </a>
+                      </CollapsibleTrigger>
+                    )}
                   </div>
-                )}
+                </Collapsible>
               </div>
               
               <div className="text-xs text-gray-500 mt-1">
                 Month: {formatMonth(post.month)}
               </div>
               
-              <div className="flex items-baseline gap-3 mt-2">
-                {post.url && (
-                  <a 
-                    href={post.url} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="text-blue-600 hover:text-blue-800 text-xs"
-                  >
-                    🔗 View on LinkedIn
-                  </a>
-                )}
-                {needsExpansion && (
-                  <span
-                    onClick={() => togglePostExpansion(index)}
-                    className="text-blue-600 hover:text-blue-800 text-xs cursor-pointer"
-                  >
-                    {isExpanded ? '📕 Show less' : '📖 Read full post'}
-                  </span>
-                )}
-              </div>
             </div>
           )
         })}

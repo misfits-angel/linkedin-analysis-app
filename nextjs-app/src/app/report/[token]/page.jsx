@@ -1,28 +1,184 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import React, { useState, useEffect } from 'react'
 import { Badge } from '@/components/ui/badge'
-import MetricsDisplay from '@/components/MetricsDisplay'
-import ChartSection from '@/components/ChartSection'
-import InsightsPanel from '@/components/InsightsPanel'
-import EngagementAnalysis from '@/components/EngagementAnalysis'
-import PostingRhythm from '@/components/PostingRhythm'
-import TimingInsights from '@/components/TimingInsights'
-import PostDistributionHeatmap from '@/components/PostDistributionHeatmap'
-import TopPosts from '@/components/TopPosts'
-import PeerComparison from '@/components/PeerComparison'
-import ValueProposition from '@/components/ValueProposition'
-import LinkedinAnalyticsCard from '@/components/LinkedinAnalyticsCard'
-import PostTypeMosaic from '@/components/PostTypeMosaic'
-import PostTypeDistributionCard from '@/components/PostTypeDistributionCard'
 import { supabase } from '@/lib/supabase-client'
-import { CardNameProvider } from '@/lib/contexts/CardNameContext'
+import { ShareableReportUIPreferencesProvider, useCardVisibility } from '@/lib/contexts/ShareableReportUIPreferencesContext'
+import { EditableContentProvider } from '@/lib/contexts/EditableContentContext'
+import { getVisibleCardComponents, getCardOrder } from '@/lib/utils/dynamicCardDetection'
+import ConditionalCard from '@/components/ConditionalCard'
+
+function DynamicReportContent({ data }) {
+  const { cardVisibility, isInitialized } = useCardVisibility()
+  const [screenWidth, setScreenWidth] = React.useState(0)
+
+  // Add screen width detection
+  React.useEffect(() => {
+    const updateScreenWidth = () => {
+      const width = window.innerWidth
+      setScreenWidth(width)
+      
+      const widthElement = document.getElementById('screen-width')
+      if (widthElement) {
+        widthElement.textContent = `${width}px`
+        console.log('Screen width updated:', width)
+      }
+    }
+    
+    // Use setTimeout to ensure DOM is ready
+    setTimeout(updateScreenWidth, 100)
+    window.addEventListener('resize', updateScreenWidth)
+    return () => window.removeEventListener('resize', updateScreenWidth)
+  }, [])
+
+  if (!isInitialized) {
+    return null
+  }
+
+  // Get all visible card components dynamically (with null check for data)
+  const visibleCardComponents = data ? getVisibleCardComponents(cardVisibility, data) : []
+  const cardOrder = getCardOrder(cardVisibility)
+  
+  // Sort visible components by the preferred order
+  const orderedComponents = cardOrder.map(cardId => 
+    visibleCardComponents.find(comp => comp.cardId === cardId)
+  ).filter(Boolean)
+
+  // Separate components into Analytics and Unstoppable sections
+  const analyticsCards = [
+    'posts-count', 'active-months', 'median-engagement', 'p90-engagement', 
+    'avg-posts-per-month', 'longest-gap', 'avg-posting-gap', 'peak-month',
+    'linkedin-analytics', 'post-type-mosaic', 'engagement-trend-chart', 
+    'posts-per-month-chart', 'format-mix-chart', 'top-topics-chart',
+    'engagement-by-format', 'ai-insights-summary', 'ai-recommendations', 
+    'ai-content-analysis', 'timing-insights', 'day-wise-distribution', 
+    'monthly-distribution', 'ai-topic-analysis', 'top-posts', 
+    'peer-comparison', 'value-proposition'
+  ]
+
+  const unstoppableCards = [
+    'why-us', 'how-we-work', 'what-you-get', 'investment-terms', 'next-steps'
+  ]
+
+  const analyticsComponents = orderedComponents.filter(comp => 
+    analyticsCards.includes(comp.cardId)
+  )
+
+  const unstoppableComponents = orderedComponents.filter(comp => 
+    unstoppableCards.includes(comp.cardId)
+  )
+
+  if (orderedComponents.length === 0) {
+    return null
+  }
+
+  return (
+    <div className="w-full">
+      {/* Debug info - remove in production */}
+      {process.env.NODE_ENV === 'development' && (
+        <div style={{ position: 'fixed', top: '1rem', right: '1rem', zIndex: 50, background: 'black', color: 'white', padding: '0.5rem', fontSize: '0.75rem', borderRadius: '0.25rem' }}>
+          <div>Screen: {screenWidth < 640 ? 'XS' : screenWidth < 768 ? 'SM' : screenWidth < 1024 ? 'MD' : screenWidth < 1280 ? 'LG' : 'XL+'}</div>
+          <div>Analytics: {analyticsComponents.length} cards</div>
+          <div>Unstoppable: {unstoppableComponents.length} cards</div>
+          <div>Width: {screenWidth}px</div>
+          <div>Breakpoint: 1024px</div>
+          <div style={{ marginTop: '0.5rem', paddingTop: '0.5rem', borderTop: '1px solid #444' }}>
+            <div style={{ color: screenWidth >= 1024 ? '#4ade80' : '#fbbf24' }}>
+              {screenWidth >= 1024 ? '✓ Desktop Mode Active' : '⚠ Mobile Mode Active'}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Analytics Section */}
+      {analyticsComponents.length > 0 && (
+        <section style={{ marginBottom: '3rem' }}>
+          {/* Section Header */}
+          <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+            <h2 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '0.5rem' }}>Analytics</h2>
+            <div style={{ marginBottom: '0.5rem' }}>
+              <span style={{ 
+                display: 'inline-flex', 
+                alignItems: 'center', 
+                padding: '0.25rem 0.75rem', 
+                borderRadius: '9999px', 
+                fontSize: '0.75rem', 
+                fontWeight: '500', 
+                border: '1px solid #d1d5db', 
+                color: '#374151',
+                backgroundColor: 'transparent'
+              }}>
+                {data?.summary?.analysis_period_months ? 
+                  `Last ${data.summary.analysis_period_months} months` : 
+                  'Last 12 months'
+                }
+              </span>
+            </div>
+            <p style={{ color: '#6b7280', fontSize: '1rem' }}>Your LinkedIn performance insights</p>
+          </div>
+
+          {/* Analytics Layout - 2 columns on desktop, 1 column on mobile */}
+          {screenWidth >= 1024 ? (
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1.5rem' }}>
+              {/* Left Column */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                {analyticsComponents.filter((_, index) => index % 2 === 0).map(({ cardId, Component, props }) => (
+                  <ConditionalCard key={cardId} cardId={cardId}>
+                    <Component {...props} />
+                  </ConditionalCard>
+                ))}
+              </div>
+
+              {/* Right Column */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                {analyticsComponents.filter((_, index) => index % 2 === 1).map(({ cardId, Component, props }) => (
+                  <ConditionalCard key={cardId} cardId={cardId}>
+                    <Component {...props} />
+                  </ConditionalCard>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              {analyticsComponents.map(({ cardId, Component, props }) => (
+                <ConditionalCard key={cardId} cardId={cardId}>
+                  <Component {...props} />
+                </ConditionalCard>
+              ))}
+            </div>
+          )}
+        </section>
+      )}
+
+      {/* Unstoppable Section */}
+      {unstoppableComponents.length > 0 && (
+        <section>
+          {/* Section Header */}
+          <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+            <h2 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '0.5rem' }}>Unstoppable</h2>
+            <p style={{ color: '#6b7280', fontSize: '1rem' }}>Your path to LinkedIn success starts here</p>
+          </div>
+
+          {/* Unstoppable Layout - Always 1 column */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', maxWidth: '800px', margin: '0 auto' }}>
+            {unstoppableComponents.map(({ cardId, Component, props }) => (
+              <ConditionalCard key={cardId} cardId={cardId}>
+                <Component {...props} />
+              </ConditionalCard>
+            ))}
+          </div>
+        </section>
+      )}
+    </div>
+  )
+}
 
 export default function StaticReport({ params }) {
   const [data, setData] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const [cardVisibilitySettings, setCardVisibilitySettings] = useState({})
+  const [editableContent, setEditableContent] = useState({})
 
   useEffect(() => {
     const loadReportData = async () => {
@@ -44,22 +200,23 @@ export default function StaticReport({ params }) {
           throw new Error('Report not found')
         }
 
-        // Check if static HTML content is available
-        if (dataset.static_html_content) {
-          // For static reports, we'll render the HTML content directly
-          setData({
-            ...dataset.analysis_data,
-            staticHtmlContent: dataset.static_html_content,
-            llmInsights: dataset.llm_insights,
-            isStaticReport: true
-          })
-        } else {
-          // Dynamic rendering with LLM insights included
-          setData({
-            ...dataset.analysis_data,
-            llmInsights: dataset.llm_insights
-          })
+        // Store card visibility settings from the dataset
+        if (dataset.card_visibility_settings) {
+          console.log('🎛️ Loading card visibility settings from dataset:', dataset.card_visibility_settings)
+          setCardVisibilitySettings(dataset.card_visibility_settings)
         }
+
+        // Store editable content from the dataset
+        if (dataset.editable_content) {
+          console.log('✏️ Loading editable content from dataset:', Object.keys(dataset.editable_content))
+          setEditableContent(dataset.editable_content)
+        }
+
+        // Always use dynamic rendering for consistent user experience
+        setData({
+          ...dataset.analysis_data,
+          llmInsights: dataset.llm_insights
+        })
       } catch (err) {
         console.error('Failed to load report:', err)
         setError(err.message)
@@ -75,10 +232,10 @@ export default function StaticReport({ params }) {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="text-center">
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+        <div className="text-center max-w-sm w-full">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900 mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading report...</p>
+          <p className="text-gray-600 text-sm sm:text-base">Loading report...</p>
         </div>
       </div>
     )
@@ -86,11 +243,11 @@ export default function StaticReport({ params }) {
 
   if (error) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="text-center">
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+        <div className="text-center max-w-sm w-full">
           <div className="text-4xl mb-4">📊</div>
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">Report Not Found</h1>
-          <p className="text-gray-600">{error}</p>
+          <h1 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">Report Not Found</h1>
+          <p className="text-gray-600 text-sm sm:text-base">{error}</p>
         </div>
       </div>
     )
@@ -98,37 +255,29 @@ export default function StaticReport({ params }) {
 
   if (!data) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="text-center">
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+        <div className="text-center max-w-sm w-full">
           <div className="text-4xl mb-4">📊</div>
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">No Data Available</h1>
-          <p className="text-gray-600">This report contains no data.</p>
+          <h1 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">No Data Available</h1>
+          <p className="text-gray-600 text-sm sm:text-base">This report contains no data.</p>
         </div>
       </div>
     )
   }
 
-  // If this is a static report with HTML content, render it directly
-  if (data?.isStaticReport && data?.staticHtmlContent) {
-    return (
-      <div 
-        dangerouslySetInnerHTML={{ __html: data.staticHtmlContent }}
-        className="min-h-screen"
-      />
-    )
-  }
 
   return (
-    <CardNameProvider>
-      <div className="min-h-screen bg-gray-50">
+    <ShareableReportUIPreferencesProvider initialCardVisibility={cardVisibilitySettings}>
+      <EditableContentProvider initialEditableContent={editableContent}>
+        <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <div className="bg-white border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
           <div className="text-center">
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2 px-2">
               {data?.profile?.name || 'LinkedIn Analytics Report'}
             </h1>
-            <div className="flex items-center justify-center gap-2">
+            <div className="flex flex-wrap items-center justify-center gap-2 px-2">
               <Badge variant="secondary" className="text-xs">
                 {new Date().toLocaleDateString('en-US', {
                   year: 'numeric',
@@ -136,165 +285,17 @@ export default function StaticReport({ params }) {
                   day: 'numeric'
                 })}
               </Badge>
-              <Badge variant="outline" className="text-xs">Last 12 months</Badge>
-              <Badge variant="outline" className="text-xs">Dynamic Report</Badge>
             </div>
           </div>
         </div>
       </div>
 
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
-        <div className="space-y-8">
-          {/* Key Numbers Section */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <Card>
-              <CardContent className="p-4">
-                <div className="text-sm text-muted-foreground mb-1">
-                  Posts <span className="text-xs">(excl. reshares)</span>
-                </div>
-                <div className="text-2xl font-bold text-primary">
-                  {data?.summary?.posts_last_12m ?? '-'}
-                </div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="p-4">
-                <div className="text-sm text-muted-foreground mb-1">
-                  Active months
-                </div>
-                <div className="text-2xl font-bold text-primary">
-                  {data?.summary?.active_months ?? '-'}
-                </div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="p-4">
-                <div className="text-sm text-muted-foreground mb-1">
-                  Median engagement
-                </div>
-                <div className="text-2xl font-bold text-primary">
-                  {data?.summary?.median_engagement ?? '-'}
-                </div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="p-4">
-                <div className="text-sm text-muted-foreground mb-1">
-                  P90 engagement
-                </div>
-                <div className="text-2xl font-bold text-primary">
-                  {data?.summary?.p90_engagement ?? '-'}
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-
-          {/* Analytics Cards Row */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
-            {/* LinkedIn Analytics Card */}
-            <div className="space-y-4">
-              {data?.trends?.posts_per_month && (
-                <LinkedinAnalyticsCard
-                  monthlyCounts={Object.values(data.trends.posts_per_month)}
-                  start={{ month: 9, year: 2024 }}
-                  insight=""
-                  posts={data.posts || []}
-                  summaryData={data.summary}
-                />
-              )}
-            </div>
-
-            {/* Post Type Distribution Cards */}
-            {data?.mix?.type_share && (
-              <div className="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-8">
-                {/* Original PostTypeMosaic - Single Column Stack */}
-                <div className="space-y-4">
-                  <h3 className="text-sm font-medium text-gray-600 text-center">Single Column Stack</h3>
-                  <div className="flex justify-center">
-                    <div className="w-[280px]">
-                      <PostTypeMosaic
-                        data={(() => {
-                          const entries = Object.entries(data.mix.type_share);
-                          return entries.map(([type, share]) => ({
-                            type: type.charAt(0).toUpperCase() + type.slice(1),
-                            value: Math.round((share || 0) * 100),
-                            color: undefined
-                          }));
-                        })()}
-                        options={{
-                          columns: 1,
-                          preferOneColumnForThree: false,
-                          minH: 80,
-                          maxH: 250,
-                          unit: 2.5
-                        }}
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                {/* New PostTypeDistributionCard - Two Column Weighted */}
-                <div className="space-y-4">
-                  <h3 className="text-sm font-medium text-gray-600 text-center">Two Column Weighted</h3>
-                  <div className="flex justify-center">
-                    <div className="w-[280px] h-[400px]">
-                      <PostTypeDistributionCard
-                        data={(() => {
-                          const entries = Object.entries(data.mix.type_share);
-                          return entries.map(([type, share]) => ({
-                            type: type.charAt(0).toUpperCase() + type.slice(1),
-                            desc: type === 'text' ? 'Pure text updates' :
-                                  type === 'image' ? 'Posts with static visuals' :
-                                  type === 'video' ? 'Clips or video snippets' : `${type} content`,
-                            value: Math.round((share || 0) * 100),
-                            color: undefined
-                          }));
-                        })()}
-                        options={{
-                          columns: 2,
-                          preferOneColumnForThree: false,
-                          minH: 0,
-                          maxH: 400,
-                          unit: 4
-                        }}
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-
-          {/* Charts Section */}
-          <ChartSection data={data} />
-
-          {/* Engagement Analysis */}
-          <EngagementAnalysis data={data} />
-
-          {/* AI Insights */}
-          <InsightsPanel data={data} />
-
-          {/* Timing Insights */}
-          <TimingInsights data={data} />
-
-          {/* Post Distribution Heatmap */}
-          <PostDistributionHeatmap data={data} />
-
-          {/* Posting Rhythm & Top Posts */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <PostingRhythm data={data} />
-            <TopPosts data={data} />
-          </div>
-
-          {/* Peer Comparison */}
-          <PeerComparison data={data} />
-
-          {/* Value Proposition Section */}
-          <ValueProposition data={data} />
-        </div>
+      <div className="max-w-7xl mx-auto py-4 sm:py-8 px-3 sm:px-4 lg:px-8">
+        <DynamicReportContent data={data} />
       </div>
     </div>
-    </CardNameProvider>
+      </EditableContentProvider>
+    </ShareableReportUIPreferencesProvider>
   )
 }

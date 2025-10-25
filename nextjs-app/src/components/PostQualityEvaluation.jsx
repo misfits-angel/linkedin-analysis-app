@@ -4,13 +4,19 @@ import { useState } from 'react'
 import { useLLMInsights } from '@/lib/hooks/useLLMInsights'
 import LLMButton from './LLMButton'
 import Card, { CardContent, CardHeader, CardTitle } from '@/components/CardWithName'
+import { usePathname } from 'next/navigation'
 
 export default function PostQualityEvaluation({ postsData, llmInsights }) {
   const [evaluation, setEvaluation] = useState(llmInsights?.postEvaluation || null)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(null)
+  const [isExpanded, setIsExpanded] = useState(false)
+  const pathname = usePathname()
   
-  const { evaluatePosts } = useLLMInsights()
+  const { evaluatePosts } = useLLMInsights('ai-content-analysis')
+  
+  // Check if we're in report mode (not dashboard)
+  const isReportMode = pathname?.startsWith('/report/')
 
   const handleEvaluatePosts = async () => {
     if (!postsData || postsData.length === 0) {
@@ -120,46 +126,73 @@ export default function PostQualityEvaluation({ postsData, llmInsights }) {
           </div>
         )}
         
-        {/* Overall Analysis */}
-        {overall_analysis && (
-          <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg">
-            <div className="flex items-start gap-2">
-              <div className="text-xl">📊</div>
-              <div className="flex-1">
-                <div className="font-semibold text-blue-800 mb-1">Overall Analysis</div>
-                <div className="text-sm text-blue-700">{overall_analysis}</div>
+        {/* Detailed Analysis Sections - Only show when expanded */}
+        {isExpanded && (
+          <>
+            {/* Overall Analysis */}
+            {overall_analysis && (
+              <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                <div className="flex items-start gap-2">
+                  <div className="text-xl">📊</div>
+                  <div className="flex-1">
+                    <div className="font-semibold text-blue-800 mb-1">Overall Analysis</div>
+                    <div className="text-sm text-blue-700">{overall_analysis}</div>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
+            )}
+            
+            {/* Strengths */}
+            {strengths.length > 0 && (
+              <div className="space-y-2">
+                <div className="text-sm font-semibold text-gray-700">✅ Strengths</div>
+                <div className="space-y-2">
+                  {strengths.map((strength, idx) => (
+                    <div key={idx} className="flex items-start gap-2 p-2">
+                      <div className="text-green-600 text-sm">✓</div>
+                      <div className="text-sm text-gray-700">{strength}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+            
+            {/* Areas for Improvement */}
+            {improvements.length > 0 && (
+              <div className="space-y-2">
+                <div className="text-sm font-semibold text-gray-700">🔧 Areas for Improvement</div>
+                <div className="space-y-2">
+                  {improvements.map((improvement, idx) => (
+                    <div key={idx} className="flex items-start gap-2 p-2">
+                      <div className="text-blue-600 text-sm">→</div>
+                      <div className="text-sm text-gray-700">{improvement}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </>
         )}
         
-        {/* Strengths */}
-        {strengths.length > 0 && (
-          <div className="space-y-2">
-            <div className="text-sm font-semibold text-gray-700">✅ Strengths</div>
-            <div className="space-y-2">
-              {strengths.map((strength, idx) => (
-                <div key={idx} className="flex items-start gap-2 p-2">
-                  <div className="text-green-600 text-sm">✓</div>
-                  <div className="text-sm text-gray-700">{strength}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-        
-        {/* Areas for Improvement */}
-        {improvements.length > 0 && (
-          <div className="space-y-2">
-            <div className="text-sm font-semibold text-gray-700">🔧 Areas for Improvement</div>
-            <div className="space-y-2">
-              {improvements.map((improvement, idx) => (
-                <div key={idx} className="flex items-start gap-2 p-2">
-                  <div className="text-blue-600 text-sm">→</div>
-                  <div className="text-sm text-gray-700">{improvement}</div>
-                </div>
-              ))}
-            </div>
+        {/* See More/Less Toggle Button */}
+        {(overall_analysis || strengths.length > 0 || improvements.length > 0) && (
+          <div className="flex justify-center pt-2">
+            <button
+              onClick={() => setIsExpanded(!isExpanded)}
+              className="text-xs text-gray-500 hover:text-gray-700 transition-colors duration-200 flex items-center gap-1 px-2 py-1 rounded-md hover:bg-gray-50"
+            >
+              {isExpanded ? (
+                <>
+                  <span>See Less</span>
+                  <span className="text-gray-400">↑</span>
+                </>
+              ) : (
+                <>
+                  <span>See More</span>
+                  <span className="text-gray-400">↓</span>
+                </>
+              )}
+            </button>
           </div>
         )}
       </div>
@@ -169,21 +202,10 @@ export default function PostQualityEvaluation({ postsData, llmInsights }) {
   return (
     <Card cardName="Post Quality Evaluation Card">
       <CardHeader>
-        <div className="flex justify-between items-center">
-          <CardTitle className="flex items-center gap-2">
-          Post Quality Evaluation
-            {evaluation && ` • ${evaluation.score_100}/100`}
-          </CardTitle>
-          <LLMButton
-          onClick={handleEvaluatePosts}
-          isLoading={isLoading}
-          icon="🎯"
-          text="Evaluate"
-          loadingText="Evaluating..."
-          variant="primary"
-          size="sm"
-        />
-        </div>
+        <CardTitle className="flex items-center gap-2">
+        Post Quality Evaluation
+          {evaluation && ` • ${evaluation.score_100}/100`}
+        </CardTitle>
       </CardHeader>
       <CardContent>
 
@@ -204,11 +226,29 @@ export default function PostQualityEvaluation({ postsData, llmInsights }) {
       
       {evaluation && !isLoading && renderEvaluation()}
       
-        {!evaluation && !isLoading && !error && (
-          <div className="text-sm text-muted-foreground italic">
-            Click "Evaluate" to get AI-powered quality assessment of your content.
-          </div>
-        )}
+      {/* Show button only in dashboard mode, not in report mode */}
+      {!isReportMode && !evaluation && !isLoading && !error && (
+        <div className="flex justify-center mb-4">
+          <LLMButton
+            onClick={handleEvaluatePosts}
+            isLoading={isLoading}
+            text="Evaluate Posts"
+            loadingText="Evaluating posts..."
+            icon="📊"
+            variant="primary"
+            size="sm"
+          />
+        </div>
+      )}
+      
+      {!evaluation && !isLoading && !error && (
+        <div className="text-sm text-muted-foreground italic">
+          {isReportMode 
+            ? "Post quality evaluation will be available when this report is generated."
+            : "Click 'Evaluate Posts' to get AI-powered quality assessment of your content."
+          }
+        </div>
+      )}
       </CardContent>
     </Card>
   )

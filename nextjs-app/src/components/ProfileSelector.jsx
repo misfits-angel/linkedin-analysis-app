@@ -31,9 +31,7 @@ import {
   SortAsc,
   SortDesc,
   ChevronUp,
-  ChevronRight as ChevronRightIcon,
-  Eye,
-  EyeOff
+  ChevronRight as ChevronRightIcon
 } from 'lucide-react'
 import { useDataPersistence } from '@/lib/hooks/useDataPersistence'
 
@@ -52,7 +50,7 @@ export function ProfileSelector({
   const [currentPage, setCurrentPage] = useState(1)
   const [isCollapsed, setIsCollapsed] = useState(defaultCollapsed)
   const profilesPerPage = 5
-  const { loadAllDatasets, deleteDataset } = useDataPersistence()
+  const { loadAllDatasets, deleteDataset, deleteProfile } = useDataPersistence()
 
   // Load all available datasets
   useEffect(() => {
@@ -125,16 +123,17 @@ export function ProfileSelector({
   }
 
   const handleDeleteProfile = async (datasetId, authorName) => {
-    if (window.confirm(`Are you sure you want to delete ${authorName}'s profile?`)) {
+    if (window.confirm(`Are you sure you want to delete the entire profile for ${authorName}?\n\n⚠️ This will permanently remove:\n- The entire profile from the database\n- All LinkedIn analysis data\n- All associated reports and settings\n\nThis action cannot be undone.`)) {
       try {
-        const success = await deleteDataset(datasetId)
+        const success = await deleteProfile(datasetId)
         if (success) {
-          // Remove from local state
+          // Remove the deleted dataset from local state
           setDatasets(prev => prev.filter(ds => ds.id !== datasetId))
-          // If this was the current profile, clear it
+          // If this was the current profile, reset the app state
           if (currentProfile?.id === datasetId) {
             onProfileSelect(null)
           }
+          console.log('Profile deleted successfully')
         }
       } catch (err) {
         console.error('Failed to delete profile:', err)
@@ -219,42 +218,49 @@ export function ProfileSelector({
 
   return (
     <Card className="w-full">
-      <CardHeader>
-        <CardTitle className="flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <Users className="h-5 w-5" />
-            <span>Select Profile</span>
-            <Badge variant="secondary">{totalFiltered}</Badge>
-            {searchQuery && (
-              <Badge variant="outline" className="text-xs">
-                {datasets.length} total
-              </Badge>
-            )}
-            {currentProfile && (
-              <Badge variant="default" className="text-xs">
-                {currentProfile.name}
-              </Badge>
-            )}
-          </div>
-          <div className="flex items-center space-x-2">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setIsCollapsed(!isCollapsed)}
-              className="h-8 w-8 p-0"
-              title={isCollapsed ? "Show profile selector" : "Hide profile selector"}
-            >
-              {isCollapsed ? <Eye className="h-4 w-4" /> : <EyeOff className="h-4 w-4" />}
-            </Button>
-            {showUploadButton && (
-              <Button onClick={onUploadNew} size="sm">
-                <Upload className="h-4 w-4 mr-2" />
-                Upload New
-              </Button>
-            )}
-          </div>
-        </CardTitle>
-      </CardHeader>
+      <div
+        className="cursor-pointer hover:bg-muted/50 transition-colors"
+        onClick={() => setIsCollapsed(!isCollapsed)}
+      >
+        <CardHeader>
+          <CardTitle className="flex items-center justify-between">
+            <div className="flex items-center space-x-2">
+              <Users className="h-5 w-5" />
+              <span>Select Profile</span>
+              <Badge variant="secondary">{totalFiltered}</Badge>
+              {searchQuery && (
+                <Badge variant="outline" className="text-xs">
+                  {datasets.length} total
+                </Badge>
+              )}
+              {currentProfile && (
+                <Badge variant="default" className="text-xs">
+                  {currentProfile.name}
+                </Badge>
+              )}
+            </div>
+            <div className="flex items-center space-x-2">
+              {isCollapsed ? (
+                <ChevronRight className="h-4 w-4" />
+              ) : (
+                <ChevronDown className="h-4 w-4" />
+              )}
+              {showUploadButton && (
+                <Button 
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    onUploadNew()
+                  }} 
+                  size="sm"
+                >
+                  <Upload className="h-4 w-4 mr-2" />
+                  Upload New
+                </Button>
+              )}
+            </div>
+          </CardTitle>
+        </CardHeader>
+      </div>
       
       {/* Collapsible Content */}
       <div className={`transition-all duration-300 ease-in-out overflow-hidden ${
