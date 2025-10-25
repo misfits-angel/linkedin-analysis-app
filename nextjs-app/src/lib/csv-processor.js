@@ -154,12 +154,10 @@ export function analyzeCsvData(rows, metadata = {}, options = {}) {
   // Filter out reshares - ONLY use original posts for MOST analysis
   const originalPosts = posts.filter(p => !p.action.toLowerCase().includes('reposted'))
   
-  if (originalPosts.length === 0) {
-    throw new Error('No original posts found in the analysis period. Only reposts/reshares were found.')
-  }
-  
-  // Use original posts for all analysis EXCEPT action distribution
-  const postsForAnalysis = originalPosts
+  // Allow users with only reshares to upload their data
+  // This is needed for the "Unstoppable" section to work for all users
+  // If no original posts, use all posts (including reshares) for analysis
+  const postsForAnalysis = originalPosts.length > 0 ? originalPosts : posts
 
   // Get author name (most common author)
   const authorCounts = {}
