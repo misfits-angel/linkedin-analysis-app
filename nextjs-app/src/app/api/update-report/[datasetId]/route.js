@@ -5,7 +5,7 @@ import {
   analyzeTopicsWithLLM, 
   evaluatePostsWithLLM, 
   analyzePositioningWithLLM 
-} from '@/lib/llm-analysis'
+} from '@/lib/llm-functions'
 
 export async function PUT(request, { params }) {
   console.log('🔄 API Route: Starting update-report request')
