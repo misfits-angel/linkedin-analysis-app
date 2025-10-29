@@ -32,14 +32,5 @@ export function useCardVisibilityCheck(cardId) {
   // Return true if initialized and card is visible, false otherwise
   const isVisible = isInitialized && cardVisibility[cardId] === true
   
-  // Debug logging for shareable reports
-  if (process.env.NODE_ENV === 'development') {
-    console.log(`🔍 Card visibility check for ${cardId}:`, {
-      isInitialized,
-      cardVisibility: cardVisibility[cardId],
-      isVisible
-    })
-  }
-  
   return isVisible
 }

@@ -95,51 +95,77 @@ def parse_html_table(html_content):
     """Parse HTML table and return list of rows"""
     soup = BeautifulSoup(html_content, 'html.parser')
     
-    # Extract headers
-    headers = []
-    header_row = soup.find('thead').find('tr')
-    for th in header_row.find_all('th'):
-        header_text = th.get('data-testid', '')
-        headers.append(header_text)
+    # Find all tables in the HTML
+    tables = soup.find_all('table')
     
-    # Extract data rows
-    data_rows = []
-    tbody = soup.find('tbody')
-    if tbody:
-        for tr in tbody.find_all('tr'):
-            row_data = {}
-            for i, td in enumerate(tr.find_all('td')):
-                if i < len(headers):
-                    # Get data from span with title attribute
-                    span_with_title = td.find('span', {'title': True})
-                    if span_with_title:
-                        row_data[headers[i]] = span_with_title.get('title', '').strip()
+    if not tables:
+        print("No tables found in HTML content!")
+        return [], []
+    
+    print(f"Found {len(tables)} tables in HTML content")
+    
+    # Extract headers from the first table (they should be the same for all tables)
+    headers = []
+    first_table = tables[0]
+    header_row = first_table.find('thead')
+    if header_row:
+        header_row = header_row.find('tr')
+        if header_row:
+            for th in header_row.find_all('th'):
+                header_text = th.get('data-testid', '')
+                headers.append(header_text)
+    
+    if not headers:
+        print("No headers found in first table!")
+        return [], []
+    
+    # Extract data rows from all tables
+    all_data_rows = []
+    
+    for table_idx, table in enumerate(tables):
+        print(f"Processing table {table_idx + 1}/{len(tables)}")
+        
+        tbody = table.find('tbody')
+        if tbody:
+            table_rows = []
+            for tr in tbody.find_all('tr'):
+                row_data = {}
+                for i, td in enumerate(tr.find_all('td')):
+                    if i < len(headers):
+                        # Get data from span with title attribute
+                        span_with_title = td.find('span', {'title': True})
+                        if span_with_title:
+                            row_data[headers[i]] = span_with_title.get('title', '').strip()
+                        else:
+                            # Fallback to get text content
+                            text_content = td.get_text(strip=True)
+                            row_data[headers[i]] = text_content
+                
+                if row_data:
+                    # Convert timestamps to ISO format
+                    post_date = row_data.get('postDate', '')
+                    if row_data.get('timestamp'):
+                        row_data['timestamp'] = convert_timestamp(row_data['timestamp'], post_date)
+                    if row_data.get('postTimestamp'):
+                        row_data['postTimestamp'] = convert_post_timestamp(row_data['postTimestamp'], post_date)
+                    
+                    # Add calculated approximate date from relative date
+                    if post_date:
+                        row_data['approximateDate'] = calculate_approximate_date(post_date)
                     else:
-                        # Fallback to get text content
-                        text_content = td.get_text(strip=True)
-                        row_data[headers[i]] = text_content
+                        row_data['approximateDate'] = ''
+                    
+                    table_rows.append(row_data)
             
-            if row_data:
-                # Convert timestamps to ISO format
-                post_date = row_data.get('postDate', '')
-                if row_data.get('timestamp'):
-                    row_data['timestamp'] = convert_timestamp(row_data['timestamp'], post_date)
-                if row_data.get('postTimestamp'):
-                    row_data['postTimestamp'] = convert_post_timestamp(row_data['postTimestamp'], post_date)
-                
-                # Add calculated approximate date from relative date
-                if post_date:
-                    row_data['approximateDate'] = calculate_approximate_date(post_date)
-                else:
-                    row_data['approximateDate'] = ''
-                
-                data_rows.append(row_data)
+            all_data_rows.extend(table_rows)
+            print(f"  Found {len(table_rows)} rows in table {table_idx + 1}")
     
     # Add approximateDate to headers if not already there
     if 'approximateDate' not in headers:
         headers.append('approximateDate')
     
-    return headers, data_rows
+    print(f"Total rows extracted: {len(all_data_rows)}")
+    return headers, all_data_rows
 
 def append_to_csv(headers, data_rows, output_file='linkedin_posts_combined.csv'):
     """Append data to CSV file"""
@@ -154,8 +180,21 @@ def append_to_csv(headers, data_rows, output_file='linkedin_posts_combined.csv')
                 print(f"Warning: Headers don't match existing file!")
                 return False
     
-    # Append to file
-    with open(output_file, 'a', newline='', encoding='utf-8') as f:
+    # Clean data rows to handle Unicode characters
+    cleaned_data_rows = []
+    for row in data_rows:
+        cleaned_row = {}
+        for key, value in row.items():
+            if isinstance(value, str):
+                # Replace problematic Unicode characters
+                cleaned_value = value.encode('utf-8', errors='replace').decode('utf-8')
+                cleaned_row[key] = cleaned_value
+            else:
+                cleaned_row[key] = value
+        cleaned_data_rows.append(cleaned_row)
+    
+    # Append to file with UTF-8 encoding and BOM for Excel compatibility
+    with open(output_file, 'a', newline='', encoding='utf-8-sig') as f:
         writer = csv.DictWriter(f, fieldnames=headers)
         
         # Write header only if file is new
@@ -165,7 +204,7 @@ def append_to_csv(headers, data_rows, output_file='linkedin_posts_combined.csv')
         else:
             print(f"Appending to existing file: {output_file}")
         
-        writer.writerows(data_rows)
+        writer.writerows(cleaned_data_rows)
     
     return True
 

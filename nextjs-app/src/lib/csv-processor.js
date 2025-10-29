@@ -285,6 +285,24 @@ export function analyzeCsvData(rows, metadata = {}, options = {}) {
     author: p.author
   }))
 
+  // Prepare ALL posts array (including reposts) for components that need it
+  const allPostsForJson = posts.map(p => ({
+    content: p.content,
+    date: p.date,
+    month: p.month,
+    dayOfWeek: p.dayOfWeek,
+    type: p.type,
+    action: p.action,
+    likes: p.likes,
+    comments: p.comments,
+    reposts: p.reposts,
+    views: p.views,
+    eng: p.eng,
+    topics: p.topics,
+    url: p.url,
+    author: p.author
+  }))
+
   return {
     profile: { name: authorName },
     summary,
@@ -314,6 +332,7 @@ export function analyzeCsvData(rows, metadata = {}, options = {}) {
     timingInsights,
     distribution,
     posts: postsForJson,
+    allPosts: allPostsForJson, // ALL posts including reposts for Post vs Reshare calculations
     // Include metadata for database storage
     fileName: metadata.fileName || null,
     rawCsvData: metadata.rawCsvData || null,

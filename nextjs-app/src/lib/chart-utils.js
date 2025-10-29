@@ -43,9 +43,71 @@ export function ensureArray(a) {
 export function createPostsPerMonthChart(data) {
   const arr = data?.trends?.posts_per_month || {}
   
-  const months = Object.keys(arr).sort()
-  const values = months.map(month => arr[month] || 0)
-  const labels = months.map(labelMonth)
+  // Get all months from the data
+  const dataMonths = Object.keys(arr).sort()
+  
+  if (dataMonths.length === 0) {
+    return {
+      type: 'bar',
+      data: {
+        labels: [],
+        datasets: [{
+          label: 'Posts',
+          data: [],
+          backgroundColor: 'rgba(130, 175, 160, 0.8)',
+          borderColor: 'rgba(90, 140, 130, 1)',
+          borderWidth: 1,
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          title: { display: false },
+          datalabels: { display: false }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            suggestedMax: 3, // Show at least up to 3 on y-axis
+            ticks: { 
+              stepSize: 1,
+              precision: 0
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  // Create complete month range from first to last month
+  const firstMonth = dataMonths[0]
+  const lastMonth = dataMonths[dataMonths.length - 1]
+  
+  // Parse first and last months
+  const [firstYear, firstMonthNum] = firstMonth.split('-').map(Number)
+  const [lastYear, lastMonthNum] = lastMonth.split('-').map(Number)
+  
+  // Generate all months in the range
+  const allMonths = []
+  let currentYear = firstYear
+  let currentMonth = firstMonthNum
+  
+  while (currentYear < lastYear || (currentYear === lastYear && currentMonth <= lastMonthNum)) {
+    const monthKey = `${currentYear}-${currentMonth.toString().padStart(2, '0')}`
+    allMonths.push(monthKey)
+    
+    currentMonth++
+    if (currentMonth > 12) {
+      currentMonth = 1
+      currentYear++
+    }
+  }
+  
+  // Create values array with 0 for months without data
+  const values = allMonths.map(month => arr[month] || 0)
+  const labels = allMonths.map(labelMonth)
   
   return {
     type: 'bar',
@@ -78,8 +140,10 @@ export function createPostsPerMonthChart(data) {
       scales: {
         y: {
           beginAtZero: true,
+          suggestedMax: Math.max(...values) + 2, // Always show 2 extra ticks above max value
           ticks: {
-            stepSize: 1
+            stepSize: 1,
+            precision: 0
           }
         }
       }

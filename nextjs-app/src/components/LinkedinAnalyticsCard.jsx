@@ -24,6 +24,7 @@ Chart.register(LineController, LineElement, PointElement, LinearScale, CategoryS
  * - insight: string
  * - posts: array of post objects
  * - summaryData: object containing summary metrics (single source of truth for total count)
+ * - isReportView: boolean - if true, renders without borders and with edge-to-edge layout
  */
 const LinkedinAnalyticsCard = forwardRef(({
   monthlyCounts = [],
@@ -31,6 +32,7 @@ const LinkedinAnalyticsCard = forwardRef(({
   insight = '',
   posts = [],
   summaryData = null, // Add summary data as prop for consistency
+  isReportView = false, // New prop for report view styling
 }, ref) => {
   const [dynamicInsight, setDynamicInsight] = useState('')
   const [isGenerating, setIsGenerating] = useState(false)
@@ -50,12 +52,12 @@ const LinkedinAnalyticsCard = forwardRef(({
     setIsGenerating(true)
     try {
       const result = await generateNarrativeInsights(posts)
-      // Extract brief insights from the result (2-3 key observations)
+      // Extract one line commentary from the result
       const insights = result?.insights || []
-      const briefSummary = insights.length > 0
-        ? insights.slice(0, 3).join('\n\n')
-        : 'Analysis complete - your LinkedIn strategy shows consistent engagement patterns.'
-      setDynamicInsight(briefSummary)
+      const oneLineCommentary = insights.length > 0
+        ? insights[0]
+        : 'Your LinkedIn strategy shows consistent engagement patterns.'
+      setDynamicInsight(oneLineCommentary)
     } catch (error) {
       console.error('Error generating brief summary:', error)
       setDynamicInsight('Unable to generate summary at this time.')
@@ -188,23 +190,71 @@ const LinkedinAnalyticsCard = forwardRef(({
     }
   }
 
+  // Report view rendering without card wrapper
+  if (isReportView) {
+    return (
+      <div>
+        <h3 className="text-lg font-semibold text-[#2f8f5b] mb-4">LinkedIn Analytics</h3>
+        <div ref={containerRef}>
+          {/* Edge-to-edge card content */}
+          <div className="w-full">
+            {/* Top (chart) */}
+            <div className="bg-[#307254]" style={{ padding: '24px' }}>
+              <div className="flex flex-col">
+                <span className="text-white text-sm font-medium tracking-wide">
+                  Total Posts
+                </span>
+                <span className="text-white text-5xl font-bold mt-1">{totalPosts}</span>
+              </div>
+
+              <div className="relative w-full mt-2">
+                {/* Chart area with maximum bottom spacing to separate from footer */}
+                <div className="relative h-[90px] w-full overflow-hidden pb-8">
+                  <canvas
+                    ref={canvasRef}
+                    aria-label="Posts trend chart"
+                    role="img"
+                    className="border-none"
+                    style={{ border: 'none', background: 'transparent' }}
+                  ></canvas>
+                </div>
+
+                {/* Horizontal line - clear footer divider */}
+                <div className="border-t-2 border-white w-full opacity-70"></div>
+
+                {/* Date labels - right at the border, no padding below */}
+                <div className="flex justify-between items-center pt-1 pb-0">
+                  <span className="text-xs text-white">{leftLabel}</span>
+                  <span className="text-xs text-white">{rightLabel}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  // Regular card rendering for non-report views
   return (
     <Card cardName="LinkedIn Analytics Card">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
         <CardTitle className="text-lg font-semibold">📈 LinkedIn Analytics</CardTitle>
         <div className="flex items-center gap-2">
-          <button 
-            className="chart-export-btn-summary" 
-            onClick={handleGenerateBriefSummary}
-            disabled={isGenerating}
-            title="Generate Brief Summary"
-          >
-            {isGenerating ? (
-              <Loader2 className="h-4 w-4 animate-spin" />
-            ) : (
-              <Zap className="h-4 w-4" />
-            )}
-          </button>
+          {!isReportContext && (
+            <button 
+              className="chart-export-btn-summary" 
+              onClick={handleGenerateBriefSummary}
+              disabled={isGenerating}
+              title="Generate Brief Summary"
+            >
+              {isGenerating ? (
+                <Loader2 className="h-4 w-4 animate-spin" />
+              ) : (
+                <Zap className="h-4 w-4" />
+              )}
+            </button>
+          )}
           {!isReportContext && (
             <button 
               className="chart-export-btn-inline" 
@@ -254,7 +304,7 @@ const LinkedinAnalyticsCard = forwardRef(({
               </div>
 
               {/* Insight (LLM observation) */}
-              <div className="p-4 text-black text-sm font-normal leading-relaxed whitespace-pre-line">
+              <div className="p-4 text-black text-sm font-normal leading-relaxed">
                 {dynamicInsight || insight || (
                   <>
                     Founder stories outperformed other themes.

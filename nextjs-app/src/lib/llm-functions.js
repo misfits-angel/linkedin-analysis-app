@@ -12,6 +12,16 @@ import { GoogleGenerativeAI } from '@google/generative-ai'
 const genai = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '')
 
 /**
+ * Get the Gemini model based on environment
+ * Production: gemini-2.5-pro (best quality)
+ * Development: gemini-2.5-flash (fast & efficient)
+ */
+function getGeminiModel() {
+  // Always use Gemini Flash 2.5 as requested
+  return 'gemini-2.5-flash'
+}
+
+/**
  * Check if Gemini API key is configured
  */
 function checkAPIKey() {
@@ -90,7 +100,7 @@ function prepareCondensedPosts(postsData, limit = 50) {
       engagement,
       has_image: Boolean(post.imgUrl || post.has_image),
       type: post.type || 'Text',
-      date: post.postTimestamp || ''
+      date: post.postTimestamp || post.date || ''
     })
   }
   
@@ -98,8 +108,16 @@ function prepareCondensedPosts(postsData, limit = 50) {
   return condensedPosts.sort((a, b) => b.engagement - a.engagement)
 }
 
+// ============================================================================
+// DASHBOARD ANALYTICS FUNCTIONS
+// ============================================================================
+// The following functions are used by dashboard analytics cards (on-demand)
+// They are NOT called during report generation to keep it fast
+// ============================================================================
+
 /**
  * Generate narrative insights from posts data
+ * Used by: Dashboard analytics cards (on-demand only, not during report generation)
  */
 export async function generateNarrativeInsights(postsData) {
   checkAPIKey()
@@ -110,43 +128,41 @@ export async function generateNarrativeInsights(postsData) {
 You are a LinkedIn analytics expert providing personalized, data-driven insights.
 
 CRITICAL RULES:
-• Maximum 6-8 words per insight
+• Generate ONE single line commentary only (maximum 10-12 words)
 • Be SPECIFIC to THIS person's actual posting patterns
 • No generic statements - analyze their unique content themes
-• Direct and actionable observations
+• Direct and actionable observation
 
 Analyze these ${condensedPosts.length} LinkedIn posts. Look at:
 - What specific topics/themes appear repeatedly?
 - What content types get more engagement?
 - What's unique about their posting style?
-- What's one specific area they could improve?
 
 POSTS DATA:
 ${JSON.stringify(condensedPosts, null, 2)}
 
-Return 2-3 insights that are PERSONALIZED to this specific user's content, including at least ONE area of improvement. Examples of good personalized insights:
-- "Technical deep-dives resonate with your audience."
-- "Team culture posts spark more conversations."
-- "Product launch updates drive peak engagement."
-- "Add more visual content for higher engagement." (improvement)
-- "Increase posting consistency during weekdays." (improvement)
+Return ONE line of commentary that is PERSONALIZED to this specific user's content. Examples of good one-line insights:
+- "Technical deep-dives resonate most with your audience."
+- "Team culture posts spark more conversations consistently."
+- "Product launch updates drive your peak engagement."
+- "Visual content performs 2x better than text posts."
+- "Weekday posts generate 3x more engagement."
 
 BAD (too generic): "Authentic posts perform well"
-GOOD (specific): "Behind-the-scenes content drives comments"
-GOOD (improvement): "Try more data-driven storytelling posts"
+GOOD (specific): "Behind-the-scenes content drives 2x more comments"
+GOOD (specific): "AI and tech topics dominate your top posts"
 
-Return JSON with at least one improvement suggestion:
+Return JSON with ONE single line commentary:
 {
   "insights": [
-    "[Specific insight about their actual content themes]",
-    "[Specific insight about their posting patterns]",
-    "[Specific area of improvement - actionable suggestion]"
+    "[One specific line about their actual content patterns - max 12 words]"
   ]
 }
 `
 
   try {
-    const model = genai.getGenerativeModel({ model: 'gemini-2.5-flash-lite' })
+    const model = genai.getGenerativeModel({ model: getGeminiModel() })
+    console.log(`🤖 Using model: ${getGeminiModel()} for narrative insights`)
     const result = await model.generateContent(prompt)
     const response = await result.response
     const text = response.text()
@@ -163,7 +179,8 @@ Return JSON with at least one improvement suggestion:
 }
 
 /**
- * Analyze topics from posts data - Enhanced to match legacy design
+ * Analyze topics from posts data
+ * Used by: Dashboard analytics cards (on-demand only, not during report generation)
  */
 export async function analyzeTopicsWithLLM(postsData) {
   checkAPIKey()
@@ -172,7 +189,6 @@ export async function analyzeTopicsWithLLM(postsData) {
   const condensedPosts = prepareCondensedPosts(postsData, 50)
   console.log('🔄 Condensed posts sample:', JSON.stringify(condensedPosts.slice(0, 2), null, 2))
   
-  // Create prompt matching legacy format
   const prompt = `
 You are analyzing ${condensedPosts.length} LinkedIn posts to identify topics and performance patterns.
 
@@ -207,7 +223,8 @@ Focus on accuracy. A post about "hiring engineers" should be tagged as both "hir
 `
 
   try {
-    const model = genai.getGenerativeModel({ model: 'gemini-2.5-flash-lite' })
+    const model = genai.getGenerativeModel({ model: getGeminiModel() })
+    console.log(`🤖 Using model: ${getGeminiModel()} for topic analysis`)
     const result = await model.generateContent(prompt)
     const response = await result.response
     const text = response.text()
@@ -225,6 +242,7 @@ Focus on accuracy. A post about "hiring engineers" should be tagged as both "hir
 
 /**
  * Evaluate posts with LLM using scoring rubric
+ * Used by: Dashboard analytics cards (on-demand only, not during report generation)
  */
 export async function evaluatePostsWithLLM(postsData) {
   checkAPIKey()
@@ -298,7 +316,8 @@ ${JSON.stringify(condensedPosts, null, 2)}
 `
 
   try {
-    const model = genai.getGenerativeModel({ model: 'gemini-2.5-flash-lite' })
+    const model = genai.getGenerativeModel({ model: getGeminiModel() })
+    console.log(`🤖 Using model: ${getGeminiModel()} for post evaluation`)
     const result = await model.generateContent(prompt)
     const response = await result.response
     const text = response.text()
@@ -316,6 +335,7 @@ ${JSON.stringify(condensedPosts, null, 2)}
 
 /**
  * Analyze positioning with LLM
+ * Used by: Dashboard analytics cards (on-demand only, not during report generation)
  */
 export async function analyzePositioningWithLLM(postsData) {
   checkAPIKey()
@@ -366,7 +386,8 @@ Return a JSON response with this exact structure:
 `
 
   try {
-    const model = genai.getGenerativeModel({ model: 'gemini-2.5-flash-lite' })
+    const model = genai.getGenerativeModel({ model: getGeminiModel() })
+    console.log(`🤖 Using model: ${getGeminiModel()} for positioning analysis`)
     const result = await model.generateContent(prompt)
     const response = await result.response
     const text = response.text()
@@ -381,3 +402,110 @@ Return a JSON response with this exact structure:
     throw new Error(`Failed to analyze positioning: ${error}`)
   }
 }
+
+// ============================================================================
+// PROPOSAL REPORT FUNCTIONS
+// ============================================================================
+// The following functions are used specifically for proposal report generation
+// ============================================================================
+
+/**
+ * Generate card summaries for specific cards
+ */
+export async function generateCardSummaries(postsData, stats = {}) {
+  checkAPIKey()
+
+  const condensedPosts = prepareCondensedPosts(postsData, 30)
+  const cardSummaries = {}
+  
+  // 1. Snapshots Summary
+  if (stats.originalPosts !== undefined) {
+    try {
+      const prompt = `Based on these LinkedIn posting statistics:
+- Original Posts: ${stats.originalPosts}
+- Reposts: ${stats.reposts || 0}
+- Most Active Month: ${stats.mostActiveMonth || 'N/A'}
+- Longest Inactive Period: ${stats.longestInactive || 'N/A'}
+
+Generate a single sentence (10-15 words) summarizing the posting activity pattern. Be specific and actionable.
+
+Return only the summary text, no JSON, no quotes.`
+      
+      const model = genai.getGenerativeModel({ model: getGeminiModel() })
+      const result = await model.generateContent(prompt)
+      const response = await result.response
+      cardSummaries.snapshotsSummary = response.text().trim().replace(/^["']|["']$/g, '')
+      console.log('✅ Snapshots summary generated:', cardSummaries.snapshotsSummary)
+    } catch (error) {
+      console.error('❌ Failed to generate snapshots summary:', error.message)
+      console.error('❌ Error details:', error)
+    }
+  }
+  
+  // 2. Posting Activity Summary
+  console.log('🔄 Generating posting activity summary...')
+  try {
+    const prompt = `Based on this posting activity data from ${condensedPosts.length} LinkedIn posts:
+${JSON.stringify(condensedPosts.slice(0, 10), null, 2)}
+
+Generate a single sentence (10-15 words) about posting consistency and activity patterns. Be specific.
+
+Return only the summary text, no JSON, no quotes.`
+    
+    const model = genai.getGenerativeModel({ model: getGeminiModel() })
+    const result = await model.generateContent(prompt)
+    const response = await result.response
+    cardSummaries.postingActivitySummary = response.text().trim().replace(/^["']|["']$/g, '')
+    console.log('✅ Posting activity summary generated:', cardSummaries.postingActivitySummary)
+  } catch (error) {
+    console.error('❌ Failed to generate posting activity summary:', error.message)
+    console.error('❌ Error details:', error)
+  }
+  
+  // 3. Analytics Card Summary
+  console.log('🔄 Generating analytics card summary...')
+  try {
+    const prompt = `Based on these LinkedIn posts with engagement metrics:
+${JSON.stringify(condensedPosts.slice(0, 10), null, 2)}
+
+Generate a single sentence (10-15 words) about engagement patterns and what content performs well. Be specific.
+
+Return only the summary text, no JSON, no quotes.`
+    
+    const model = genai.getGenerativeModel({ model: getGeminiModel() })
+    const result = await model.generateContent(prompt)
+    const response = await result.response
+    cardSummaries.analyticsCardSummary = response.text().trim().replace(/^["']|["']$/g, '')
+    console.log('✅ Analytics card summary generated:', cardSummaries.analyticsCardSummary)
+  } catch (error) {
+    console.error('❌ Failed to generate analytics card summary:', error.message)
+    console.error('❌ Error details:', error)
+  }
+  
+  // 4. Cadence Chart Summary
+  console.log('🔄 Generating cadence chart summary...')
+  try {
+    const prompt = `Based on posting cadence patterns from these LinkedIn posts:
+${JSON.stringify(condensedPosts.map(p => ({ date: p.date })).slice(0, 20), null, 2)}
+
+Generate a single sentence (10-15 words) about posting frequency and timing patterns. Be specific.
+
+Return only the summary text, no JSON, no quotes.`
+    
+    const model = genai.getGenerativeModel({ model: getGeminiModel() })
+    const result = await model.generateContent(prompt)
+    const response = await result.response
+    cardSummaries.cadenceChartSummary = response.text().trim().replace(/^["']|["']$/g, '')
+    console.log('✅ Cadence chart summary generated:', cardSummaries.cadenceChartSummary)
+  } catch (error) {
+    console.error('❌ Failed to generate cadence chart summary:', error.message)
+    console.error('❌ Error details:', error)
+  }
+  
+  console.log('🎉 All card summaries generation complete!')
+  console.log('📦 Final cardSummaries object:', JSON.stringify(cardSummaries, null, 2))
+  console.log('📊 Summary keys:', Object.keys(cardSummaries))
+  
+  return cardSummaries
+}
+

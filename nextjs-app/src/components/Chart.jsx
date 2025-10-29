@@ -3,7 +3,7 @@
 import { useEffect, useRef, forwardRef, useImperativeHandle } from 'react'
 import { ChartJS } from '@/lib/chart-setup'
 
-const Chart = forwardRef(({ config, title, className = '', showHeaderButton = false }, ref) => {
+const Chart = forwardRef(({ config, title, className = '', showHeaderButton = false, noBorder = false }, ref) => {
   const canvasRef = useRef(null)
   const chartRef = useRef(null)
 
@@ -150,9 +150,13 @@ const Chart = forwardRef(({ config, title, className = '', showHeaderButton = fa
     }
   }
 
+  const wrapperClass = noBorder 
+    ? `${className}` 
+    : `chart-wrap ${className}`
+
   if (!showHeaderButton) {
     return (
-      <div className={`chart-wrap ${className}`}>
+      <div className={wrapperClass} style={noBorder ? { height: '300px', position: 'relative' } : {}}>
         <canvas 
           ref={canvasRef}
           role="img" 
@@ -163,7 +167,7 @@ const Chart = forwardRef(({ config, title, className = '', showHeaderButton = fa
   }
 
   return (
-    <div className={`chart-wrap ${className}`}>
+    <div className={wrapperClass} style={noBorder ? { height: '300px', position: 'relative' } : {}}>
       <button 
         className="chart-export-btn" 
         onClick={handleExport}

@@ -152,8 +152,8 @@ body {
 .text-center { text-align: center !important; }
 
 
-/* Button styles - Exclude sidebar buttons */
-button:not([data-sidebar]):not([data-sidebar] button) {
+/* Button styles - Exclude sidebar buttons and FAQ triggers */
+button:not([data-sidebar]):not([data-sidebar] button):not([data-faq-trigger]) {
   background: linear-gradient(135deg, var(--color-primary) 0%, #0F5A6B 100%) !important;
   color: white !important;
   padding: 0.75rem 1.5rem !important;
@@ -169,7 +169,7 @@ button:not([data-sidebar]):not([data-sidebar] button) {
   box-shadow: 0 4px 15px rgba(21, 113, 135, 0.4) !important;
 }
 
-button:not([data-sidebar]):not([data-sidebar] button)::before {
+button:not([data-sidebar]):not([data-sidebar] button):not([data-faq-trigger])::before {
   content: '' !important;
   position: absolute !important;
   top: 0 !important;
@@ -180,20 +180,20 @@ button:not([data-sidebar]):not([data-sidebar] button)::before {
   transition: left 0.5s !important;
 }
 
-button:not([data-sidebar]):not([data-sidebar] button):hover::before {
+button:not([data-sidebar]):not([data-sidebar] button):not([data-faq-trigger]):hover::before {
   left: 100% !important;
 }
 
-button:not([data-sidebar]):not([data-sidebar] button):hover {
+button:not([data-sidebar]):not([data-sidebar] button):not([data-faq-trigger]):hover {
   transform: translateY(-2px) !important;
   box-shadow: 0 8px 25px rgba(21, 113, 135, 0.6) !important;
 }
 
-button:not([data-sidebar]):not([data-sidebar] button):active {
+button:not([data-sidebar]):not([data-sidebar] button):not([data-faq-trigger]):active {
   transform: translateY(0) !important;
 }
 
-button:not([data-sidebar]):not([data-sidebar] button):disabled {
+button:not([data-sidebar]):not([data-sidebar] button):not([data-faq-trigger]):disabled {
   opacity: 0.6 !important;
   cursor: not-allowed !important;
   transform: none !important;
@@ -202,9 +202,9 @@ button:not([data-sidebar]):not([data-sidebar] button):disabled {
 
 /* Grid styles */
 .grid { display: grid !important; }
-.grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)) !important; }
-.grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
-.lg\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+.grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+.grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.lg\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .gap-6 { gap: 1.5rem !important; }
 
 /* Chart container */
@@ -419,8 +419,8 @@ button:not([data-sidebar]):not([data-sidebar] button):disabled {
 .bg-green-400 { background-color: #4ade80 !important; }
 
 /* Grid improvements */
-.grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)) !important; }
-.grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+.grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+.grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .gap-2 { gap: 0.5rem !important; }
 .gap-3 { gap: 0.75rem !important; }
 .gap-4 { gap: 1rem !important; }
@@ -481,11 +481,14 @@ button:not([data-sidebar]):not([data-sidebar] button):disabled {
 /* Responsive */
 @media (min-width: 768px) {
   .md\:text-3xl { font-size: 1.875rem !important; }
-  .md\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; }
+  .md\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .md\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .md\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .md\:gap-12 { gap: 3rem; }
 }
 
 @media (min-width: 1024px) {
-  .lg\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  .lg\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 :root {

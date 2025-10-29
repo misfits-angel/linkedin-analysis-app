@@ -13,6 +13,10 @@ ADD COLUMN IF NOT EXISTS llm_insights JSONB;
 ALTER TABLE linkedin_datasets 
 ADD COLUMN IF NOT EXISTS card_visibility_settings JSONB;
 
+-- Add editable_content field to store custom editable content for reports
+ALTER TABLE linkedin_datasets 
+ADD COLUMN IF NOT EXISTS editable_content JSONB;
+
 -- Add static_html_content field for static report generation (optional)
 ALTER TABLE linkedin_datasets 
 ADD COLUMN IF NOT EXISTS static_html_content TEXT;

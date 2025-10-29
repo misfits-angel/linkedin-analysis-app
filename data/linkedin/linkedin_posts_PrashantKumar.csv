@@ -1,0 +1,73 @@
+postUrl,imgUrl,type,postContent,likeCount,commentCount,repostCount,postDate,action,author,authorUrl,profileUrl,timestamp,viewCount,postTimestamp,sharedPostUrl,approximateDate
+https://www.linkedin.com/feed/update/urn:li:activity:7338414669868449792,https://media.licdn.com/dms/image/v2/D5622AQEmcsZUAeGWjw/feedshare-shrink_800/B56ZddJNiEGoAk-/0/1749614397271?e=1762992000&v=beta&t=Q_O-x3NKIgxfTuvt5qIeFL16aRglITJu7_82ITODXHY,Image,"Over the past few months, I have received a lot of DMs and many of you have asked what I’ve been heads-down working on. Here’s the short version.
+
+We set out to build a platform, an ""AI Agent design studio"" built on custom Agentic framework—something more deliberate than a mere chatbot and more capable than a rule-based workflow. 
+
+The goal was straightforward: create agents that can observe, reason, take action, and keep getting better.
+
+What that means in practice:
+
+- Multimodal by default: voice, video, and text all handled natively.
+
+- Tool-ready: the agent can reach into real systems—CRMs, HR platforms, data stores—and do actual work.
+
+- Memory that lasts: context isn’t reset every time the conversation ends; it compounds.
+
+Businesses don't just work on code and software, they depend on a whole lot—telephony, video systems, hardware and a lot of operations. 
+
+We have built everything on one platform. Stiched actual components that power businesses and operations.
+
+We’re now in the final stretch. The system is functional, modular, and nearly live.
+
+A few reflections from the build-out:
+
+Architecture matters more than model size. An elegant separation between perception, cognition, and action solves problems brute force never will.
+
+Guardrails aren’t an afterthought. Real-world agents need business logic and ethical constraints baked in from day one.
+
+Usefulness beats novelty every time. If an agent can’t close a loop—hire the candidate, resolve the ticket, finish the analysis, sell something—it isn’t worth shipping.
+
+Soon I’ll share details and lessons learned, but for now I wanted to give you—the people who have traded notes, challenged assumptions, and offered early feedback—a look behind the curtain.
+
+If you’re also pushing toward autonomous agents—or wrestling with how to apply them to hiring, support, sales, or research—I’d love to compare experiences. Feel free to reach out.
+
+#AI #AutonomousAgents #LLM #EnterpriseAI #ProductDesign #VoiceFirst #AIInfrastructure",59,10,3,4mo,Post,Prashant Kumar,https://www.linkedin.com/in/imprashant04,https://www.linkedin.com/in/imprashant04/,2025-06-27T18:01:00.000Z,,2025-06-11T00:00:00.000Z,,2025-06-27
+https://www.linkedin.com/feed/update/urn:li:activity:7304698978204336129,https://media.licdn.com/dms/image/v2/D5622AQEIGE__28blSg/feedshare-shrink_800/B56ZV8SA8pHsAk-/0/1741546853952?e=1762992000&v=beta&t=pEQGwRFYxvFoprKroVQWNAXQzh98nI3UsDQbCvxB1Bg,Image,"We're excited to announce the launch of our initial recruitment drive for Enterprise Partners and GCCs this week. With #thousands of tech roles available across various experience levels, we invite you to submit your resume to support@bibha.ai
+
+#NowHiring #TechJobs #FreshersWelcome #FollowForOpportunities #EnterprisePartners #GCCJobs #CareerOpportunities #TechCareers #TalentAcquisition",29,2,1,7mo,Post,Prashant Kumar,https://www.linkedin.com/in/imprashant04,https://www.linkedin.com/in/imprashant04/,2025-03-29T18:01:00.000Z,,2025-03-10T00:00:00.000Z,https://www.linkedin.com/feed/update/urn:li:activity:7304576940248637441/,2025-03-29
+https://www.linkedin.com/feed/update/urn:li:activity:7300013041599856640,https://media.licdn.com/dms/image/v2/D5622AQFMgm2l23L3oA/feedshare-shrink_2048_1536/B56ZU7bKuyGUAo-/0/1740458735912?e=1762992000&v=beta&t=eoH3zSO9QaW9DcTAFbEqv5MUpd7iU4ovBnfHVHDltBQ,Image,"I recently had a conversation with a Global Talent Head about hiring trends, and it’s fascinating to see how the job market is evolving. While some traditional roles are being phased out, entirely new ones are emerging at an incredible pace.
+
+Roles like AI Ethicist, Virtual Reality Designer, Human-Machine Teaming Manager, Data Privacy Officer, and AI Trainer are gaining momentum. Are these the jobs of the future? The demand suggests so.
+
+For freshers and grads, this is the perfect time to explore these opportunities. The key? Upskilling and reskilling. I am personally seeing the job market changing rapidly first hand, and in my opinion, those who stay curious and adaptable will thrive.
+
+Change is inevitable—let’s embrace it and build careers that drive innovation!
+https://bibha.ai/
+#Upskilling #Reskilling #Freshers #Grads #JobSeekers #AI #FutureOfWork #NewJobs #TechCareers #CareerGrowth",35,1,1,8mo,Post,Prashant Kumar,https://www.linkedin.com/in/imprashant04,https://www.linkedin.com/in/imprashant04/,2025-02-27T18:01:00.000Z,,2025-02-25T00:00:00.000Z,,2025-02-27
+https://www.linkedin.com/feed/update/urn:li:activity:7293675955858915328,https://media.licdn.com/dms/image/v2/D5622AQEnTm6t6Aoo_w/feedshare-shrink_800/B56ZTg_VSMGQAg-/0/1738941488041?e=1762992000&v=beta&t=lkLHI4BCVl8Os7Su6B3EQ9A2h3FIMevclXQKBZZGVtY,Image,"Over the years, I’ve learned that technology should be our ally, not our adversary. I’ve faced my share of recruitment headaches—from endless delays and miscommunications to frustrating candidate drop-offs that cost valuable time. 
+
+That’s exactly why we built bibha.ai 
+
+It tackles these common challenges head-on by streamlining our process with smart conversational interviews and data-driven insights, making candidate engagement more personal and efficient.
+
+I’m curious to hear how industry leaders like #Randstad, #Adecco, #ManpowerGroup, #KornFerry, #Hays, #ANSR and #RobertHalf are overcoming these hurdles. The future of work is evolving—let’s share our insights and keep the conversation going!
+
+#AIinRecruitment #TalentAcquisition #HRTech #DataDrivenHiring #FutureOfWork #RecruitmentInnovation",8,0,0,8mo,Post,Prashant Kumar,https://www.linkedin.com/in/imprashant04,https://www.linkedin.com/in/imprashant04/,2025-02-27T18:01:00.000Z,,2025-02-07T00:00:00.000Z,https://www.linkedin.com/feed/update/urn:li:activity:7293649248590434305/,2025-02-27
+https://www.linkedin.com/feed/update/urn:li:activity:7271532600593137664,https://media.licdn.com/dms/image/v2/D4E22AQGrwwxI3dFMMg/feedshare-shrink_800/feedshare-shrink_800/0/1733667893116?e=1762992000&v=beta&t=2MUJBe9tlFYubgJPRn4sSDDk-rvJr7Gh67AnVR-euqE,Image,"Stop Burning Money – Let bibha.ai Help You Save and Grow
+
+Are inefficient processes and rising costs draining your business resources? 
+
+Don’t let outdated systems and missed opportunities burn a hole in your revenue. At bibha.ai, we specialize in transforming business operations with advanced AI and automation. Here's how we help:
+
+- Streamlined Operations: Reduce inefficiencies and cut costs with AI-driven workflows.
+
+- Accelerated Sales: Automate lead generation and follow-ups to boost conversions and revenue.
+
+- Customer Engagement: Deliver personalized experiences that build loyalty and increase profitability.
+
+- Efficient Support: Automate technical support to save time and resources while keeping customers happy.
+
+Every dollar wasted is a dollar you could reinvest into growth. Take control of your business operations with bibha.ai and start maximizing your revenue today.
+
+Contact us now to learn how we can help you save and grow smarter.
+https://bibha.ai/",11,0,2,10mo,Prashant Kumar reposted this,Bibha AI Labs,https://www.linkedin.com/company/bibha-ai,https://www.linkedin.com/in/imprashant04/,2024-12-29T18:01:00.000Z,,2024-12-08T00:00:00.000Z,,2024-12-29

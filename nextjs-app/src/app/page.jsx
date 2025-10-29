@@ -16,7 +16,6 @@ import { useAuth } from '@/lib/contexts/AuthContext'
 import { supabase } from '@/lib/supabase-client'
 import AdminControlSection from '@/components/AdminControlSection'
 import LinkedInAnalyticsSection from '@/components/LinkedInAnalyticsSection'
-import UnstoppableSection from '@/components/UnstoppableSection'
 
 function HomeContent() {
   const [error, setError] = useState(null)
@@ -389,7 +388,7 @@ function HomeContent() {
   const displayError = error || dataError
 
   return (
-    <div className="flex flex-1 flex-col gap-8 py-8 px-8 md:py-12 md:px-20 lg:px-32 xl:px-40 2xl:px-48 w-full max-w-[1600px] mx-auto">
+    <div className="flex flex-1 flex-col gap-8 py-8 px-4 md:py-12 md:px-8 lg:px-12 xl:px-16 2xl:px-20 w-full max-w-[1600px] mx-auto">
 
       {/* Hidden file input for Upload New button */}
       <input
@@ -473,9 +472,6 @@ function HomeContent() {
       {!isLoading && (data || savedData) && (
         <LinkedInAnalyticsSection data={data} />
       )}
-
-      {/* Section 3: Unstoppable - Always show */}
-      <UnstoppableSection />
     </div>
   )
 }

@@ -25,6 +25,7 @@ import TopicAnalysisCard from '@/components/TopicAnalysisCard'
 import TopPostsCard from '@/components/TopPostsCard'
 import PeerComparisonCard from '@/components/PeerComparisonCard'
 import ValuePropositionCard from '@/components/ValuePropositionCard'
+import PostingActivityStatsCard from '@/components/PostingActivityStatsCard'
 import ConditionalCard from '@/components/ConditionalCard'
 
 export default function LinkedInAnalyticsSection({ data }) {
@@ -106,7 +107,8 @@ export default function LinkedInAnalyticsSection({ data }) {
           'ai-topic-analysis',
           'top-posts',
           'peer-comparison',
-          'value-proposition'
+          'value-proposition',
+          'posting-activity-stats'
         ]}
       >
         {/* Key Metrics Cards */}
@@ -151,6 +153,7 @@ export default function LinkedInAnalyticsSection({ data }) {
         <TopPostsCard data={data} />
         <PeerComparisonCard data={data} />
         <ValuePropositionCard data={data} />
+        <PostingActivityStatsCard data={data} />
 
       </IndependentColumnLayout>
     </section>
