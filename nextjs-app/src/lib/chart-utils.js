@@ -3,6 +3,9 @@
 // Import chart setup with plugins
 import './chart-setup'
 
+// Import date utilities
+import { generateMonthsArray } from './utils/dateUtils'
+
 /**
  * Generate month labels for display
  */
@@ -42,11 +45,11 @@ export function ensureArray(a) {
  */
 export function createPostsPerMonthChart(data) {
   const arr = data?.trends?.posts_per_month || {}
-  
-  // Get all months from the data
-  const dataMonths = Object.keys(arr).sort()
-  
-  if (dataMonths.length === 0) {
+
+  // Always show last 12 months to include inactive periods
+  const last12Months = generateMonthsArray(12)
+
+  if (last12Months.length === 0) {
     return {
       type: 'bar',
       data: {
@@ -71,7 +74,7 @@ export function createPostsPerMonthChart(data) {
           y: {
             beginAtZero: true,
             suggestedMax: 3, // Show at least up to 3 on y-axis
-            ticks: { 
+            ticks: {
               stepSize: 1,
               precision: 0
             }
@@ -80,35 +83,11 @@ export function createPostsPerMonthChart(data) {
       }
     }
   }
-  
-  // Create complete month range from first to last month
-  const firstMonth = dataMonths[0]
-  const lastMonth = dataMonths[dataMonths.length - 1]
-  
-  // Parse first and last months
-  const [firstYear, firstMonthNum] = firstMonth.split('-').map(Number)
-  const [lastYear, lastMonthNum] = lastMonth.split('-').map(Number)
-  
-  // Generate all months in the range
-  const allMonths = []
-  let currentYear = firstYear
-  let currentMonth = firstMonthNum
-  
-  while (currentYear < lastYear || (currentYear === lastYear && currentMonth <= lastMonthNum)) {
-    const monthKey = `${currentYear}-${currentMonth.toString().padStart(2, '0')}`
-    allMonths.push(monthKey)
-    
-    currentMonth++
-    if (currentMonth > 12) {
-      currentMonth = 1
-      currentYear++
-    }
-  }
-  
+
   // Create values array with 0 for months without data
-  const values = allMonths.map(month => arr[month] || 0)
-  const labels = allMonths.map(labelMonth)
-  
+  const values = last12Months.map(month => arr[month] || 0)
+  const labels = last12Months.map(labelMonth)
+
   return {
     type: 'bar',
     data: {
@@ -140,7 +119,7 @@ export function createPostsPerMonthChart(data) {
       scales: {
         y: {
           beginAtZero: true,
-          suggestedMax: Math.max(...values) + 2, // Always show 2 extra ticks above max value
+          suggestedMax: Math.max(...values, 1) + 2, // Always show 2 extra ticks above max value, minimum 1
           ticks: {
             stepSize: 1,
             precision: 0
@@ -157,11 +136,13 @@ export function createPostsPerMonthChart(data) {
 export function createEngagementOverTimeChart(data) {
   const medianData = data?.trends?.month_median || {}
   const totalData = data?.trends?.month_total || {}
-  
-  const months = Object.keys({...medianData, ...totalData}).sort()
-  const medianValues = months.map(month => medianData[month] || 0)
-  const totalValues = months.map(month => totalData[month] || 0)
-  const labels = months.map(labelMonth)
+
+  // Always show last 12 months to include inactive periods
+  const last12Months = generateMonthsArray(12)
+
+  const medianValues = last12Months.map(month => medianData[month] || 0)
+  const totalValues = last12Months.map(month => totalData[month] || 0)
+  const labels = last12Months.map(labelMonth)
   
   return {
     type: 'line',

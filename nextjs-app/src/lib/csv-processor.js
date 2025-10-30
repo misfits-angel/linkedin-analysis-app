@@ -183,17 +183,18 @@ export function analyzeCsvData(rows, metadata = {}, options = {}) {
   const monthTotal = {}
   const monthEngagements = {}
 
+  // Initialize all months in the analysis period with 0 values
+  const allMonths = generateMonthsArray(analysisPeriodMonths)
+  allMonths.forEach(month => {
+    postsPerMonth[month] = 0
+    monthMedian[month] = 0
+    monthTotal[month] = 0
+    monthEngagements[month] = []
+  })
+
   // Process all posts and collect data by month
   postsForAnalysis.forEach(p => {
     if (p.month) {
-      // Initialize month if not exists
-      if (!postsPerMonth[p.month]) {
-        postsPerMonth[p.month] = 0
-        monthMedian[p.month] = 0
-        monthTotal[p.month] = 0
-        monthEngagements[p.month] = []
-      }
-      
       // Increment count and collect engagement data
       postsPerMonth[p.month]++
       monthEngagements[p.month].push(p.eng)
@@ -201,9 +202,11 @@ export function analyzeCsvData(rows, metadata = {}, options = {}) {
     }
   })
 
-  // Calculate median engagement for each month
+  // Calculate median engagement for each month (only for months with posts)
   Object.keys(monthEngagements).forEach(month => {
-    monthMedian[month] = median(monthEngagements[month])
+    if (monthEngagements[month].length > 0) {
+      monthMedian[month] = median(monthEngagements[month])
+    }
   })
 
   // Mix: Type distribution - USES ORIGINAL POSTS ONLY
