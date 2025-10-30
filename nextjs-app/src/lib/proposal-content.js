@@ -86,9 +86,9 @@ export const PROPOSAL_CONTENT = {
 
   // Section 5: Next Steps
   nextSteps: {
-    title: "Next Steps",
-    content: "Ready to become unstoppable? Let's get started.",
-    ctaText: "Confirm on WhatsApp",
+    title: "Getting started",
+    content: "Let me know if you want to get started.",
+    ctaText: "Message Vishal",
     ctaLink: "https://wa.me/919910020210"
   },
 

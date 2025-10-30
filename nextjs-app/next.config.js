@@ -5,6 +5,16 @@ const nextConfig = {
   
   // Environment variables are handled in .env.local
   // No need to explicitly set them in next.config.js
+  
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'storage.googleapis.com',
+        pathname: '/misfits-production.appspot.com/**',
+      },
+    ],
+  },
 }
 
 module.exports = nextConfig

@@ -80,16 +80,16 @@ export default function ProposalContentClient({ data }) {
         <h1 className="text-4xl sm:text-5xl font-bold text-[#2f8f5b] text-center mb-8">
           {proposition.title}
         </h1>
-        <div className="flex flex-col md:flex-row gap-16 md:gap-20 items-start">
+        <div className="flex flex-col md:flex-row gap-0 md:gap-20 items-start">
           {/* Left Column */}
-          <div className="flex-1 space-y-4 text-lg text-gray-700 leading-relaxed">
+          <div className="flex-1 space-y-4 text-lg text-gray-700 leading-relaxed w-full mb-0 md:mb-0">
             <p className="text-lg text-gray-700 leading-relaxed" dangerouslySetInnerHTML={{ __html: proposition.headline }} />
             {proposition.paragraphs.slice(0, 3).map((para, idx) => (
               <p key={idx} className={para.includes('So the founders') ? 'font-semibold text-gray-900' : ''} dangerouslySetInnerHTML={{ __html: para }} />
             ))}
           </div>
           {/* Right Column */}
-          <div className="flex-1 space-y-4 text-lg text-gray-700 leading-relaxed">
+          <div className="flex-1 space-y-4 text-lg text-gray-700 leading-relaxed w-full">
             {proposition.paragraphs.slice(3).map((para, idx) => (
               <p key={idx + 3} className={para.includes('So the founders') ? 'font-semibold text-gray-900' : ''} dangerouslySetInnerHTML={{ __html: para }} />
             ))}
@@ -106,9 +106,9 @@ export default function ProposalContentClient({ data }) {
           {coreOffering.title}
         </h2>
 
-        <div className="flex flex-col md:flex-row gap-16 md:gap-20 items-start">
+        <div className="flex flex-col md:flex-row gap-0 md:gap-20 items-start">
           {/* Left Column - Intro, Positioning, Voice, Drafts, Posts */}
-          <div className="flex-1 space-y-8">
+          <div className="flex-1 space-y-8 w-full mb-0 md:mb-0">
             {coreOffering.intro && (
               <p className="text-gray-700 text-lg mb-8" dangerouslySetInnerHTML={{ __html: coreOffering.intro }} />
             )}
@@ -126,9 +126,15 @@ export default function ProposalContentClient({ data }) {
               </div>
             ))}
           </div>
-          
+
           {/* Right Column - Mind, Configured POV feed, Pricing */}
-          <div className="flex-1 space-y-8">
+          <div className="flex-1 w-full mb-0 md:mb-0">
+            {/* Separator before Mind (mobile: top margin + separator, desktop: just separator) */}
+            <div className="mt-8 md:mt-0 mb-8">
+              <div className="w-1/2 border-t border-gray-300"></div>
+            </div>
+            
+            <div className="space-y-8">
             {coreOffering.sections.filter((_, idx) => [1, 3].includes(idx)).map((section, originalIdx, array) => (
               <div key={`right-${originalIdx}`}>
                 <div className="space-y-4">
@@ -151,6 +157,7 @@ export default function ProposalContentClient({ data }) {
               <h3 className="text-xl font-bold text-[#2f8f5b]">{coreOffering.pricing.title}</h3>
               <div className="text-gray-700 leading-relaxed whitespace-pre-line" dangerouslySetInnerHTML={{ __html: coreOffering.pricing.content }} />
             </div>
+            </div>
           </div>
         </div>
 
@@ -165,39 +172,61 @@ export default function ProposalContentClient({ data }) {
           {PROPOSAL_CONTENT.addOns.title}
         </h2>
 
-        <div className="flex flex-col md:flex-row gap-16 md:gap-20 mb-12 items-start">
-          {/* Column 1 - Intro + Engagement */}
-          <div className="flex-1 space-y-6">
-            <p className="text-gray-700 text-lg mb-8">
-              {PROPOSAL_CONTENT.addOns.intro}
-            </p>
-            <div>
-              <h3 className="text-xl font-bold text-[#2f8f5b] mb-3">{PROPOSAL_CONTENT.addOns.sections[0].title}</h3>
-              <div className="text-gray-700 leading-relaxed whitespace-pre-line">
-                {PROPOSAL_CONTENT.addOns.sections[0].content}
+        <div className="flex flex-col md:flex-row gap-0 md:gap-20 mb-12 items-start">
+          {/* Column 1 - Intro + Engagement + Outreach */}
+          <div className="flex-1 w-full mb-0 md:mb-0">
+            <div className="space-y-8">
+              <p className="text-gray-700 text-lg">
+                {PROPOSAL_CONTENT.addOns.intro}
+              </p>
+              
+              <div className="space-y-4">
+                <h3 className="text-xl font-bold text-[#2f8f5b]">{PROPOSAL_CONTENT.addOns.sections[0].title}</h3>
+                <div className="text-gray-700 leading-relaxed whitespace-pre-line">
+                  {PROPOSAL_CONTENT.addOns.sections[0].content}
+                </div>
+              </div>
+              
+              {/* Separator before Outreach */}
+              <div className="my-8">
+                <div className="w-1/2 border-t border-gray-300"></div>
+              </div>
+              
+              <div className="space-y-4">
+                <h3 className="text-xl font-bold text-[#2f8f5b]">{PROPOSAL_CONTENT.addOns.sections[1].title}</h3>
+                <div className="text-gray-700 leading-relaxed whitespace-pre-line">
+                  {PROPOSAL_CONTENT.addOns.sections[1].content}
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Column 2 - Outreach + Twitter/X + Pricing */}
-          <div className="flex-1 space-y-6">
-            <div>
-              <h3 className="text-xl font-bold text-[#2f8f5b] mb-3">{PROPOSAL_CONTENT.addOns.sections[1].title}</h3>
-              <div className="text-gray-700 leading-relaxed whitespace-pre-line">
-                {PROPOSAL_CONTENT.addOns.sections[1].content}
-              </div>
+          {/* Column 2 - Twitter/X + Pricing */}
+          <div className="flex-1 w-full mb-0 md:mb-0">
+            {/* Separator before Twitter/X (mobile: top margin + separator, desktop: just separator) */}
+            <div className="mt-8 md:mt-0 mb-8">
+              <div className="w-1/2 border-t border-gray-300"></div>
             </div>
-            <div>
-              <h3 className="text-xl font-bold text-[#2f8f5b] mb-3">{PROPOSAL_CONTENT.addOns.sections[2].title}</h3>
-              <div className="text-gray-700 leading-relaxed whitespace-pre-line">
-                {PROPOSAL_CONTENT.addOns.sections[2].content}
+            
+            <div className="space-y-8">
+              <div className="space-y-4">
+                <h3 className="text-xl font-bold text-[#2f8f5b]">{PROPOSAL_CONTENT.addOns.sections[2].title}</h3>
+                <div className="text-gray-700 leading-relaxed whitespace-pre-line">
+                  {PROPOSAL_CONTENT.addOns.sections[2].content}
+                </div>
               </div>
-            </div>
-            {/* Pricing */}
-            <div>
-              <h3 className="text-xl font-bold text-[#2f8f5b] mb-3">{PROPOSAL_CONTENT.addOns.pricing.title}</h3>
-              <div className="text-gray-700 leading-relaxed whitespace-pre-line">
-                {PROPOSAL_CONTENT.addOns.pricing.content}
+              
+              {/* Separator before Pricing */}
+              <div className="my-8">
+                <div className="w-1/2 border-t border-gray-300"></div>
+              </div>
+              
+              {/* Pricing */}
+              <div className="space-y-4">
+                <h3 className="text-xl font-bold text-[#2f8f5b]">{PROPOSAL_CONTENT.addOns.pricing.title}</h3>
+                <div className="text-gray-700 leading-relaxed whitespace-pre-line">
+                  {PROPOSAL_CONTENT.addOns.pricing.content}
+                </div>
               </div>
             </div>
           </div>
@@ -216,84 +245,98 @@ export default function ProposalContentClient({ data }) {
           </h2>
 
           {/* Flex Layout for Independent Columns */}
-          <div className="flex flex-col md:flex-row gap-16 md:gap-20 items-start">
+          <div className="flex flex-col md:flex-row gap-0 md:gap-20 items-start">
             {/* Left Column - Independent flow */}
-            <div className="flex-1 space-y-12">
-              {/* Quick Stats Table */}
-              <div>
-                <p className="text-gray-700 text-lg mb-6">
-                  {audit.subtitle}
-                </p>
-                <h3 className="text-lg font-semibold text-[#2f8f5b] mb-4">Snapshots</h3>
-                <table className="w-full">
-                  <tbody className="divide-y divide-gray-200">
-                    <tr>
-                      <td className="py-3 font-medium text-gray-900">Original posts in a year</td>
-                      <td className="py-3 text-gray-700">{stats.originalPostsInYear}</td>
-                    </tr>
-                    <tr>
-                      <td className="py-3 font-medium text-gray-900">Reposts in a year</td>
-                      <td className="py-3 text-gray-700">{stats.repostsInYear}</td>
-                    </tr>
-                    <tr>
-                      <td className="py-3 font-medium text-gray-900">Most active month</td>
-                      <td className="py-3 text-gray-700">{stats.mostActiveMonth}</td>
-                    </tr>
-                    <tr>
-                      <td className="py-3 font-medium text-gray-900">Longest inactive period</td>
-                      <td className="py-3 text-gray-700">{stats.longestInactivePeriod}</td>
-                    </tr>
-                  </tbody>
-                </table>
-                <div className="mt-6">
-                  <p className="text-sm text-gray-700">
-                    {data?.llmInsights?.cardSummaries?.postingActivitySummary || (
-                      <span className="opacity-70">
-                        {audit.placeholderSummary}
-                        {!data?.llmInsights && " (Report may need to be regenerated with LLM insights enabled)"}
-                      </span>
-                    )}
+            <div className="flex-1 w-full mb-0 md:mb-0">
+              <div className="space-y-12">
+                {/* Quick Stats Table */}
+                <div>
+                  <p className="text-gray-700 text-lg mb-6">
+                    {audit.subtitle}
                   </p>
+                  <h3 className="text-lg font-semibold text-[#2f8f5b] mb-4">Snapshots</h3>
+                  <table className="w-full">
+                    <tbody className="divide-y divide-gray-200">
+                      <tr>
+                        <td className="py-3 font-medium text-gray-900">Original posts in a year</td>
+                        <td className="py-3 text-gray-700">{stats.originalPostsInYear}</td>
+                      </tr>
+                      <tr>
+                        <td className="py-3 font-medium text-gray-900">Reposts in a year</td>
+                        <td className="py-3 text-gray-700">{stats.repostsInYear}</td>
+                      </tr>
+                      <tr>
+                        <td className="py-3 font-medium text-gray-900">Most active month</td>
+                        <td className="py-3 text-gray-700">{stats.mostActiveMonth}</td>
+                      </tr>
+                      <tr>
+                        <td className="py-3 font-medium text-gray-900">Longest inactive period</td>
+                        <td className="py-3 text-gray-700">{stats.longestInactivePeriod}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <div className="mt-6">
+                    <p className="text-sm text-gray-700">
+                      {data?.llmInsights?.cardSummaries?.postingActivitySummary || (
+                        <span className="opacity-70">
+                          {audit.placeholderSummary}
+                          {!data?.llmInsights && " (Report may need to be regenerated with LLM insights enabled)"}
+                        </span>
+                      )}
+                    </p>
+                  </div>
                 </div>
-              </div>
 
-              {/* Card 2: LinkedIn Analytics */}
-              <div>
-                <LinkedInAnalyticsCard
-                  monthlyCounts={data?.trends?.posts_per_month ? Object.values(data.trends.posts_per_month) : []}
-                  postsPerMonth={data?.trends?.posts_per_month || {}}
-                  insight=""
-                  posts={data?.posts || []}
-                  summaryData={data?.summary}
-                  isReportView={true}
-                />
-                <div className="mt-4">
-                  <p className="text-sm text-gray-700">
-                    {data?.llmInsights?.cardSummaries?.analyticsCardSummary || (
-                      <span className="opacity-70">
-                        {audit.placeholderSummary}
-                        {!data?.llmInsights && " (Report may need to be regenerated with LLM insights enabled)"}
-                      </span>
-                    )}
-                  </p>
+                {/* Separator after Snapshots */}
+                <div className="my-8">
+                  <div className="w-1/2 border-t border-gray-300"></div>
+                </div>
+
+                {/* Card 2: LinkedIn Analytics */}
+                <div>
+                  <LinkedInAnalyticsCard
+                    monthlyCounts={data?.trends?.posts_per_month ? Object.values(data.trends.posts_per_month) : []}
+                    postsPerMonth={data?.trends?.posts_per_month || {}}
+                    insight=""
+                    posts={data?.posts || []}
+                    summaryData={data?.summary}
+                    isReportView={true}
+                  />
+                  <div className="mt-4">
+                    <p className="text-sm text-gray-700">
+                      {data?.llmInsights?.cardSummaries?.analyticsCardSummary || (
+                        <span className="opacity-70">
+                          {audit.placeholderSummary}
+                          {!data?.llmInsights && " (Report may need to be regenerated with LLM insights enabled)"}
+                        </span>
+                      )}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
 
             {/* Right Column - Independent flow */}
-            <div className="flex-1 space-y-12">
-              {/* Card: Posting Cadence (Posts Per Month Chart) */}
-              <div>
-                <PostsPerMonthChart data={data} isReportView={true} />
-                <div className="mt-4">
-                  <p className="text-sm text-gray-700">
-                    {data?.llmInsights?.cardSummaries?.cadenceChartSummary || (
-                      <span className="opacity-70">
-                        {audit.placeholderSummary}
-                        {!data?.llmInsights && " (Report may need to be regenerated with LLM insights enabled)"}
-                      </span>
-                    )}
-                  </p>
+            <div className="flex-1 w-full mb-0 md:mb-0">
+              {/* Separator before Posting Cadence (mobile: top margin + separator, desktop: just separator) */}
+              <div className="mt-12 md:mt-0 mb-12">
+                <div className="w-1/2 border-t border-gray-300"></div>
+              </div>
+              
+              <div className="space-y-12">
+                {/* Card: Posting Cadence (Posts Per Month Chart) */}
+                <div>
+                  <PostsPerMonthChart data={data} isReportView={true} />
+                  <div className="mt-4">
+                    <p className="text-sm text-gray-700">
+                      {data?.llmInsights?.cardSummaries?.cadenceChartSummary || (
+                        <span className="opacity-70">
+                          {audit.placeholderSummary}
+                          {!data?.llmInsights && " (Report may need to be regenerated with LLM insights enabled)"}
+                        </span>
+                      )}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -317,7 +360,7 @@ export default function ProposalContentClient({ data }) {
             href={PROPOSAL_CONTENT.nextSteps.ctaLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block bg-[#2f8f5b] hover:bg-[#1a5636] text-white font-semibold py-4 px-8 rounded-lg transition-colors duration-200 text-lg"
+            className="inline-block bg-[#307254] hover:bg-[#245a42] text-white font-semibold py-4 px-8 rounded-lg transition-colors duration-200 text-lg"
           >
             {PROPOSAL_CONTENT.nextSteps.ctaText}
           </a>
@@ -333,9 +376,9 @@ export default function ProposalContentClient({ data }) {
           {faqs.title}
         </h2>
         
-        <div className="flex flex-col md:flex-row gap-16 md:gap-20">
+        <div className="flex flex-col md:flex-row gap-0 md:gap-20">
           {/* Left Column - Odd FAQs (1st, 3rd, 5th...) */}
-          <div className="w-full md:flex-1 space-y-6">
+          <div className="w-full md:flex-1 space-y-6 mb-0 md:mb-0">
             {faqs.questions.map((faq, idx) => idx % 2 === 0 && (
               <Collapsible
                 key={idx}
@@ -359,7 +402,7 @@ export default function ProposalContentClient({ data }) {
           </div>
           
           {/* Right Column - Even FAQs (2nd, 4th, 6th...) */}
-          <div className="w-full md:flex-1 space-y-6">
+          <div className="w-full md:flex-1 space-y-6 mt-6 md:mt-0">
             {faqs.questions.map((faq, idx) => idx % 2 === 1 && (
               <Collapsible
                 key={idx}

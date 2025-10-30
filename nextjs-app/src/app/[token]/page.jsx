@@ -54,7 +54,11 @@ export default async function StaticReport({ params }) {
       <div className="bg-white border-b border-gray-100 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="text-center">
-            <p className="text-sm text-gray-500 mb-1">Prepared for</p>
+            <img
+              src="https://storage.googleapis.com/misfits-production.appspot.com/image_assets/Unstoppable%20logos%20(1080%20x%201080%20px)%20(59).png"
+              alt="Unstoppable Logo"
+              className="h-16 w-auto mx-auto mb-4"
+            />
             <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
               {data?.profile?.name || 'LinkedIn Profile'}
             </h1>
