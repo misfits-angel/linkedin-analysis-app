@@ -100,7 +100,7 @@ function HomeContent() {
         // Update all state together atomically
         setSavedData(profileData)
         setCurrentProfile({ id: datasetId, name: profileData.profile?.name })
-        setShareableUrl(dataset?.shareable_url ? `${window.location.origin}/report/${dataset.shareable_url}` : null)
+        setShareableUrl(dataset?.shareable_url ? `${window.location.origin}/${dataset.shareable_url}` : null)
         setShowProfileSelector(false)
         
         // Scroll to dashboard section after loading profile

@@ -16,7 +16,8 @@ export default function PostQualityEvaluation({ postsData, llmInsights }) {
   const { evaluatePosts } = useLLMInsights('ai-content-analysis')
   
   // Check if we're in report mode (not dashboard)
-  const isReportMode = pathname?.startsWith('/report/')
+  // Check if we're in report mode (not dashboard) - reports are at /{uuid}
+  const isReportMode = pathname && pathname !== '/' && !pathname.startsWith('/api') && !pathname.startsWith('/auth')
 
   const handleEvaluatePosts = async () => {
     if (!postsData || postsData.length === 0) {

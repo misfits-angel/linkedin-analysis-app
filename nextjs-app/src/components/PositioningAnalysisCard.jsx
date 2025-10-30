@@ -21,7 +21,8 @@ export default function PositioningAnalysisCard({ data }) {
   } = useLLMInsights('ai-recommendations')
   
   // Check if we're in report mode (not dashboard)
-  const isReportMode = pathname?.startsWith('/report/')
+  // Check if we're in report mode (not dashboard) - reports are at /{uuid}
+  const isReportMode = pathname && pathname !== '/' && !pathname.startsWith('/api') && !pathname.startsWith('/auth')
 
   const handleAnalyzePositioning = async () => {
     setIsLoadingPositioning(true)

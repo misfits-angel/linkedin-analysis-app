@@ -20,8 +20,8 @@ export default function NarrativeInsightsCard({ data }) {
     generateNarrativeInsights
   } = useLLMInsights('ai-insights-summary')
   
-  // Check if we're in report mode (not dashboard)
-  const isReportMode = pathname?.startsWith('/report/')
+  // Check if we're in report mode (not dashboard) - reports are at /{uuid}
+  const isReportMode = pathname && pathname !== '/' && !pathname.startsWith('/api') && !pathname.startsWith('/auth')
 
   const handleGenerateInsights = async () => {
     setIsLoadingNarrative(true)

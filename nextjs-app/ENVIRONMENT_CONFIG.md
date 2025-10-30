@@ -41,6 +41,7 @@ If you've already added the custom domain in Vercel:
 3. ✅ Code updated to use the custom domain
 
 The report URLs will now be:
-- ✅ `https://users.theunstoppable.ai/report/{token}`
+- ✅ `https://users.theunstoppable.ai/{token}`
+- ❌ ~~`https://users.theunstoppable.ai/report/{token}`~~
 - ❌ ~~`https://linkedin-analysis-app.vercel.app/report/{token}`~~
 

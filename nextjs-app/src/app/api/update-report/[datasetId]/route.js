@@ -155,7 +155,7 @@ export async function PUT(request, { params }) {
     
     // Get base URL for the report link - prioritize custom domain
     const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://users.theunstoppable.ai'
-    const shareableUrl = `${baseUrl}/report/${dataset.shareable_url}`
+    const shareableUrl = `${baseUrl}/${dataset.shareable_url}`
     
     return NextResponse.json({ 
       success: true,

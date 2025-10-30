@@ -15,7 +15,8 @@ export default function TopicAnalysis({ postsData, llmInsights }) {
   const { analyzeTopics } = useLLMInsights('ai-topic-analysis')
   
   // Check if we're in report mode (not dashboard)
-  const isReportMode = pathname?.startsWith('/report/')
+  // Check if we're in report mode (not dashboard) - reports are at /{uuid}
+  const isReportMode = pathname && pathname !== '/' && !pathname.startsWith('/api') && !pathname.startsWith('/auth')
 
   const handleAnalyzeTopics = async () => {
     if (!postsData || postsData.length === 0) {

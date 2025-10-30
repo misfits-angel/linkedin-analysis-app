@@ -108,7 +108,7 @@ export async function GET(request, { params }) {
         node_env: process.env.NODE_ENV
       },
       recommendations,
-      debug_url: dataset.shareable_url ? `/report/${dataset.shareable_url}` : null
+      debug_url: dataset.shareable_url ? `/${dataset.shareable_url}` : null
     })
 
   } catch (error) {

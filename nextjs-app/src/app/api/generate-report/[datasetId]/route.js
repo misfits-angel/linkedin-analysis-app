@@ -46,7 +46,7 @@ export async function POST(request, { params }) {
     if (dataset.shareable_url) {
       return NextResponse.json({ 
         success: true, 
-        url: `${baseUrl}/report/${dataset.shareable_url}`,
+        url: `${baseUrl}/${dataset.shareable_url}`,
         message: 'Report already exists'
       })
     }
@@ -128,7 +128,7 @@ export async function POST(request, { params }) {
     console.log('✅ Report generated successfully')
     return NextResponse.json({ 
       success: true, 
-      url: `${baseUrl}/report/${token}`,
+      url: `${baseUrl}/${token}`,
       token
     })
 
