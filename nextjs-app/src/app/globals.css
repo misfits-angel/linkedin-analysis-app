@@ -506,10 +506,6 @@ button:not([data-sidebar]):not([data-sidebar] button):not([data-faq-trigger]):di
   --color-secondary: #C4E5ED;
 }
 
-body {
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial;
-}
-
 
 .metric {
   font-size: 1.5rem;

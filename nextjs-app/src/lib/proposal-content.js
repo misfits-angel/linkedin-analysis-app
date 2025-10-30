@@ -19,7 +19,7 @@ export const PROPOSAL_CONTENT = {
 
   // Section 2: Core Offering
   coreOffering: {
-    title: "Core-offering",
+    title: "Core offering",
     intro: "The core offering is focused towards <span style='background-color: #d6e3dd; padding: 2px 4px; border-radius: 3px; display: inline; line-height: 2;'>building credibility.</span>",
     sections: [
       {

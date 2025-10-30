@@ -14,6 +14,9 @@ module.exports = {
   			'2xl': '1400px'
   		}
   	},
+  	fontFamily: {
+  		sans: ['Manrope', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+  	},
   	extend: {
   		colors: {
   			beige: '#FAF9F5',
