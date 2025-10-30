@@ -9,8 +9,8 @@ const manrope = Manrope({ subsets: ['latin'] })
 const jetbrainsMono = JetBrains_Mono({ subsets: ['latin'], variable: '--font-mono' })
 
 export const metadata = {
-  title: 'LinkedIn Yearly Wrap • Preview (Chart.js)',
-  description: 'Analyze your LinkedIn posts with AI-powered insights',
+  title: 'Unstoppable',
+  description: 'Proposal',
 }
 
 export const viewport = {
