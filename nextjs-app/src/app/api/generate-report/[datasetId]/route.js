@@ -25,9 +25,8 @@ export async function POST(request, { params }) {
       console.warn('⚠️ Could not parse request body:', error.message)
     }
 
-    // Get base URL for the report link
-    const origin = request.headers.get('origin') || request.headers.get('host')
-    const baseUrl = origin?.startsWith('http') ? origin : `https://${origin}` || process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
+    // Get base URL for the report link - prioritize custom domain
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://users.theunstoppable.ai'
 
     // Fetch dataset
     const { data: dataset, error: fetchError } = await supabase

@@ -153,16 +153,8 @@ export async function PUT(request, { params }) {
 
     console.log('✅ Report updated successfully')
     
-    // Get the origin from the request headers
-    const origin = request.headers.get('origin') || request.headers.get('host')
-    let baseUrl
-    
-    if (origin) {
-      baseUrl = origin.startsWith('http') ? origin : `https://${origin}`
-    } else {
-      baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
-    }
-    
+    // Get base URL for the report link - prioritize custom domain
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://users.theunstoppable.ai'
     const shareableUrl = `${baseUrl}/report/${dataset.shareable_url}`
     
     return NextResponse.json({ 
