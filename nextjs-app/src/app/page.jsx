@@ -18,7 +18,7 @@ export default function HomePage() {
         <img
           src="https://storage.googleapis.com/misfits-production.appspot.com/image_assets/Unstoppable%20logos%20(1080%20x%201080%20px)%20(59).png"
           alt="Unstoppable Logo"
-          className="h-32 w-auto mx-auto mb-8 animate-pulse"
+          className="h-48 max-w-full mx-auto mb-8 animate-pulse object-contain"
         />
         <p className="text-gray-600 text-lg">Redirecting to Unstoppable...</p>
       </div>
